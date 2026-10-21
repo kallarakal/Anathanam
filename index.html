@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Generation Family Tree - Travancore Heritage Theme</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        padding: 54px 20px 30px;
+        min-height: 100vh;
+    }
+    .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        padding: 5px 24px;
+        min-height: 44px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-left {
+        grid-column: 1;
+    }
+    .nav-title {
+        grid-column: 2;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .nav-title h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: 0.2px;
+        text-align: center;
+    }
+    .nav-title p {
+        margin: 1px 0 0;
+        font-size: 11px;
+        line-height: 1.2;
+        opacity: 0.85;
+        text-align: center;
+    }
+    .nav-controls {
+        grid-column: 3;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    .tool-btn {
+        height: 28px;
+        min-width: 28px;
+        padding: 0 8px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+    }
+    .fit-btn, .print-btn { padding: 0 10px; font-size: 11.5px; }
+    .v-line { width: 1px; height: 16px; margin: 0 3px; }
+    .zoom-text { font-size: 12px; font-weight: 600; min-width: 44px; text-align: center; }
+
+    .tree-scroll-wrapper {
+        width: 100%;
+        max-width: 1700px;
+        margin: 0 auto;
+        overflow: auto;
+        padding: 10px 5px 30px;
+        display: flex;
+        justify-content: center;
+    }
+    .tree-container {
+        display: block;
+        margin: 0 auto;
+        transform-origin: top center;
+        transition: transform 0.2s ease;
+        height: auto !important;
+    }
+    rect { stroke-width: 2.5; rx: 8; ry: 8; }
+    text { font-weight: 600; font-size: 14px; user-select: none; }
+    text.root-text { font-size: 13px; font-weight: 700; }
+    text.compact-text { font-size: 11px; font-weight: 700; }
+    line { stroke-width: 2.5; }
+
+    @media print {
+        .top-nav { display: none !important; }
+        body { padding: 0 !important; background: white !important; }
+        .tree-scroll-wrapper { overflow: visible !important; }
+        .tree-container { transform: none !important; box-shadow: none !important; }
+    }
+
+        body {
+            background: #1f1610;
+            background-image: radial-gradient(ellipse at 50% 20%, #2e2017 0%, #1a120d 80%, #0d0805 100%);
+            color: #f7eedc;
+            font-family: 'Playfair Display', 'Georgia', serif;
+        }
+        .top-nav {
+            background: rgba(31, 22, 16, 0.88);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+        .nav-title h2 { font-family: 'Cinzel', serif; color: #edd18c; letter-spacing: 0.5px; }
+        .nav-title p { color: #c9b183; font-family: 'Lora', serif; font-style: italic; }
+        .tool-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+        }
+        .tool-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+        }
+        .v-line { background: rgba(175, 129, 51, 0.4); }
+        .zoom-text { color: #edd18c; }
+        .tree-container {
+            background: #fbf7ee;
+            border: 4px solid #b38938;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 0 3px #3e2815;
+            border-radius: 6px;
+        }
+        .tree-container line {
+            stroke: #af8133 !important;
+            stroke-width: 2.7;
+        }
+        .tree-container rect[fill="#e3f2fd"] {
+            fill: #eef5fa !important;
+            stroke: #5d88a4 !important;
+            filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));
+        }
+        .tree-container rect[fill="#fce4ec"] {
+            fill: #faf0f2 !important;
+            stroke: #bc7585 !important;
+            filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));
+        }
+        .tree-container text {
+            fill: #2c1a0c !important;
+        }
+    
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+        a.node-link rect {
+            cursor: pointer;
+            transition: filter 0.2s ease, stroke-width 0.2s ease;
+        }
+        a.node-link:hover rect {
+            filter: brightness(0.96) drop-shadow(0 4px 8px rgba(0,0,0,0.18)) !important;
+            stroke-width: 3.2 !important;
+        }
+        a.node-link text {
+            cursor: pointer;
+            transition: fill 0.2s ease;
+        }
+        a.node-link:hover text {
+            text-decoration: underline;
+            fill: #000000 !important;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="top-nav">
+        <div class="nav-left"></div>
+        <div class="nav-title">
+            <h2>Kanjirapally, Kallarakal, Anathanam Family Tree</h2>
+            
+        </div>
+        <div class="nav-controls">
+            <button class="tool-btn" onclick="changeZoom(-0.1)" title="Zoom Out">−</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="tool-btn" onclick="changeZoom(0.1)" title="Zoom In">+</button>
+            <button class="tool-btn" onclick="resetZoom()" title="Original Size">1:1</button>
+            <button class="tool-btn fit-btn" onclick="fitWidth()" title="Fit to Screen Width">Fit Width</button>
+            <div class="v-line"></div>
+            <button class="tool-btn print-btn" onclick="window.print()" title="Print or Save as PDF">🖨️ Print</button>
+        </div>
+    </div>
+    
+    <div class="tree-scroll-wrapper" id="scrollWrapper">
+        <svg id="familySvg" class="tree-container" width="1600" height="1593" viewBox="0 15 1600 1593" preserveAspectRatio="xMidYMin meet">
+            
+    <g class="watermark-travancore" opacity="0.18" pointer-events="none" user-select="none">
+        <path d="M 80 180 Q 800 60 1520 180" stroke="#af8133" stroke-width="3" fill="none"/>
+        <path d="M 80 192 Q 800 72 1520 192" stroke="#af8133" stroke-width="1.5" stroke-dasharray="6,4" fill="none"/>
+        
+        <g transform="translate(800, 310) scale(1.1)">
+            <path d="M -60 40 C -40 25, -20 35, 0 45 C 20 35, 40 25, 60 40 C 40 55, -40 55, -60 40 Z" fill="#b8860b"/>
+            <path d="M -45 42 C -30 20, 0 25, 0 45 C 0 25, 30 20, 45 42 Z" fill="#cfa02c"/>
+            <rect x="-7" y="-70" width="14" height="105" rx="3" fill="#b8860b"/>
+            <rect x="-42" y="-45" width="84" height="14" rx="3" fill="#b8860b"/>
+            <circle cx="0" cy="-73" r="7" fill="#cfa02c"/>
+            <circle cx="-45" cy="-38" r="7" fill="#cfa02c"/>
+            <circle cx="45" cy="-38" r="7" fill="#cfa02c"/>
+            <circle cx="0" cy="-15" r="70" fill="none" stroke="#af8133" stroke-width="1.5" stroke-dasharray="4,6"/>
+        </g>
+        <g transform="translate(800, 1590)">
+            <path d="M -220 0 L 220 0" stroke="#b8860b" stroke-width="2"/>
+            <path d="M -160 8 L 160 8" stroke="#b8860b" stroke-width="1"/>
+            <circle cx="0" cy="0" r="5" fill="#b8860b"/>
+            <circle cx="-100" cy="0" r="3" fill="#b8860b"/>
+            <circle cx="100" cy="0" r="3" fill="#b8860b"/>
+        </g>
+    </g>
+
+            <line x1="530" y1="105" x2="530" y2="150" />
+            <line x1="530" y1="203" x2="530" y2="270" />
+            <line x1="530" y1="323" x2="530" y2="365" />
+            <line x1="200" y1="365" x2="860" y2="365" />
+            <line x1="200" y1="365" x2="200" y2="395" />
+            <line x1="365" y1="365" x2="365" y2="395" />
+            <line x1="530" y1="365" x2="530" y2="395" />
+            <line x1="695" y1="365" x2="695" y2="395" />
+            <line x1="860" y1="365" x2="860" y2="395" />
+            <line x1="860" y1="448" x2="860" y2="495" />
+            <line x1="282.5" y1="495" x2="980" y2="495" />
+            <line x1="282.5" y1="495" x2="282.5" y2="525" />
+            <line x1="980" y1="495" x2="980" y2="525" />
+            <line x1="980" y1="551.5" x2="530" y2="551.5" />
+            <line x1="980" y1="551.5" x2="1210" y2="551.5" />
+            <line x1="282.5" y1="578" x2="282.5" y2="761.5" />
+            <line x1="282.5" y1="671.5" x2="257" y2="671.5" />
+            <line x1="282.5" y1="746.5" x2="257" y2="746.5" />
+            <line x1="530" y1="578" x2="530" y2="980" />
+            <line x1="530" y1="671.5" x2="555" y2="671.5" />
+            <line x1="530" y1="761.5" x2="555" y2="761.5" />
+            <line x1="530" y1="851.5" x2="555" y2="851.5" />
+            <line x1="530" y1="941.5" x2="555" y2="941.5" />
+            <line x1="1210" y1="578" x2="1210" y2="1571.5" />
+            <line x1="1210" y1="671.5" x2="1135" y2="671.5" />
+            <line x1="1210" y1="746.5" x2="1135" y2="746.5" />
+            <line x1="1210" y1="821.5" x2="1135" y2="821.5" />
+            <line x1="1210" y1="896.5" x2="1135" y2="896.5" />
+            <line x1="1210" y1="971.5" x2="1135" y2="971.5" />
+            <line x1="1210" y1="1046.5" x2="1135" y2="1046.5" />
+            <line x1="1210" y1="1121.5" x2="1135" y2="1121.5" />
+            <line x1="1210" y1="1196.5" x2="1135" y2="1196.5" />
+            <line x1="1210" y1="1271.5" x2="1135" y2="1271.5" />
+            <line x1="1210" y1="1346.5" x2="1135" y2="1346.5" />
+            <line x1="1210" y1="1421.5" x2="1135" y2="1421.5" />
+            <line x1="1210" y1="1496.5" x2="1135" y2="1496.5" />
+            <line x1="1210" y1="1571.5" x2="1135" y2="1571.5" />
+            <g>
+                <a class="node-link" href="Kallarackal_Mathai_and_Daughter_of_Ittiavirah.html" xlink:href="Kallarackal_Mathai_and_Daughter_of_Ittiavirah.html" title="Open Aruvithura Kallarackal Mathai & Daughter of Ittiavirah">
+                    <rect x="280" y="25" width="500" height="80" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="root-text" x="530.0" y="62.0" text-anchor="middle">Kanjirapally Naduvile ValiyaVeettil Ittiavirah's second daughter</text>
+                <text class="root-text" x="530.0" y="77.0" text-anchor="middle">Aruvithura Kallarackal Varkey's son Mathai</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Kanjirapally_Kallarackal_Ittiavirah.html" xlink:href="Kanjirapally_Kallarackal_Ittiavirah.html" title="Open Kanjirapally Kallarackal Ittiavirah">
+                    <rect x="390" y="150" width="280" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="530.0" y="181.5" text-anchor="middle">Kanjirapally Kallarackal Ittiavirah</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mathai_and_Mariya_Mukkatt.html" xlink:href="Mathai_and_Mariya_Mukkatt.html" title="Open Mathai & Mariya Mukkatt">
+                    <rect x="430" y="270" width="200" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="530.0" y="301.5" text-anchor="middle">Mathai & Mariya Mukkatt</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="ValiyaKallarakal_Ittiavirah.html" xlink:href="ValiyaKallarakal_Ittiavirah.html" title="Open ValiyaKallarakal Ittiavirah">
+                    <rect x="125" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="200.0" y="418.5" text-anchor="middle">ValiyaKallarakal</text>
+                <text class="compact-text" x="200.0" y="433.5" text-anchor="middle">Ittiavirah</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="KochuKallarackal_Kunjacko.html" xlink:href="KochuKallarackal_Kunjacko.html" title="Open KochuKallarackal Kunjacko">
+                    <rect x="290" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="365.0" y="418.5" text-anchor="middle">KochuKallarackal</text>
+                <text class="compact-text" x="365.0" y="433.5" text-anchor="middle">Kunjacko</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Fr_Kuruvila.html" xlink:href="Fr_Kuruvila.html" title="Open Kuruvila (Priest)">
+                    <rect x="455" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="530.0" y="418.5" text-anchor="middle">Kuruvila</text>
+                <text class="compact-text" x="530.0" y="433.5" text-anchor="middle">(priest)</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mathai_Shooting_Accident.html" xlink:href="Mathai_Shooting_Accident.html" title="Open Mathai (Shooting Accident)">
+                    <rect x="620" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="695.0" y="414" text-anchor="middle">Mathai</text>
+                <text class="compact-text" x="695.0" y="427" text-anchor="middle">(died in a shooting</text>
+                <text class="compact-text" x="695.0" y="440" text-anchor="middle">accident)</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Pazhaya_Kallarackal_KunjuVarkey.html" xlink:href="Pazhaya_Kallarackal_KunjuVarkey.html" title="Open Pazhaya Kallarackal KunjuVarkey">
+                    <rect x="785" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="860.0" y="414" text-anchor="middle">Pazhaya</text>
+                <text class="compact-text" x="860.0" y="427" text-anchor="middle">Kallarackal</text>
+                <text class="compact-text" x="860.0" y="440" text-anchor="middle">KunjuVarkey</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Kollamkulam_Kunjuvarkey_Mathai.html" xlink:href="Kollamkulam_Kunjuvarkey_Mathai.html" title="Open Kollamkulam Kunjuvarkey Mathai (1837 - 1868)">
+                    <rect x="207.5" y="525" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="282.5" y="548.5" text-anchor="middle">Kollamkulam Kunjuvarkey</text>
+                <text class="compact-text" x="282.5" y="563.5" text-anchor="middle">Mathai (1837 - 1868)</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Anathanam_KunjuVarkey_Kuruvila.html" xlink:href="Anathanam_KunjuVarkey_Kuruvila.html" title="Open Anathanam KunjuVarkey Kuruvila (1849 - 1933)">
+                    <rect x="905" y="525" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="980.0" y="548.5" text-anchor="middle">Anathanam KunjuVarkey</text>
+                <text class="compact-text" x="980.0" y="563.5" text-anchor="middle">Kuruvila (1849 - 1933)</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="First_Wife_Chachi_Mapilasseril.html" xlink:href="First_Wife_Chachi_Mapilasseril.html" title="Open First Wife Chachi Mapilasseril">
+                    <rect x="455" y="525" width="150" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="530.0" y="548.5" text-anchor="middle">First wife Chachi</text>
+                <text class="compact-text" x="530.0" y="563.5" text-anchor="middle">Mapilasseril</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Second_Wife_Chachi_Karippaparmpil.html" xlink:href="Second_Wife_Chachi_Karippaparmpil.html" title="Open Second Wife Chachi Karippaparmpil">
+                    <rect x="1135" y="525" width="150" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1210.0" y="548.5" text-anchor="middle">Second wife Chachi</text>
+                <text class="compact-text" x="1210.0" y="563.5" text-anchor="middle">Karippaparmpil</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Msgr_Jacob_Kallarackal.html" xlink:href="Msgr_Jacob_Kallarackal.html" title="Open Msgr. Jacob Kallarackal (Vicar General of Changanassery)">
+                    <rect x="17" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="137.0" y="668.5" text-anchor="middle">Msgr. Jacob Kallarackal</text>
+                <text class="compact-text" x="137.0" y="683.5" text-anchor="middle">(Vicar General of Chagnassery)</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="KunjuVarkey_Kollamkulam.html" xlink:href="KunjuVarkey_Kollamkulam.html" title="Open KunjuVarkey (Kollamkulam)">
+                    <rect x="17" y="720" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="137.0" y="751.5" text-anchor="middle">KunjuVarkey</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="KunjuVarkey_Karickatturumpil.html" xlink:href="KunjuVarkey_Karickatturumpil.html" title="Open KunjuVarkey Karickatturumpil">
+                    <rect x="555" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="675.0" y="668.5" text-anchor="middle">KunjuVarkey</text>
+                <text class="compact-text" x="675.0" y="683.5" text-anchor="middle">Karickatturumpil</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mariya_Karickatturumpil.html" xlink:href="Mariya_Karickatturumpil.html" title="Open Mariya Karickatturumpil">
+                    <rect x="555" y="735" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text x="675.0" y="766.5" text-anchor="middle">Mariya</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Thommy_Maliackal.html" xlink:href="Thommy_Maliackal.html" title="Open Thommy Maliackal">
+                    <rect x="555" y="825" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="675.0" y="856.5" text-anchor="middle">Thommy Maliackal</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mariya_Maliackal.html" xlink:href="Mariya_Maliackal.html" title="Open Mariya Maliackal">
+                    <rect x="555" y="915" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text x="675.0" y="946.5" text-anchor="middle">Mariya</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mathai_Anathanam.html" xlink:href="Mathai_Anathanam.html" title="Open Mathai Anathanam">
+                    <rect x="895" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="676.5" text-anchor="middle">Mathai</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Devasia_Anathanam.html" xlink:href="Devasia_Anathanam.html" title="Open Devasia Anathanam">
+                    <rect x="895" y="720" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="751.5" text-anchor="middle">Devasia</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="KochuMathai_Puthenpura.html" xlink:href="KochuMathai_Puthenpura.html" title="Open KochuMathai Puthenpura">
+                    <rect x="895" y="795" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="818.5" text-anchor="middle">KochuMathai</text>
+                <text class="compact-text" x="1015.0" y="833.5" text-anchor="middle">Puthenpura</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="KC_Thomas_Puliurumbil.html" xlink:href="KC_Thomas_Puliurumbil.html" title="Open KC Thomas Puliurumbil">
+                    <rect x="895" y="870" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="893.5" text-anchor="middle">KC Thomas</text>
+                <text class="compact-text" x="1015.0" y="908.5" text-anchor="middle">Puliurumbil</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Mammy_Kathayanat.html" xlink:href="Mammy_Kathayanat.html" title="Open Mammy Kathayanat">
+                    <rect x="895" y="945" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="968.5" text-anchor="middle">Mammy</text>
+                <text class="compact-text" x="1015.0" y="983.5" text-anchor="middle">Kathayanat</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Ackamma_Pallivathukal_Ramapuram.html" xlink:href="Ackamma_Pallivathukal_Ramapuram.html" title="Open Ackamma Pallivathukal, Ramapuram">
+                    <rect x="895" y="1020" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1043.5" text-anchor="middle">Ackamma Pallivathukal,</text>
+                <text class="compact-text" x="1015.0" y="1058.5" text-anchor="middle">Ramapuram</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Appachan_Methayathel.html" xlink:href="Appachan_Methayathel.html" title="Open Appachan Methayathel">
+                    <rect x="895" y="1095" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1118.5" text-anchor="middle">Appachan</text>
+                <text class="compact-text" x="1015.0" y="1133.5" text-anchor="middle">Methayathel</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Thresia_Kavalam.html" xlink:href="Thresia_Kavalam.html" title="Open Thresia Kavalam">
+                    <rect x="895" y="1170" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1193.5" text-anchor="middle">Thresia</text>
+                <text class="compact-text" x="1015.0" y="1208.5" text-anchor="middle">Kavalam</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Fr_Mathew.html" xlink:href="Fr_Mathew.html" title="Open Fr. Mathew">
+                    <rect x="895" y="1245" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="1276.5" text-anchor="middle">Fr. Mathew</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Alykutty_Karivelithara.html" xlink:href="Alykutty_Karivelithara.html" title="Open Alykutty Karivelithara">
+                    <rect x="895" y="1320" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1343.5" text-anchor="middle">Alykutty</text>
+                <text class="compact-text" x="1015.0" y="1358.5" text-anchor="middle">Karivelithara</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Chackochan_Bhoothakuzhy.html" xlink:href="Chackochan_Bhoothakuzhy.html" title="Open Chackochan Bhoothakuzhy">
+                    <rect x="895" y="1395" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1418.5" text-anchor="middle">Chackochan</text>
+                <text class="compact-text" x="1015.0" y="1433.5" text-anchor="middle">Bhoothakuzhy</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Ittiavirah_Anathanam.html" xlink:href="Ittiavirah_Anathanam.html" title="Open Ittiavirah Anathanam">
+                    <rect x="895" y="1470" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="1501.5" text-anchor="middle">Ittiavirah</text>
+                </a>
+            </g>
+            <g>
+                <a class="node-link" href="Kuruvachan_Anathanam.html" xlink:href="Kuruvachan_Anathanam.html" title="Open Kuruvachan Anathanam">
+                    <rect x="895" y="1545" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1568.5" text-anchor="middle">Kuruvachan</text>
+                <text class="compact-text" x="1015.0" y="1583.5" text-anchor="middle">Anathanam</text>
+                </a>
+            </g>
+        </svg>
+    </div>
+    
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 40;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 1600));
+            applyZoom();
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth < 1650) {
+                fitWidth();
+            }
+        });
+    </script>
+
+</body>
+</html>
