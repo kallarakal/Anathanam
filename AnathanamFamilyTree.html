@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Generation Family Tree - Anathanam &amp; Kallarackal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* ================= BASE / RESET STYLES ================= */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 68px 20px 30px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            transition: background 0.4s ease, color 0.4s ease;
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 14px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .page-header h1 {
+            margin: 0 0 3px 0;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+            text-align: center;
+            transition: color 0.3s ease, font-family 0.3s ease;
+        }
+        .page-header p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.85;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        /* Scroll / Canvas Wrapper */
+        .tree-scroll-wrapper {
+            width: 100%;
+            max-width: 1700px;
+            margin: 0 auto;
+            overflow: auto;
+            padding: 10px 5px 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .tree-container {
+            display: block;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+            border-radius: 8px;
+            transition: background 0.4s ease, box-shadow 0.4s ease, border 0.4s ease, transform 0.2s ease;
+            transform-origin: top center;
+        }
+
+        /* SVG Default Elements */
+        rect { stroke-width: 2.5; rx: 8; ry: 8; transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease; }
+        text { font-weight: 600; font-size: 14px; fill: #37474f; user-select: none; transition: fill 0.3s ease, font-family 0.3s ease; }
+        text.root-text { font-size: 13px; font-weight: 700; }
+        text.compact-text { font-size: 11px; font-weight: 700; }
+        line { stroke: #b0bec5; stroke-width: 2.5; transition: stroke 0.3s ease, stroke-width 0.3s ease; }
+
+        /* Watermarks inside SVG */
+        .watermark-layer {
+            pointer-events: none;
+            user-select: none;
+            transition: opacity 0.5s ease;
+        }
+        .wm-parchment, .wm-tree, .wm-kerala, .wm-emerald {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* ================= THEME CONTROLLER BAR ================= */
+        .control-bar {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+            border-radius: 50px;
+            padding: 6px 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            max-width: 98vw;
+            overflow-x: auto;
+        }
+
+        .theme-pills {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .theme-btn {
+            border: 1px solid transparent;
+            background: transparent;
+            padding: 7px 13px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #4b5563;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        .theme-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+            color: #111827;
+        }
+        .theme-btn.active {
+            background: #1e293b;
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+        }
+
+        .divider-v {
+            width: 1px;
+            height: 22px;
+            background: rgba(0, 0, 0, 0.15);
+            margin: 0 4px;
+        }
+
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .zoom-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.12);
+            background: #ffffff;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+            color: #374151;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s ease;
+        }
+        .zoom-btn:hover {
+            background: #f3f4f6;
+            color: #000000;
+        }
+        .zoom-display {
+            font-size: 12px;
+            font-weight: 600;
+            color: #4b5563;
+            min-width: 44px;
+            text-align: center;
+        }
+
+
+        /* ================= THEME 1: VINTAGE PARCHMENT ================= */
+        body.theme-parchment {
+            background-color: #f5edd8;
+            background-image: 
+                radial-gradient(ellipse at 50% 20%, #fdf9ee 0%, #f3e7ce 60%, #e2ceab 100%);
+            color: #422d19;
+            font-family: 'Lora', 'Georgia', serif;
+        }
+        body.theme-parchment .page-header h1 {
+            font-family: 'Cinzel', 'Palatino', serif;
+            color: #4a341b;
+            letter-spacing: 1px;
+        }
+        body.theme-parchment .page-header p {
+            color: #6d502f;
+            font-style: italic;
+        }
+        body.theme-parchment .tree-container {
+            background: #fbf7ec;
+            background-image: linear-gradient(135deg, #fdfbf3 0%, #f7f1df 50%, #f0e3c8 100%);
+            border: 6px double #c0a16b;
+            box-shadow: 0 15px 35px rgba(84, 57, 23, 0.22), inset 0 0 80px rgba(168, 126, 68, 0.12);
+            border-radius: 4px;
+        }
+        body.theme-parchment .tree-container line {
+            stroke: #a27e4e !important;
+            stroke-width: 2.6;
+        }
+        body.theme-parchment .tree-container rect[fill="#e3f2fd"] {
+            fill: #edf4f8 !important;
+            stroke: #7e9fb4 !important;
+            filter: drop-shadow(0 2px 4px rgba(78, 60, 37, 0.1));
+        }
+        body.theme-parchment .tree-container rect[fill="#fce4ec"] {
+            fill: #faf0f2 !important;
+            stroke: #c88998 !important;
+            filter: drop-shadow(0 2px 4px rgba(78, 60, 37, 0.1));
+        }
+        body.theme-parchment .tree-container text {
+            fill: #342416 !important;
+            font-family: 'Lora', 'Georgia', serif;
+        }
+        body.theme-parchment .wm-parchment {
+            display: block;
+            opacity: 1;
+        }
+
+
+        /* ================= THEME 2: HERITAGE TREE WATERMARK ================= */
+        body.theme-tree {
+            background: #eef3ee;
+            background-image: radial-gradient(circle at 50% 10%, #f6faf6 0%, #e8f0e8 70%, #dbe7db 100%);
+            color: #1f3826;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+        body.theme-tree .page-header h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            color: #1b4324;
+            letter-spacing: -0.3px;
+        }
+        body.theme-tree .page-header p {
+            color: #3b6244;
+        }
+        body.theme-tree .tree-container {
+            background-color: #ffffff;
+            border: 1px solid #c8dccb;
+            box-shadow: 0 12px 36px rgba(27, 67, 36, 0.12);
+            border-radius: 12px;
+        }
+        body.theme-tree .tree-container line {
+            stroke: #5d8c67 !important;
+            stroke-width: 2.6;
+        }
+        body.theme-tree .tree-container rect[fill="#e3f2fd"] {
+            fill: #f0f7fb !important;
+            stroke: #6fa0c2 !important;
+            filter: drop-shadow(0 2px 5px rgba(33, 64, 41, 0.08));
+        }
+        body.theme-tree .tree-container rect[fill="#fce4ec"] {
+            fill: #fdf2f5 !important;
+            stroke: #de889d !important;
+            filter: drop-shadow(0 2px 5px rgba(33, 64, 41, 0.08));
+        }
+        body.theme-tree .tree-container text {
+            fill: #1a3321 !important;
+        }
+        body.theme-tree .wm-tree {
+            display: block;
+            opacity: 0.16;
+        }
+
+
+        /* ================= THEME 3: TRAVANCORE / KERALA HERITAGE ================= */
+        body.theme-kerala {
+            background: #1f1610;
+            background-image: radial-gradient(ellipse at 50% 20%, #2e2017 0%, #1a120d 80%, #0d0805 100%);
+            color: #f7eedc;
+            font-family: 'Playfair Display', 'Georgia', serif;
+        }
+        body.theme-kerala .page-header h1 {
+            font-family: 'Cinzel', serif;
+            color: #edd18c;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        }
+        body.theme-kerala .page-header p {
+            color: #c9b183;
+        }
+        body.theme-kerala .tree-container {
+            background: #fbf7ee;
+            border: 4px solid #b38938;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 0 3px #3e2815;
+            border-radius: 6px;
+        }
+        body.theme-kerala .tree-container line {
+            stroke: #af8133 !important;
+            stroke-width: 2.7;
+        }
+        body.theme-kerala .tree-container rect[fill="#e3f2fd"] {
+            fill: #eef5fa !important;
+            stroke: #5d88a4 !important;
+            filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));
+        }
+        body.theme-kerala .tree-container rect[fill="#fce4ec"] {
+            fill: #faf0f2 !important;
+            stroke: #bc7585 !important;
+            filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));
+        }
+        body.theme-kerala .tree-container text {
+            fill: #2c1a0c !important;
+        }
+        body.theme-kerala .wm-kerala {
+            display: block;
+            opacity: 0.18;
+        }
+
+
+        /* ================= THEME 4: ROYAL EMERALD & GOLD ================= */
+        body.theme-emerald {
+            background: #0b1a13;
+            background-image: radial-gradient(circle at 50% 15%, #132a20 0%, #091710 65%, #040c08 100%);
+            color: #e9f2eb;
+            font-family: 'Cinzel', serif;
+        }
+        body.theme-emerald .page-header h1 {
+            color: #f1d794;
+            letter-spacing: 1.5px;
+            text-shadow: 0 3px 12px rgba(0,0,0,0.7);
+        }
+        body.theme-emerald .page-header p {
+            color: #a3c4ad;
+            font-family: 'Lora', serif;
+            font-style: italic;
+        }
+        body.theme-emerald .tree-container {
+            background: #faf8f2;
+            border: 3px solid #d4af37;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.25);
+            border-radius: 6px;
+        }
+        body.theme-emerald .tree-container line {
+            stroke: #c29938 !important;
+            stroke-width: 2.8;
+        }
+        body.theme-emerald .tree-container rect[fill="#e3f2fd"] {
+            fill: #f0f6fa !important;
+            stroke: #4d7a97 !important;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+        }
+        body.theme-emerald .tree-container rect[fill="#fce4ec"] {
+            fill: #faf1f3 !important;
+            stroke: #b66879 !important;
+            stroke-width: 2.5;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.12));
+        }
+        body.theme-emerald .tree-container text {
+            fill: #192b21 !important;
+        }
+        body.theme-emerald .wm-emerald {
+            display: block;
+            opacity: 0.85;
+        }
+
+
+        /* ================= THEME 5: MODERN MINIMALIST LINEN ================= */
+        body.theme-modern {
+            background-color: #f1f4f8;
+            background-image: 
+                radial-gradient(#cfd8dc 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+            color: #1e293b;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+        body.theme-modern .page-header h1 {
+            font-family: 'Inter', sans-serif;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        body.theme-modern .page-header p {
+            color: #64748b;
+        }
+        body.theme-modern .tree-container {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0,0,0,0.03);
+            border-radius: 16px;
+        }
+        body.theme-modern .tree-container line {
+            stroke: #94a3b8 !important;
+            stroke-width: 2.2;
+        }
+        body.theme-modern .tree-container rect {
+            rx: 10; ry: 10;
+        }
+        body.theme-modern .tree-container rect[fill="#e3f2fd"] {
+            fill: #eff6ff !important;
+            stroke: #60a5fa !important;
+            filter: drop-shadow(0 2px 4px rgba(37, 99, 235, 0.06));
+        }
+        body.theme-modern .tree-container rect[fill="#fce4ec"] {
+            fill: #fdf2f8 !important;
+            stroke: #f472b6 !important;
+            filter: drop-shadow(0 2px 4px rgba(219, 39, 119, 0.06));
+        }
+        body.theme-modern .tree-container text {
+            fill: #0f172a !important;
+            font-family: 'Inter', sans-serif;
+        }
+
+
+        /* ================= THEME 0: ORIGINAL CLEAN DEFAULT ================= */
+        body.theme-original {
+            background-color: #f4f6f7;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #2c3e50;
+        }
+        body.theme-original .page-header h1 {
+            color: #2c3e50;
+        }
+        body.theme-original .tree-container {
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            border: none;
+        }
+        body.theme-original .tree-container line {
+            stroke: #b0bec5 !important;
+            stroke-width: 2.5;
+        }
+        body.theme-original .tree-container text {
+            fill: #37474f !important;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* Print styles */
+        @media print {
+            .control-bar { display: none !important; }
+            body { padding: 0 !important; background: white !important; }
+            .tree-scroll-wrapper { overflow: visible !important; }
+            .tree-container { transform: none !important; box-shadow: none !important; border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body class="theme-parchment">
+
+    <!-- FLOATING THEME SWITCHER -->
+    <div class="control-bar" id="controlBar">
+        <div class="theme-pills">
+            <button class="theme-btn active" onclick="setTheme('parchment', this)" title="Vintage aged manuscript scroll">📜 Parchment</button>
+            <button class="theme-btn" onclick="setTheme('tree', this)" title="Grand heritage tree silhouette watermark">🌳 Heritage Tree</button>
+            <button class="theme-btn" onclick="setTheme('kerala', this)" title="Traditional Kerala &amp; Travancore heritage">🏛️ Travancore</button>
+            <button class="theme-btn" onclick="setTheme('emerald', this)" title="Royal emerald gallery exhibition">👑 Royal Emerald</button>
+            <button class="theme-btn" onclick="setTheme('modern', this)" title="Contemporary clean linen &amp; cards">💎 Modern</button>
+            <button class="theme-btn" onclick="setTheme('original', this)" title="Restore original clean appearance">⚪ Original</button>
+        </div>
+        <div class="divider-v"></div>
+        <div class="zoom-controls">
+            <button class="zoom-btn" onclick="changeZoom(-0.1)" title="Zoom Out">−</button>
+            <span class="zoom-display" id="zoomLevel">100%</span>
+            <button class="zoom-btn" onclick="changeZoom(0.1)" title="Zoom In">+</button>
+            <button class="zoom-btn" onclick="resetZoom()" title="Reset Zoom" style="font-size: 11px;">1:1</button>
+            <button class="zoom-btn" onclick="fitWidth()" title="Fit to Screen Width" style="font-size: 11px; width: 34px; border-radius: 12px;">Fit</button>
+        </div>
+        <div class="divider-v"></div>
+        <button class="zoom-btn" onclick="window.print()" title="Print / Export PDF" style="width: auto; padding: 0 10px; border-radius: 20px; font-size: 12px; gap: 4px;">🖨️ Print</button>
+    </div>
+
+    <!-- HEADER TITLE -->
+    <div class="page-header">
+        <h1 id="treeTitle">Six Generation Family Tree</h1>
+        <p id="treeSubtitle">Kallarackal &amp; Anathanam Family — Kanjirapally &bull; Aruvithura &bull; Changanassery</p>
+    </div>
+
+    <!-- DIAGRAM SCROLL CONTAINER -->
+    <div class="tree-scroll-wrapper" id="scrollWrapper">
+        <svg id="familySvg" class="tree-container" width="1600" height="1650" viewBox="0 0 1600 1650">
+            
+            <!-- ================= WATERMARKS & BACKGROUND MOTIFS ================= -->
+            <g class="watermark-layer">
+                
+                <!-- 1. PARCHMENT ORNAMENTAL CORNERS & INNER FRAME -->
+                <g class="wm-parchment">
+                    <rect x="15" y="15" width="1570" height="1620" fill="none" stroke="#c0a16b" stroke-width="1.5" stroke-dasharray="8,4" opacity="0.6"/>
+                    <rect x="22" y="22" width="1556" height="1606" fill="none" stroke="#d5be94" stroke-width="0.8" opacity="0.8"/>
+                    <!-- Top Left Corner Flourish -->
+                    <path d="M 25 65 C 25 35, 35 25, 65 25 M 35 65 C 35 45, 45 35, 65 35 M 45 45 L 30 30" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Top Right Corner Flourish -->
+                    <path d="M 1575 65 C 1575 35, 1565 25, 1535 25 M 1565 65 C 1565 45, 1555 35, 1535 35 M 1555 45 L 1570 30" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Bottom Left Corner Flourish -->
+                    <path d="M 25 1585 C 25 1615, 35 1625, 65 1625 M 35 1585 C 35 1605, 45 1615, 65 1615 M 45 1605 L 30 1620" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Bottom Right Corner Flourish -->
+                    <path d="M 1575 1585 C 1575 1615, 1565 1625, 1535 1625 M 1565 1585 C 1565 1605, 1555 1615, 1535 1615 M 1555 1605 L 1570 1620" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                </g>
+
+                <!-- 2. HERITAGE TREE ARTISTIC WATERMARK SILHOUETTE -->
+                <g class="wm-tree">
+                    <!-- Base Ground / Roots Horizon -->
+                    <path d="M 150 1610 Q 750 1590 1450 1610" stroke="#25522e" stroke-width="6" fill="none" opacity="0.5"/>
+                    <!-- Sprawling Roots -->
+                    <path d="M 680 1550 Q 640 1580 500 1605 M 710 1560 Q 680 1590 610 1620 M 760 1555 Q 810 1585 920 1615 M 740 1560 Q 770 1595 830 1625 M 720 1570 L 720 1630" stroke="#1f4426" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    
+                    <!-- Main Trunk ascending upward from bottom through center -->
+                    <path d="M 680 1550 C 690 1350 670 1150 690 950 C 700 800 660 650 710 500 C 720 400 715 250 725 150 
+                             C 745 250 740 400 750 500 C 800 650 760 800 770 950 C 790 1150 770 1350 780 1550 Z" 
+                          fill="#275630"/>
+                    
+                    <!-- Grand Spreading Limbs & Branches -->
+                    <!-- Lower Left Branches -->
+                    <path d="M 685 1100 Q 520 1020 350 1060 Q 220 1100 120 1060" stroke="#275630" stroke-width="18" stroke-linecap="round" fill="none"/>
+                    <path d="M 450 1040 Q 380 940 260 930" stroke="#275630" stroke-width="10" stroke-linecap="round" fill="none"/>
+                    <!-- Mid Left Branches -->
+                    <path d="M 695 800 Q 480 720 320 750 Q 200 770 110 720" stroke="#275630" stroke-width="16" stroke-linecap="round" fill="none"/>
+                    <path d="M 420 735 Q 350 640 220 630" stroke="#275630" stroke-width="9" stroke-linecap="round" fill="none"/>
+                    <!-- Upper Left Branches -->
+                    <path d="M 705 520 Q 540 430 360 450 Q 240 460 140 410" stroke="#275630" stroke-width="14" stroke-linecap="round" fill="none"/>
+                    <path d="M 460 445 Q 390 350 280 340" stroke="#275630" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <!-- Top Crown Left -->
+                    <path d="M 715 300 Q 580 200 420 210 Q 320 220 220 170" stroke="#275630" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                    <!-- Lower Right Branches -->
+                    <path d="M 775 1100 Q 940 1020 1110 1060 Q 1240 1100 1340 1060" stroke="#275630" stroke-width="18" stroke-linecap="round" fill="none"/>
+                    <path d="M 1010 1040 Q 1080 940 1200 930" stroke="#275630" stroke-width="10" stroke-linecap="round" fill="none"/>
+                    <!-- Mid Right Branches -->
+                    <path d="M 765 800 Q 980 720 1140 750 Q 1260 770 1350 720" stroke="#275630" stroke-width="16" stroke-linecap="round" fill="none"/>
+                    <path d="M 1040 735 Q 1110 640 1240 630" stroke="#275630" stroke-width="9" stroke-linecap="round" fill="none"/>
+                    <!-- Upper Right Branches -->
+                    <path d="M 755 520 Q 920 430 1100 450 Q 1220 460 1320 410" stroke="#275630" stroke-width="14" stroke-linecap="round" fill="none"/>
+                    <path d="M 1000 445 Q 1070 350 1180 340" stroke="#275630" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <!-- Top Crown Right -->
+                    <path d="M 745 300 Q 880 200 1040 210 Q 1140 220 1240 170" stroke="#275630" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                    <!-- Foliage Clouds / Leaf Canopy Clusters -->
+                    <ellipse cx="200" cy="420" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="320" cy="340" rx="100" ry="55" fill="#2e6437"/>
+                    <ellipse cx="440" cy="200" rx="110" ry="60" fill="#2e6437"/>
+                    <ellipse cx="600" cy="140" rx="120" ry="65" fill="#2e6437"/>
+                    <ellipse cx="730" cy="110" rx="130" ry="70" fill="#2e6437"/>
+                    <ellipse cx="860" cy="140" rx="120" ry="65" fill="#2e6437"/>
+                    <ellipse cx="1020" cy="200" rx="110" ry="60" fill="#2e6437"/>
+                    <ellipse cx="1150" cy="340" rx="100" ry="55" fill="#2e6437"/>
+                    <ellipse cx="1270" cy="420" rx="90" ry="50" fill="#2e6437"/>
+                    <!-- Mid canopy clusters -->
+                    <ellipse cx="160" cy="730" rx="95" ry="50" fill="#2e6437"/>
+                    <ellipse cx="260" cy="630" rx="85" ry="45" fill="#2e6437"/>
+                    <ellipse cx="1300" cy="730" rx="95" ry="50" fill="#2e6437"/>
+                    <ellipse cx="1200" cy="630" rx="85" ry="45" fill="#2e6437"/>
+                    <!-- Lower canopy clusters -->
+                    <ellipse cx="160" cy="1060" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="300" cy="940" rx="80" ry="45" fill="#2e6437"/>
+                    <ellipse cx="1300" cy="1060" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="1160" cy="940" rx="80" ry="45" fill="#2e6437"/>
+                </g>
+
+                <!-- 3. TRAVANCORE & KERALA HERITAGE WATERMARK -->
+                <g class="wm-kerala">
+                    <!-- Traditional Brass Arch Border at top -->
+                    <path d="M 80 180 Q 800 60 1520 180" stroke="#af8133" stroke-width="3" fill="none"/>
+                    <path d="M 80 192 Q 800 72 1520 192" stroke="#af8133" stroke-width="1.5" stroke-dasharray="6,4" fill="none"/>
+                    
+                    <!-- Center Heritage Medallion (Symbolizing historic Syrian Christian heritage of Kanjirapally / Aruvithura) -->
+                    <g transform="translate(800, 310) scale(1.1)">
+                        <!-- Lotus Base -->
+                        <path d="M -60 40 C -40 25, -20 35, 0 45 C 20 35, 40 25, 60 40 C 40 55, -40 55, -60 40 Z" fill="#b8860b"/>
+                        <path d="M -45 42 C -30 20, 0 25, 0 45 C 0 25, 30 20, 45 42 Z" fill="#cfa02c"/>
+                        <!-- Heritage Cross Motif -->
+                        <rect x="-7" y="-70" width="14" height="105" rx="3" fill="#b8860b"/>
+                        <rect x="-42" y="-45" width="84" height="14" rx="3" fill="#b8860b"/>
+                        <!-- Floral extremities -->
+                        <circle cx="0" cy="-73" r="7" fill="#cfa02c"/>
+                        <circle cx="-45" cy="-38" r="7" fill="#cfa02c"/>
+                        <circle cx="45" cy="-38" r="7" fill="#cfa02c"/>
+                        <!-- Ray circles -->
+                        <circle cx="0" cy="-15" r="70" fill="none" stroke="#af8133" stroke-width="1.5" stroke-dasharray="4,6"/>
+                    </g>
+                    <!-- Bottom Heritage Base Inscription Seal -->
+                    <g transform="translate(800, 1590)">
+                        <path d="M -220 0 L 220 0" stroke="#b8860b" stroke-width="2"/>
+                        <path d="M -160 8 L 160 8" stroke="#b8860b" stroke-width="1"/>
+                        <circle cx="0" cy="0" r="5" fill="#b8860b"/>
+                        <circle cx="-100" cy="0" r="3" fill="#b8860b"/>
+                        <circle cx="100" cy="0" r="3" fill="#b8860b"/>
+                    </g>
+                </g>
+
+                <!-- 4. ROYAL EMERALD & GOLD WATERMARK -->
+                <g class="wm-emerald">
+                    <rect x="18" y="18" width="1564" height="1614" fill="none" stroke="#d4af37" stroke-width="1.8" opacity="0.6"/>
+                    <rect x="26" y="26" width="1548" height="1598" fill="none" stroke="#f3e5ab" stroke-width="0.8" opacity="0.8"/>
+                    <!-- Ornate Filigree Corner Pieces -->
+                    <!-- TL -->
+                    <g transform="translate(30, 30)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- TR -->
+                    <g transform="translate(1570, 30) scale(-1, 1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- BL -->
+                    <g transform="translate(30, 1620) scale(1, -1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- BR -->
+                    <g transform="translate(1570, 1620) scale(-1, -1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                </g>
+            </g>
+
+            <!-- ================= ORIGINAL FAMILY TREE LINES & NODES ================= -->
+            <!-- ================= WATERMARKS & BACKGROUND MOTIFS ================= -->
+            <g class="watermark-layer">
+                
+                <!-- 1. PARCHMENT ORNAMENTAL CORNERS & INNER FRAME -->
+                <g class="wm-parchment">
+                    <rect x="15" y="15" width="1570" height="1620" fill="none" stroke="#c0a16b" stroke-width="1.5" stroke-dasharray="8,4" opacity="0.6"/>
+                    <rect x="22" y="22" width="1556" height="1606" fill="none" stroke="#d5be94" stroke-width="0.8" opacity="0.8"/>
+                    <!-- Top Left Corner Flourish -->
+                    <path d="M 25 65 C 25 35, 35 25, 65 25 M 35 65 C 35 45, 45 35, 65 35 M 45 45 L 30 30" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Top Right Corner Flourish -->
+                    <path d="M 1575 65 C 1575 35, 1565 25, 1535 25 M 1565 65 C 1565 45, 1555 35, 1535 35 M 1555 45 L 1570 30" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Bottom Left Corner Flourish -->
+                    <path d="M 25 1585 C 25 1615, 35 1625, 65 1625 M 35 1585 C 35 1605, 45 1615, 65 1615 M 45 1605 L 30 1620" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                    <!-- Bottom Right Corner Flourish -->
+                    <path d="M 1575 1585 C 1575 1615, 1565 1625, 1535 1625 M 1565 1585 C 1565 1605, 1555 1615, 1535 1615 M 1555 1605 L 1570 1620" fill="none" stroke="#a68453" stroke-width="2" opacity="0.5"/>
+                </g>
+
+                <!-- 2. HERITAGE TREE ARTISTIC WATERMARK SILHOUETTE -->
+                <g class="wm-tree">
+                    <!-- Base Ground / Roots Horizon -->
+                    <path d="M 150 1610 Q 750 1590 1450 1610" stroke="#25522e" stroke-width="6" fill="none" opacity="0.5"/>
+                    <!-- Sprawling Roots -->
+                    <path d="M 680 1550 Q 640 1580 500 1605 M 710 1560 Q 680 1590 610 1620 M 760 1555 Q 810 1585 920 1615 M 740 1560 Q 770 1595 830 1625 M 720 1570 L 720 1630" stroke="#1f4426" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    
+                    <!-- Main Trunk ascending upward from bottom through center -->
+                    <path d="M 680 1550 C 690 1350 670 1150 690 950 C 700 800 660 650 710 500 C 720 400 715 250 725 150 
+                             C 745 250 740 400 750 500 C 800 650 760 800 770 950 C 790 1150 770 1350 780 1550 Z" 
+                          fill="#275630"/>
+                    
+                    <!-- Grand Spreading Limbs & Branches -->
+                    <!-- Lower Left Branches -->
+                    <path d="M 685 1100 Q 520 1020 350 1060 Q 220 1100 120 1060" stroke="#275630" stroke-width="18" stroke-linecap="round" fill="none"/>
+                    <path d="M 450 1040 Q 380 940 260 930" stroke="#275630" stroke-width="10" stroke-linecap="round" fill="none"/>
+                    <!-- Mid Left Branches -->
+                    <path d="M 695 800 Q 480 720 320 750 Q 200 770 110 720" stroke="#275630" stroke-width="16" stroke-linecap="round" fill="none"/>
+                    <path d="M 420 735 Q 350 640 220 630" stroke="#275630" stroke-width="9" stroke-linecap="round" fill="none"/>
+                    <!-- Upper Left Branches -->
+                    <path d="M 705 520 Q 540 430 360 450 Q 240 460 140 410" stroke="#275630" stroke-width="14" stroke-linecap="round" fill="none"/>
+                    <path d="M 460 445 Q 390 350 280 340" stroke="#275630" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <!-- Top Crown Left -->
+                    <path d="M 715 300 Q 580 200 420 210 Q 320 220 220 170" stroke="#275630" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                    <!-- Lower Right Branches -->
+                    <path d="M 775 1100 Q 940 1020 1110 1060 Q 1240 1100 1340 1060" stroke="#275630" stroke-width="18" stroke-linecap="round" fill="none"/>
+                    <path d="M 1010 1040 Q 1080 940 1200 930" stroke="#275630" stroke-width="10" stroke-linecap="round" fill="none"/>
+                    <!-- Mid Right Branches -->
+                    <path d="M 765 800 Q 980 720 1140 750 Q 1260 770 1350 720" stroke="#275630" stroke-width="16" stroke-linecap="round" fill="none"/>
+                    <path d="M 1040 735 Q 1110 640 1240 630" stroke="#275630" stroke-width="9" stroke-linecap="round" fill="none"/>
+                    <!-- Upper Right Branches -->
+                    <path d="M 755 520 Q 920 430 1100 450 Q 1220 460 1320 410" stroke="#275630" stroke-width="14" stroke-linecap="round" fill="none"/>
+                    <path d="M 1000 445 Q 1070 350 1180 340" stroke="#275630" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <!-- Top Crown Right -->
+                    <path d="M 745 300 Q 880 200 1040 210 Q 1140 220 1240 170" stroke="#275630" stroke-width="11" stroke-linecap="round" fill="none"/>
+
+                    <!-- Foliage Clouds / Leaf Canopy Clusters -->
+                    <ellipse cx="200" cy="420" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="320" cy="340" rx="100" ry="55" fill="#2e6437"/>
+                    <ellipse cx="440" cy="200" rx="110" ry="60" fill="#2e6437"/>
+                    <ellipse cx="600" cy="140" rx="120" ry="65" fill="#2e6437"/>
+                    <ellipse cx="730" cy="110" rx="130" ry="70" fill="#2e6437"/>
+                    <ellipse cx="860" cy="140" rx="120" ry="65" fill="#2e6437"/>
+                    <ellipse cx="1020" cy="200" rx="110" ry="60" fill="#2e6437"/>
+                    <ellipse cx="1150" cy="340" rx="100" ry="55" fill="#2e6437"/>
+                    <ellipse cx="1270" cy="420" rx="90" ry="50" fill="#2e6437"/>
+                    <!-- Mid canopy clusters -->
+                    <ellipse cx="160" cy="730" rx="95" ry="50" fill="#2e6437"/>
+                    <ellipse cx="260" cy="630" rx="85" ry="45" fill="#2e6437"/>
+                    <ellipse cx="1300" cy="730" rx="95" ry="50" fill="#2e6437"/>
+                    <ellipse cx="1200" cy="630" rx="85" ry="45" fill="#2e6437"/>
+                    <!-- Lower canopy clusters -->
+                    <ellipse cx="160" cy="1060" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="300" cy="940" rx="80" ry="45" fill="#2e6437"/>
+                    <ellipse cx="1300" cy="1060" rx="90" ry="50" fill="#2e6437"/>
+                    <ellipse cx="1160" cy="940" rx="80" ry="45" fill="#2e6437"/>
+                </g>
+
+                <!-- 3. TRAVANCORE & KERALA HERITAGE WATERMARK -->
+                <g class="wm-kerala">
+                    <!-- Traditional Brass Arch Border at top -->
+                    <path d="M 80 180 Q 800 60 1520 180" stroke="#af8133" stroke-width="3" fill="none"/>
+                    <path d="M 80 192 Q 800 72 1520 192" stroke="#af8133" stroke-width="1.5" stroke-dasharray="6,4" fill="none"/>
+                    
+                    <!-- Center Heritage Medallion (Symbolizing historic Syrian Christian heritage of Kanjirapally / Aruvithura) -->
+                    <g transform="translate(800, 310) scale(1.1)">
+                        <!-- Lotus Base -->
+                        <path d="M -60 40 C -40 25, -20 35, 0 45 C 20 35, 40 25, 60 40 C 40 55, -40 55, -60 40 Z" fill="#b8860b"/>
+                        <path d="M -45 42 C -30 20, 0 25, 0 45 C 0 25, 30 20, 45 42 Z" fill="#cfa02c"/>
+                        <!-- Heritage Cross Motif -->
+                        <rect x="-7" y="-70" width="14" height="105" rx="3" fill="#b8860b"/>
+                        <rect x="-42" y="-45" width="84" height="14" rx="3" fill="#b8860b"/>
+                        <!-- Floral extremities -->
+                        <circle cx="0" cy="-73" r="7" fill="#cfa02c"/>
+                        <circle cx="-45" cy="-38" r="7" fill="#cfa02c"/>
+                        <circle cx="45" cy="-38" r="7" fill="#cfa02c"/>
+                        <!-- Ray circles -->
+                        <circle cx="0" cy="-15" r="70" fill="none" stroke="#af8133" stroke-width="1.5" stroke-dasharray="4,6"/>
+                    </g>
+                    <!-- Bottom Heritage Base Inscription Seal -->
+                    <g transform="translate(800, 1590)">
+                        <path d="M -220 0 L 220 0" stroke="#b8860b" stroke-width="2"/>
+                        <path d="M -160 8 L 160 8" stroke="#b8860b" stroke-width="1"/>
+                        <circle cx="0" cy="0" r="5" fill="#b8860b"/>
+                        <circle cx="-100" cy="0" r="3" fill="#b8860b"/>
+                        <circle cx="100" cy="0" r="3" fill="#b8860b"/>
+                    </g>
+                </g>
+
+                <!-- 4. ROYAL EMERALD & GOLD WATERMARK -->
+                <g class="wm-emerald">
+                    <rect x="18" y="18" width="1564" height="1614" fill="none" stroke="#d4af37" stroke-width="1.8" opacity="0.6"/>
+                    <rect x="26" y="26" width="1548" height="1598" fill="none" stroke="#f3e5ab" stroke-width="0.8" opacity="0.8"/>
+                    <!-- Ornate Filigree Corner Pieces -->
+                    <!-- TL -->
+                    <g transform="translate(30, 30)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- TR -->
+                    <g transform="translate(1570, 30) scale(-1, 1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- BL -->
+                    <g transform="translate(30, 1620) scale(1, -1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                    <!-- BR -->
+                    <g transform="translate(1570, 1620) scale(-1, -1)">
+                        <path d="M 0 0 L 80 0 M 0 0 L 0 80 M 15 15 L 60 15 M 15 15 L 15 60" stroke="#d4af37" stroke-width="2.5" fill="none"/>
+                        <circle cx="15" cy="15" r="4" fill="#d4af37"/>
+                        <path d="M 0 30 Q 30 30 30 0" stroke="#d4af37" stroke-width="1.5" fill="none"/>
+                    </g>
+                </g>
+            </g>
+
+            <!-- ================= ORIGINAL FAMILY TREE LINES & NODES ================= -->
+            <line x1="530" y1="105" x2="530" y2="150" />
+            <line x1="530" y1="203" x2="530" y2="270" />
+            <line x1="530" y1="323" x2="530" y2="365" />
+            <line x1="200" y1="365" x2="860" y2="365" />
+            <line x1="200" y1="365" x2="200" y2="395" />
+            <line x1="365" y1="365" x2="365" y2="395" />
+            <line x1="530" y1="365" x2="530" y2="395" />
+            <line x1="695" y1="365" x2="695" y2="395" />
+            <line x1="860" y1="365" x2="860" y2="395" />
+            <line x1="860" y1="448" x2="860" y2="495" />
+            <line x1="282.5" y1="495" x2="980" y2="495" />
+            <line x1="282.5" y1="495" x2="282.5" y2="525" />
+            <line x1="980" y1="495" x2="980" y2="525" />
+            <line x1="980" y1="551.5" x2="530" y2="551.5" />
+            <line x1="980" y1="551.5" x2="1210" y2="551.5" />
+            <line x1="282.5" y1="578" x2="282.5" y2="761.5" />
+            <line x1="282.5" y1="671.5" x2="257" y2="671.5" />
+            <line x1="282.5" y1="746.5" x2="257" y2="746.5" />
+            <line x1="530" y1="578" x2="530" y2="980" />
+            <line x1="530" y1="671.5" x2="555" y2="671.5" />
+            <line x1="530" y1="761.5" x2="555" y2="761.5" />
+            <line x1="530" y1="851.5" x2="555" y2="851.5" />
+            <line x1="530" y1="941.5" x2="555" y2="941.5" />
+            <line x1="1210" y1="578" x2="1210" y2="1571.5" />
+            <line x1="1210" y1="671.5" x2="1135" y2="671.5" />
+            <line x1="1210" y1="746.5" x2="1135" y2="746.5" />
+            <line x1="1210" y1="821.5" x2="1135" y2="821.5" />
+            <line x1="1210" y1="896.5" x2="1135" y2="896.5" />
+            <line x1="1210" y1="971.5" x2="1135" y2="971.5" />
+            <line x1="1210" y1="1046.5" x2="1135" y2="1046.5" />
+            <line x1="1210" y1="1121.5" x2="1135" y2="1121.5" />
+            <line x1="1210" y1="1196.5" x2="1135" y2="1196.5" />
+            <line x1="1210" y1="1271.5" x2="1135" y2="1271.5" />
+            <line x1="1210" y1="1346.5" x2="1135" y2="1346.5" />
+            <line x1="1210" y1="1421.5" x2="1135" y2="1421.5" />
+            <line x1="1210" y1="1496.5" x2="1135" y2="1496.5" />
+            <line x1="1210" y1="1571.5" x2="1135" y2="1571.5" />
+            <g>
+                <rect x="280" y="25" width="500" height="80" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="root-text" x="530.0" y="62.0" text-anchor="middle">Kanjirapally Naduvile ValiyaVeettil Ittiavirah's second daughter</text>
+                <text class="root-text" x="530.0" y="77.0" text-anchor="middle">Aruvithura Kallarackal Varkey's son Mathai</text>
+            </g>
+            <g>
+                <rect x="390" y="150" width="280" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="530.0" y="181.5" text-anchor="middle">Kanjirapally Kallarackal Ittiavirah</text>
+            </g>
+            <g>
+                <rect x="430" y="270" width="200" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="530.0" y="301.5" text-anchor="middle">Mathai & Mariya Mukkatt</text>
+            </g>
+            <g>
+                <rect x="125" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="200.0" y="418.5" text-anchor="middle">ValiyaKallarakal</text>
+                <text class="compact-text" x="200.0" y="433.5" text-anchor="middle">Ittiavirah</text>
+            </g>
+            <g>
+                <rect x="290" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="365.0" y="418.5" text-anchor="middle">KochuKallarackal</text>
+                <text class="compact-text" x="365.0" y="433.5" text-anchor="middle">Kunjacko</text>
+            </g>
+            <g>
+                <rect x="455" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="530.0" y="418.5" text-anchor="middle">Kuruvila</text>
+                <text class="compact-text" x="530.0" y="433.5" text-anchor="middle">(priest)</text>
+            </g>
+            <g>
+                <rect x="620" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="695.0" y="414" text-anchor="middle">Mathai</text>
+                <text class="compact-text" x="695.0" y="427" text-anchor="middle">(died in a shooting</text>
+                <text class="compact-text" x="695.0" y="440" text-anchor="middle">accident)</text>
+            </g>
+            <g>
+                <rect x="785" y="395" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="860.0" y="414" text-anchor="middle">Pazhaya</text>
+                <text class="compact-text" x="860.0" y="427" text-anchor="middle">Kallarackal</text>
+                <text class="compact-text" x="860.0" y="440" text-anchor="middle">KunjuVarkey</text>
+            </g>
+            <g>
+                <rect x="207.5" y="525" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="282.5" y="548.5" text-anchor="middle">Kollamkulam Kunjuvarkey</text>
+                <text class="compact-text" x="282.5" y="563.5" text-anchor="middle">Mathai (1837 - 1868)</text>
+            </g>
+            <g>
+                <rect x="905" y="525" width="150" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="980.0" y="548.5" text-anchor="middle">Anathanam KunjuVarkey</text>
+                <text class="compact-text" x="980.0" y="563.5" text-anchor="middle">Kuruvila (1849 - 1933)</text>
+            </g>
+            <g>
+                <rect x="455" y="525" width="150" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="530.0" y="548.5" text-anchor="middle">First wife Chachi</text>
+                <text class="compact-text" x="530.0" y="563.5" text-anchor="middle">Mapilasseril</text>
+            </g>
+            <g>
+                <rect x="1135" y="525" width="150" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1210.0" y="548.5" text-anchor="middle">Second wife Chachi</text>
+                <text class="compact-text" x="1210.0" y="563.5" text-anchor="middle">Karippaparmpil</text>
+            </g>
+            <g>
+                <rect x="17" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="137.0" y="668.5" text-anchor="middle">Msgr. Jacob Kallarackal</text>
+                <text class="compact-text" x="137.0" y="683.5" text-anchor="middle">(Vicar General of Chagnassery)</text>
+            </g>
+            <g>
+                <rect x="17" y="720" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="137.0" y="751.5" text-anchor="middle">KunjuVarkey</text>
+            </g>
+            <g>
+                <rect x="555" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="675.0" y="668.5" text-anchor="middle">KunjuVarkey</text>
+                <text class="compact-text" x="675.0" y="683.5" text-anchor="middle">Karickatturumpil</text>
+            </g>
+            <g>
+                <rect x="555" y="735" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text x="675.0" y="766.5" text-anchor="middle">Mariya</text>
+            </g>
+            <g>
+                <rect x="555" y="825" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="675.0" y="856.5" text-anchor="middle">Thommy Maliackal</text>
+            </g>
+            <g>
+                <rect x="555" y="915" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text x="675.0" y="946.5" text-anchor="middle">Mariya</text>
+            </g>
+            <g>
+                <rect x="895" y="645" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="676.5" text-anchor="middle">Mathai</text>
+            </g>
+            <g>
+                <rect x="895" y="720" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="751.5" text-anchor="middle">Devasia</text>
+            </g>
+            <g>
+                <rect x="895" y="795" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="818.5" text-anchor="middle">KochuMathai</text>
+                <text class="compact-text" x="1015.0" y="833.5" text-anchor="middle">Puthenpura</text>
+            </g>
+            <g>
+                <rect x="895" y="870" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="893.5" text-anchor="middle">KC Thomas</text>
+                <text class="compact-text" x="1015.0" y="908.5" text-anchor="middle">Puliurumbil</text>
+            </g>
+            <g>
+                <rect x="895" y="945" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="968.5" text-anchor="middle">Mammy</text>
+                <text class="compact-text" x="1015.0" y="983.5" text-anchor="middle">Kathayanat</text>
+            </g>
+            <g>
+                <rect x="895" y="1020" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1043.5" text-anchor="middle">Ackamma Pallivathukal,</text>
+                <text class="compact-text" x="1015.0" y="1058.5" text-anchor="middle">Ramapuram</text>
+            </g>
+            <g>
+                <rect x="895" y="1095" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1118.5" text-anchor="middle">Appachan</text>
+                <text class="compact-text" x="1015.0" y="1133.5" text-anchor="middle">Methayathel</text>
+            </g>
+            <g>
+                <rect x="895" y="1170" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1193.5" text-anchor="middle">Thresia</text>
+                <text class="compact-text" x="1015.0" y="1208.5" text-anchor="middle">Kavalam</text>
+            </g>
+            <g>
+                <rect x="895" y="1245" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="1276.5" text-anchor="middle">Fr. Mathew</text>
+            </g>
+            <g>
+                <rect x="895" y="1320" width="240" height="53" fill="#fce4ec" stroke="#f48fb1" />
+                <text class="compact-text" x="1015.0" y="1343.5" text-anchor="middle">Alykutty</text>
+                <text class="compact-text" x="1015.0" y="1358.5" text-anchor="middle">Karivelithara</text>
+            </g>
+            <g>
+                <rect x="895" y="1395" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1418.5" text-anchor="middle">Chackochan</text>
+                <text class="compact-text" x="1015.0" y="1433.5" text-anchor="middle">Bhoothakuzhy</text>
+            </g>
+            <g>
+                <rect x="895" y="1470" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text x="1015.0" y="1501.5" text-anchor="middle">Ittiavirah</text>
+            </g>
+            <g>
+                <rect x="895" y="1545" width="240" height="53" fill="#e3f2fd" stroke="#90caf9" />
+                <text class="compact-text" x="1015.0" y="1568.5" text-anchor="middle">Kuruvachan</text>
+                <text class="compact-text" x="1015.0" y="1583.5" text-anchor="middle">Anathanam</text>
+            </g>
+        </svg>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLER -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        // Theme Switcher Function
+        function setTheme(themeName, btn) {
+            // Remove previous theme classes
+            document.body.className = '';
+            document.body.classList.add('theme-' + themeName);
+
+            // Update button states
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                const found = Array.from(document.querySelectorAll('.theme-btn')).find(b => b.getAttribute('onclick').includes(themeName));
+                if (found) found.classList.add('active');
+            }
+
+            // Update Subtitle styling for context
+            const sub = document.getElementById('treeSubtitle');
+            if (themeName === 'kerala') {
+                sub.innerHTML = 'Historic Syrian Christian Lineage &bull; Kanjirapally &bull; Aruvithura &bull; Changanassery';
+            } else if (themeName === 'parchment') {
+                sub.innerHTML = 'Kallarackal &amp; Anathanam Family Chronicles &bull; Six Generations';
+            } else if (themeName === 'tree') {
+                sub.innerHTML = 'Generational Roots &amp; Descendant Branches &bull; Six Generations';
+            } else {
+                sub.innerHTML = 'Kallarackal &amp; Anathanam Family &bull; Kanjirapally &bull; Aruvithura &bull; Changanassery';
+            }
+
+            // Persist preference
+            try {
+                localStorage.setItem('anathanam_tree_theme', themeName);
+            } catch(e) {}
+        }
+
+        // Zoom Functions
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.4, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 40;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 1600));
+            applyZoom();
+        }
+
+        // On Load: Restore saved theme or default to parchment
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('anathanam_tree_theme') || 'parchment';
+            setTheme(savedTheme);
+            
+            // Auto fit on smaller screens
+            if (window.innerWidth < 1650) {
+                fitWidth();
+            }
+        });
+    </script>
+</body>
+</html>
