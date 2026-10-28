@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Tree: Anathanam KunjuVarkey Kuruvila</title>
+    <style>
+        :root {
+            --bg-dark: #1f1610;
+            --bg-radial: radial-gradient(ellipse at 50% 15%, #2e2017 0%, #1a120d 75%, #0d0805 100%);
+            --gold-accent: #af8133;
+            --gold-light: #edd18c;
+            --gold-border: #b38938;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--bg-dark);
+            background-image: var(--bg-radial);
+            color: #f7eedc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-center h1 {
+            margin: 0;
+            font-family: 'Cinzel', 'Playfair Display', Georgia, serif;
+            font-size: 19px;
+            color: #edd18c;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-center p {
+            margin: 2px 0 0;
+            font-size: 12px;
+            color: #c9b183;
+            font-style: italic;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 13px;
+            font-weight: 700;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        .v-sep {
+            width: 1px;
+            height: 18px;
+            background: rgba(175, 129, 51, 0.4);
+            margin: 0 4px;
+        }
+
+        /* Subheader / Legend */
+        .legend-bar {
+            max-width: 1600px;
+            margin: 14px auto 6px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            color: #edd18c;
+        }
+
+        .legend-swatch {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1.5px solid transparent;
+        }
+        .swatch-parent { background: #fdfaf3; border-color: #b38938; }
+        .swatch-male { background: #eef5fa; border-color: #5d88a4; }
+        .swatch-female { background: #faf0f2; border-color: #bc7585; }
+        .swatch-deceased { background: #eceff1; border-color: #90a4ae; border-style: dashed; }
+
+        /* Tree Scroll Container */
+        .tree-scroll-wrapper {
+            width: 100%;
+            max-width: 1680px;
+            margin: 0 auto;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 10px 15px 35px 15px;
+            display: flex;
+            justify-content: center;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tree-container {
+            background: #fbf7ee;
+            border: 4px solid #b38938;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.75), 0 0 0 3px #3e2815;
+            border-radius: 12px;
+            display: block;
+            margin: 0 auto;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        /* SVG Node Link Effects */
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 3.2 !important;
+            filter: brightness(0.96) drop-shadow(0 6px 12px rgba(60, 40, 18, 0.25));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* Detailed Roster Section */
+        .roster-container {
+            max-width: 1560px;
+            margin: 20px auto 60px auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(175, 129, 51, 0.35);
+            padding-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-family: 'Cinzel', Georgia, serif;
+            color: #edd18c;
+            margin: 0 0 6px 0;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header p {
+            margin: 0;
+            color: #c9b183;
+            font-size: 14.5px;
+        }
+
+        .marriage-sections-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.5fr;
+            gap: 25px;
+        }
+
+        @media (max-width: 1100px) {
+            .marriage-sections-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .marriage-card-panel {
+            background: rgba(36, 26, 18, 0.85);
+            border: 2px solid #af8133;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .panel-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(175, 129, 51, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 16px;
+        }
+
+        .panel-title h3 {
+            margin: 0;
+            color: #edd18c;
+            font-size: 17px;
+        }
+
+        .badge-count {
+            background: #af8133;
+            color: #1a120d;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 2px 10px;
+            border-radius: 12px;
+        }
+
+        .children-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .grid-1-col { grid-template-columns: 1fr; }
+        .grid-2-col { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+        .child-card {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 12px 14px;
+            display: block;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-left: 5px solid;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .child-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+            filter: brightness(0.98);
+        }
+
+        .card-male {
+            border-left-color: #3b6e8c;
+            background: #f7fbfe;
+        }
+
+        .card-female {
+            border-left-color: #bc7585;
+            background: #fef9fa;
+        }
+
+        .card-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .order-badge {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .order-male { background: #e3f2fd; color: #1e3a5f; }
+        .order-female { background: #fce4ec; color: #6d2b3c; }
+
+        .card-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #2c1a0c;
+            margin: 0;
+        }
+
+        .card-branch {
+            font-size: 13px;
+            color: #5c4028;
+            font-weight: 600;
+            margin: 2px 0 0 0;
+        }
+
+        .card-status {
+            font-size: 11.5px;
+            font-style: italic;
+            color: #b71c1c;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        @media print {
+            .top-nav, .legend-bar, .nav-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-wrapper { overflow: visible !important; }
+            .tree-container { box-shadow: none !important; border: 1px solid #333 !important; }
+            .marriage-card-panel { background: white !important; border: 1px solid #333 !important; }
+            .child-card { box-shadow: none !important; border: 1px solid #ccc !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Navigation -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="AnathanamFamilyTree-Travancore.html" class="nav-btn" title="Back to Main Heritage Tree">
+                &larr; Heritage Tree
+            </a>
+            <a href="KuruvilaAnathanam.html" class="nav-btn" title="Read Detailed Biography &amp; History">
+                &#128214; Biography &amp; History
+            </a>
+        </div>
+
+        <div class="nav-center">
+            <h1>Anathanam KunjuVarkey Kuruvila (1849 &ndash; 1933)</h1>
+            <p>5th Generation Kallarackal &bull; Founder of Anathanam Branch &bull; 17 Children</p>
+        </div>
+
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <div class="v-sep"></div>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit to Screen Width">Fit Width</button>
+            <div class="v-sep"></div>
+            <button class="nav-btn" onclick="window.print()" title="Print Tree">&#128424; Print</button>
+        </div>
+    </header>
+
+    <!-- Legend Bar -->
+    <div class="legend-bar">
+        <div class="legend-items">
+            <div class="legend-item"><span class="legend-swatch swatch-parent"></span> <strong>Father &amp; Wives</strong></div>
+            <div class="legend-item"><span class="legend-swatch swatch-male"></span> <strong>Sons (11 Total)</strong></div>
+            <div class="legend-item"><span class="legend-swatch swatch-female"></span> <strong>Daughters (6 Total)</strong></div>
+            <div class="legend-item"><span class="legend-swatch swatch-deceased"></span> <strong style="color: #ef9a9a;">Died at Young Age (5 Children)</strong></div>
+        </div>
+        <div style="color: #c9b183; font-size: 12px; font-style: italic;">
+            Click on any family member box to view their details
+        </div>
+    </div>
+
+    <!-- Tree SVG Scroll Area -->
+    <div class="tree-scroll-wrapper" id="scrollWrapper">
+        <svg id="familySvg" class="tree-container" width="1620" height="730" viewBox="0 0 1620 730" preserveAspectRatio="xMidYMin meet">
+            
+            <!-- Connectors (Heritage Bronze #af8133) -->
+            <!-- Stem from Father down to Marriage Bar -->
+            <line x1="720" y1="96" x2="720" y2="114" stroke="#af8133" stroke-width="2.7" />
+            
+            <!-- Marriage Bar connecting Father to Both Wives -->
+            <line x1="290" y1="114" x2="1150" y2="114" stroke="#af8133" stroke-width="2.7" />
+            
+            <!-- Drop to Wife 1 (Left) -->
+            <line x1="290" y1="114" x2="290" y2="130" stroke="#af8133" stroke-width="2.7" />
+            
+            <!-- Drop to Wife 2 (Right) -->
+            <line x1="1150" y1="114" x2="1150" y2="130" stroke="#af8133" stroke-width="2.7" />
+            
+            <!-- FIRST MARRIAGE CONNECTORS -->
+            <!-- Drop from Wife 1 bottom to Column 1 trunk -->
+            <line x1="290" y1="190" x2="290" y2="216" stroke="#af8133" stroke-width="2.7" />
+            <line x1="290" y1="216" x2="145" y2="216" stroke="#af8133" stroke-width="2.7" />
+            <line x1="145" y1="216" x2="145" y2="567" stroke="#af8133" stroke-width="2.7" />
+            <!-- Spurs to 4 Children of Marriage 1 -->
+            <line x1="145" y1="282" x2="175" y2="282" stroke="#af8133" stroke-width="2.5" />
+            <line x1="145" y1="377" x2="175" y2="377" stroke="#af8133" stroke-width="2.5" />
+            <line x1="145" y1="472" x2="175" y2="472" stroke="#af8133" stroke-width="2.5" />
+            <line x1="145" y1="567" x2="175" y2="567" stroke="#af8133" stroke-width="2.5" />
+
+            <!-- SECOND MARRIAGE CONNECTORS -->
+            <!-- Drop from Wife 2 bottom to bus bar -->
+            <line x1="1150" y1="190" x2="1150" y2="216" stroke="#af8133" stroke-width="2.7" />
+            <!-- Bus Bar spanning across Columns 2, 3, 4 -->
+            <line x1="510" y1="216" x2="1250" y2="216" stroke="#af8133" stroke-width="2.7" />
+
+            <!-- Column 2 Trunk (Children 5-9) -->
+            <line x1="510" y1="216" x2="510" y2="662" stroke="#af8133" stroke-width="2.7" />
+            <line x1="510" y1="282" x2="540" y2="282" stroke="#af8133" stroke-width="2.5" />
+            <line x1="510" y1="377" x2="540" y2="377" stroke="#af8133" stroke-width="2.5" />
+            <line x1="510" y1="472" x2="540" y2="472" stroke="#af8133" stroke-width="2.5" />
+            <line x1="510" y1="567" x2="540" y2="567" stroke="#af8133" stroke-width="2.5" />
+            <line x1="510" y1="662" x2="540" y2="662" stroke="#af8133" stroke-width="2.5" />
+
+            <!-- Column 3 Trunk (Children 10-13) -->
+            <line x1="880" y1="216" x2="880" y2="567" stroke="#af8133" stroke-width="2.7" />
+            <line x1="880" y1="282" x2="910" y2="282" stroke="#af8133" stroke-width="2.5" />
+            <line x1="880" y1="377" x2="910" y2="377" stroke="#af8133" stroke-width="2.5" />
+            <line x1="880" y1="472" x2="910" y2="472" stroke="#af8133" stroke-width="2.5" />
+            <line x1="880" y1="567" x2="910" y2="567" stroke="#af8133" stroke-width="2.5" />
+
+            <!-- Column 4 Trunk (Children 14-17) -->
+            <line x1="1250" y1="216" x2="1250" y2="567" stroke="#af8133" stroke-width="2.7" />
+            <line x1="1250" y1="282" x2="1280" y2="282" stroke="#af8133" stroke-width="2.5" />
+            <line x1="1250" y1="377" x2="1280" y2="377" stroke="#af8133" stroke-width="2.5" />
+            <line x1="1250" y1="472" x2="1280" y2="472" stroke="#af8133" stroke-width="2.5" />
+            <line x1="1250" y1="567" x2="1280" y2="567" stroke="#af8133" stroke-width="2.5" />
+
+            <!-- Marriage Date Badges -->
+            <g transform="translate(485, 105)">
+                <rect x="-65" y="-10" width="130" height="20" rx="10" ry="10" fill="#2a1b12" stroke="#af8133" stroke-width="1.2" />
+                <text x="0" y="4" text-anchor="middle" font-size="10.5px" font-weight="700" fill="#edd18c">1st Marriage (~1870)</text>
+            </g>
+            <g transform="translate(940, 105)">
+                <rect x="-65" y="-10" width="130" height="20" rx="10" ry="10" fill="#2a1b12" stroke="#af8133" stroke-width="1.2" />
+                <text x="0" y="4" text-anchor="middle" font-size="10.5px" font-weight="700" fill="#edd18c">2nd Marriage (1881)</text>
+            </g>
+
+            <!-- ===================== PARENT NODES ===================== -->
+            <!-- Central Father Node -->
+            <g>
+                <a class="node-link" href="KuruvilaAnathanam.html" xlink:href="KuruvilaAnathanam.html" title="View Biography of Anathanam KunjuVarkey Kuruvila">
+                    <rect x="540" y="30" width="360" height="66" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 4px 10px rgba(60, 40, 18, 0.18));" />
+                    <text x="720" y="55" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">Anathanam KunjuVarkey Kuruvila</text>
+                    <text x="720" y="72" text-anchor="middle" font-size="12px" font-weight="600" fill="#7a5823">(1849 &ndash; 1933) &bull; Pazhaya Kallarackal</text>
+                    <text x="720" y="87" text-anchor="middle" font-size="10.5px" font-weight="700" fill="#8c5d1e">&#10022; 5th Generation Patriarch &bull; 17 Children &#10022;</text>
+                </a>
+            </g>
+
+            <!-- First Wife Node -->
+            <g>
+                <a class="node-link" href="First_Wife_Chachi_Mapilasseril.html" xlink:href="First_Wife_Chachi_Mapilasseril.html" title="Open First Wife Chachi Mapilasseril">
+                    <rect x="150" y="130" width="280" height="60" rx="8" ry="8" fill="#faf0f2" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 8px rgba(60, 40, 18, 0.15));" />
+                    <text x="290" y="154" text-anchor="middle" font-size="13.5px" font-weight="700" fill="#6d2b3c">1st Wife: Chachi Mapilasseril</text>
+                    <text x="290" y="172" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#8c4e5e">Champakulam &bull; (m. ~1870 &ndash; d. 1879)</text>
+                </a>
+            </g>
+
+            <!-- Second Wife Node -->
+            <g>
+                <a class="node-link" href="Second_Wife_Chachi_Karippaparmpil.html" xlink:href="Second_Wife_Chachi_Karippaparmpil.html" title="Open Second Wife Chachi Karippaparambil">
+                    <rect x="990" y="130" width="320" height="60" rx="8" ry="8" fill="#faf0f2" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 8px rgba(60, 40, 18, 0.15));" />
+                    <text x="1150" y="154" text-anchor="middle" font-size="13.5px" font-weight="700" fill="#6d2b3c">2nd Wife: Chachi Karippaparambil</text>
+                    <text x="1150" y="172" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#8c4e5e">Kanjirappally &bull; (m. 1881 &ndash; d. 1933)</text>
+                </a>
+            </g>
+
+            <!-- ===================== COLUMN 1: FIRST MARRIAGE (4 CHILDREN) ===================== -->
+            <!-- Child 1: Kuruvila KunjuVarkey Karickatturumpil -->
+            <g>
+                <a class="node-link" href="KunjuVarkey_Karickatturumpil.html" xlink:href="KunjuVarkey_Karickatturumpil.html" title="Open Kuruvila KunjuVarkey Karickatturumpil">
+                    <rect x="175" y="250" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="187" y="267" font-size="10.5px" font-weight="700" fill="#3b6e8c">#1 &bull; SON</text>
+                    <text x="187" y="286" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila KunjuVarkey</text>
+                    <text x="187" y="303" font-size="11.5px" font-weight="600" fill="#4a6572">Karickatturumpil</text>
+                </a>
+            </g>
+
+            <!-- Child 2: Maria (died young) -->
+            <g>
+                <a class="node-link" href="Mariya_Karickatturumpil.html" xlink:href="Mariya_Karickatturumpil.html" title="Open Maria (Karickatturumpil)">
+                    <rect x="175" y="345" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="187" y="362" font-size="10.5px" font-weight="700" fill="#bc7585">#2 &bull; DAUGHTER</text>
+                    <text x="187" y="381" font-size="13px" font-weight="700" fill="#6d2b3c">Maria</text>
+                    <text x="187" y="398" font-size="11px" font-weight="600" fill="#c62828">(died at a young age)</text>
+                </a>
+            </g>
+
+            <!-- Child 3: Kuruvila Thommy Maliakal -->
+            <g>
+                <a class="node-link" href="Thommy_Maliackal.html" xlink:href="Thommy_Maliackal.html" title="Open Kuruvila Thommy Maliakal">
+                    <rect x="175" y="440" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="187" y="457" font-size="10.5px" font-weight="700" fill="#3b6e8c">#3 &bull; SON</text>
+                    <text x="187" y="476" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila Thommy</text>
+                    <text x="187" y="493" font-size="11.5px" font-weight="600" fill="#4a6572">Maliakal (Maliackal)</text>
+                </a>
+            </g>
+
+            <!-- Child 4: Maria (died young) -->
+            <g>
+                <a class="node-link" href="Mariya_Maliackal.html" xlink:href="Mariya_Maliackal.html" title="Open Maria (Maliackal)">
+                    <rect x="175" y="535" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="187" y="552" font-size="10.5px" font-weight="700" fill="#bc7585">#4 &bull; DAUGHTER</text>
+                    <text x="187" y="571" font-size="13px" font-weight="700" fill="#6d2b3c">Maria</text>
+                    <text x="187" y="588" font-size="11px" font-weight="600" fill="#c62828">(died at a young age)</text>
+                </a>
+            </g>
+
+            <!-- ===================== COLUMN 2: SECOND MARRIAGE (CHILDREN 5-9) ===================== -->
+            <!-- Child 5: Mathai (died young) -->
+            <g>
+                <a class="node-link" href="Mathai_Anathanam.html" xlink:href="Mathai_Anathanam.html" title="Open Mathai Anathanam">
+                    <rect x="540" y="250" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="552" y="267" font-size="10.5px" font-weight="700" fill="#3b6e8c">#5 &bull; SON</text>
+                    <text x="552" y="286" font-size="13px" font-weight="700" fill="#1e3a5f">Mathai</text>
+                    <text x="552" y="303" font-size="11px" font-weight="600" fill="#c62828">(died at a young age)</text>
+                </a>
+            </g>
+
+            <!-- Child 6: Devasia (died young) -->
+            <g>
+                <a class="node-link" href="Devasia_Anathanam.html" xlink:href="Devasia_Anathanam.html" title="Open Devasia Anathanam">
+                    <rect x="540" y="345" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="552" y="362" font-size="10.5px" font-weight="700" fill="#3b6e8c">#6 &bull; SON</text>
+                    <text x="552" y="381" font-size="13px" font-weight="700" fill="#1e3a5f">Devasia</text>
+                    <text x="552" y="398" font-size="11px" font-weight="600" fill="#c62828">(died at a young age)</text>
+                </a>
+            </g>
+
+            <!-- Child 7: KochuMathai -->
+            <g>
+                <a class="node-link" href="KochuMathai_Puthenpura.html" xlink:href="KochuMathai_Puthenpura.html" title="Open KochuMathai Puthenpura">
+                    <rect x="540" y="440" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="552" y="457" font-size="10.5px" font-weight="700" fill="#3b6e8c">#7 &bull; SON</text>
+                    <text x="552" y="476" font-size="13px" font-weight="700" fill="#1e3a5f">KochuMathai</text>
+                    <text x="552" y="493" font-size="11.5px" font-weight="600" fill="#4a6572">Puthenpura (Vilangupara)</text>
+                </a>
+            </g>
+
+            <!-- Child 8: Thomachen -->
+            <g>
+                <a class="node-link" href="KC_Thomas_Puliurumbil.html" xlink:href="KC_Thomas_Puliurumbil.html" title="Open Thomachen (KC Thomas Puliurumbil)">
+                    <rect x="540" y="535" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="552" y="552" font-size="10.5px" font-weight="700" fill="#3b6e8c">#8 &bull; SON</text>
+                    <text x="552" y="571" font-size="13px" font-weight="700" fill="#1e3a5f">Thomachen (KC Thomas)</text>
+                    <text x="552" y="588" font-size="11.5px" font-weight="600" fill="#4a6572">Puliurumbil (B.A., B.E.)</text>
+                </a>
+            </g>
+
+            <!-- Child 9: Mammy -->
+            <g>
+                <a class="node-link" href="Mammy_Kathayanat.html" xlink:href="Mammy_Kathayanat.html" title="Open Mammy Kathayanat">
+                    <rect x="540" y="630" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="552" y="647" font-size="10.5px" font-weight="700" fill="#bc7585">#9 &bull; DAUGHTER</text>
+                    <text x="552" y="666" font-size="13px" font-weight="700" fill="#6d2b3c">Mammy (Mariya)</text>
+                    <text x="552" y="683" font-size="11.5px" font-weight="600" fill="#8c4e5e">Kathayanat (Thambalackattu)</text>
+                </a>
+            </g>
+
+            <!-- ===================== COLUMN 3: SECOND MARRIAGE (CHILDREN 10-13) ===================== -->
+            <!-- Child 10: Ackamma -->
+            <g>
+                <a class="node-link" href="Ackamma_Pallivathukal_Ramapuram.html" xlink:href="Ackamma_Pallivathukal_Ramapuram.html" title="Open Ackamma Pallivathukal, Ramapuram">
+                    <rect x="910" y="250" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="922" y="267" font-size="10.5px" font-weight="700" fill="#bc7585">#10 &bull; DAUGHTER</text>
+                    <text x="922" y="286" font-size="13px" font-weight="700" fill="#6d2b3c">Ackamma</text>
+                    <text x="922" y="303" font-size="11.5px" font-weight="600" fill="#8c4e5e">Pallivathukal, Ramapuram</text>
+                </a>
+            </g>
+
+            <!-- Child 11: Appachan -->
+            <g>
+                <a class="node-link" href="Appachan_Methayathel.html" xlink:href="Appachan_Methayathel.html" title="Open Appachan Methayathel">
+                    <rect x="910" y="345" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="922" y="362" font-size="10.5px" font-weight="700" fill="#3b6e8c">#11 &bull; SON</text>
+                    <text x="922" y="381" font-size="13px" font-weight="700" fill="#1e3a5f">Appachan (Ousep)</text>
+                    <text x="922" y="398" font-size="11.5px" font-weight="600" fill="#4a6572">Methayathel</text>
+                </a>
+            </g>
+
+            <!-- Child 12: Thresia -->
+            <g>
+                <a class="node-link" href="Thresia_Kavalam.html" xlink:href="Thresia_Kavalam.html" title="Open Thresia Kavalam">
+                    <rect x="910" y="440" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="922" y="457" font-size="10.5px" font-weight="700" fill="#bc7585">#12 &bull; DAUGHTER</text>
+                    <text x="922" y="476" font-size="13px" font-weight="700" fill="#6d2b3c">Thresia</text>
+                    <text x="922" y="493" font-size="11.5px" font-weight="600" fill="#8c4e5e">Kavalam (Puthuparambil)</text>
+                </a>
+            </g>
+
+            <!-- Child 13: Mathoochan -->
+            <g>
+                <a class="node-link" href="Fr_Mathew.html" xlink:href="Fr_Mathew.html" title="Open Mathoochan (Fr. Mathew)">
+                    <rect x="910" y="535" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="922" y="552" font-size="10.5px" font-weight="700" fill="#3b6e8c">#13 &bull; SON</text>
+                    <text x="922" y="571" font-size="13px" font-weight="700" fill="#1e3a5f">Mathoochan (Fr. Mathew)</text>
+                    <text x="922" y="588" font-size="11.5px" font-weight="600" fill="#4a6572">Jesuit Priest (B.A., B.L.)</text>
+                </a>
+            </g>
+
+            <!-- ===================== COLUMN 4: SECOND MARRIAGE (CHILDREN 14-17) ===================== -->
+            <!-- Child 14: Aleykutty -->
+            <g>
+                <a class="node-link" href="Alykutty_Karivelithara.html" xlink:href="Alykutty_Karivelithara.html" title="Open Aleykutty Karivelithara">
+                    <rect x="1280" y="250" width="230" height="64" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="1292" y="267" font-size="10.5px" font-weight="700" fill="#bc7585">#14 &bull; DAUGHTER</text>
+                    <text x="1292" y="286" font-size="13px" font-weight="700" fill="#6d2b3c">Aleykutty (Eli)</text>
+                    <text x="1292" y="303" font-size="11.5px" font-weight="600" fill="#8c4e5e">Karivelithara</text>
+                </a>
+            </g>
+
+            <!-- Child 15: Chackochan -->
+            <g>
+                <a class="node-link" href="Chackochan_Bhoothakuzhy.html" xlink:href="Chackochan_Bhoothakuzhy.html" title="Open Chackochan Bhoothakuzhy">
+                    <rect x="1280" y="345" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="1292" y="362" font-size="10.5px" font-weight="700" fill="#3b6e8c">#15 &bull; SON</text>
+                    <text x="1292" y="381" font-size="13px" font-weight="700" fill="#1e3a5f">Chackochan (Chacko)</text>
+                    <text x="1292" y="398" font-size="11.5px" font-weight="600" fill="#4a6572">Bhoothakuzhy</text>
+                </a>
+            </g>
+
+            <!-- Child 16: Ittiavira (died young) -->
+            <g>
+                <a class="node-link" href="Ittiavirah_Anathanam.html" xlink:href="Ittiavirah_Anathanam.html" title="Open Ittiavira Anathanam">
+                    <rect x="1280" y="440" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="1292" y="457" font-size="10.5px" font-weight="700" fill="#3b6e8c">#16 &bull; SON</text>
+                    <text x="1292" y="476" font-size="13px" font-weight="700" fill="#1e3a5f">Ittiavira</text>
+                    <text x="1292" y="493" font-size="11px" font-weight="600" fill="#c62828">(died at a young age)</text>
+                </a>
+            </g>
+
+            <!-- Child 17: Kuruvachan -->
+            <g>
+                <a class="node-link" href="Kuruvachan_Anathanam.html" xlink:href="Kuruvachan_Anathanam.html" title="Open Kuruvachan Anathanam">
+                    <rect x="1280" y="535" width="230" height="64" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                    <text x="1292" y="552" font-size="10.5px" font-weight="700" fill="#3b6e8c">#17 &bull; SON</text>
+                    <text x="1292" y="571" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvachan (Kuruvila)</text>
+                    <text x="1292" y="588" font-size="11.5px" font-weight="600" fill="#4a6572">Anathanam (Ancestral House)</text>
+                </a>
+            </g>
+
+        </svg>
+    </div>
+
+    <!-- Detailed Roster & Card Section -->
+    <main class="roster-container">
+        <div class="section-header">
+            <h2>Detailed Family Roster</h2>
+            <p>Seventeen children across two marriages &bull; Click any card to open their page</p>
+        </div>
+
+        <div class="marriage-sections-grid">
+            
+            <!-- First Marriage Panel -->
+            <section class="marriage-card-panel">
+                <div class="panel-title">
+                    <h3>First Marriage: Chachi Mapilasseril</h3>
+                    <span class="badge-count">4 Children</span>
+                </div>
+                <p style="font-size: 13px; color: #edd18c; margin-top: -6px; margin-bottom: 15px; font-style: italic;">
+                    Married ~1870. Wife passed away 17 Makaram 1879.
+                </p>
+
+                <div class="children-grid grid-1-col">
+                    
+                    <!-- Child 1 -->
+                    <a href="KunjuVarkey_Karickatturumpil.html" class="child-card card-male" title="Open KunjuVarkey Karickatturumpil">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #1 &bull; Son</span>
+                            <span style="font-size: 11.5px; color: #4a6572; font-weight: 600;">Eldest Son</span>
+                        </div>
+                        <h4 class="card-name">Kuruvila KunjuVarkey</h4>
+                        <p class="card-branch">Karickatturumpil</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Eli (Tharappel), remarried Mariya (Perekattu)</p>
+                    </a>
+
+                    <!-- Child 2 -->
+                    <a href="Mariya_Karickatturumpil.html" class="child-card card-female" title="Open Maria">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #2 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Maria</h4>
+                        <p class="card-branch">Karickatturumpil</p>
+                        <p class="card-status">&#9877; Died at a young age in infancy</p>
+                    </a>
+
+                    <!-- Child 3 -->
+                    <a href="Thommy_Maliackal.html" class="child-card card-male" title="Open Thommy Maliackal">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #3 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Kuruvila Thommy</h4>
+                        <p class="card-branch">Maliakal (Maliackal)</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Eli (Tharavattathil), settled at Maliyekkal Mansion</p>
+                    </a>
+
+                    <!-- Child 4 -->
+                    <a href="Mariya_Maliackal.html" class="child-card card-female" title="Open Maria">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #4 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Maria</h4>
+                        <p class="card-branch">Maliackal</p>
+                        <p class="card-status">&#9877; Died at a young age</p>
+                    </a>
+
+                </div>
+            </section>
+
+            <!-- Second Marriage Panel -->
+            <section class="marriage-card-panel">
+                <div class="panel-title">
+                    <h3>Second Marriage: Chachi Karippaparambil</h3>
+                    <span class="badge-count">13 Children</span>
+                </div>
+                <p style="font-size: 13px; color: #edd18c; margin-top: -6px; margin-bottom: 15px; font-style: italic;">
+                    Married Makaram 1881. 9 Sons, 4 Daughters (Mammy, Ackamma, Thresia, Aleykutty).
+                </p>
+
+                <div class="children-grid grid-2-col">
+
+                    <!-- Child 5 -->
+                    <a href="Mathai_Anathanam.html" class="child-card card-male" title="Open Mathai Anathanam">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #5 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Mathai</h4>
+                        <p class="card-branch">Anathanam</p>
+                        <p class="card-status">&#9877; Died at a young age in infancy</p>
+                    </a>
+
+                    <!-- Child 6 -->
+                    <a href="Devasia_Anathanam.html" class="child-card card-male" title="Open Devasia Anathanam">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #6 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Devasia</h4>
+                        <p class="card-branch">Anathanam</p>
+                        <p class="card-status">&#9877; Died at a young age in infancy</p>
+                    </a>
+
+                    <!-- Child 7 -->
+                    <a href="KochuMathai_Puthenpura.html" class="child-card card-male" title="Open KochuMathai Puthenpura">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #7 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">KochuMathai</h4>
+                        <p class="card-branch">Puthenpura (Vilangupara)</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Eli / Mammi (Pallivathukal Karimbanal)</p>
+                    </a>
+
+                    <!-- Child 8 -->
+                    <a href="KC_Thomas_Puliurumbil.html" class="child-card card-male" title="Open KC Thomas Puliurumbil">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #8 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Thomachen (KC Thomas)</h4>
+                        <p class="card-branch">Puliurumbil &bull; B.A., B.E.</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">Government Engineer, m. Katrina (Kanjuparambu)</p>
+                    </a>
+
+                    <!-- Child 9 -->
+                    <a href="Mammy_Kathayanat.html" class="child-card card-female" title="Open Mammy Kathayanat">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #9 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Mammy (Mariya)</h4>
+                        <p class="card-branch">Kathayanat</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Thoma (Kunnumpurathu, Thambalackattu)</p>
+                    </a>
+
+                    <!-- Child 10 -->
+                    <a href="Ackamma_Pallivathukal_Ramapuram.html" class="child-card card-female" title="Open Ackamma Pallivathukal, Ramapuram">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #10 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Ackamma</h4>
+                        <p class="card-branch">Pallivathukal, Ramapuram</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. George Thomas (Pallivathukal, Ramapuram)</p>
+                    </a>
+
+                    <!-- Child 11 -->
+                    <a href="Appachan_Methayathel.html" class="child-card card-male" title="Open Appachan Methayathel">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #11 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Appachan (Ousep)</h4>
+                        <p class="card-branch">Methayathel</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Moni (Mulecheril Nilavunthara, Kavalam)</p>
+                    </a>
+
+                    <!-- Child 12 -->
+                    <a href="Thresia_Kavalam.html" class="child-card card-female" title="Open Thresia Kavalam">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #12 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Thresia</h4>
+                        <p class="card-branch">Kavalam (Puthuparambil)</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Anthony (Kanjuparambil), remarried Dr. Varghese</p>
+                    </a>
+
+                    <!-- Child 13 -->
+                    <a href="Fr_Mathew.html" class="child-card card-male" title="Open Fr. Mathew">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #13 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Mathoochan (Fr. Mathew)</h4>
+                        <p class="card-branch">Society of Jesus (Jesuit Priest)</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">B.A., B.L. Advocate, Jesuit Priest</p>
+                    </a>
+
+                    <!-- Child 14 -->
+                    <a href="Alykutty_Karivelithara.html" class="child-card card-female" title="Open Alykutty Karivelithara">
+                        <div class="card-header-row">
+                            <span class="order-badge order-female">Child #14 &bull; Daughter</span>
+                        </div>
+                        <h4 class="card-name">Aleykutty (Eli)</h4>
+                        <p class="card-branch">Karivelithara</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Chacko (Karivelithara, Mampuzhakari)</p>
+                    </a>
+
+                    <!-- Child 15 -->
+                    <a href="Chackochan_Bhoothakuzhy.html" class="child-card card-male" title="Open Chackochan Bhoothakuzhy">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #15 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Chackochan (Chacko)</h4>
+                        <p class="card-branch">Bhoothakuzhy</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Anna (Puthenpura, Kanjirappally)</p>
+                    </a>
+
+                    <!-- Child 16 -->
+                    <a href="Ittiavirah_Anathanam.html" class="child-card card-male" title="Open Ittiavira Anathanam">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #16 &bull; Son</span>
+                        </div>
+                        <h4 class="card-name">Ittiavira</h4>
+                        <p class="card-branch">Anathanam</p>
+                        <p class="card-status">&#9877; Died at a young age in childhood</p>
+                    </a>
+
+                    <!-- Child 17 -->
+                    <a href="Kuruvachan_Anathanam.html" class="child-card card-male" title="Open Kuruvachan Anathanam">
+                        <div class="card-header-row">
+                            <span class="order-badge order-male">Child #17 &bull; Son</span>
+                            <span style="font-size: 11.5px; color: #4a6572; font-weight: 600;">Youngest Son</span>
+                        </div>
+                        <h4 class="card-name">Kuruvachan (Kuruvila)</h4>
+                        <p class="card-branch">Anathanam (Ancestral Residence)</p>
+                        <p style="font-size: 12px; color: #666; margin: 4px 0 0;">m. Lucy (Vellanikkaran, Irinjalakuda)</p>
+                    </a>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 40;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 1620));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper.clientWidth < 1620) {
+                fitWidth();
+            }
+        });
+    </script>
+
+</body>
+</html>
