@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KochuMathai (Puthenpura) - കൊച്ചുമത്തായി - Family Tree &amp; History</title>
+    <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 19px;
+            font-weight: 700;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 35px auto;
+            max-width: 800px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">കൊച്ചുമത്തായി (പുത്തൻപുര) &bull; KochuMathai (Puthenpura)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                കൊച്ചുമത്തായി (പുത്തൻപുര)<br>
+                <span style="font-size: 22px; font-weight: 600; color: #4a3319;">KochuMathai (Puthenpura)</span><br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">ഏലി (മാമ്മി) കരിമ്പനാൽ &bull; Aely (Mammi) Karimbanal</span>
+            </h1>
+            <p class="lifespan">(1885 &ndash; 1970)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- KochuMathai Puthenpura & Aely Family Tree Diagram -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="1794" height="230" viewBox="0 0 1794 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents -->
+                <line x1="897" y1="78" x2="897" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 9 children -->
+                <line x1="121" y1="118" x2="1673" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1479" y1="118" x2="1479" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1673" y1="118" x2="1673" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 6) -->
+                <g>
+                    <rect x="707" y="18" width="380" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="897" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">KochuMathai &amp; Aely (Mammi)</text>
+                    <text x="897" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Aely from Karimbanal, Pallivathukal &bull; m. 1903)</text>
+                </g>
+
+                <!-- Child 1: Kuruvila (Son) -->
+                <g>
+                    <a class="node-link" href="Kuruvila_Puthenpura.html" xlink:href="Kuruvila_Puthenpura.html" title="Open Kuruvila Puthenpura">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Son)</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Thresia (Daughter) -->
+                <g>
+                    <a class="node-link" href="Thresia_Puthenpura.html" xlink:href="Thresia_Puthenpura.html" title="Open Thresia Puthenpura">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Thresia</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Daughter)</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Ittiavirah (Son) -->
+                <g>
+                    <a class="node-link" href="Ittiavirah_Puthenpura.html" xlink:href="Ittiavirah_Puthenpura.html" title="Open Ittiavirah Puthenpura">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Ittiavirah</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Settled in Ranni)</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Devasia (Son) -->
+                <g>
+                    <a class="node-link" href="Devasia_Puthenpura.html" xlink:href="Devasia_Puthenpura.html" title="Open Devasia Puthenpura">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Devasia</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Son)</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Mathai (Son) -->
+                <g>
+                    <a class="node-link" href="Mathai_Puthenpura.html" xlink:href="Mathai_Puthenpura.html" title="Open Mathai Puthenpura">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathai</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Son)</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Niklavos (Son) -->
+                <g>
+                    <a class="node-link" href="Niklavos_Puthenpura.html" xlink:href="Niklavos_Puthenpura.html" title="Open Niklavos (Nicholas) Puthenpura">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Niklavos (Nicholas)</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Son)</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Anna (Daughter) -->
+                <g>
+                    <a class="node-link" href="Anna_Puthenpura.html" xlink:href="Anna_Puthenpura.html" title="Open Anna Puthenpura">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Anna</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Daughter)</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Joseph (Son) -->
+                <g>
+                    <a class="node-link" href="Joseph_Puthenpura.html" xlink:href="Joseph_Puthenpura.html" title="Open Joseph Puthenpura">
+                        <rect x="1394" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1479" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
+                        <text x="1479" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Son)</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Mariya (Daughter) -->
+                <g>
+                    <a class="node-link" href="Mariya_Puthenpura.html" xlink:href="Mariya_Puthenpura.html" title="Open Mariya Puthenpura">
+                        <rect x="1588" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1673" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariya</text>
+                        <text x="1673" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Daughter)</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- History & Biography Content -->
+        <main class="bio-section">
+            
+            <p class="section-lead">
+                1976-ൽ പുനഃപ്രസിദ്ധീകരിച്ച കല്ലറയ്ക്കൽ കുടുംബ ചരിത്ര പുസ്തകത്തിൽ നിന്നുള്ള ഭാഗങ്ങളാണ് താഴെ നൽകിയിരിക്കുന്നത്.
+            </p>
+
+            <p>
+                കല്ലറയ്ക്കൽ കുടുംബത്തിലെ E ശാഖയിലെ അഞ്ചാം തലമുറക്കാരനും, ആദ്യകാലങ്ങളിൽ കല്ലറയ്ക്കൽ വീട്ടിലും പിന്നീടു് ആനത്താനത്തിൽ വീടു് പണിയിച്ച് അവിടെയും പാർത്തുവന്നിരുന്ന കുഞ്ഞുവർക്കി കുരുവിളയുടെ 7-ാമത്തെ സന്താനവം (രണ്ടാമതു കല്യാണം കഴിച്ച ചാച്ചിയമ്മ കരിപ്പാപ്പറമ്പിലിന്റെ 3-ാമത്തെ - ആദ്യത്തെ രണ്ടുപേർ മരിച്ചുപോയി) 6-ാംതലമുറക്കാരനുമായ കുരുവിള മത്തായി (കൊച്ചുമത്തായി) 1885-ാമാണ്ടു് (മേടമാസത്തിൽ) ഭൂജാതനായി. പള്ളിവാതുക്കലായ “കരിമ്പനാൽ” ഇട്ടിയവിരായുടെ മൂത്തപുത്രി ഏലി (മാമ്മി) യെ 1903-ാമാണ്ടു് മത്തായി വിവാഹം ചെയ്തു.          
+            </p>
+
+            <p>
+                പിതാവിന്റെ ആജ്ഞാനുസരണവും മേൽനോട്ടത്തിലും “ആനത്താനം” ചേരിക്കലിലുള്ള “വിലങ്ങൂപാറ” പുരയിടത്തിൽ ദേഹണ്ഡങ്ങൾ നടത്തിയതു കൂടാതെ ടി ആനത്താനം ചേരിക്കലിലുള്ള “പണങ്ങോട്ടാം” വയൽ പുരയിടത്തിൽ ദേഹണ്ഡങ്ങൾ തുടരുകയും, അടുത്തയാണ്ടിൽ അറപ്പുരയ്ക്കൽ മുകൾ പുരയിടത്തിൽ തെങ്ങുംതൈകൾവച്ച് ദേഹണ്ഡങ്ങൾ നടത്തിവരികയും ചെയ്തു.  പിന്നീട് പടങ്ങോട്ടാം വയൽപ്പുരയിടത്തിന്റെ കിഴക്കുഭാഗത്തും തെക്കുഭാഗത്തും റബ്ബർ കൃഷി കൂടി ആരംഭിച്ചു.
+            </p>
+
+            <p>
+                1917-ൽ കുടുംബവസ്തുക്കളുടെ ഭാഗവീതമായി ആനത്താനത്തിൽ “വിലങ്ങുപാറ” പുരയിടവും പണങ്ങോട്ടാം വയൽപുരയിടവും അതിൻറെ കിഴക്കുവശത്തായി 15 ഏക്കറോളം റബ്ബർ തോട്ടവും നെടുങ്ങാടു ചേരിക്കലും കുടപ്പന ചേരിക്കുലിൽ റോഡിന്റെ തെക്കുഭാഗവും, കുളപ്പുറം ചേരിക്കലിൻറെ ഒരംശവും, ഉടമ്പടിപ്രകാരം മത്തായിക്ക് ലഭിക്കുകയുണ്ടായി.  ആനത്താനം തോട്ടത്തിൽ ററാപ്പിംഗ് തുടങ്ങിയതുമുതൽ നെടുങ്ങാട്ടിലും കരിമാവുതോട്ടത്തിലും റബർ കൃഷി ആരംഭിച്ചു.  കൂടാതെ മേൽപറഞ്ഞ കരിമാവുതോട്ടത്തിൽ ഏതാനും ഭാഗത്ത് തെങ്ങുകൃഷിയും നടത്തി.  അവിടെ ഒരു ചെറിയ കെട്ടിടവും പണിയിച്ചു. തെക്കുംതല ചേരിക്കലിനോടു ചേർന്നുള്ള ഇടക്കര പാപ്പള്ളിൽ പള്ളിവാതുക്കൽക്കാരിൽ നിന്നു കിട്ടിയ സ്ഥലത്തും റബർ കൃഷി ചെയ്തു.  വിലങ്ങുപാറ പുരയിടത്തിലുള്ള വീട്ടിൽ പാർത്തുവരുന്നു.
+            </p>
+
+            <p>
+                അദ്ദേഹത്തിന് കുരുവിള, ത്രേസ്യാ, ഇട്ടിയവിരാ, ദേവസ്യാ, മത്തായി, നിക്ലാവോസ്, അന്ന, ജോസഫ്, മറിയ ഇങ്ങനെ 9 സന്താനങ്ങളുണ്ടു്.
+            </p>
+
+            <p>
+                അദ്ദേഹം റാന്നിയിൽ 200 ഏക്കർ സ്ഥലം വാങ്ങി.  സൗകരൃത്തിനായി അവിടെ ഒരു കെട്ടിടം പണിതു് ഇട്ടിയവിരായെ അവിടെ പാർപ്പിക്കുകയും ചെയ്തു.  ഈ സ്ഥലത്തുനിന്നും ലത്തീൻ റീത്തിൽപെട്ട വിജയപുരം മിസ്സത്തിലെ വേദപ്രചരണോപയോഗത്തിനു വേണ്ടി ഒരു പള്ളി പണിയാനുള്ള സ്ഥലം ദാനമായി കൊടുത്തു.  ഇതുകൂടാതെ പല സഹായ സഹകരണങ്ങളും ചെയ്തുകൊടുത്തു.  കൂടാതെ കുളപ്രം ചേരിക്കലിലും കുടപ്പന ചേരിക്കലിലും ഉള്ള  ദേഹണ്ഡ സ്ഥലങ്ങളിൽ ഓരോ കെട്ടിടം കൂടി പണിയിച്ചു് മുട്ടാറു പകുതിയിലും കിടങ്ങറയിലുമായി ഏഴായിരപ്പറ നെല്ലുവീതം ആണ്ടു തോറും പാട്ടം കിട്ടുന്നതായ നിലങ്ങൾ എഴുതിവാങ്ങി, പാട്ടം വാങ്ങിയും വരുന്നു.
+            </p>
+
+            <p>
+                കൂടാതെ മലബാറിൽ ഇപ്പോഴുള്ള മലപ്പുറം ഡിസ്ട്രിക്ടിൽ “കരിവാരകുണ്ടിൽ” ആയിരം ഏക്കറോളം സ്ഥലം വാങ്ങി ദേഹണ്ഡങ്ങൾ നടത്തി വരുന്നു.  പ്രസ്തുത സ്ഥലത്തിനടുത്തുള്ള വനത്തിൽനിന്നും ആനകളെ പിടിക്കുന്നതിനുള്ള അനുവാദം ലഭിച്ചു. ഈ വിധമെല്ലാം ദൈവാനുഗ്രഹത്താൽ പുത്രപൗത്രാദികളോടുകൂടി ജീവിച്ചു വരവെ, 6-5-1970-ൽ കൊച്ചുമത്തായി തന്റെ 85-ാമത്തെ വയസ്സിൽ ഇഹലോകവാസം വെടിഞ്ഞു. ബന്ധുമിത്രാദികളുടെയും മറ്റും സാന്നിദ്ധ്യത്തിൽ കാഞ്ഞിരപ്പള്ളി പള്ളിയിലെ കുടുംബ കല്ലറയിൽ ശവസംസ്കാരം  നടത്തപ്പെട്ടു.
+            </p>
+
+            <hr class="section-separator">
+
+            <p class="section-lead">
+                The following is the English translation of the excerpts from the Kallarackal Family History book (republished in 1976):
+            </p>
+
+            <p>
+                Kuruvila Mathai (KochuMathai), a sixth-generation member and the 7th child of Kunjuvarkey Kuruvila—who belonged to the 5th generation of Branch E of the Kallarackal family and lived initially at the ancestral Kallarackal home and later built and resided in a house at Anathanam—(and the 3rd child born to his second wife, Chachyamma Karippaparambil, the first two having died in infancy), was born in 1885 (in the month of Medam). In 1903, Mathai married Eli (Mammi), the eldest daughter of Ittiavirah of the Karimbanal family of Pallivathukal.
+            </p>
+
+            <p>
+                Under his father's direction and supervision, in addition to carrying out land improvements and agricultural developments (<em>dehandangal</em>) on the &ldquo;Vilangupara&rdquo; property situated in the Anathanam Cherikkal, he continued developments on the &ldquo;Panangottam&rdquo; Vayal property within the said Anathanam Cherikkal. The following year, he planted coconut saplings and carried out agricultural improvements on the Arappuraykkal Mukal property. Subsequently, he also commenced rubber cultivation on the eastern and southern portions of the Panangottam Vayal property.
+            </p>
+
+            <p>
+                In 1917, as his allotted share in the partition of the family properties according to formal deed/agreement, Mathai received the &ldquo;Vilangupara&rdquo; property in Anathanam, the Panangottam Vayal property, approximately 15 acres of rubber plantation on its eastern side, Nedungadu Cherikkal, the portion south of the road in Kudappana Cherikkal, and a share of the Kulappuram Cherikkal. From the time tapping began in the Anathanam plantation, rubber cultivation was also initiated in Nedungad and in the Karimavu plantation. Furthermore, coconut cultivation was carried out on a portion of the aforementioned Karimavu estate, and he constructed a small building there. Rubber was also cultivated on the land acquired from the Pallivathukal family at Idakkara Pappallil adjacent to Thekkumthala Cherikkal. He resided in the house located on the Vilangupara property.
+            </p>
+
+            <p>
+                He had nine children: Kuruvila, Thresia, Ittiavirah, Devasia, Mathai, Niklavos (Nicholas), Anna, Joseph, and Mariya.
+            </p>
+
+            <p>
+                He purchased 200 acres of land in Ranni. For convenience, he constructed a building there and settled his son, Ittiavirah, on that property. From this land, he donated a parcel for the construction of a church for missionary purposes under the Latin Rite Diocese of Vijayapuram (Vijayapuram Mission). In addition, he rendered various other assistance and support. Furthermore, he constructed a building on each of the developed properties at Kulappuram Cherikkal and Kudappana Cherikkal, and acquired—through formal deeds—paddy lands in Muttar village and Kidangara yielding an annual rental income of 7,000 <em>para</em> of paddy, which he continued to collect.
+            </p>
+
+            <p>
+                Additionally, in Malabar (in present-day Malappuram District), he acquired approximately 1,000 acres of land at &ldquo;Karivarakundu&rdquo; and carried out extensive agricultural developments. He was also granted official government permission to capture wild elephants from the forest adjacent to that property. Living in this manner by the grace of God surrounded by his children and grandchildren, KochuMathai passed away from this earthly life on May 6, 1970, at the age of 85. His funeral was conducted in the presence of relatives, friends, and community members, and he was laid to rest in the family vault at Kanjirappally Church.
+            </p>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 1794));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 1794) {
+                // If on mobile or narrow screen, smooth scroll to center parents box initially
+                const centerScroll = (1794 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
