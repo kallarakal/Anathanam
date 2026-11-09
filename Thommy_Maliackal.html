@@ -190,6 +190,24 @@
             transition: transform 0.2s ease;
         }
 
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
         /* History & Biography Text */
         .bio-section {
             max-width: 960px;
@@ -271,7 +289,7 @@
 
         <!-- Thommy Maliackal & Aeli Family Tree Diagram -->
         <div class="tree-scroll-container" id="scrollWrapper">
-            <svg class="family-sub-tree" id="familySvg" width="2764" height="240" viewBox="0 0 2764 240" preserveAspectRatio="xMidYMin meet">
+            <svg class="family-sub-tree" id="familySvg" width="2764" height="230" viewBox="0 0 2764 230" preserveAspectRatio="xMidYMin meet">
                 
                 <!-- Connectors -->
                 <!-- Vertical stem from parents -->
@@ -303,100 +321,128 @@
 
                 <!-- Child 1: Chachi (Daughter) -->
                 <g>
-                    <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Chachi</text>
-                    <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Pothan Kadakassery</text>
+                    <a class="node-link" href="Chachi_Kadakassery.html" xlink:href="Chachi_Kadakassery.html" title="Open Chachi Kadakassery">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Chachi</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Pothan Kadakassery</text>
+                    </a>
                 </g>
 
                 <!-- Child 2: Kuruvila (Son) -->
                 <g>
-                    <rect x="228" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="313" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila</text>
-                    <text x="313" y="194" text-anchor="middle" font-size="11px" font-weight="500" fill="#607d8b">(died in infancy)</text>
+                    <a class="node-link" href="Kuruvila_Maliackal_Infant.html" xlink:href="Kuruvila_Maliackal_Infant.html" title="Open Kuruvila (Infant)">
+                        <rect x="228" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="313" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila</text>
+                        <text x="313" y="194" text-anchor="middle" font-size="11px" font-weight="500" fill="#607d8b">(died in infancy)</text>
+                    </a>
                 </g>
 
                 <!-- Child 3: Joseph (Son) -->
                 <g>
-                    <rect x="420" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="505" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
-                    <text x="505" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Anna Kadmapuzha</text>
+                    <a class="node-link" href="Joseph_Maliackal.html" xlink:href="Joseph_Maliackal.html" title="Open Joseph Maliackal">
+                        <rect x="420" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="505" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
+                        <text x="505" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Anna Kadmapuzha</text>
+                    </a>
                 </g>
 
                 <!-- Child 4: Anna (Daughter) -->
                 <g>
-                    <rect x="612" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="697" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Anna</text>
-                    <text x="697" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kuruvila Perekkatt</text>
+                    <a class="node-link" href="Anna_Perekkatt.html" xlink:href="Anna_Perekkatt.html" title="Open Anna Perekkatt">
+                        <rect x="612" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="697" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Anna</text>
+                        <text x="697" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kuruvila Perekkatt</text>
+                    </a>
                 </g>
 
                 <!-- Child 5: Mariya / Mammy (Daughter) -->
                 <g>
-                    <rect x="804" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="889" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariya (Mammy)</text>
-                    <text x="889" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kochouseph Kavalam</text>
+                    <a class="node-link" href="Mariya_Kavalam.html" xlink:href="Mariya_Kavalam.html" title="Open Mariya (Mammy) Kavalam">
+                        <rect x="804" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="889" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariya (Mammy)</text>
+                        <text x="889" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kochouseph Kavalam</text>
+                    </a>
                 </g>
 
                 <!-- Child 6: Aeli (Daughter) -->
                 <g>
-                    <rect x="996" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="1081" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Aeli</text>
-                    <text x="1081" y="194" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Varkey Vettimuttamkavil</text>
+                    <a class="node-link" href="Aeli_Vettimuttamkavil.html" xlink:href="Aeli_Vettimuttamkavil.html" title="Open Aeli Vettimuttamkavil">
+                        <rect x="996" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1081" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Aeli</text>
+                        <text x="1081" y="194" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Varkey Vettimuttamkavil</text>
+                    </a>
                 </g>
 
                 <!-- Child 7: Thresia (Daughter) -->
                 <g>
-                    <rect x="1188" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="1273" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Thresia</text>
-                    <text x="1273" y="194" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Mathew Karimthakarakal</text>
+                    <a class="node-link" href="Thresia_Karimthakarakal.html" xlink:href="Thresia_Karimthakarakal.html" title="Open Thresia Karimthakarakal">
+                        <rect x="1188" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1273" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Thresia</text>
+                        <text x="1273" y="194" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Mathew Karimthakarakal</text>
+                    </a>
                 </g>
 
                 <!-- Child 8: Kathreena / Achamma (Daughter) -->
                 <g>
-                    <rect x="1380" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="1465" y="173" text-anchor="middle" font-size="12px" font-weight="700" fill="#6d2b3c">Kathreena (Achamma)</text>
-                    <text x="1465" y="194" text-anchor="middle" font-size="11px" font-weight="500" fill="#8c4e5e">(died in infancy)</text>
+                    <a class="node-link" href="Kathreena_Maliackal_Infant.html" xlink:href="Kathreena_Maliackal_Infant.html" title="Open Kathreena (Achamma - Infant)">
+                        <rect x="1380" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1465" y="173" text-anchor="middle" font-size="12px" font-weight="700" fill="#6d2b3c">Kathreena (Achamma)</text>
+                        <text x="1465" y="194" text-anchor="middle" font-size="11px" font-weight="500" fill="#8c4e5e">(died in infancy)</text>
+                    </a>
                 </g>
 
                 <!-- Child 9: Kathreena / Achamma (Daughter) -->
                 <g>
-                    <rect x="1572" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="1657" y="173" text-anchor="middle" font-size="12px" font-weight="700" fill="#6d2b3c">Kathreena (Achamma)</text>
-                    <text x="1657" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kuruvla Perekkatt</text>
+                    <a class="node-link" href="Kathreena_Perekkatt.html" xlink:href="Kathreena_Perekkatt.html" title="Open Kathreena (Achamma) Perekkatt">
+                        <rect x="1572" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1657" y="173" text-anchor="middle" font-size="12px" font-weight="700" fill="#6d2b3c">Kathreena (Achamma)</text>
+                        <text x="1657" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Kuruvla Perekkatt</text>
+                    </a>
                 </g>
 
                 <!-- Child 10: Kuruvla (Son) -->
                 <g>
-                    <rect x="1764" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="1849" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvla</text>
-                    <text x="1849" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Anna Pottamkulam</text>
+                    <a class="node-link" href="Kuruvla_Maliackal.html" xlink:href="Kuruvla_Maliackal.html" title="Open Kuruvla Maliackal">
+                        <rect x="1764" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1849" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvla</text>
+                        <text x="1849" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Anna Pottamkulam</text>
+                    </a>
                 </g>
 
                 <!-- Child 11: Mathai (Son) -->
                 <g>
-                    <rect x="1956" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="2041" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathai</text>
-                    <text x="2041" y="194" text-anchor="middle" font-size="10px" font-weight="600" fill="#4a6572">m. Pennamma Menamparambil</text>
+                    <a class="node-link" href="Mathai_Maliackal.html" xlink:href="Mathai_Maliackal.html" title="Open Mathai Maliackal">
+                        <rect x="1956" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2041" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathai</text>
+                        <text x="2041" y="194" text-anchor="middle" font-size="10px" font-weight="600" fill="#4a6572">m. Pennamma Menamparambil</text>
+                    </a>
                 </g>
 
                 <!-- Child 12: Thommy / Nanichan (Son) -->
                 <g>
-                    <rect x="2148" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="2233" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thommy (Nanichan)</text>
-                    <text x="2233" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Aeli Vallikkappil</text>
+                    <a class="node-link" href="Thommy_Nanichan_Maliackal.html" xlink:href="Thommy_Nanichan_Maliackal.html" title="Open Thommy (Nanichan) Maliackal">
+                        <rect x="2148" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2233" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thommy (Nanichan)</text>
+                        <text x="2233" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Aeli Vallikkappil</text>
+                    </a>
                 </g>
 
                 <!-- Child 13: Varkey (Son) -->
                 <g>
-                    <rect x="2340" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="2425" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Varkey</text>
-                    <text x="2425" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Rossamma Neerackal</text>
+                    <a class="node-link" href="Varkey_Maliackal.html" xlink:href="Varkey_Maliackal.html" title="Open Varkey Maliackal">
+                        <rect x="2340" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2425" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Varkey</text>
+                        <text x="2425" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Rossamma Neerackal</text>
+                    </a>
                 </g>
 
                 <!-- Child 14: KochuThresia / Theyyamma (Daughter) -->
                 <g>
-                    <rect x="2532" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
-                    <text x="2617" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">KochuThresia</text>
-                    <text x="2617" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Theyyamma)</text>
+                    <a class="node-link" href="KochuThresia_Maliackal.html" xlink:href="KochuThresia_Maliackal.html" title="Open KochuThresia (Theyyamma) Maliackal">
+                        <rect x="2532" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2617" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">KochuThresia</text>
+                        <text x="2617" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Theyyamma)</text>
+                    </a>
                 </g>
 
             </svg>
@@ -409,12 +455,12 @@
                 1976-ൽ പുനഃപ്രസിദ്ധീകരിച്ച കല്ലറയ്ക്കൽ കുടുംബ ചരിത്ര പുസ്തകത്തിൽ നിന്നുള്ള ഭാഗങ്ങളാണ് താഴെ നൽകിയിരിക്കുന്നത്.
             </p>
 
-            <p language = "ml">
+            <p>
                 E ശാഖയിലെ അഞ്ചാംതലമുറക്കാരനായി ആദ്യകാലം കല്ലറയ്ക്കൽവീട്ടിലും പിന്നീടു് ആനത്താനത്തു പണിയിച്ചിരുന്ന വീട്ടിലും താമസിച്ചിരുന്ന 
-                കുരുവിളയുടെ മൂന്നാമത്തെ സന്താനവും ആറാം തലമുറക്കാരനുമായ കുരുവിള തൊമ്മി 1873-മാണ്ടു തുലാമാസത്തിൽ ഭൂജാതനായി.
-                തൻറെ 7-മത്തെ വയസ്സിൽ മാതാവു മരിച്ചതിനാൽ പിതാവിൻറെയും വല്യമ്മ മുതലായവരുടെയും ലാളനയിൽ വളർന്നു.  
-                മലയാള വിദൃാഭ്യാസത്തിനു ശേഷം 1882-മാണ്ടു് ചിങ്ങം 2-തീയതി മീനച്ചിൽ കിഴവറയാരുകരയിൽ തറവട്ടത്തിൽ 
-                മത്തായിയുടെ പുത്രി ഏലിയെ വിവാഹം ചെയ്തു.  പിതാവിന്റെ ആജ്ഞപ്രകാരവും, സഹകരണത്തിലും 1896-മാണ്ടു്
+                കുരുവിളയുടെ മൂന്നാമത്തെ സന്താനവും ആറാം തലമുറക്കാരനുമായ കുരുവിള തൊമ്മി 1873-ാമാണ്ടു തുലാമാസത്തിൽ ഭൂജാതനായി.
+                തൻറെ 7-ാമത്തെ വയസ്സിൽ മാതാവു മരിച്ചതിനാൽ പിതാവിൻറെയും വല്യമ്മ മുതലായവരുടെയും ലാളനയിൽ വളർന്നു.  
+                മലയാള വിദൃാഭ്യാസത്തിനു ശേഷം 1882-ാമാണ്ടു് ചിങ്ങം 2-ാംതീയതി മീനച്ചിൽ കിഴവറയാരുകരയിൽ തറവട്ടത്തിൽ 
+                മത്തായിയുടെ പുത്രി ഏലിയെ വിവാഹം ചെയ്തു.  പിതാവിന്റെ ആജ്ഞപ്രകാരവും, സഹകരണത്തിലും 1896-ാമാണ്ടു്
                 മാളിയേക്കൽ പുരയിടത്തിൽ തന്റെ മേൽനോട്ടത്തിൽ ദേഹണ്ഡങ്ങൾ  നടത്തിത്തുടങ്ങി.  1897 മുതൽ പണി ആരംഭിച്ചതായ 
                 രണ്ടുനില മാളിക പൂർത്തിയായ ശേഷം അവിടേക്കു് മാറി താമസിച്ചു.  ചാച്ചി, കുരുവിള, ജോസഫ്, അന്ന, മാമ്മി, ഏലി, ത്രേസ്യാ, 
                 അച്ചാമ്മ, കത്രീനാ, കുരുവിള, മത്തായി, തൊമ്മി, വർക്കി, കൊച്ചുത്രേസ്യാ ഇങ്ങനെ 14 സന്താനങ്ങൾ അദ്ദേഹത്തിനുണ്ടായിരുന്നു.
@@ -449,7 +495,7 @@
             </p>
 
             <p>
-                9-മത്തെ സന്താനമായ കത്രീനാ (അച്ചാമ്മ) യെ മീനച്ചിൽ പേരേക്കാട്ട് ഔസേപ്പിന്റെ പുത്രൻ കുരുവിള വിവാഹം ചെയ്തു.
+                9-ാമത്തെ സന്താനമായ കത്രീനാ (അച്ചാമ്മ) യെ മീനച്ചിൽ പേരേക്കാട്ട് ഔസേപ്പിന്റെ പുത്രൻ കുരുവിള വിവാഹം ചെയ്തു.
             </p>
 
             <p>
@@ -457,11 +503,11 @@
             </p>
 
             <p>
-                11-മത്തെ സന്താനമായ മത്തായി പാലായിൽ മേനാമ്പറമ്പിൽ കുഞ്ഞമ്മൻ പുത്രി പെണ്ണമ്മയെ വിവാഹം ചെയ്തു.
+                11-ാമത്തെ സന്താനമായ മത്തായി പാലായിൽ മേനാമ്പറമ്പിൽ കുഞ്ഞമ്മൻ പുത്രി പെണ്ണമ്മയെ വിവാഹം ചെയ്തു.
             </p>
 
             <p>
-                12-മത്തെ സന്താനമായ തൊമ്മി അരുവിത്തുറ വള്ളിക്കാപ്പിൽ ജോസഫിൻറ പുത്രി ഏലിയെ കല്യാണം കഴിച്ചു.
+                12-ാമത്തെ സന്താനമായ തൊമ്മി അരുവിത്തുറ വള്ളിക്കാപ്പിൽ ജോസഫിൻറ പുത്രി ഏലിയെ കല്യാണം കഴിച്ചു.
             </p>
 
             <p>
@@ -473,7 +519,7 @@
             </p>
 
             <p>
-                1910-മാണ്ടു മുതൽ നെടുങ്ങാടു് ചേരിക്കലിൽ ദേഹണ്ഡങ്ങളാരംഭിച്ചു. 1914-ൽ പിതാവിനാൽ തയ്യാറാക്കപ്പെട്ട ഉടംമ്പടി പ്രകാരം, 
+                1910-ാമാണ്ടു മുതൽ നെടുങ്ങാടു് ചേരിക്കലിൽ ദേഹണ്ഡങ്ങളാരംഭിച്ചു. 1914-ൽ പിതാവിനാൽ തയ്യാറാക്കപ്പെട്ട ഉടംമ്പടി പ്രകാരം, 
                 തനിക്കു് ലഭിച്ചിട്ടുള്ള നെടുങ്ങാടു് ചേരിക്കലിൽ തൊമ്മി ദേഹണ്ഡങ്ങൾ ആരംഭിച്ചു. 1920 മുതൽ മണ്ണർക്കാടു, ഇഞ്ചിക്കുന്നു് എന്നു പേരുള്ള 
                 കമ്പനിയിൽ ഒരോഹരി ചേർന്നു.  പിൽക്കാലത്തു് 1935-ൽ ജ്യേഷ്ഠൻ കുഞ്ഞു വർക്കിയുടേയും, ഇളയ സഹോദരങ്ങളിൽ തോമസ് 
                 മുതലായവരുടെയും വകയായ രണ്ടു ഷെയറുകൾ ഉൾപ്പെടെ 3 ഷെയറുകൾ സഹോദരങ്ങൾ പ്രതിഫലം കൂടാതെ തൊമ്മിക്കു് ഉപേക്ഷിച്ചു വിട്ടു കൊടുത്തു.  
@@ -482,8 +528,8 @@
                 പണിയിച്ചു്, പുത്രനായ ജോസഫിനെ അവിടെ താമസിപ്പിച്ചു.  ചിററടി ചേരിക്കലിൽ കുടുംബാവകാശമായി കിട്ടിയിരുന്നതും, അവകാശപ്രകാരം വ്യവഹാരത്താൽ 
                 ഒഴിപ്പിച്ചു വാങ്ങിയതുമായ സ്ഥലത്തു് ദേഹണ്ഡങ്ങൾ ചെയ്തു.  കൂടാതെ പാലമ്പ്ര ചേരിക്കൽ അന്ന്യർക്കു  വിലയ്ക്കുകൊടുത്തു.  ബാക്കിയുള്ള സ്ഥലങ്ങളിൽ 
                 ദേഹണ്ഡങ്ങൾ നടത്തി.  പിന്നീടു് ചൂണ്ടശേരിപ്പറമ്പിൽ ഒരു വീടുകൂടി പണിയിച്ചു് മത്തായിയെ അവിടെ താമസിപ്പിച്ചു.  നെടുങ്ങാടു് ചേരിക്കലിൽ ആറിൻറെ 
-                അടുത്തു ഒരു പുര പണിയിച്ച് അതിൽ 12-മത്തെ സന്താനമായ തൊമ്മി (നാനിച്ചൻ ) യെ താമസിപ്പിച്ചു. 13-മത്തെ സന്താനമായ വർക്കി തന്നോടുകൂടി 
-                പാത്തുവരുന്ന കാലത്തു് (1972-മാണ്ടു് ഇടവത്തിൽ) ഭാരൃയായ ഏലി മരണം പ്രാപിച്ചു.
+                അടുത്തു ഒരു പുര പണിയിച്ച് അതിൽ 12-ാമത്തെ സന്താനമായ തൊമ്മി (നാനിച്ചൻ ) യെ താമസിപ്പിച്ചു. 13-ാമത്തെ സന്താനമായ വർക്കി തന്നോടുകൂടി 
+                പാത്തുവരുന്ന കാലത്തു് (1972-ാമാണ്ടു് ഇടവത്തിൽ) ഭാരൃയായ ഏലി മരണം പ്രാപിച്ചു.
             </p>
 
             <hr class="section-separator">
