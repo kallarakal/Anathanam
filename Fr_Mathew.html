@@ -3,22 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fr. Mathew - Under Construction</title>
+    <title>Rev. Fr. K. K. Mathew S.J., B.A., B.L. (Mathoochan) - ഫാ. കെ. കെ. മാത്യ - Biography &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.4em auto;
+            padding: 14px 20px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+            line-height: 1.8;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">റവ. ഫാ. കെ. കെ. മാത്യു S.J., B.A., B.L. &bull; Rev. Fr. K. K. Mathew S.J.</span>
+        </div>
+        <div class="nav-right">
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html#children-panel" class="nav-btn" title="View All 17 Children">
+                &equiv; Siblings
+            </a>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                റവ. ഫാ. കെ. കെ. മാത്യു S.J., B.A., B.L. (മാത്തൂച്ചൻ)<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">Rev. Fr. K. K. Mathew, S.J., B.A., B.L. &bull; Society of Jesus</span>
+            </h1>
+            <p class="lifespan">ആനത്താനം, കാഞ്ഞിരപ്പള്ളി &bull; Anathanam, Kanjirapally &bull; (Born: October 7, 1900)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <main>
+            <!-- Profile / Heritage / Vocation Banner -->
+            
+<div class="bio-section">
+    <div style="background: #ffffff; border: 2px solid #b38938; border-radius: 12px; padding: 22px 25px; margin: 25px auto 35px auto; box-shadow: 0 8px 24px rgba(60, 40, 18, 0.1);">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #d8be86; padding-bottom: 14px; margin-bottom: 16px; gap: 10px;">
+            <div>
+                <span style="font-size: 13px; font-weight: 700; color: #8c5d1e; text-transform: uppercase; letter-spacing: 0.8px;">Heritage &bull; പൈതൃകം</span>
+                <h3 style="margin: 2px 0 0 0; color: #3b2210; font-size: 20px;">6th Generation &bull; ആറാം തലമുറ (കല്ലറയ്ക്കൽ ആനത്താനം)</h3>
+            </div>
+            <div style="text-align: right;">
+                <span style="display: inline-block; background: #2a1b12; color: #f0dbaf; padding: 4px 12px; border-radius: 6px; font-size: 13px; font-weight: 700; border: 1px solid #af8133;">
+                    Society of Jesus &bull; ഈശോസഭ (S.J.)
+                </span>
+            </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; font-size: 14.5px; line-height: 1.7; color: #2c1a0c;">
+            <div>
+                <p style="margin: 0 0 6px 0;"><strong>Parents:</strong> Anathanam KunjuVarkey Kuruvila &amp; Chachiyamma Karippaparambil (13th Child)</p>
+                <p style="margin: 0 0 6px 0;"><strong>Date of Birth:</strong> October 7, 1900</p>
+                <p style="margin: 0;"><strong>Academic Degrees:</strong> B.A. (Mathematics), B.L. (Law)</p>
+            </div>
+            <div>
+                <p style="margin: 0 0 6px 0;"><strong>High Court Advocate:</strong> Madras High Court (Feb 1, 1929) &amp; Travancore High Court (Feb 7, 1933)</p>
+                <p style="margin: 0 0 6px 0;"><strong>Jesuit Novitiate:</strong> Sacred Heart College, Shembaganur (Joined June 15, 1934)</p>
+                <p style="margin: 0;"><strong>Life Vocation:</strong> Renounced worldly career &amp; wealth at age 34 for consecrated religious priesthood.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 18px; padding-top: 14px; border-top: 1px dashed #d8be86; text-align: center; font-style: italic; color: #634018; font-size: 15px;">
+            &ldquo;By the grace of God, I leap over the wall&rdquo; &bull; &ldquo;It was one of the way-side peeps of Our Lord&rdquo;
+        </div>
+    </div>
+</div>
+
+
+            <!-- Malayalam Biography & History First -->
+            
+<div class="bio-section" id="malayalam-history">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">ഫാ. കെ. കെ. മാത്യ S. J., B. A., B. L. &ndash; ജീവചരിത്രവും ചരിത്രരേഖകളും</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">ആനത്താനത്തു കുഞ്ഞുവർക്കി കുരുവിളയുടെ 13-ാമത്തെ സന്താനം &bull; ആറാം തലമുറ &bull; ഈശോസഭാ വൈദികൻ &bull; (ജനനം: 1900 ഒക്ടോബർ 7)</p>
+
+    <p class="section-lead">
+        ആനത്താനത്തു കുഞ്ഞുവർക്കി കുരുവിളയുടെ 13-ാമത്തെ സന്താനവും, അദ്ദേഹത്തിൻറെ രണ്ടാമത്തെ ഭാര്യ കരിപ്പാപ്പറമ്പിൽ ചാച്ചിയമ്മയുടെ 9-ാമത്തെ സന്താനവുമായ കെ.കെ. മാത്യു (മാത്തൂച്ചൻ) 1900-മാണ്ടു ഒക്ടോബർ 7-ാം തീയതിയാണ് ജനിച്ചതു്. ജനനം മുതൽ അഞ്ചുവയസ്സുവരെ വീട്ടിലുള്ളവരുടെ, പ്രത്യേകിച്ചു് സഹോദരിമാരായ മാമ്മി, അക്കാമ്മ, ജേഷ്ഠത്തിമാരായ മറിയാമ്മ, മാമ്മി മുതലായവരുടെ സ്നേഹത്തിലും ലാളനയിലും കഴിഞ്ഞു.
+    </p>
+
+    <p>
+        തൻറെ അമ്മാവനായ കരിപ്പാപ്പറമ്പിൽ തൊമ്മൻ ചെറിയാൻ നാടകം കളിക്കുന്നതിലും മറ്റും വലിയ ഭ്രമക്കാരനായിരുന്നതുകൊണ്ടു് മാത്തൂച്ചനും അദ്ദേഹത്തോടുള്ള Hero worship Mentality അനുസരിച്ചു് അതിലേക്കു നയിക്കപ്പെട്ടിരുന്നു. പിന്നീടു് കാർത്തികപ്പള്ളിക്കാരൻ മത്തായി വാദ്ധ്യാരെ വീട്ടിൽ താമസിപ്പിച്ചു് പഠിച്ചുകൊണ്ടിരുന്നു.
+    </p>
+
+    <p>
+        1906-നു ശേഷം സ്ഥലത്തുള്ള Govt. Vernacular Middle School-ൽ 4-ാം ക്ലാസുവരെ പഠിച്ചു. അന്നത്തെ സ്കൂൾ ഹെഡ്മാസ്റ്റർ പിന്നീട് ഒരു പ്രൊട്ടസ്റ്റന്റ് പാതിരിയായ റവ. എൻ.എം. കോരത് ആയിരുന്നു. അദ്ദേഹത്തിൻറെ സഹധർമ്മിണി മിസ്സിസു് ചാച്ചി കോരതായിരുന്നു മൂന്നാംക്ലാസിൽ വച്ചുതന്നെ മാത്തൂച്ചനെ ഇംഗ്ലീഷ് പഠിപ്പിച്ചു തുടങ്ങിയത്. അന്നു മലയാളം സ്കൂളുകളിൽ മൂന്നു മുതൽ ഏഴുവരെ ക്ലാസ്സുകളിൽ മലയാളത്തോടുകൂടി ഇംഗ്ലീഷ് പഠിപ്പിച്ചിരുന്നതിനാൽ എല്ലാവർക്കും കുറെ &ldquo;മുറി ഇംഗ്ലീഷു&rdquo; കൂടി പരിചയമായിരുന്നു.
+    </p>
+
+    <div style="background: rgba(179, 137, 56, 0.08); border-left: 4px solid #b38938; padding: 12px 18px; margin: 20px auto; max-width: 900px; font-size: 14.5px; line-height: 1.7; border-radius: 0 8px 8px 0;">
+        <strong>ഇനീഷ്യലുകളിലെ (Initial) വ്യത്യാസത്തെക്കുറിച്ചുള്ള കുറിപ്പ്:</strong><br>
+        കുഞ്ഞുവർക്കി കുരുവിളയുടെ ആദ്യസന്താനങ്ങളെ <strong>K. C.</strong> എന്ന initial കൊണ്ടും മാത്തൂച്ചൻ, ജേഷ്ഠൻ അപ്പച്ചൻ മുതലുള്ളവരെ <strong>K. K.</strong> എന്ന Initial കൊണ്ടുമാണു് അഭിസംബോധന ചെയ്യുന്നതു്. ആദ്യകാലത്തു് സ്കൂളധികൃതർ കുരുവിളയെന്ന പിതാവിന്റെ പേരു് ഇംഗ്ലീഷിൽ <em>Curuvilla</em>-യെന്നും പിൽക്കാലത്തുള്ളവർ <em>Kuruvilla</em>-യെന്നും എഴുതിയിരുന്നതിനാലാണ് ഇങ്ങനെ സംഭവിച്ചതു്.
+    </div>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">മാത്തൂച്ചൻ കാഞ്ഞിരപ്പള്ളി ഗവ. ഇംഗ്ലീഷ് മിഡിൽ സ്കൂളിൽ (1909)</h3>
+    <p>
+        1909-ലാണു് കാഞ്ഞിരപ്പള്ളിയിൽ സർക്കാർ വകയായി ഇംഗ്ലീഷ് ഒരു മിഡിൽസ്കൂൾ സ്ഥാപിച്ചതു്. ഇടപ്പള്ളിയിലുണ്ടായിരുന്ന സ്കൂൾ നിർത്തൽ ചെയ്ത്, അതു് കാഞ്ഞിരപ്പള്ളിയിലേക്കു മാറ്റുകയാണു ചെയ്തതു്. സ്കൂൾ സ്ഥാപനത്തിനു പറ്റിയ ഗവണ്മെൻറു വക കെട്ടിടങ്ങളൊന്നും ഇല്ലാഞ്ഞതിനാൽ ആദ്യം ഇളപ്പുപാറ വീട്ടിലും പിന്നീടു് ആശുപത്രി മുക്കിലുള്ള കൊല്ലങ്കുളത്തുകാരുടെ കെട്ടിടത്തിലുമാണ് സ്കൂൾ നടത്തിയിരുന്നതു്. അക്കാലത്തെ ഹെഡ്മാസ്റ്റർ തലവടിക്കാരൻ മിസ്റ്റർ ഡേവിഡ് ബി.എ. ആയിരുന്നു.
+    </p>
+    <p>
+        അന്നു് സ്കൂൾ കുട്ടികളെക്കൊണ്ടു് ഷേക്സ്പീയറിൻറെ, &ldquo;Merchant of Venice&rdquo; എന്ന നാടകത്തിലെ Trial court scene കോഴഞ്ചേരിക്കാരൻ എം.പി. തോമസ് വാദ്ധ്യാർ അഭിനയിപ്പിച്ചതിൽ നിന്നും മറ്റും അവർ ഇംഗ്ലീഷ് പഠിപ്പിക്കുന്നതിൽ എത്രമാത്രം ശ്രദ്ധിച്ചിരുന്നുവെന്നു മനസിലാക്കാം. കരിക്കാട്ടുറുമ്പിൽ വർക്കിയച്ചൻ ഷൈലോക്കായും, കടമപ്പഴ ചാക്കോച്ചൻ പോർഷ്യയായും ഭംഗിയായി അഭിനയിക്കുകയുണ്ടായി. അന്നത്തെ വിദ്യാഭ്യാസ ഡയറക്ടറായിരുന്ന മിച്ചൽ സായിപ്പിന്റെ എഡ്യൂക്കേഷൻ കോഡ് പ്രാബല്യത്തിൽ വന്നുകൊണ്ടിരുന്ന അക്കാലത്തു് വിദ്യാർത്ഥികളെല്ലാം കോട്ടു്, ടൈ, ക്യാപ് ഇവ ധരിച്ചേ സ്കൂളിൽ വരാവൂ എന്നു നിർബ്ബന്ധമുണ്ടായിരുന്നു.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">ചങ്ങനാശേരി സെന്റ് ബർക്കുമാൻസ് (S.B.) സ്കൂളിൽ (1915–1919)</h3>
+    <p>
+        മിഡിൽസ്കൂൾ വിദ്യാഭ്യാസത്തിനുശേഷം മാത്തൂച്ചൻ തൻറെ പല കൂട്ടുകാരുമൊത്തു് ചങ്ങനാശേരി സെയിന്റ് ബർക്കുമാൻസ് സ്കൂളിൽ വന്നു. ബ. അമ്പിയാത്തച്ചൻറെ മേൽനോട്ടത്തിൽ ഇപ്പോഴത്തെ അരമനയുടെ മൂന്നാം നിലയിൽ നടത്തിയിരുന്ന ബോർഡിംഗിൽ ആയിരുന്നു താമസം. രണ്ടാം നിലയിൽ താമസിച്ചിരുന്ന ബ. കുര്യാളശേരി പിതാവു് കുട്ടികളോടു് സ്നേഹവാത്സല്യങ്ങളോടെ പെരുമാറിയിരുന്നു. ബോർഡിംഗ് കുട്ടികളുടെ സ്പിരിച്വൽ ഡയറക്ടർ ബ. പനച്ചിക്കലച്ചനായിരുന്നു. S.B. ഹൈസ്കൂളിന്റെ മാനേജർ ബ. മുരിക്കൽ തോമ്മാച്ചനും, ഹെഡ്മാസ്റ്റർ തമിഴ്നാട്ടുകാരനും സമർത്ഥനും ആയിരുന്ന ശ്രീ. എ.പി. മര്യാദാസ് പിള്ള ബി.എ., എൽ.ടി. യും ആയിരുന്നു.
+    </p>
+    <p>
+        മാത്തൂച്ചൻ V ഫോമിൽ പഠിക്കുമ്പോൾ ജൂലിയസ് സീസർ എന്ന നാടകത്തിൽ ബ്രൂട്ടസിന്റെ രംഗം അഭിനയിക്കുകയും, അന്നു നടന്നുകൊണ്ടിരുന്ന യുദ്ധത്തെപ്പറ്റിയുള്ള ഒരു പ്രസംഗമത്സരത്തിൽ ഒന്നാം സമ്മാനം നേടുകയും ചെയ്തിട്ടുണ്ടു്. ഈ പ്രസംഗത്തിൻറെ തുടക്കം പൊടിപൊടിയാക്കാൻ അന്നൊരു സ്കൂൾ അദ്ധ്യാപകനായിരുന്ന ഇന്നത്തെ റവ. ഫാ. കെ.സി. ചാണ്ടി ബി.എ., എൽ.ടി. കൊടിത്തോട്ടം സഹായിച്ചു. അക്കാലത്തു് V Form-ൽ വച്ചുതന്നെ ഐശ്ചിക വിഷയം തെരഞ്ഞെടുത്തിരുന്നു. മാത്തമാറ്റിക്സ്, ഫിസിക്സ്, കെമിസ്ട്രി ഇവ ഉൾപ്പെടുന്ന ഫസ്റ്റ്ഗ്രൂപ്പാണ് മാത്തൂച്ചൻ എടുത്തതു്. ജ്യേഷ്ഠൻ കെ.സി. തോമസിനെപ്പോലെ ഒരു എൻജിനീയറായിത്തീരണമെന്ന ആഗ്രഹമാണു് ഈ തിരഞ്ഞെടുപ്പിനു് അദ്ദേഹത്തെ പ്രേരിപ്പിച്ചതു്.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">കോട്ടയം C.M.S. കോളേജിൽ (1919–1921)</h3>
+    <p>
+        1919-ൽ എസ്.ബി. സ്കൂളിൽ നിന്നും സ്കൂൾ ഫൈനൽ പാസ്സായ ശേഷം മാത്തൂച്ചൻ കോട്ടയം C.M.S. കോളേജിൽ ചേർന്നു് ഫസ്റ്റ്ഗ്രൂപ്പെടുത്തു ഇന്റർമീഡിയറ്റിനു് പഠിച്ചു. ആദ്യം ദീപിക ഓഫീസിന്റെ സ്ഥാനത്തുണ്ടായിരുന്ന ഒരു കെട്ടിടത്തിലും, പിന്നീടു Y.M.C.A. ഹോസ്റ്റലിലും താമസിച്ചു. അന്നത്തെ C.M.S. കോളേജ് പ്രിൻസിപ്പൽ പ്രശസ്തനായിരുന്ന ആസ്ക്വിത്തു സായിപ്പായിരുന്നു. മാത്തൂച്ചൻ ഫസ്റ്റ് ഗ്രൂപ്പെടുത്തു പഠിച്ചുവെങ്കിലും പരീക്ഷാഫലം പുറത്തു വന്നപ്പോൾ ഇംഗ്ലീഷ് സെക്കൻഡു് പാർട്ടിനു് തോറ്റതായും ഓപ്ഷണലിനു നല്ല മാർക്കു ലഭിച്ചതായും കണ്ടു.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">തൃശിനാപ്പള്ളിയിലെ പഠനവും ദൈവവിളിയും (1921–1922)</h3>
+    <p>
+        ഇംഗ്ലീഷ് സെക്കൻഡു് പാർട്ട് പാസ്സാകുന്നതിനുവേണ്ടി ബ. ഒണോരേ എസ്.ജെ. യുടെ പ്രേരണയാൽ, തൃശിനാപ്പള്ളിയിൽ Prof. Peck മുതലായവർ നടത്തിയിരുന്ന ട്യൂഷൻ ക്ലാസിൽ ചേർന്നു. തൃശിനാപ്പള്ളിയിലെ ജീവിതം മറ്റു പലർക്കുമെന്നപോലെ മാത്തൂച്ചനും തൻറെ ദൈവവിളി പ്രശ്നത്തിനു്, പല വ്യതിചലനങ്ങൾക്കു ശേഷവും ഒരു പരിഹാരം കണ്ടെത്താൻതക്ക ദൈവവിശ്വാസം, ശരണം, ഉപവി ഇവ പ്രദാനം ചെയ്തു. നല്ല ആദർശങ്ങളും ആഗ്രഹങ്ങളും ഉജ്ജ്വലിക്കത്തക്കവണ്ണം ജീവിതശുദ്ധിയാലും മഹത്വമേറിയ ആദർശങ്ങളാലും നയിക്കപ്പെട്ടിരുന്ന പലരുടെയും സ്നേഹ സേവനങ്ങൾക്ക് അദ്ദേഹം പാത്രീഭൂതനായി. ഇവരുടെയെല്ലാം സ്വാധീന വലയത്തിൽപ്പെട്ടതുകൊണ്ടാണു് പിന്നീട് ഒരു വൈദികനായിത്തീരാൻ തീരുമാനിച്ചതു്. ആ ആദർശ പുരുഷന്മാർ ഇന്നു് ഏറ്റവും കൃതജ്ഞതയോടെ സ്മരിക്കപ്പെടുന്നവരുമാണ്:
+    </p>
+    <ol style="max-width: 850px; margin: 10px auto 20px auto; line-height: 1.8; font-size: 15.5px;">
+        <li>Rev. Fr. Peter Carty S. J. (Professor of Economics and Rector)</li>
+        <li>Rev. Fr. D. Honore S. J. (Professor of Physics, Spiritual father and a friend of Malayalee students in particular)</li>
+        <li>Rev. Fr. Frohely S. J. (Professor of English and Minister of St. Joseph's)</li>
+        <li>Rev. Fr. William Naryamparampil C.M.I., M.A., L.T.</li>
+    </ol>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">തിരുവനന്തപുരത്തെ പഠനവും കാർമ്മൽ ഹിൽ ആശ്രമവും (1922–1925)</h3>
+    <p>
+        1922 ജൂൺ 21-നു് ജ്യേഷ്ഠസഹോദരൻ അപ്പച്ചൻ തിരുവനന്തപുരം ജനറൽ ആശുപത്രിയിൽ വച്ച് Dr. Peter Lakshmanan Durbar Physician-ന്റെ ചികിത്സയിലിരിക്കെ പെട്ടെന്നു നിർയ്യാതനായി. സഹോദരങ്ങളോടൊത്തു അപ്പച്ചനെ ശുശ്രൂഷിച്ചതിനുശേഷം തിരുവനന്തപുരത്തുതന്നെ പഠിച്ചു. മഹാരാജാസ് കോളേജിൽ നിന്നു മാത്തമാറ്റിക്സ് ഐശ്ചികമായെടുത്തു് ബി.എ. പാസ്സായി. അപ്പോൾ താമസിച്ചിരുന്നതു് തിരുവനന്തപുരം Carmel Hill Monastery-യിലായിരുന്നു. ഇതു തൃശിനാപ്പള്ളിയിലെ ഭക്തിതീഷ്ണമായ ജീവിതം തുടർന്നു കൊണ്ടുപോകുന്നതിനു സഹായകമായിരുന്നു. അവിടെയുണ്ടായിരുന്ന ഒന്നാം സഭ Belgian Carmelite Fathers ആയിരുന്ന Rev. Fr. Gregory C.D., Rev. Fr. Constantine, Rev. Fr. Engelbert C. D. മുതലായവർ വളരെ വിശാലഹൃദയരും സ്നേഹസമ്പന്നരുമായിരുന്നു.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">മദ്രാസ് ലോ കോളേജും ഹൈക്കോടതി പ്രാക്ടീസും (1925–1932)</h3>
+    <p>
+        ഒരു Law Degree ഇല്ലാതെ ലോകജീവിതം നയിക്കാൻ പ്രയാസമെന്നുള്ള ധാരണ മാത്തൂച്ചനിൽ വർദ്ധിച്ചുവന്നു. വൃദ്ധനായ പിതാവിൻറെ അനുമതിപ്രകാരം 1925-ൽ ഇദ്ദേഹം മദ്രാസ് ലോ കോളേജിൽ ചേർന്നു. നടയ്ക്കൽ എൻ.റ്റി. ജോസഫുമൊത്തു് Y.M.C.A.-യിൽ താമസമാക്കി. ആദ്യവർഷം F.L. പാസ്സായി. 1927-ൽ B.L. ഡിഗ്രിക്കു് ചേർന്നു് പാസാവുകയും ചെയ്തു. ഇതിനുശേഷം, വീട്ടിലെ പരിതസ്ഥിതി അനുകൂലമായി വന്നതിനാൽ മാത്തൂച്ചൻ മദ്രാസിൽ തന്നെ പ്രാക്ടീസ് ആരംഭിക്കുന്നതിനു തീരുമാനിച്ചു.
+    </p>
+    <p>
+        ഇതിനായി Vere Mockett Barrister-at-Law എന്ന ഇംഗ്ലീഷുകാരനു് 500 രൂപ ഫീസു് കൊടുത്തു് അദ്ദേഹത്തിൻറെ കൂടെ law pupil അഥവാ apprentice-at-law ആയി. അദ്ദേഹം നടത്തിയിരുന്ന കേസിന്റെ pleadings പഠിച്ചു് എന്നും ഹൈക്കോർട്ടിൽ സംബന്ധിച്ചു. ഒരുവർഷംകൊണ്ടു് അന്നു മദ്രാസ് ഹൈക്കോടതിയിലും കീഴ്ക്കോടതികളിലും നിലവിലിരുന്ന Law of practice &amp; procedure (Civil &amp; Criminal) പഠിച്ചു് apprentice examination പാസ്സായി. <strong>1929 ഫെബ്രുവരി 1-ാം തീയതി ഇദ്ദേഹം മദ്രാസ് ഹൈക്കോർട്ടിലെ അഡ്വക്കേററായി enroll ചെയ്തു.</strong> ഒരു വൈദികനെങ്കിൽ പോലും ഈ സന്നദിന്റെ അടിസ്ഥാനത്തിൽ മാത്തൂച്ചൻ ഇന്നും മദ്രാസ് ഹൈക്കോർട്ടിലെ ഒരു ബാർ മെമ്പറായി കഴിയുന്നു. പിന്നീടു് കുറേ നാളത്തേക്ക് Vere Mockett-ന്റെ കൂടെ ജൂനിയർ ആയി ജോലി പരിചയപ്പെടുകയും ചെയ്തു.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">പിതാവിന്റെ വിയോഗവും കോട്ടയത്തെ വക്കീൽ പ്രാക്ടീസും (1932–1934)</h3>
+    <p>
+        ഇങ്ങനെ മദ്രാസിൽ താമസിച്ചു വരവെ പിതാവിൻറെ അസുഖം വർദ്ധിച്ചു. മറ്റു സഹോദരങ്ങളോടൊപ്പം പിതാവിനെ പരിചരിക്കുന്നതിനായി അദ്ദേഹം കാഞ്ഞിരപ്പള്ളിയിൽ എത്തി. 1932 ആഗസ്റ്റ് 25-ാം തീയതി പിതാവിൻറെ മരണംവരെ ഇങ്ങനെ വീട്ടിൽ താമസിക്കുകയും ചെയ്തു. പിന്നീടു് വീട്ടുകാര്യങ്ങൾകൂടി അന്വേഷിക്കത്തക്ക വിധത്തിൽ, മദ്രാസ് ഹൈക്കോർട്ടിൽ അഡ്വക്കേററായി enroll ചെയ്ത അടിസ്ഥാനത്തിൽ തിരുവനന്തപുരത്തുപോയി Chief Justice Joseph Thaliath Barrister-at-Law-യുടെയും മാധവൻ നായരുടെയും ബഞ്ചിൽ <strong>1933 ഫെബ്രുവരി 7-നു് തിരുവിതാംകൂർ ഹൈക്കോടതി വക്കീലായി</strong> മാത്തൂച്ചൻ enroll ചെയ്തു.
+    </p>
+    <p>
+        അതിനുശേഷം കോട്ടയം ഡിസ്ട്രിക്റ്റ് കോർട്ടിൽ സീനിയർ ആയിരുന്ന റ്റി.ജെ. മാത്യു തെള്ളിയിൽ ബി.എ., ബി.എൽ.-ന്റെ കൂടെ ജൂനിയർ ആയി pleadings കൈകാര്യം ചെയ്തു പഠിച്ച ശേഷം സ്വതന്ത്രമായി Law-practice ആരംഭിച്ചു. ഇക്കാലത്ത് കോട്ടയത്തു് താമസിച്ചുകൊണ്ടു് പതിമൂന്നോളം കേസുകൾ വാദിക്കാൻ സാധിച്ചു.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">ആദ്ധ്യാത്മിക തീർപ്പും "മതിൽ ചാടലും" (മേയ്–ജൂൺ 1934)</h3>
+    <p>
+        ഇങ്ങനെയിരിക്കെ മുൻ പതിവുപോലെ 1934 മെയ് മാസത്തിൽ ആലുവാ സെന്റ് ജോസഫ്സ് സെമിനാരിയിൽ പോയി Rev. Fr. Proserpio-യുടെ നിയന്ത്രണത്തിൽ ഒരു Laymen's annual 3-day retreat കഴിച്ചപ്പോൾ ദൈവവിളി പ്രശ്നത്തെപ്പറ്റി കൂടുതൽ അഗാധമായ ചിന്തയും പ്രാർത്ഥനയും വേണമെന്നു മനസ്സിലായി. കോട്ടയത്തു താമസിച്ചിരുന്നപ്പോൾ ബന്ധുക്കളും സ്നേഹിതരും ആയിരുന്ന Rev. Fr. William Naryamparampil C.M.I., M.A., L.T., Rev. Fr. Ambrose Palakunnel (C.M.I.), Rev. Fr. Stephen Thayyil C.M.I. (Palai) എന്നിവർ പലപ്പോഴും മാത്തൂച്ചനെക്കണ്ടും ഉത്സാഹിപ്പിച്ചും വായിക്കാനുള്ള നല്ല Catholic papers കൊടുത്തുകൊണ്ടുമിരുന്നു.
+    </p>
+    <p>
+        ദൈവഹിതം അനുസരിച്ചുള്ളതും തെറ്റു പറ്റാത്തതുമായ ഒരു ജീവിതാന്തസ് തെരഞ്ഞെടുക്കുന്നതിനും സംശയങ്ങൾ തീർക്കുന്നതിനുമായി സെന്റ് ജോസഫ്സ് കോളേജിലെ പ്രൊഫസ്സറായിരുന്ന Rev. Fr. D. Honore S.J. യെയും Rev. Fr. F.X. Frohely S.J. യെയും കാണുന്നതിനു് കൊഡൈക്കനാലിനു പോയി. അവരുടെ ഉപദേശപ്രകാരം വി. ഇഗ്നേഷ്യസ് ലയോളായുടെ ആദ്ധ്യാത്മിക സാധനാ അഭ്യാസങ്ങളിൽ ചിന്താധീനനായി അഞ്ചു ദിവസം മാത്തൂച്ചൻ കഴിച്ചുകൂട്ടി. ഇതനുസരിച്ചുള്ള ത്യാജ്യഗ്രാഹ്യ വിവേചനം പ്രയോഗിക്കാൻ മനസ്സിനെ സന്നദ്ധമാക്കി ഒരു സ്വതന്ത്ര തീരുമാനത്തിൽ എത്തിച്ചു. ആ തീരുമാനത്തിൻറെ സംക്ഷേപം സങ്കീർത്തകന്റെ ഭാഷയിൽ പറഞ്ഞാൽ <strong>&ldquo;By the grace of God, I leap over the wall&rdquo;</strong> എന്നായിരുന്നു.
+    </p>
+    <blockquote>
+        അതായതു് വളരെ സന്തോഷത്തോടും ഉത്സാഹത്തോടും കൂടി ചെയ്തിരുന്ന ജോലി ഉപേക്ഷിച്ച്, ലൗകിക ജീവിത മത്സരത്തിൽനിന്നു മതിൽ ചാടി അപ്പുറം കടന്നു് 34-ാമത്തെ വയസ്സിൽ ഒരു പുതിയ ജീവിതം തുടങ്ങി. ഇതു് അന്നുവരെ സ്വീകരിച്ചിരുന്ന ആഗ്രഹത്തിനും പ്രകൃതിക്കും എതിരായ ഒരു തീരുമാനമാണെന്നു തോന്നാമെങ്കിലും, &ldquo;What is wisdom with God is foolishness with man&rdquo;. ഇതിനെപ്പറ്റി Fr. F.X. Frohely പറഞ്ഞതിപ്രകാരമാണു്:<br>
+        <strong>&ldquo;It was one of the way-side peeps of Our Lord&rdquo;</strong> (ഈശോയുടെ വഴിയരികിൽ നിന്നുള്ള ഒരു സ്നേഹകടാക്ഷ വീക്ഷണമായിരുന്നു, ആ നിശ്ചയത്തിന്റെ പശ്ചാത്തലം).
+    </blockquote>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">കോട്ടയത്തോടുള്ള യാത്രപറച്ചിലും ഈശോസഭാ പ്രവേശനവും (1934 ജൂൺ 15)</h3>
+    <p>
+        1934 ജൂൺമാസത്തിൽ ഒരുദിവസം മാത്തൂച്ചൻ വൈകുന്നേരം വരെ കോട്ടയം ഡിസ്ട്രിക്റ്റ് കോടതിയിൽ വാദപ്രതിവാദം നടത്തിയശേഷം, തന്റെ സീനിയർ ആയ റ്റി.ജെ. മാത്യു തെള്ളിയിൽ ഉൾപ്പെടെയുള്ള സഹവക്കീലന്മാരോടു യാത്രപറഞ്ഞു. ഷെമ്പഗന്നൂരിൽ വച്ചു് ഈശോസഭയിൽ ചേരുന്നതിനു നിശ്ചയിച്ച ശേഷം തൻറെ ധ്യാനഗുരുവിന്റെ ഉപദേശപ്രകാരം തൂത്തുക്കുടിയിൽ പോയി മധുരാ മിഷൻ സുപ്പീരിയർ Fr. Andrew Ayraud S.J. യെ കണ്ടു. തനിക്കു് ഈ സഭയിലെ ഒരു നവസന്യാസിയായി പ്രവേശനം തരണമെന്ന് ഉറപ്പു വാങ്ങുകയും ചെയ്തു. 1934 ജൂൺ 15-ാം തീയതി ഷെമ്പഗന്നൂരിൽ എത്താമെന്നും പറഞ്ഞിരുന്നു. കൂടാതെ ഈശോസഭയിൽ ചേരുമ്പോൾ ചെയ്യേണ്ട Legal arrangements-നെപ്പറ്റിയും അദ്ദേഹം മാത്തൂച്ചനു് നിർദ്ദേശം നല്കിയിരുന്നു.
+    </p>
+    <p>
+        കോട്ടയം വിടുന്നതിനു മുമ്പായി, മാത്തൂച്ചൻകൂടി ഉത്സാഹിച്ചു തുടങ്ങിയ കോട്ടയം കാത്തലിക് ക്ലബ്ബിനു 500 രൂപായിൽ കൂടുതൽ വിലവരുന്ന പുസ്തകങ്ങളും, കണ്ണാടി വാതിലുകളോടു കൂടിയ ഒരു തേക്ക് അലമാരയും അദ്ദേഹം സംഭാവന ചെയ്തു. (ക്ലബ്ബ് മെമ്പേഴ്സ് മിക്കവാറും എല്ലാവരും തന്നെ വക്കീലന്മാരായിരുന്നു). പിന്നീടു് 1975-ൽ മാത്തൂച്ചൻ ക്ലബ്ബ് സന്ദർശിച്ചപ്പോൾ പുസ്തകങ്ങളൊന്നും ഇല്ലാതെ അലമാരി മാത്രം ശേഷിച്ചിരിക്കുന്നതു് ഖേദത്തോടുകൂടി കാണാൻ കഴിഞ്ഞു.
+    </p>
+    <p>
+        കോട്ടയം വിട്ടു വീട്ടിലെത്തി, മാത്തൂച്ചൻ തൻറെ നിശ്ചയത്തെപ്പറ്റി അറിയേണ്ടവരെയെല്ലാം അറിയിക്കുകയും, മറ്റേർപ്പാടുകളെല്ലാം ചെയ്ത് തയ്യാറെടുപ്പ് ധ്രുതഗതിയിൽ നടത്തുകയും ചെയ്തു. വീട്ടുകാര്യങ്ങളെല്ലാം അന്വേഷിച്ച് നടത്തുന്നതിനുവേണ്ട അധികാരാവകാശങ്ങൾ അനുജൻ കൊച്ചുകുറുവച്ചനുമായി (K.K. കുരുവിള) പരസ്പരം സമ്മതിച്ചു് വേണ്ട ഏർപ്പാടുകളെല്ലാം ചെയ്തു. അതിനുശേഷം തിരുവനന്തപുരത്തെത്തി അവിടെ താമസിച്ചിരുന്ന ജ്യേഷ്ഠസഹോദരൻ K.C. തോമസിനോടും, കുടുംബാംഗങ്ങളോടും, Carmel Hill-ൽ ഉണ്ടായിരുന്ന Belgian Carmelite Fathers-നോടും യാത്രപറഞ്ഞു് കൊഡൈക്കനാലിലേക്കു യാത്ര തിരിച്ചു.
+    </p>
+</div>
+
+
+            <!-- English Biography & History Second -->
+            
+<div class="bio-section" id="english-history">
+    <hr class="section-separator" style="margin: 50px auto 35px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Rev. Fr. K. K. Mathew, S.J., B.A., B.L. &ndash; Biography &amp; Historical Record</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">13th Child of Anathanam KunjuVarkey Kuruvila &bull; 6th Generation &bull; Jesuit Priest &amp; Advocate &bull; (b. October 7, 1900)</p>
+
+    <p class="section-lead">
+        <strong>Rev. Fr. K. K. Mathew, S.J., B.A., B.L. (Mathoochan)</strong>, the thirteenth child of fifth-generation patriarch <strong>KunjuVarkey Kuruvila</strong> and the ninth child of his second wife, <strong>Chachiyamma Karippaparambil</strong>, was born on <strong>October 7, 1900</strong>.
+    </p>
+
+    <p>
+        From birth until the age of five, Mathoochan was nurtured in the warm, protective embrace of his home, doted upon with boundless affection by his elder sisters Mammy and Ackamma, and his sisters-in-law Mariyamma, Mammy, and others.
+    </p>
+
+    <p>
+        His maternal uncle, <strong>Thomman Cherian Karippaparambil</strong>, was an ardent lover and patron of theatrical drama and stage performance. Inspired by an early &ldquo;hero worship&rdquo; admiration for his uncle, young Mathoochan was naturally drawn toward drama, oratory, and stage acting. Subsequently, private home instruction was arranged under tutor Mathai Asan from Karthikappally, who resided with the family.
+    </p>
+
+    <p>
+        From 1906, he attended the local Government Vernacular Middle School up to Class 4. The headmaster of the school was <strong>Rev. N. M. Korath</strong> (who later became a Protestant clergyman). His wife, <strong>Mrs. Chachi Korath</strong>, initiated young Mathoochan into English instruction as early as Class 3. Because English was taught alongside Malayalam from classes 3 to 7 in vernacular schools of that period, pupils developed early familiarity with conversational English.
+    </p>
+
+    <div style="background: rgba(179, 137, 56, 0.08); border-left: 4px solid #b38938; padding: 12px 18px; margin: 20px auto; max-width: 900px; font-size: 14.5px; line-height: 1.7; border-radius: 0 8px 8px 0;">
+        <strong>Historical Note on Family Initials (&ldquo;K.C.&rdquo; vs. &ldquo;K.K.&rdquo;):</strong><br>
+        The earlier children of KunjuVarkey Kuruvila were addressed with the initial <strong>K.C.</strong>, whereas from Appachan and Mathoochan onwards, the younger children bore the initial <strong>K.K.</strong> In the earlier era, British and Travancore educational authorities recorded the father's name in English as <em>&ldquo;Curuvilla&rdquo;</em> (hence K.C.), while in later years it came to be standardized as <em>&ldquo;Kuruvilla&rdquo;</em> (hence K.K.).
+    </div>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">Kanjirappally Government English Middle School (1909)</h3>
+    <p>
+        In 1909, the Travancore Government established an English Middle School in Kanjirappally by transferring an existing school from Edappally. As suitable public buildings were initially unavailable, classes were conducted first at the Ilappupara residence and later at the Kollamkulam family premises near the Hospital Junction. The headmaster was <strong>Mr. David, B.A.</strong>, from Thalavadi.
+    </p>
+    <p>
+        The school maintained high standards of English instruction. Teacher M. P. Thomas of Kozhencherry trained the pupils to stage the famous Trial Court scene from Shakespeare's <em>The Merchant of Venice</em>, in which Varkeyachan of Karickatturumpil played Shylock and Chackochan of Kadamappuzha played Portia with memorable elegance. Under the newly introduced Education Code of the British Director of Public Instruction, Mr. Mitchell, all students were strictly required to attend school wearing a European coat, tie, and cap.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">St. Berchmans (S.B.) High School, Changanacherry (1915–1919)</h3>
+    <p>
+        Upon completing middle school, Mathoochan traveled with several classmates to join <strong>St. Berchmans (S.B.) High School, Changanacherry</strong>. He resided at the student boarding house located on the third floor of the present Bishop's House (Aramana), overseen by Rev. Fr. Ambiyath. The venerable Bishop Mar Thomas Kurialacherry, who resided on the second floor, treated the young boarding students with fatherly love. Rev. Fr. Panachickal served as their Spiritual Director. The manager of S.B. High School was Rev. Fr. Thommachan Murickal, and the headmaster was the able educationist <strong>Mr. A. P. Maryadas Pillai, B.A., L.T.</strong>, from Tamil Nadu.
+    </p>
+    <p>
+        While studying in V Form, Mathoochan distinguished himself on stage by portraying the role of Brutus in Shakespeare's <em>Julius Caesar</em>, and captured <strong>First Prize</strong> in an inter-school elocution competition speaking on the ongoing First World War (mentored by Rev. Fr. K. C. Chandy, B.A., L.T., Kodithottam). When elective academic streams were chosen in V Form, Mathoochan opted for the First Group (Mathematics, Physics, and Chemistry), fueled by the youthful ambition to follow in the footsteps of his distinguished elder brother, <strong>Er. K. C. Thomas</strong>, and become an engineer.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">C.M.S. College, Kottayam (1919–1921)</h3>
+    <p>
+        Having graduated School Final in 1919, Mathoochan enrolled in the Intermediate First Group course at <strong>C.M.S. College, Kottayam</strong>, residing first near the Deepika press office and subsequently at the Y.M.C.A. Hostel. The principal of C.M.S. College was the illustrious British scholar, <strong>Rev. Asquith</strong>. When examination results were published, Mathoochan secured high marks in his science and mathematics optionals, but narrowly failed in the English Second Part paper.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">St. Joseph's College, Tiruchirappalli (Trichy) &amp; Spiritual Awakening (1921–1922)</h3>
+    <p>
+        At the earnest encouragement of <strong>Rev. Fr. D. Honoré, S.J.</strong>, Mathoochan moved to Trichy to clear his English paper and enrolled in advanced coaching under Prof. Peck and others. His stay in Tiruchirappalli proved providential: amidst soul-searching vocational doubts, the deeply devout collegiate environment provided him with transformative faith, hope, and charity.
+    </p>
+    <p>
+        He was deeply inspired by holy, selfless mentors who exemplified spiritual purity and lofty Christian ideals. Their guiding influence led to his ultimate resolution to embrace religious priesthood. Those revered mentors include:
+    </p>
+    <ol style="max-width: 850px; margin: 10px auto 20px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Rev. Fr. Peter Carty, S.J.</strong> &bull; Professor of Economics and Rector</li>
+        <li><strong>Rev. Fr. D. Honoré, S.J.</strong> &bull; Professor of Physics, Spiritual Father, and patron of Malayalee scholars</li>
+        <li><strong>Rev. Fr. F. X. Froehly, S.J.</strong> &bull; Professor of English and Minister of St. Joseph's</li>
+        <li><strong>Rev. Fr. William Naryamparampil, C.M.I., M.A., L.T.</strong></li>
+    </ol>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">Trivandrum &amp; B.A. Studies at Carmel Hill Monastery (1922–1925)</h3>
+    <p>
+        On <strong>June 21, 1922</strong>, his elder brother Appachan suddenly passed away at the Trivandrum General Hospital while under the care of Durbar Physician Dr. Peter Lakshmanan. After nursing his ailing brother alongside his siblings and attending his funeral rites, Mathoochan continued his collegiate education in Trivandrum.
+    </p>
+    <p>
+        He completed his <strong>Bachelor of Arts (B.A.)</strong> in Mathematics from <strong>Maharaja's College, Trivandrum</strong>. During this period, he resided at the <strong>Carmel Hill Monastery</strong>, which fostered his devout prayer life. He was deeply edified by the broad-minded, loving Belgian Carmelite First Order Fathers: <strong>Rev. Fr. Gregory, O.C.D.</strong>, <strong>Rev. Fr. Constantine, O.C.D.</strong>, and <strong>Rev. Fr. Engelbert, O.C.D.</strong>
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">Madras Law College &amp; Legal Practice at Madras High Court (1925–1932)</h3>
+    <p>
+        Convinced that a comprehensive knowledge of the law was indispensable for public and family governance, with the blessing of his elderly father, Mathoochan enrolled at <strong>Madras Law College in 1925</strong>, boarding at the Y.M.C.A. with N. T. Joseph of Nadackal. He passed the First Examination in Law (F.L.) in his first year and graduated with his <strong>Bachelor of Laws (B.L.)</strong> degree in 1927.
+    </p>
+    <p>
+        With favorable domestic circumstances, he resolved to practice law at Madras. He paid ₹500 fee to the renowned English Barrister-at-Law, <strong>Mr. Vere Mockett</strong>, becoming his law pupil and apprentice-at-law. He accompanied Mockett daily to the High Court of Judicature at Madras, drafting pleadings and mastering civil and criminal procedure. Passing his apprentice examination within a year, <strong>on February 1, 1929, Mathoochan was formally enrolled as an Advocate of the Madras High Court</strong>. On the strength of this prestigious sanad, he remained a respected life member of the Madras High Court Bar, continuing as junior counsel under Vere Mockett.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">Father's Demise &amp; Independent Practice in Kottayam (1932–1934)</h3>
+    <p>
+        In 1932, his father's health declined severely. Mathoochan returned to Kanjirappally to nurse him alongside his brothers, remaining at his father's side until KunjuVarkey Kuruvila's death on <strong>August 25, 1932</strong>.
+    </p>
+    <p>
+        To manage family affairs locally while maintaining his legal career, on <strong>February 7, 1933</strong>, he was enrolled as an <strong>Advocate of the High Court of Travancore</strong> in Trivandrum before the Bench of Chief Justice Joseph Thaliath (Barrister-at-Law) and Justice Madhavan Nair. He joined Senior Advocate <strong>T. J. Mathew Thelliyil, B.A., B.L.</strong>, at the Kottayam District Court to gain mastery of local pleadings, and subsequently launched an independent law practice, successfully arguing approximately 13 major cases in Kottayam.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">The Ignatian Discernment &amp; Decision to &ldquo;Leap Over the Wall&rdquo; (May–June 1934)</h3>
+    <p>
+        In May 1934, during the annual 3-day laymen's retreat at <strong>St. Joseph's Pontifical Seminary, Aluva</strong>, directed by Rev. Fr. Proserpio, S.J., Mathoochan recognized that his vocational calling demanded deep prayer and irrevocable discernment. His priest companions in Kottayam&mdash;Rev. Fr. William Naryamparampil, C.M.I., Rev. Fr. Ambrose Palakunnel, C.M.I., and Rev. Fr. Stephen Thayyil, C.M.I.&mdash;frequently visited him, offering spiritual encouragement and Catholic treatises.
+    </p>
+    <p>
+        Seeking infallible clarity on the Divine Will, Mathoochan traveled to Kodaikanal to consult his former professors, Rev. Fr. D. Honoré, S.J., and Rev. Fr. F. X. Froehly, S.J. Under their direction, he completed the rigorous <strong>Spiritual Exercises of St. Ignatius of Loyola</strong> in deep silence for five days. Exercising the Ignatian discernment of spirits, he reached an absolute, liberating decision, summarized in the Psalmist's words: <strong>&ldquo;By the grace of God, I leap over the wall&rdquo;</strong> (Psalm 18:29).
+    </p>
+    <blockquote>
+        At the age of 34, he willingly surrendered a flourishing legal career, wealth, and worldly position, stepping completely outside secular competition into religious consecrated life. While to the worldly eye this seemed counter-intuitive, <em>&ldquo;What is wisdom with God is foolishness with man.&rdquo;</em> Reflecting on this grace, Fr. F. X. Froehly remarked:<br>
+        <strong>&ldquo;It was one of the way-side peeps of Our Lord&rdquo;</strong> (A loving, glance of Divine gaze by the wayside of life).
+    </blockquote>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">Farewell to Kottayam &amp; Entering the Society of Jesus (June 15, 1934)</h3>
+    <p>
+        One evening in June 1934, having argued cases until court closure at the Kottayam District Court, Mathoochan bade farewell to his senior, T. J. Mathew Thelliyil, and his fellow advocates. Having decided to enter the Society of Jesus at Shembaganur, he visited Tuticorin to meet the Superior of the Madura Jesuit Mission, <strong>Fr. Andrew Ayraud, S.J.</strong>, securing formal admission as a novice with an agreed arrival date of June 15, 1934.
+    </p>
+    <p>
+        Before leaving Kottayam, Mathoochan generously donated over ₹500 worth of valuable law treatises and general reference books, together with a fine glass-fronted teak bookcase, to the newly established <strong>Kottayam Catholic Club</strong> (whose members were predominantly advocates). When he revisited the club four decades later in 1975, the bookcase still stood, though the books had regrettably dispersed over time.
+    </p>
+    <p>
+        Returning to Anathanam, he announced his resolution to his family and swiftly concluded domestic arrangements, legally transferring the administration of family properties to his younger brother, <strong>Kochukuruvachan (K. K. Kuruvila)</strong>. He then traveled to Trivandrum to bid an affectionate farewell to his elder brother <strong>Er. K. C. Thomas</strong> and family, as well as the Carmelite Fathers at Carmel Hill, and departed on <strong>June 15, 1934</strong>, for the Jesuit Novitiate at Sacred Heart College, Shembaganur, beginning his lifelong consecrated vocation as a Jesuit priest.
+    </p>
+</div>
+
+        </main>
+    </div>
+
+</body>
 </html>
