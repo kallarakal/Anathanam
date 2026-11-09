@@ -3,22 +3,605 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appachan Methayathel - Under Construction</title>
+    <title>Kuruvila Joseph (Appachan) Methayathel - കുരുവിള ജോസഫ് - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            gap: 16px;
+            max-width: 900px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.2em auto;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">കുരുവിള ജോസഫ് (അപ്പച്ചൻ) മെത്തായത്തേൽ &bull; Kuruvila Joseph (Methayathel)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                കുരുവിള ജോസഫ് (അപ്പച്ചൻ) &ndash; മോനിക്കാമ്മ മൂലേശേരി<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">Kuruvila Joseph (Appachan) &ndash; Monickamma Moolesery</span>
+            </h1>
+            <p class="lifespan">ആനത്താനം മെത്തായത്തേൽ, കാഞ്ഞിരപ്പള്ളി &bull; Methayathel, Kanjirapally &bull; (1894 &ndash; 1921)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Appachan Methayathel & Monickamma Family Tree Diagram -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="680" height="230" viewBox="0 0 680 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents -->
+                <line x1="340" y1="78" x2="340" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning 2 daughters -->
+                <line x1="180" y1="118" x2="500" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each daughter -->
+                <line x1="180" y1="118" x2="180" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="500" y1="118" x2="500" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 6) -->
+                <g>
+                    <rect x="130" y="18" width="420" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="340" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">Kuruvila Joseph (Appachan) &amp; Monickamma</text>
+                    <text x="340" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Monickamma from Moolesery, Kavalam &bull; m. 1918)</text>
+                </g>
+
+                <!-- Child 1: Thelamma (Daughter) -->
+                <g>
+                    <a class="node-link" href="Thelamma_Pottamkulam.html" xlink:href="Thelamma_Pottamkulam.html" title="Open Thelamma Pottamkulam">
+                        <rect x="70" y="148" width="220" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="180" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Thelamma</text>
+                        <text x="180" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Mathaichan Pottamkulam</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Mariyamma (Daughter) -->
+                <g>
+                    <a class="node-link" href="Mariyamma_Thumpassery.html" xlink:href="Mariyamma_Thumpassery.html" title="Open Mariyamma (Adv. T.J. Joseph Thumpassery)">
+                        <rect x="390" y="148" width="220" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="500" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariyamma</text>
+                        <text x="500" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Adv. T.J. Joseph Thumpassery</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <main>
+            <!-- Three Generation Genealogy Overview Cards -->
+            
+<div class="bio-section">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 6px;">Three Generation Family Tree &bull; മൂന്നു തലമുറകൾ</h2>
+    <p style="text-align: center; font-weight: 600; color: #7a5823; margin-bottom: 25px;">Kuruvila Joseph (Appachan) &amp; Monickamma (6th Gen) &bull; 2 Daughters (7th Gen) &bull; 16 Grandchildren (8th Gen)</p>
+    
+    <div class="overview-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        <!-- Branch 1: Thelamma -->
+        <div class="overview-card female">
+            <h4>1. Thelamma (b. 1920)</h4>
+            <div class="spouse">m. Mathaichan &bull; Kallarackal Pottamkulam</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 8 Children):</p>
+            <ul>
+                <li><strong>Appachan</strong> (b. 1939) m. Meera (Panikulam, Kattoor) &bull; Koottickal</li>
+                <li><strong>Molly</strong> (b. 1941) m. Er. V. M. Mathew (Vadakkekalam, Alappuzha) &bull; Kollam</li>
+                <li><strong>Shantha</strong> (b. 1942) m. K. S. Eapen (Kurishummoottil, Kanjirappally) &bull; Madras</li>
+                <li><strong>Lalitha B.Sc.</strong> (b. 1945) m. George (Kandakkudy, Kainady) &bull; Thamarassery</li>
+                <li><strong>Tessy B.Sc.</strong> (b. 1947) m. Dr. K. C. Jacob (Kallupurackal, Pulincunnoo) &bull; Alappuzha</li>
+                <li><strong>Valsa B.Sc.</strong> (b. 1952) m. Chandikunju (Pallivathukkal) &bull; Ernakulam</li>
+                <li><strong>Johny</strong> (b. 1953) &bull; Medical Student (M.B.B.S., Udupi)</li>
+                <li><strong>Mathew</strong> (b. 1955) &bull; Medical Student (M.B.B.S., Udupi)</li>
+            </ul>
+        </div>
+
+        <!-- Branch 2: Mariyamma -->
+        <div class="overview-card female">
+            <h4>2. Mariyamma (b. 1921)</h4>
+            <div class="spouse">m. Adv. T. J. Joseph, M.A., B.L. (Ittiappachan) &bull; Thumpassery</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 8 Children) &bull; Jose Villa, Methayathel:</p>
+            <ul>
+                <li><strong>Er. T. J. Joseph</strong> (b. 1942) m. Alphonsa (Kayyalakkakathu, Palai) &bull; Civil Maintenance, F.A.C.T.</li>
+                <li><strong>Dr. T. J. George</strong> (b. 1944) M.B.B.S., M.S. m. Ethamma (Ambukan, Poyka) &bull; F.R.C.S. England</li>
+                <li><strong>Ammini B.Sc.</strong> (b. 1946) m. Dr. Abraham (Thayyil, Alappuzha) &bull; Alappuzha</li>
+                <li><strong>T. J. Mathew</strong> (b. 1950) &bull; Medical Student (M.B.B.S., Belgaum)</li>
+                <li><strong>T. J. Thomas</strong> (b. 1952) &bull; Chartered Accountancy (C.A.) Student</li>
+                <li><strong>T. J. Abraham</strong> (b. 1955) &bull; Student (S.B. College, Changanacherry)</li>
+                <li><strong>Binny</strong> (b. 1957) &bull; Student (Madras)</li>
+                <li><strong>Valsala</strong> (b. 1959) &bull; Student (Tangasseri, Kollam)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Malayalam Biography & History First -->
+            
+<div class="bio-section" id="malayalam-history">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">കുരുവിള ജോസഫ് (അപ്പച്ചൻ) &ndash; ജീവചരിത്രവും കുടുംബ ചരിത്രവും</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">ആനത്താനം മെത്തായത്തേൽ, കാഞ്ഞിരപ്പള്ളി &bull; (1894 &ndash; 1921)</p>
+
+    <p class="section-lead">
+        കുഞ്ഞുവർക്കി കുരുവിളയുടെ 11-ാം മത്തെ സന്താനമായ കുരുവിള ജോസഫ് (അപ്പച്ചൻ) 1894 ഏപ്രിൽ 20-ാം തീയതി ജനിച്ചു. ഇദ്ദേഹം മാന്നാനത്തു സ്കൂളിൽ പഠിച്ചശേഷം തൃശിനാപ്പള്ളിയിൽ F.A. യ്ക്കു പഠിച്ചു കൊണ്ടിരിക്കവേ, പിതാവിൻറെ ആജ്ഞാനുസരണം കുടുംബകാരൃങ്ങളന്വേഷിക്കാൻ വിദ്യാഭ്യാസം നിർത്തി ആനത്താനത്തു താമസമാക്കി.
+    </p>
+
+    <p>
+        1918 ജൂൺ 26-ാം തീയതി കാവാലത്തു മൂലേശേരിയിൽ ജോസഫിൻറെയും അന്നയുടേയും മകൾ മോനിക്കാമ്മയെ വിവാഹം കഴിച്ചു. ഇവർക്കു തേലമ്മ, മറിയമ്മ എന്നീ രണ്ടു സന്താനങ്ങളും ഉണ്ടു്.
+    </p>
+
+    <p>
+        അപ്പച്ചൻ സഹോദരീ ത്രേസ്യാമ്മയുടെ ചികിത്സയ്ക്കായി തിരുവനന്തപുരത്തു താമസിക്കുമ്പോൾ പെട്ടെന്നു രോഗബാധിതനായിത്തീരുകയും, ആശുപത്രിയിൽ വച്ചു് 1921 ജൂൺ 21-നു് മരണം പ്രാപിക്കുകയും ചെയ്തു. മൃതശരീരം കാഞ്ഞിരപ്പള്ളിയിൽ കൊണ്ടുവന്നു് സിമിത്തേരിപ്പള്ളിയിൽ സംസ്കരിച്ചു.
+    </p>
+
+    <p>
+        കുഞ്ഞുവർക്കി കുരുവിള, അപ്പച്ചൻറെ മരണശേഷം അദ്ദേഹത്തിൻറെ ഭാരൃക്കും മക്കൾക്കും ആനത്താനം ചേരിക്കലിലും, മററു ചേരിക്കലുകളിലുമായി ഒരു വീതം നൽകി. ആ വസ്തുക്കൾ അപ്പച്ചൻറെ അനുജന്മാരായ ചാക്കോച്ചനും കുറുവച്ചനും അന്വേഷിച്ചുവന്നു. കുടുംബത്തിൻറെ മററു കാരൃങ്ങൾ ജ്യേഷ്ഠൻ K. C. തോമസും അനുജനായ ഫാ. K. K. Mathew S. J. യും ആണു് വേണ്ടവിധം നടത്തിയിരുന്നതു്.
+    </p>
+
+    <hr class="section-separator">
+    <h3 style="text-align: center; color: var(--header-color); margin-top: 30px; margin-bottom: 20px;">അപ്പച്ചൻറെ സന്താനങ്ങളും അവരുടെ കുടുംബങ്ങളും</h3>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. തേലമ്മ (കല്ലറയ്ക്കൽ പൊട്ടങ്കുളം)</h3>
+    <p>
+        അപ്പച്ചൻറെ മൂത്തപുത്രി തേലമ്മ, 1920 ആഗസ്റ്റ് 3-ാം തീയതി ജനിച്ചു. ചങ്ങനാശേരിയിൽ സ്കൂൾ വിദ്യാഭ്യാസത്തിനു ശേഷം തിരുവനന്തപുരം കോളേജിൽ പഠിച്ചുവരവെ, 16-ാമത്തെ വയസ്സിൽ കല്ലറയ്ക്കൽ പൊട്ടങ്കുളത്തു വർക്കിയുടെ 2-ാമത്തെ മകൻ മത്തായിച്ചൻ വിവാഹം ചെയ്തു. ഇവർക്ക് 8 സന്താനങ്ങൾ ഉണ്ടു്:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>അപ്പച്ചൻ</strong> (1939 ഓഗസ്റ്റ് 5-നു ജനിച്ചു): ഉന്നതവിദ്യാഭ്യാസാനന്തരം കുടുംബകാര്യങ്ങൾ അന്വേഷിച്ച് കൂട്ടിക്കൽ താമസിച്ചുവരവെ, കാട്ടൂർ പാനികുളം എൻജിനീയർ ജോസഫിൻറെ മകൾ മീറായെ വിവാഹം കഴിച്ചു.</li>
+        <li><strong>മോളി</strong> (1941 മാർച്ച് 3-നു ജനിച്ചു): B.Sc. പാസ്സായശേഷം ആലപ്പുഴ വടക്കേക്കളത്തിൽ മത്തായിച്ചൻറെ രണ്ടാമത്തെ മകൻ V. M. Mathew (Eng) വിവാഹം കഴിച്ചു് കൊല്ലത്തു താമസിക്കുന്നു.</li>
+        <li><strong>ശാന്ത</strong> (1942 നവംബർ 14-നു ജനിച്ചു): B.Sc. പാസ്സായശേഷം ശാന്തയെ കാഞ്ഞിരപ്പള്ളി കുരിശുംമൂട്ടിൽ ദേവസ്യാ വക്കീലിൻറെ മകൻ K. S. ഈപ്പൻ 1964-മാണ്ടു വിവാഹം കഴിച്ചു. ഇപ്പോൾ മദ്രാസിൽ താമസിച്ചു വരുന്നു.</li>
+        <li><strong>ലളിത B.Sc.</strong> (1945 ജൂലൈ 21-നു ജനിച്ചു): 1965 മെയ് 26-നു കൈനടി കണ്ടക്കുടിയിൽ കറിയാച്ചൻ മകൻ ജോർജ്ജ്, ലളിതയെ വിവാഹം കഴിച്ചു് കോഴിക്കോട്ടു് താമരശേരിയിൽ താമസിച്ചു വരുന്നു.</li>
+        <li><strong>റെറസി B.Sc.</strong> (1947 ഡിസംബർ 1-നു ജനിച്ചു): റെറസിയെ 1969 സെപ്റ്റംബർ 1-നു് പുളിങ്കുന്ന് കല്ലുപുരയ്ക്കൽ ചാണ്ടിപ്പിള്ളയുടെ മകൻ Dr. K. C. Jacob വിവാഹം കഴിച്ചു് ആലപ്പുഴയിൽ താമസിച്ചു വരുന്നു.</li>
+        <li><strong>വത്സ B.Sc.</strong> (1952 ജനുവരി 10-നു ജനിച്ചു): വത്സയെ 1970 ഡിസംബർ 31-നു് പള്ളിവാതുക്കൽ പി.സി. തോമസ്സിന്റെ മൂത്തമകൻ ചാണ്ടിക്കുഞ്ഞു് വിവാഹം കഴിച്ചു് എറണാകുളത്തു താമസിക്കുന്നു.</li>
+        <li><strong>ജോണി</strong> (1953 ഡിസംബർ 28-നു ജനിച്ചു): ഉടുപ്പി മെഡിക്കൽ കോളജിൽ M.B.B.S.-നു പഠിച്ചുകൊണ്ടിരിക്കുന്നു.</li>
+        <li><strong>മാത്യു</strong> (1955 ജൂലൈ 9-നു ജനിച്ചു): ഉടുപ്പി മെഡിക്കൽ കോളജിൽ M.B.B.S.-നു പഠിച്ചുകൊണ്ടിരിക്കുന്നു.</li>
+    </ul>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. മറിയമ്മ (തുമ്പശേരി / മെത്തായത്തേൽ - ജോസ് വില്ലാ)</h3>
+    <p>
+        അപ്പച്ചൻറെ 2-ാമത്തെ പുത്രിയായ മറിയമ്മ 1921 ജൂൺ 21-ന് ജനിച്ചു. തിരുവനന്തപുരത്തു കോളേജിൽ പഠിക്കവേ, ജഡ്ജി T. J. ജോസഫ് തുമ്പശേരിയുടെ മൂത്ത പുത്രൻ T. J. ജോസഫ് M.A., B.L. (ഇട്ടിയപ്പച്ചൻ) 1941 നവംബർ 10-നു് മറിയമ്മയെ വിവാഹം കഴിച്ചു. കോട്ടയത്തു വക്കീൽ പ്രാക്ടീസ് ചെയ്തുവരവെ, കുഞ്ഞുവർക്കി കുരുവിളയിൽനിന്നും കിട്ടിയ വസ്തുക്കളുടെ അന്വേഷണത്തിനായും മററും കോട്ടയത്തെ പ്രാക്ടീസു നിർത്തി ഇട്ടിയപ്പച്ചനും മറിയമ്മയും 1947 സെപ്റ്റംബർ 14 മുതൽ ആനത്താനം മെത്തായത്തേൽ (ജോസ് വില്ലാ) പുതിയ വീടുവച്ചു് താമസിച്ചു വരുന്നു. ഇവർക്ക് 8 സന്താനങ്ങളുണ്ടു്:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>T. J. Joseph</strong> (1942 സെപ്റ്റംബർ 20-ന് ജനിച്ചു): എൻജിനീയറിംഗ് പാസ്സായശേഷം F.A.C.T. യിൽ ജോലി ചെയ്തുവരവെ, 1967 Oct. 23-ന് പാലാ കയ്യാലയ്ക്കകത്ത് ജോസഫിന്റെ മകൾ അൽഫോൻസായെ വിവാഹം കഴിച്ചു. ഇപ്പോൾ F.A.C.T. യിൽ Civil Maintenance-ൻറെ ചുമതല വഹിക്കുന്നു.</li>
+        <li><strong>ഡോ. ററി. ജെ. ജോർജ്</strong> (1944 ജൂൺ 2-നു ജനിച്ചു): ഉടുപ്പി മെഡിക്കൽ കോളജിൽ നിന്നു് M.B.B.S. ഡിഗ്രിയെടുത്തശേഷം ബാംഗ്ലൂരുനിന്നും M.S. ഉം പാസ്സായി. 1969 നവം. 19-നു് പൊയ്ക അമ്പൂക്കൻ ജോസിൻറെ മകൾ ഈത്തമ്മയെ വിവാഹം ചെയ്തു. ഇപ്പോൾ ഇംഗ്ലണ്ടിൽ F.R.C.S.-നു പഠിച്ചുകൊണ്ടു് കുടുംബസമേതം അവിടെ താമസിക്കുന്നു.</li>
+        <li><strong>അമ്മിണി B.Sc.</strong> (1946 മാർച്ച് 15-ന് ജനിച്ചു): അമ്മിണിയെ 1967 Oct. 19-നു് ആലപ്പുഴ തയ്യിൽ T. A. വർഗീസിന്റെ മൂത്തമകൻ Dr. Abraham വിവാഹം കഴിച്ചു. ഇവർ ആലപ്പുഴയിൽ താമസിക്കുന്നു.</li>
+        <li><strong>ററി. ജെ. മാത്യ</strong> (1950 മാർച്ചു് 10-ന് ജനിച്ചു): ഇപ്പോൾ ബെൽഗം (Belgaum) മെഡിക്കൽ കോളേജിൽ M.B.B.S.-നു പഠിക്കുന്നു.</li>
+        <li><strong>ററി. ജെ. തോമസ്സ്</strong> (1952 മെയ് 8-ന് ജനിച്ചു): ഇപ്പോൾ C.A. യ്ക്കു പഠിക്കുന്നു.</li>
+        <li><strong>ററി. ജെ. എബ്രാഹം</strong> (1955 Oct. 21-നു ജനിച്ചു): ചങ്ങനാശേരി S.B. കോളജിൽ പഠിച്ചുകൊണ്ടിരിക്കുന്നു.</li>
+        <li><strong>ബിന്നി</strong> (1957 ജൂൺ 27-ന് ജനിച്ചു): മദ്രാസിൽ പഠിച്ചുകൊണ്ടിരിക്കുന്നു.</li>
+        <li><strong>വത്സല</strong> (1959 ഏപ്രിൽ 10-ന് ജനിച്ചു): കൊല്ലത്തു തങ്കശേരിയിൽ പഠിച്ചുകൊണ്ടിരിക്കുന്നു.</li>
+    </ul>
+</div>
+
+
+            <!-- English Biography & History Second -->
+            
+<div class="bio-section" id="english-history">
+    <hr class="section-separator" style="margin: 50px auto 35px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Kuruvila Joseph (Appachan) Methayathel &ndash; Biography &amp; Family History</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">Anathanam Methayathel, Kanjirappally &bull; (1894 &ndash; 1921)</p>
+
+    <p class="section-lead">
+        <strong>Kuruvila Joseph (Appachan)</strong>, the eleventh child of fifth-generation patriarch <strong>KunjuVarkey Kuruvila</strong> (and belonging to the sixth generation of the Kallarackal / Anathanam family), was born on <strong>April 20, 1894</strong>.
+    </p>
+
+    <p>
+        After completing his initial schooling at Mannanam, he was pursuing his <strong>F.A. (Fellow of Arts)</strong> degree at St. Joseph's College in Trichinopoly (Tiruchirappalli). While engaged in his higher studies, in accordance with the wish and instruction of his father to take charge of family affairs and agricultural properties, he discontinued his collegiate education and took up residence at the Anathanam ancestral estate.
+    </p>
+
+    <p>
+        On <strong>June 26, 1918</strong>, he married <strong>Monickamma</strong>, daughter of Joseph and Anna of the venerable <strong>Moolesery (Moolassery)</strong> family in Kavalam. To this couple were born two daughters: <strong>Thelamma</strong> and <strong>Mariyamma</strong>.
+    </p>
+
+    <p>
+        While Appachan was staying in Trivandrum to assist and arrange for the medical treatment of his sister Thresiamma, he suddenly contracted a severe illness. He was admitted to the hospital where, despite medical care, he passed away on <strong>June 21, 1921</strong>, at the young age of 27. His mortal remains were conveyed to Kanjirappally and interred with solemn rites in the family cemetery at the Cemetery Church (സിമിത്തേരിപ്പള്ളി).
+    </p>
+
+    <p>
+        Following Appachan's demise, his father KunjuVarkey Kuruvila apportioned a rightful share of the estate in Anathanam Cherikkal and other Cherikkals for his widow Monickamma and their two young daughters. Those lands were looked after by Appachan's younger brothers, Chackochan and Kuruvachan. General family governance and counsel were provided by his elder brother <strong>Er. K. C. Thomas</strong> and his younger brother <strong>Rev. Fr. K. K. Mathew, S.J.</strong>
+    </p>
+
+    <hr class="section-separator">
+    <h2 style="text-align: center; color: var(--header-color); margin-top: 35px; margin-bottom: 20px;">The Daughters of Appachan &amp; Monickamma (7th Generation)</h2>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Thelamma (Kallarackal Pottamkulam)</h3>
+    <p>
+        Appachan's eldest daughter, Thelamma, was born on <strong>August 3, 1920</strong>. After completing her schooling in Changanacherry, she was studying at college in Trivandrum when, at age 16, she was given in marriage to <strong>Mathaichan</strong>, the second son of Varkey of the <strong>Kallarackal Pottamkulam</strong> family. They were blessed with <strong>8 children</strong> belonging to the eighth generation:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Appachan</strong> *(b. Aug 5, 1939)*: Following higher education, oversaw family affairs while residing in Koottickal. Married <strong>Meera</strong>, daughter of Engineer Joseph of the Panikulam family, Kattoor.</li>
+        <li><strong>Molly</strong> *(b. Mar 3, 1941)*: Graduated B.Sc. Married <strong>Er. V. M. Mathew</strong>, second son of Mathaichan of the Vadakkekalam family, Alappuzha; resides in Kollam.</li>
+        <li><strong>Shantha</strong> *(b. Nov 14, 1942)*: Graduated B.Sc. Married in 1964 to <strong>K. S. Eapen</strong>, son of Advocate Devasia of the Kurishummoottil family, Kanjirappally; resides in Madras (Chennai).</li>
+        <li><strong>Lalitha, B.Sc.</strong> *(b. Jul 21, 1945)*: Married on May 26, 1965 to <strong>George</strong>, son of Kariyachan of the Kandakkudy family, Kainady; resides in Thamarassery, Kozhikode.</li>
+        <li><strong>Tessy, B.Sc.</strong> *(b. Dec 1, 1947)*: Married on September 1, 1969 to <strong>Dr. K. C. Jacob</strong>, son of Chandipillai of the Kallupurackal family, Pulincunnoo; resides in Alappuzha.</li>
+        <li><strong>Valsa, B.Sc.</strong> *(b. Jan 10, 1952)*: Married on December 31, 1970 to <strong>Chandikunju</strong>, eldest son of P. C. Thomas of the Pallivathukkal family; resides in Ernakulam.</li>
+        <li><strong>Johny</strong> *(b. Dec 28, 1953)*: Pursuing M.B.B.S. medical degree at Udupi Medical College.</li>
+        <li><strong>Mathew</strong> *(b. Jul 9, 1955)*: Pursuing M.B.B.S. medical degree at Udupi Medical College.</li>
+    </ul>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Mariyamma (Adv. T. J. Joseph Thumpassery &bull; Jose Villa, Methayathel)</h3>
+    <p>
+        Appachan's second daughter, Mariyamma, was born on <strong>June 21, 1921</strong> (the day of her father's demise). While studying in college at Trivandrum, she was married on <strong>November 10, 1941</strong> to <strong>Adv. T. J. Joseph, M.A., B.L. (Ittiappachan)</strong>, eldest son of <strong>Judge T. J. Joseph Thumpassery</strong>.
+    </p>
+    <p>
+        Adv. T. J. Joseph was actively practicing law in Kottayam. Later, to directly manage and administer the family lands received from KunjuVarkey Kuruvila, he retired from legal practice in Kottayam. From <strong>September 14, 1947</strong>, Ittiappachan and Mariyamma constructed a stately new home named <strong>"Jose Villa" at Anathanam Methayathel</strong>, where they settled. To them were born <strong>8 children</strong> belonging to the eighth generation:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Er. T. J. Joseph</strong> *(b. Sep 20, 1942)*: Graduated in Engineering. Joined F.A.C.T. (Fertilisers and Chemicals Travancore), currently holding executive charge of Civil Maintenance. Married on October 23, 1967 to <strong>Alphonsa</strong>, daughter of Joseph of the Kayyalakkakathu family, Palai.</li>
+        <li><strong>Dr. T. J. George</strong> *(b. Jun 2, 1944)*: Graduated M.B.B.S. from Udupi Medical College and M.S. (Master of Surgery) from Bangalore. Married on November 19, 1969 to <strong>Ethamma</strong>, daughter of Jose of the Ambukan family, Poyka. Currently in England pursuing his <strong>F.R.C.S.</strong> (Fellow of the Royal College of Surgeons) and residing there with his family.</li>
+        <li><strong>Ammini, B.Sc.</strong> *(b. Mar 15, 1946)*: Married on October 19, 1967 to <strong>Dr. Abraham</strong>, eldest son of T. A. Varghese of the Thayyil family, Alappuzha; resides in Alappuzha.</li>
+        <li><strong>T. J. Mathew</strong> *(b. Mar 10, 1950)*: Pursuing M.B.B.S. at Belgaum Medical College.</li>
+        <li><strong>T. J. Thomas</strong> *(b. May 8, 1952)*: Pursuing Chartered Accountancy (C.A.).</li>
+        <li><strong>T. J. Abraham</strong> *(b. Oct 21, 1955)*: Student at St. Berchmans (S.B.) College, Changanacherry.</li>
+        <li><strong>Binny</strong> *(b. Jun 27, 1957)*: Student studying in Madras (Chennai).</li>
+        <li><strong>Valsala</strong> *(b. Apr 10, 1959)*: Student studying in Tangasseri, Kollam.</li>
+    </ul>
+</div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 680));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 680) {
+                const centerScroll = (680 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
