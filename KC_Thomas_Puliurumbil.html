@@ -3,22 +3,731 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KC Thomas Puliurumbil - Under Construction</title>
+    <title>K. C. Thomas (Flower Mount / Puliurumbil) - കെ.സി. തോമസ് - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1500px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.2em auto;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">കെ.സി. തോമസ് (പുളിങ്കുന്ന് / പുഷ്പമല) &bull; K. C. Thomas (Puliurumbil / Flower Mount)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                K. C. Thomas B.A., B.E. (തോമ്മാച്ചൻ)<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">കത്രീനമ്മ കാഞ്ഞൂപ്പറമ്പിൽ &bull; Kathreenamma Kanjooparambil</span>
+            </h1>
+            <p class="lifespan">പുഷ്പമല (ഫ്ലവർ മൗണ്ട്), കാഞ്ഞിരപ്പള്ളി &bull; Flower Mount, Kanjirapally &bull; (1889 &ndash; 1973)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- K. C. Thomas & Kathreenamma Family Tree Diagram -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="1406" height="230" viewBox="0 0 1406 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents -->
+                <line x1="703" y1="78" x2="703" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 7 children -->
+                <line x1="121" y1="118" x2="1285" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 6) -->
+                <g>
+                    <rect x="493" y="18" width="420" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="703" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">K.C. Thomas &amp; Kathreenamma</text>
+                    <text x="703" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Kathreenamma from Kanjooparambil, Chennankary &bull; m. 1910)</text>
+                </g>
+
+                <!-- Child 1: Teresa (Daughter) -->
+                <g>
+                    <a class="node-link" href="Teresa_Poovarani.html" xlink:href="Teresa_Poovarani.html" title="Open Teresa (Pennamma) Poovarani">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Teresa (Pennamma)</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. K.J. Joseph Aanavalaril</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Jacob Thomas (Son) -->
+                <g>
+                    <a class="node-link" href="Jacob_Thomas_Puliurumbil.html" xlink:href="Jacob_Thomas_Puliurumbil.html" title="Open Er. Jacob Thomas (Baby) Puliurumbil">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Er. Jacob Thomas (Baby)</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Elizabeth Alappatt</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Alexander (Son) -->
+                <g>
+                    <a class="node-link" href="Alexander_Thomas_Puliurumbil.html" xlink:href="Alexander_Thomas_Puliurumbil.html" title="Open Alexander Thomas (Lalichan) Puliurumbil">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Alexander (Lalichan)</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Rosamma Purayackal</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: George (Son) -->
+                <g>
+                    <a class="node-link" href="KT_George_Puliurumbil.html" xlink:href="KT_George_Puliurumbil.html" title="Open Er. K. T. George (Kuruvachan) Puliurumbil">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Er. George (Kuruvachan)</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Elikutty Thanikkal</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Mathew (Son) -->
+                <g>
+                    <a class="node-link" href="KT_Mathew_Puliurumbil.html" xlink:href="KT_Mathew_Puliurumbil.html" title="Open K. T. Mathew (Mathachan) Puliurumbil">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathew (Mathachan)</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Annamma Neroth</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Elizabeth (Daughter) -->
+                <g>
+                    <a class="node-link" href="Dame_Marie_Britto.html" xlink:href="Dame_Marie_Britto.html" title="Open Dame Marie Britto (Achamma)">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Dame Marie Britto</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Elizabeth / Achamma)</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Mary (Daughter) -->
+                <g>
+                    <a class="node-link" href="Mary_Thomas_Molly.html" xlink:href="Mary_Thomas_Molly.html" title="Open Mary Thomas (Molly)">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mary Thomas (Molly)</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Educator)</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <main>
+            <!-- Three Generation Genealogy Overview Cards -->
+            
+<div class="bio-section">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 6px;">Three Generation Family Tree &bull; മൂന്നു തലമുറകൾ</h2>
+    <p style="text-align: center; font-weight: 600; color: #7a5823; margin-bottom: 25px;">Er. K. C. Thomas (6th Gen) &bull; 7 Children (7th Gen) &bull; 23 Grandchildren (8th Gen)</p>
+    
+    <div class="overview-grid">
+        <!-- Branch 1: Teresa Pennamma -->
+        <div class="overview-card female">
+            <h4>1. K. T. Teresa, B.A. (Pennamma) (b. 1913)</h4>
+            <div class="spouse">m. K. J. Joseph B.A. (Kochu) &bull; Aanavalaril, Poovarani</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation):</p>
+            <ul>
+                <li><strong>Mary (Ammini)</strong> (b. 1942) m. Er. C. P. Mathew (Kappil, Pulincunnoo) &bull; HPF Ooty. Children: Annu, Joppan, Jose.</li>
+                <li><strong>Elizabeth (Leelamma)</strong> (b. 1954) m. V. C. Jacob B.A. (Vettimuttikavu, Thidanad) &bull; Officer, Federal Bank.</li>
+            </ul>
+        </div>
+
+        <!-- Branch 2: Er. Jacob Thomas -->
+        <div class="overview-card male">
+            <h4>2. Er. K. Jacob Thomas, B.E., C.E. (Baby) (b. 1916)</h4>
+            <div class="spouse">m. Elizabeth (Susheela) &bull; Alappatt Thoppil, Karanchira</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation):</p>
+            <ul>
+                <li><strong>Dr. Thomas Jacob (Balan)</strong> Ph.D., D.I.C. (London) m. Dr. Susan Moire (Toronto, Canada)</li>
+                <li><strong>Paul</strong> (Ailing from paralysis since age 4)</li>
+                <li><strong>Mary Catherine (Kitty)</strong> M.Sc. m. Ignatius Alex (Vattaparambil, Puthenpura) &bull; SBI</li>
+                <li><strong>Dr. Joseph Jacob</strong> M.B.B.S.</li>
+                <li><strong>Annie Jacob</strong> M.A. (Literature)</li>
+                <li><strong>Elizabeth Jacob (Lissy)</strong> Pre-Degree student</li>
+                <li><strong>Francis Jacob</strong> Student</li>
+            </ul>
+        </div>
+
+        <!-- Branch 3: Alexander Thomas -->
+        <div class="overview-card male">
+            <h4>3. K. Alexander Thomas, M.A. (Lalichan) (b. 1919)</h4>
+            <div class="spouse">m. Kunjamma (Rosamma) &bull; Purayackal, Pulincunnoo</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation):</p>
+            <ul>
+                <li><strong>Catherine (Susie)</strong> B.Sc. m. Er. Thomas (Tomy) (Kattuvally, Vattaparambil) &bull; FCI Sindri</li>
+                <li><strong>Annie</strong> M.A. m. Er. Paul (Pauly) (Elanjikkal Thoppil, Kothamangalam) &bull; CSI Institute</li>
+                <li><strong>Thomas (Thommachan)</strong> Engineering Student (Govt. Engg. College, Palakkad)</li>
+            </ul>
+        </div>
+
+        <!-- Branch 4: Er. K. T. George -->
+        <div class="overview-card male">
+            <h4>4. Er. K. T. George, B.Sc., B.Sc. (Eng.) (Kuruvachan) (b. 1921)</h4>
+            <div class="spouse">m. Elikutty &bull; Thanikkal Thoppil, Manaloor</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation):</p>
+            <ul>
+                <li><strong>Catherine (Valsamma)</strong> B.Sc. m. Er. Thomas (Valiyaveettil, Vaikom) &bull; P.W.D.</li>
+                <li><strong>Elizabeth (Elimma)</strong> M.B.B.S.</li>
+                <li><strong>Mariyamma</strong> M.Sc.</li>
+                <li><strong>Thresiamma</strong> Medical Student</li>
+                <li><strong>Annamma</strong> Pre-Degree student</li>
+                <li><strong>Thomas (Tomy)</strong> Student</li>
+                <li><strong>Joseph (Jose)</strong> Student</li>
+            </ul>
+        </div>
+
+        <!-- Branch 5: K. T. Mathew -->
+        <div class="overview-card male">
+            <h4>5. K. T. Mathew, B.A., B.Com. (Mathachan) (b. 1924)</h4>
+            <div class="spouse">m. Annamma &bull; Neroth, Alappuzha</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation):</p>
+            <ul>
+                <li><strong>Catherine (Reena)</strong> B.Sc. student</li>
+                <li><strong>Thomas (Tomy)</strong> Pre-Degree student</li>
+                <li><strong>Alexander (Alex)</strong> Student</li>
+                <li><strong>Thresia (Tessy)</strong> Student</li>
+            </ul>
+        </div>
+
+        <!-- Branch 6: Dame Marie Britto -->
+        <div class="overview-card female">
+            <h4>6. Dame Marie Britto / Elizabeth (Achamma), B.Sc., B.T. (b. 1926)</h4>
+            <div class="spouse">Religious Life &bull; Canoness of St. Augustine</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Life & Vocation:</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Novitiate in Belgium; Headmistress of St. Roch’s High School, Trivandrum since 1956.</p>
+        </div>
+
+        <!-- Branch 7: Mary Thomas -->
+        <div class="overview-card female">
+            <h4>7. K. Mary Thomas, B.A., B.T., M.Ed. (Molly) (b. 1930)</h4>
+            <div class="spouse">Educator &bull; Mundakayam</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Life & Career:</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Educator serving at Bishop Bonaventure Memorial Training School, Mundakayam since 1965 (Unmarried).</p>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Malayalam Biography & History -->
+            <div class="bio-section" id="malayalam-history">
+<h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">കെ. സി. തോമസ് ബി. എ., ബി. ഇ. (തോമ്മാച്ചൻ)</h2>
+<p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">റിട്ടയേർഡ് എക്സിക്യൂട്ടീവ് എൻജിനീയർ, P.W.D. &bull; ആനത്താനത്തു്, ഫ്ലവർ മൗണ്ട്, കാഞ്ഞിരപ്പള്ളി (1889 &ndash; 1973)</p>
+<p>(Retired Executive Engineer, P. W. D.) Anathanam, Flower Mount, Kanjirapally. 1889 -1973 A. D. കല്ലറയ്ക്കൽ കുടുംബത്തിലെ അഞ്ചാമത്തെ (E)ശാഖയിലെ അഞ്ചാംതലമുറക്കാരനായിരുന്ന കുഞ്ഞുവർക്കി കുരുവിളയുടെ 8-ാമത്തെ സന്താനവും 6-ാംതലമുറക്കാരനു മായ ശ്രീ .കെ.സി. തോമസ് (തോമ്മാച്ചൻ) A.D. 1889-ാമാണ്ടു ജനിച്ചു.  St. Berchman&#x27;s E. H. School Changanacherry, C.M.S. College, Kottayam, St. Joseph&#x27;s College, Trichinopoly, എന്നീ ലയങ്ങളിൽ വിദ്യാഭ്യാസം നടത്തി, Mathematics B.A. ഒന്നാംക്ലാസു ഡിഗ്രി സമ്പാദിച്ചശേഷം മദ്രാസ് എൻജിനീയറിംഗ് കോളേജിൽ B.E. Degree കോഴ്സിന് പഠിച്ചുകൊണ്ടിരിക്കവ, A.D. 1910-ാമാണ്ടു് ചേന്നങ്കരി കാഞ്ഞൂപറമ്പിലായ കളത്തിൽ ചാണ്ടിയച്ചൻറെ രണ്ടാമത്തെ സന്താനവും മൂത്ത പുത്രിയുമായ കത്രീനാമ്മയെ വിവാഹം ചെയ്തു.  A.D. 1913-ാമാണ്ടു Civil Engineering വിഭാഗത്തിൽ B.E. ഡിഗ്രി സബാദിച്ചപ്പോൾ, ഈ രാജ്യത്തെ സുറിയാനി കത്തോലിക്കാ സമുദായത്തിലെ പ്രഥമ എൻജിനീയർ എന്ന സ്ഥാനവും അദ്ദേഹത്തിനു ലഭിച്ചു.</p>
+<p>അതിനുശേഷം അക്കാലത്തു് തിരുവിതാംകൂർ P.W.D. യിലെ സുപ്രസിദ്ധ  ചീഫ് എൻജിനീയറായിരുന്ന Mr. A.H. Bastow-യുടെ കീഴിൽ Apprentice ആയി ജോലി ചെയ്ത അവസരത്തിൽ അദ്ദേഹത്തിൻറെ പ്രശംസക്കു് പാത്രീഭൂതനായി.   ഏറെത്താമസിയാതെ അദ്ദേഹത്തിൻറെ ആഫീസിൽതന്നെ Design Branch തലവനായി 1915-ൽ ഗവണ്മെന്റ് ജോലിയിൽ പ്രവേശിച്ചു.  Reinforced concrete Design-നിൽ അതിവിദഗ്ധനായിരുന്ന Mr. Bastow അതേകാരൃത്തിൽതന്നെ അസാമാന്യ സാമർത്ഥ്യം പ്രദർശിപ്പിച്ച ശ്രീ. കെ.സി. തോമസിൻറെ പ്രവർത്തനത്തിൽ അതീവ സന്തുഷ്ടനായി. നവീന രീതിയിലുള്ള വലിയ കോൺക്രീററുപാലങ്ങൾക്കുള്ള പലതരം ഡിസൈനുകളും ശ്രീ. കെ.സി. തോമസ്സ് തയ്യാറാക്കി. അവയുടെ പണികൾ ആരംഭിച്ചപ്പോൾ, അതിൽ ഏററവും പ്രാധാന്യമർഹിച്ചതും, ചെങ്ങന്നൂരിനു വടക്കുവശം സ്ഥിതിചെയ്യുന്നതുമായ എറപ്പുഴ പാലത്തിൻറെ പണിയുടെ ചുമതല വഹിക്കാൻ അസിസ്റ്റൻഡ് എൻജിനീയറായി, ശ്രീ. കെ.സി. തോമസ്സിനെ തന്നെയാണ് Mr. Bastow തിരഞ്ഞെടുത്തു നിയമിച്ചതു്.  ഈ വക പ്രവർത്തനങ്ങൾമൂലം, അക്കാലത്തു് Reinforced concrete പാലങ്ങൾ പണിയുന്ന കാരൃത്തിൽ തിരുവിതാംകൂർ P.W.D., ഇൻഡ്യയുടെ അന്നത്തെ മററു നാട്ടുരാജ്യങ്ങളുടെയും, പ്രോവിൻസുകളുടെയും ഇടയിൽ നേത്രുസ്ഥാനം കരസ്ഥമാക്കിയിരുന്നു എന്നുള്ള സത്യം, അന്നു പരക്കെ അറിയപ്പെട്ടിരുന്നു.</p>
+<p>അതിനു ശേഷം, 1922 മുതൽ 1927 വരെ ശ്രീ.കെ.സി.തോമസ്സ് പിരുമേട് സബ് ഡിവിഷൻ ചാർജ് വഹിച്ചിരുന്ന കാലത്താണ് അവിടെയുള്ള പ്രധാനപ്പെട്ട പല പുതിയ വനപ്രാന്ത റോഡുകളുടെ പ്രാരംഭനടപടികൾ ആരംഭിച്ചതും, തുടർന്ന് അവയുടെ പണികൾ പൂർത്തിയാക്കുകയും ചെയ്തതും.</p>
+<p>പിന്നീടു് 1928 മുതൽ 1933 വരെ, ഈ സ്റ്റേററിലെ, പ്രഥമ വൻകിട ശുദ്ധജലവിതരണ പദ്ധതിയായ Trivandrum Wellington Water Works-ൻറെ സകല പ്രവർത്തികളുടെയും ആദിമുതൽ അവസാനം വരെയുള്ള പ്രധാന സംവിധായകനും സൂത്രധാരനുമായി പ്രവർത്തിച്ചു് എല്ലാ സഹപ്രവർത്തകരുടെയും, മേലുദ്യോഗസ്ഥന്മാരുടേയും, ഗവണ്മെന്റിന്റെ തന്നെയും മുക്തകണ്ഠമായ പ്രശംസ നേടി. അതിനുശേഷം അന്നു് ചീഫ് എൻജിനീയറായിരുന്ന Mr. G.B.E. Truscott-ൻറെ പ്രത്യേക നിർബന്ധപ്രകാരം കുറേക്കാലം അദ്ദേഹത്തിൻറെ Personal Assistant- ആയി സേവനമനുഷ്ഠിച്ചു.  പിന്നീടു° Executive എൻജിനീയറായി തിരുവനന്തപുരത്തായിരുന്നപ്പോൾ, അന്നത്തെ ഒരു പ്രധാനപണിയായിരുന്ന State Transport Garage &amp; Workshop-ന്റെ വലിയ കെട്ടിടങ്ങളുടെ അടകൽവേല.  അന്നത്തെ ദിവാനായിരുന്ന Sir. C. P. Ramaswamy അയ്യരുടെ ഒരുററ ബന്ധുവിനു അതീവതാല്പരൃമുണ്ടായിരുന്ന ഒരുകൂട്ടർക്കു്, P.W.D. Estimate-ൻറെ ഏതാണ്ടിരട്ടിതുകയ്ക്കു് കോൺട്രാക്ട് കൊടുക്കണമെന്നുള്ള രഹസ്യമായ മേൽനിർദ്ദേശത്തെ തിരസ്കരിച്ചതിനു പിഴയെന്നോണം, ശ്രീ. കെ.സി. തോമസ്സ് ഒരു Water-works Expert ആണെന്ന വാദമുന്നയിച്ചു് ഉടൻതന്നെ അക്കാലത്ത് ആരംഭിക്കാനുദ്ദേശിച്ചിരുന്ന  Nagercoil Water Works Project -ൻറെ പരിപൂർണ്ണ ഉത്തരവാദിത്വങ്ങൾ ഏല്പിച്ചു്, അങ്ങോട്ടു് സ്ഥലം മാററി.  ഇതൊരു &quot;Punishment for non-subservience” ആയിരുന്നിട്ടും, യാതൊരു പ്രതിഷേധവും കൂടാതെ, തൻറെ പുതിയ ജോലിയിൽ ശ്രീ. കെ.സി. തോമസ് ഉടൻ തന്നെ പ്രവേശിക്കുകയും, തിരുവനന്തപുരം Water works-ൽ സിദ്ധിച്ച പരിചയസമ്പത്തും തനിക്കു സ്വതസിദ്ധമായിരുന്ന സാമർത്ഥ്യങ്ങളും പരിപൂർണമായി ഉപയോഗിച്ചു്, ഏതാണ്ടു് രണ്ടുകൊല്ലംകൊണ്ടു നാഗർകോവിൽ Water works-ൻറെ പ്രധാന പണികൾ മിക്കവാറും പൂർത്തിയാക്കി.  കൂടാതെ, ആ കാലയളവിൽതന്നെ, അദ്ദേഹത്തെ കൂടുതലായ ഭരമേല്പിച്ച Shencottah Water works-ൻറെ പ്രധാന പണികളും മിക്കവാറും പൂർത്തിയാക്കി.</p>
+<p>മേൽപ്പറഞ്ഞ ജോലികളുടെ അവസാന ഘട്ടമായപ്പോഴേക്കും, അന്നത്തെ ചീഫ് എൻജിനീയരുടെ ഒരു അടിയന്തിര സന്ദേശം ലഭിച്ചു. “നിങ്ങളെ, അററകുററപ്പെട്ടുകിടക്കുന്ന Pallivasal Hydro Electric Project-ൻറെ മുൻപോട്ടുള്ള അടിയന്തിര പണികൾക്കായി ഉടൻതന്നെ അങ്ങോട്ടു സ്ഥലംമാററാൻ ദിവാൻജി നിർദ്ദേശിച്ചിട്ടുള്ളതായി അറിയുന്നു.  ഇതു സംബന്ധിച്ചുള്ള ഗവണ്മെൻറ് ഉത്തരവ് പുറകെ വരുന്നുണ്ടു്”.  ഈ നീക്കം, കൂടുതൽ കീറാമുട്ടികളും ഭാരങ്ങളും തൻറെമേൽ ഏൽപ്പിച്ചുകൊണ്ടുള്ള വേറൊരു “Punishment Transfer” ആയിരിക്കുമോ എന്നും, മിക്കവാറും മറെറല്ലാവരും മടുത്തുമാറിയ Pallivasal Hydro Electric Project-ൽ പോയി ശ്രീ. കെ.സി. തോമസ്, തൻറെ “Waterloo” അനുഭവിക്കട്ടെ എന്നോ മറ്റോ ഉള്ള ആരുടെയോ ചിന്തകൾ ഇതിനിടയിൽ ഉണ്ടോ എന്നും, അദ്ദേഹം സംശയിച്ചു.  ഈ സംശയം തീർക്കാൻവേണ്ടി, അന്നത്തെ ചീഫ് സെക്രട്ടറിയും, തൻ ദീർഘകാലസുഹൃത്തുമായിരുന്ന ശ്രീ. നീലകണ്ഠ അയ്യരെ പോയിക്കണ്ടു്, “സ്വാമീ! ഇത്തവണ ദിവാൻജി എന്നെ പിടിച്ചിരിക്കുന്നതു് കൊല്ലാനോ, വളത്താനോ” എന്നു ചോദിച്ചു. വാപൊട്ടി ചിരിച്ചുകൊണ്ടു് അദ്ദേഹം ഉടൻ മറുപടി നൽകി. “ദിവാൻ നിങ്ങളെപ്പററിയും നിങ്ങളുടെ എല്ലാ പ്രവർത്തനങ്ങളെപ്പററിയും പരിപൂർണ്ണ അന്വേഷണങ്ങൾ വളരെ രംഹസ്യമായി നടത്തി.  ഒരു റിപ്പോർട്ടിലും നിങ്ങളെപ്പറ്റി പ്രശംസ അല്ലാതെ മറെറാന്നും കണ്ടതുമില്ല, കേട്ടതുമില്ല.  പള്ളിവാസൽ പദ്ധതി ദിവാൻറെ ഒരു വാൽസല്യ പുത്രിയാണ്.  അവളെ രക്ഷിക്കാൻ നിങ്ങളല്ലാതെ, മററാരും ഇവിടെ ഇല്ല എന്നു് അദ്ദേഹത്തിനു് പൂർണ്ണബോദ്ധ്യമായിരിക്കുന്നു.   അതുകൊണ്ടു്, സന്തോഷത്തോടുകൂടി ഈ പുതിയ ചുമതല ഏറെറടുത്തു കഴിഞ്ഞ കാലങ്ങളിലെന്നപോലെ ഭാവിയിലും സമർത്ഥമായി പ്രവർത്തിച്ച് യഥാർത്ഥ രാജ്യസേവനമനുഷ്ഠിച്ചാലും.  ഞാൻ നിങ്ങൾക്ക് സകലവിധ മംഗളാശംസകളും തരുന്നു”. ഈ സന്ദേശം, ശ്രീ. നീലകണ്ഠ അയ്യർ ആത്മാർത്ഥമായി നൽകിയതാണെന്നു ബോധ്യമുണ്ടായിരുന്നതുകൊണ്ടു്, ശ്രീ. കെ.സി. തോമസ് മനസമാധാനത്തോടും, തികഞ്ഞ ആത്മവിശ്വാസത്തോടും കൂടി വിടവാങ്ങി, മൂന്നാററിലേക്കു പോയി. 1940 ഫെബ്രുവരി മുതൽ, തൻറെ പുതിയ ജോലിയിൽ വ്യാപൃതനായി.  ദീർഘകാലമായി പ്രവർത്തനരഹിതമായി കിടന്നതും, അന്നത്തെ നിയമസഭയിലും, പൊതുവേദികളിലും വളരെ ഒച്ചപ്പാടുകൾ ഉണ്ടാക്കിയതുമായ Pallivasal Power House-ൻറെ തീരാവ്യാധികൾ ഓരോന്നായി അദ്ദേഹം പരിഹരിച്ചു് വീണ്ടും പ്രവർത്തനസജ്ജമാക്കി.  “Ramaswamy Iyer Head Works&#x27;&#x27; എന്നു പന്നീടു് നാമകരണം ചെയ്ത പുതിയ Head Regulator - ൻറെയും, പുതിയ Pen stock Pipe lines-ൻറെയും പണികൾ വേഗം പൂർത്തിയാക്കി.  അതിനുശേഷം അദ്ദേഹത്തെ ഏൽപിച്ച Kundala Dam, Madupatty Dam എന്നിവകളുടെ പണികളും വളരെ സമതമായും കായക്ഷമതയോടുകൂടിയും നിർവഹിച്ചുപോന്നു.  പക്ഷേ അവ പൂർത്തിയാകുംമുൻപേ, 1944 ൽ പെൻഷൻ പററി പിരിയാനുള്ള സമയം അടുത്തു.  എന്നാൽ, തൻറെ മേലുദ്യോഗസ്ഥനായിരുന്ന  അന്നത്തെ Chief Resident Engineer Mr. S.J. Bruford, ശ്രീ. കെ.സി. തോമസിന്റെ സേവനം തുടർന്നു ലഭിക്കേണ്ടതു്, Kundala, Madupatty എന്നീ ഡാമുകളുടെ പുരോഗതിക്ക് അത്യന്താപേക്ഷിതമാണെന്നു കരുതിക്കൊണ്ടു, ശ്രീ തോമസ് സർവീസിൽ തുടരണമെന്നും, അതിനു് താനുദ്ദേശിക്കുന്ന വ്യവസ്ഥകൾ എന്തെല്ലാമാണെന്നും ശ്രീ. തോമസിനോട് ആരാഞ്ഞു.  പൊതു ജനക്ഷേമത്തെയും, രാജ്യ സ്നേഹത്തെയും മാത്രം ആസ്പദമാക്കി, വളരെ ന്യായവും മിതവുമായ ചില വ്യവസ്ഥകൾ ശ്രീ. തോമസ്, ശ്രീ. Bruford-നു് സമർപ്പിച്ചു.  അവരിരുവരും അതേപ്പറ്റി ചർച്ച ചെയ്ത വേളയിൽ, അവയെല്ലാം വളരെ ന്യായമെന്നു Mr. Bruford സമ്മതിക്കുകയും, താൻ അവയെല്ലാം ഗവണ്മെൻറുമായി ചർച്ചചെയ്ത് അംഗീകരിപ്പിച്ചുകൊള്ളാമെന്നും ഉറപ്പു നൽകി.  പക്ഷെ, അവയെല്ലാം നിഷ്പ്രയാസം അംഗീകരിക്കുമായിരുന്ന ചീഫ് സെക്രട്ടറി നീലകണ്ഠ അയ്യർ റിട്ടയർ ചെയയ്തു കഴിഞ്ഞിരുന്നു. അദ്ദേഹത്തിനു പകരം വന്നയാൾ തൻറെ ഇടുങ്ങിയ മനസ്ഥിതിയോടെ, Mr. Bruford-ൻറെ ശുപാർശകൾ പലതും പുച്ഛിച്ചു തള്ളി.  ഇതറിഞ്ഞ ശ്രീ. തോമസ് ഗവണ്മെൻറിനു് തക്കതായ മറുപടി നൽകി.  തൻറെ കാലാവധി നീട്ടാനുള്ള Mr. Bruford-ൻറെ നീക്കം താൻ പ്രേരിപ്പിച്ചിട്ടില്ലെന്നു Bruford സാക്ഷ്യം വഹിക്കുമെന്നും മറിച്ചു്, Mr. Bruford വളരെ നിർബന്ധിച്ചിട്ടാണ് താൻ അതിനു വഴങ്ങിയതെന്നും അതിൽ ചൂണ്ടിക്കാണിച്ചു.  കൂടാതെ, Pallivasal Power House-ൽ ആദൃം ഉണ്ടായ അബദ്ധങ്ങൾ തിരുത്തുന്നതിനും, അതുപോലെയുള്ള മറ്റ് പ്രോജെക്ട്കളിലും ഉണ്ടാകരുതെന്നു ഗവണ്മെൻറിനു താല്പരൃമുണ്ടായിരുന്നതു കണ്ടുകൊണ്ടും മാത്രമാണ്  തന്നെ അങ്ങോട്ടു അയച്ചതെന്നുമായിരുന്നു തൻറെ ധാരണയെന്നും, എന്നാൽ ഗവമെൻറിൻറെ “Peny-wise Policy” കണ്ടിട്ടു് തനിക്കു് അത്ഭുതം തോന്നുന്നുവെന്നും, അതുകൊണ്ടു് തനിക്കു് 55 വയസു തികയുന്ന ദിവസംതന്നെ സവീസിൽനിന്നും റിലീവ് ചെയ്യണമെന്നും അതിൽ അഭ്യർത്ഥിച്ചിരുന്നു.  എന്നാൽ ആ എഴുത്തു് ഗവണ്മെന്റിനു് അയച്ചു കൊടുത്തുകൊണ്ടും ശ്രീ. Bruford എഴുതിയ എഴുത്തിൽ, ശ്രീ. കെ. സി. തോമസിന്റെ സേവനം അത്യന്താപേക്ഷിതമാണെന്നും, ആയതിനാൽ അദ്ദേഹമതിൻറെ ന്യായമായ വ്യവസ്ഥകൾ ഗവണ്മെന്റ് അംഗീകരിച്ചു് കാലാവധി നീട്ടിക്കൊടുക്കേണ്ടതു് ഗവണ്മെൻറിന്റെതന്നെ ആവശ്യമാണെന്നും കാണിച്ചു് Mr.Bruford വീണ്ടും എഴുതി.  പക്ഷേ, പള്ളിവാസൽ പദ്ധതിയുടെ ആദ്യഘട്ടത്തിലെ കേടുപാടുകളും നഷ്ടങ്ങളും പൊതുജനങ്ങളിൽനിന്നും മൂടിവയ്ക്കുവാൻ അതീവ യന്തം നടത്തിക്കൊണ്ടിരുന്ന ദിവാൻജിക്കു്, ആസംഗതികളിലേക്കു് ശ്രീ. തോമസ് വിരൽ ചൂണ്ടിയതു് ഒട്ടും രസിച്ചില്ല.  അതുകൊണ്ടു് ദിവാൻജി പരിഭവിച്ചു.  അതേപ്പറ്റിയുള ശ്രീ. തോമസിന്റെ എഴുത്തു് കുറേ കടന്നു പോയതായി കരുതുന്നതിനാൽ, അദ്ദേഹം പെൻഷൻപററി പിരിയുന്നതിനു വ്യസനസമേതം, അനുമതി നൽകേണ്ടിയിരിക്കുന്നു എന്നു കാണിച്ചു്, ഗവണ്മെന്റുത്തരവായി.  അതനുസരിച്ചു് 1944 ജൂലൈമാസത്തിൽ അദ്ദേഹം അന്തസ്സോടെ റിട്ടയർ ചെയ്തു.</p>
+<p>അതിനുശേഷം, കുണ്ടല, മാട്ടുപ്പെട്ടി എന്നീ ഡാമുകളുടെ പണികൾ മന്ദീഭവിക്കുകയും, അതുകണ്ടു് വിഷമിച്ച Mr. Bruford, ദിവാൻജിയുടെ രഹസ്യ അനുമതിയോടുകൂടി, ശ്രീ. കെ.സി. തോമസിന്റെ വീട്ടിൽ വന്നു് അദ്ദേഹത്തെ കണ്ടു്, തിരിച്ചു് ഗവണ്മെന്റു സർവീസിലേക്കു് വരുവാനുള്ള വ്യവസ്ഥകൾ താൻ ദിവാൻജിയുമായി നേരിട്ടുകണ്ടു് സാധിച്ചുകൊള്ളാമെന്നും, അതിലേക്കു ശ്രീ. തോമസിനു് സമ്മതമാണോ എന്നും ആരാഞ്ഞു.  പക്ഷേ, ചെറുപ്പക്കാരായ മററു എൻജിനീയർമാർക്കു് കിട്ടേണ്ടതായ പ്രമോഷൻ താൻമൂലം അവ നഷ്ടപ്പെടുത്തുവാൻ താൻ ആഗ്രഹിക്കുന്നില്ല എന്നു മാത്രം മറുപടി പറഞ്ഞും Mr. Bruford-നെ ഇഛാഭംഗനാക്കിയതിലുള്ള തൻറെ അതിരറ്റ വ്യസനം പ്രകടിപ്പിച്ചു കൊണ്ടും ശ്രീ. തോമസ് അതിൽ നിന്നു പിൻവാങ്ങി.  ശ്രീ. കെ.സി. തോമസ്, റിട്ടയർചെയ്തശേഷം 1944 മുതൽ 1946 - വരെ കോട്ടയത്തു താമസിച്ചുകൊണ്ടു് കാഞ്ഞിരപ്പള്ളിയിൽ ആനത്താനത്തു് “പുഷ്പമല” എന്ന വീടുപണിയിക്കുകയും, 1946 മുതൽ അവിടെ സകുടുംബം താമസിക്കുകയും ചെയ്തു.</p>
+<p>നല്ല ആരോഗ്യവും, പൊതുക്കാരൃപ്രസക്തിയും നിമിത്തം അദ്ദേഹം സർവ്വഥാ  കർമ്മകുശലനായി പ്രവർത്തിച്ചു പോന്നു.  The All Kerala Agriculturists Association, The Kerala Catholic Trust, The First Official P.W.D. Re-organisation Committee ഇവയുടെ ജീവാത്മാവു് ശ്രീ. കെ.സി. തോമസ് തന്നെയായിരുന്നു. ഇവയിൽ കൂടി ദീർഘകാലം അദ്ദേഹം നിർവ്വഹിച്ച പൊതുജനസേവനം ആർക്കും ഒരു കാലത്തും മറക്കാവുന്നതല്ല.  കൂടാതെ 1947 മുതൽ വളരെയേറെ പ്രതികൂല സാഹചര്യങ്ങൾ ഉണ്ടായിരുന്നിട്ടും, ഏതാണ്ടു് പത്തു വർഷത്തെ അദ്ദേഹത്തിൻറെ അശ്രാന്തപരിശ്രമഫലമായിട്ടാണ് നാം ഇന്നു കാഞ്ഞിരപ്പള്ളിയിൽ കാണുന്ന വലിയ St. Dominic&#x27;s Forane Church-ൻറെ പണി മിക്കവാറും തീർത്തതു്. എന്നാൽ ശ്രീ. കെ.സി. തോമസിന്റെ എട്ടു പത്തു വർഷങ്ങൾ നീണ്ടു നിന്ന പള്ളിപണിയിക്കൽ ജോലിയെ സംബന്ധിച്ച്, അതിൻറയെല്ലാം ദൃക്സാക്ഷിയായിരുന്ന ഒരാളുടെ വിവരണം ഇവിടെ സന്ദർഭോചിതമായിരിക്കുന്നതിനാൽ ഉധരിച്ചുകൊള്ളന്നു.</p>
+<p>പണ്ടേതന്നെ പ്രസിദ്ധമായ കല്ലറയ്ക്കുൽ കുടുംബത്തിന്റെ പേരും പെരുമയും പ്രശസ്തിയും വർദ്ധിപ്പിച്ചവരിൽ ഒട്ടും അപ്രധാനമല്ലാത്ത ഒരു സ്ഥാനമാണു്, “എൻജിനീയർ തോമ്മാച്ചൻ” എന്ന ഓമനപ്പേരിൽ അറിയപ്പെട്ടിരുന്ന റിട്ട: എക്സി: എൻജിനീയർ കെ.സി. തോമസ് B.A., B.E, യ്ക്കുള്ളതു്. സാഹചരൃങ്ങളുടെ സമ്മർദ്ദം കൊണ്ടു് ഇംഗ്ലീഷ് വിദ്യാഭ്യാസത്തിനു സൗകരൃം കുറഞ്ഞിരുന്ന അക്കാലത്തു്, കത്തോലിക്കരിൽ ഉദ്യോഗസ്ഥന്മാർ അപൂർവമായിരുന്നു. അക്കാലത്തു് കത്തോലിക്കരിൽ ആദ്യമായി എക്സിക്യട്ടീവ് എൻജിനീയർ പദവിയിലെത്തിയ ഏകവ്യക്തി തോമ്മാച്ചനായിരുന്നു.  കൈക്കൂലി, അഴിമതി ഇവയിലകപ്പെടാതെ സത്യസന്ധമായി തൻകൃതൃങ്ങൾ നിർവഹിച്ചു എന്നുള്ളതു്, തിരുവിതാംകൂറിലെ നാനാജാതി മതസ്ഥരും ഗവണ്മെൻറും ഒരു പോലെ സമ്മതിക്കുന്ന വസ്തുതയാകുന്നു.  സുദീർഘമായിട്ടുള്ള രാജ്യ സേവനത്തിനു ശേഷം 1944 ജൂലൈമാസത്തിൽ പെൻഷൻപററി പിരിഞ്ഞു. ഇങ്ങനെയിരിക്കെ 17-8-1944-ൽ കൂടിയ പള്ളി യോഗത്തിൽ പള്ളി പൊളിച്ച് വിശാലമായ ഒരു ദേവാലയമായി പണിയുന്നതിനു തീരുമാനം ചെയ്തു.  എൻജിനീയർ തോമ്മാച്ചൻറെ നിയന്ത്രണത്തിലും മേൽനോട്ടത്തിലും അക്കാരൃം നിർവഹിക്കണമെന്നും, അതിനു് അദ്ദേഹത്തോടു് അഭ്യർത്ഥിക്കണമെന്നും യോഗം നിശ്ചയിച്ചു.  അദ്ദേഹം അതു് യാതൊരു പ്രതിഫലേഛയും കൂടാതെ ചെയ്തകൊള്ളാമെന്നു സമ്മതിച്ചു.  ഇങ്ങനെ നിരന്തര രാഷ്ട്ര സേവനത്തെത്തുടർന്നു്, സാമുദായികസേവനവും തുടങ്ങി.  ഉടൻതന്നെ പള്ളി പണി ആരംഭിച്ചു.  എല്ലാ ദിവസവും 7 മണിക്കു മുൻപു് വേലക്കാർ ജോലിക്കിറങ്ങുന്നതിനു മുമ്പോ, ജോലി തുടങ്ങുമ്പോഴോ പള്ളിയിൽ വരികയും, കുർബ്ബാനസമയമെങ്കിൽ കുർബ്ബാനകണ്ടശേഷം, പണിയിക്കാൻ നിശ്ചയിച്ചിട്ടുള്ള ഓവർസീയരുടെ ആഫീസിലോ, അല്ലെങ്കിൽ ആശാരിമാരുടെ പണിപ്പുരയിൽ ഒരു തടിക്കഷണത്തിലോ മറേറാ ചെന്നിരുന്നു, അന്നു ചെയ്യേണ്ട ജോലിയേപ്പററി വിശദീകരണം നൽകി അവരെ പഠിപ്പിക്കുന്നതു കാണാം.</p>
+<blockquote>“ഒരിക്കൽ ഒരു മാന്യൻ തോമ്മാച്ചനെ കാണാൻ അതിരാവിലെ വീട്ടിൽ ചെന്നന്വേഷിച്ചതിനുശേഷം അവിടെനിന്നും പള്ളിയിൽ വന്നു. ആശാരിയുടെ പണിപ്പുരയിൽ ഒരു തടിക്കഷണത്തിൻറെ പുറത്തിരുന്നു്, ആശാരിക്കു പണിയുടെ വിശദീകരണം നൽകിക്കൊണ്ടിരിക്കുന്നതു കണ്ടു്, “ഹാ......ഹാ…. ഇത്ര രാവിലെ വരുമോ!  ഈ ഇരുപ്പും വേഷവും കണ്ടിട്ടു് അവരുടെ കൂട്ടത്തിൽ ഒരു പണിക്കാരനായിരിക്കുമെന്നു് അൽല്പം അകലെവച്ചു് ഞാൻ വിചാരിച്ചു.  നന്നാ അടുത്തു വന്നതിനുശേഷമാണ് തിരിച്ചറിഞ്ഞതു്” എന്നു പറഞ്ഞു. “ഞാനും ഇവരുടെ കൂട്ടത്തിലെ ഒരു പണിക്കാരൻ തന്നെ.  പക്ഷേ, ഉളിയും കൊട്ടുവടിയും എടുത്തില്ലെന്നേ ഉള്ളു” എന്നു മറുപടിയും പറഞ്ഞു.  അനാഡംബരമായ വസ്ത്രധാരണവും ജോലിയിലുള്ള ശുഷ്കാന്തിയും കാണിക്കാൻ ഈ സംഭവം വിവരിച്ചു എന്നേയുള്ളു.</blockquote>
+<blockquote>“രാവിലെ ബഡ്കാപ്പിയും കഴിഞ്ഞ് ജോലിയിൽ ബദ്ധശ്രദ്ധനായി ചിലപ്പോഴല്ല പലപ്പോഴും 2 P.M. വരെ ഇരിക്കുന്നതിനിടയിൽ ബ. വികാരിയച്ചൻ കാപ്പി കുടിക്കാൻ ക്ഷണിച്ചാൽ നന്ദിപൂർവം അതുപേക്ഷിച്ചുകളയും. വിശപ്പില്ലാഞ്ഞിട്ടല്ല; അതു് അദ്ദേഹത്തിന്റെ തത്വദീക്ഷയ്ക്കു വിരുദ്ധമായതുകൊണ്ടാണ്.  ഇങ്ങനെയിരിക്കെ 15-10-1961-ൽ കൂടിയ പള്ളിയോഗത്തിൽ പള്ളിയുടെ പണികളെല്ലാം നിർത്തിവയ്ക്കണമെന്നു്, തീരുമാനിക്കപ്പെട്ടതോടുകൂടിയാണു് തോമ്മാച്ചൻ തൻറെ ജോലിയിൽനിന്നും പിന്മാറിയതു്.  ഇപ്രകാരം നിഷ്കളങ്കമായി യാതൊരു പ്രതിഫലവും പററാതെ സുദീർഘമായ പത്തു വർഷങ്ങളോളം സമുദായസേവനം നടത്തിയ ഈ ത്യാഗിയുടെ സേവന സ്മാരകരേഖകൾ ഈ പള്ളിയുടെ കരിങ്കല്ലിൽ കൊത്തിപ്പോകുന്നതിനു് ആർക്കും കൃതജ്ഞത തോന്നിയില്ലെങ്കിലും, പള്ളിയുടെ ഭിത്തിയിലെ ഓരോ കരിങ്കൽ കഷണവും അതിനു സാക്ഷ്യം വഹിക്കും.  നിശ്ചയം.</blockquote>
+<p>രാഷ്ട്രീയമൊന്നുമില്ലാത്ത പ്രതിഫലേച്ഛയൊന്നും തീണ്ടാത്ത നിസ്വാർത്ഥ പൊതുപ്രവർത്തകനും, ആർക്കും പൂർണ്ണ വിശ്വാസത്തോടെ സഹായവും ഉപദേശവും എപ്പോഴും ധൈരൃപ്പെട്ട് തേടാവുന്ന ഒരുറവിടവും മാർഗ്ഗദേശിയും ആയിരുന്നു ശ്രീ. കെ.സി. തോമസ്സ്, താൻ കൈകാരൃം ചെയ്യേണ്ടി വന്നിരുന്ന ഏതു കാരൃത്തിലും പരിപൂർണ്ണ അർപ്പണ ബുദ്ധിയും ആത്മാർത്ഥതയും മാത്രം പ്രദർശിപ്പിച്ചിരുന്ന ഒരു യഥാർത്ഥ മനുഷ്യസ്നേഹിയായിരുന്നു ആനത്താനത്തു എൻജിനീയർ തോമ്മാച്ചൻ എന്നു്, അദ്ദേഹത്തെ ഒരിക്കലെങ്കിലും കണ്ടു പരിചയപ്പെടുവാൻ കഴിഞ്ഞവരെല്ലാം സമ്മതിക്കുന്ന ഒരു യാഥാർത്ഥ്യമാണു്.</p>
+<p>ഇങ്ങനെ ഒരു മികച്ച പരോപകാരിയും, ഒരുത്തമ ക്രിസ്ത്യാനിയുമായിരുന്ന അദ്ദേഹം ആരോഗൃവാനായി സകുടുംബം താമസിച്ചുവരവെ, 1973 ഫെബ്രുവരി മാസം മുതൽ വാർദ്ധക്യസഹജമായ അസുഖങ്ങൾ അനുഭവപ്പെട്ടു തുടങ്ങുകയും ക്രമേണ അവ മൂർഛിച്ച് കോട്ടയം Caritas ആശുപത്രിയിൽ വച്ചു് 1973 ആഗസ്റ്റ് 15 -നു രാവിലെ 9 മണിക്കു്, അന്ത്യകൂദാശകളെല്ലാം സ്വീകരിച്ചു് നമ്മുടെ കർത്താവിൽ നിദ്രപ്രാപിച്ചു.</p>
+<hr class="section-separator">
+<h2 style="text-align: center; color: var(--header-color); margin-top: 35px; margin-bottom: 15px;">ശ്രീ. കെ.സി. തോമസിന്റെ സന്താനങ്ങൾ.</h2>
+<p>മേൽപറഞ്ഞ ആറാംതലമുറക്കാരനായിരുന്ന ശ്രീ. കെ.സി. തോമസിനു് ഏഴു മക്കളുണ്ടു്. 1) K.T. Teresa, B.A., (Pennamma) Born 1913 (Mrs. Teresa Joseph, B. A., Kalluvelil, Anavalaril House, Poovarani) 2) K. Jacob Thomas, B.E., C.E., (Baby) Born 1916 3) K. Alexander Thomas, M.A., (Laly) Born 1919 4) K.T. George, B.Sc., B.Sc., (Eng.) (Kuruvachen) Born 1921 5) K.T. Mathew, B.A., B.Com. (Mathachen) Born 1924 6) K. Elizabeth Thomas, B.Sc., B.T. (Achamma) Born 1926 7) K. Mary Thomas, B.A., B.T., M.Ed. (Molly) Born 1930 Mrs. Teresa Joseph B, A., (പെണ്ണമ്മ) ശ്രീ. കെ. സി. തോമസ്സിന്റെ ജേഷ്ടസഹോദരനായിരുന്ന കൊച്ചുമത്തായിച്ചൻറെ മൂത്തപുത്രി കൊച്ചു ത്രേസ്യാമ്മയെ വിവാഹം ചെയ്തിരുന്ന, പൂവരണി (വിളക്കുമാടത്തു ) ആനവളരിൽ K.J. ജോസഫ് B.A. (കൊച്ചു്), തൻറെ ഭാരൃ കൊച്ചുത്രേസ്യാമ്മ 1932-ൽ മരിച്ചശേഷം, 1938 - വരെ അവിവാഹിതനായി കഴിഞ്ഞു. അതിനുശേഷം ശ്രീ. കെ.സി. തോമസ്സിന്റെ മൂത്തപുത്രിയായ പെണ്ണമ്മയെ 1938- ൽ വിവാഹം ചെയ്തു.  അവർക്കു്  1942 ൽ മേരി (അമ്മിണി) എന്നമകളും, 1954 -ൽ എലിസബത്തു് (ലീലാമ്മ) എന്ന മകളും ജനിച്ചു.  മേരി B.A. ക്ലസ്സിൽ പഠിച്ചുകൊണ്ടിരിക്കവേ, പുളിങ്കുന്നു് കാപ്പിൽ പോത്തച്ചൻറ മൂന്നാമത്തെ മകനായ എൻജിനീയർ ശ്രീ. സി.പി. മാത്യു 1961-ൽ വിവാഹം ചെയ്തു. അദ്ദേഹം ഇപ്പോൾ Ootty-ൽ Hindustan Photo Films കമ്പനിയിൽ ഉയർന്ന ഉദ്യോഗസ്ഥനാണു്.  അവർക്ക് Annu എന്ന ഒരു പുത്രിയും, ജോപ്പൻ, ജോസ്, എന്നീ രണ്ടു പുത്രന്മാരും ഉണ്ടു്.  പെണ്ണമ്മയുടേയും കൊച്ചിൻറയും രണ്ടാമത്തെ പുത്രിയായ ലീലാമ്മ, Home-Science B.Sc. ക്ലാസ്സിൽ പഠിച്ചുകൊണ്ടിരിക്കവേ, തിടനാട്ടു് വെട്ടിമൂട്ടിക്കാവിൽ വി. വി. ചാക്കോച്ചന്റെ നാലാമത്തെ മകനും, Federal Bank-ൽ ഒരു (Agent) ഓഫീസറും ആയ V.C. Jacob B.A., 1974-ൽ വിവാഹം ചെയ്തു</p>
+<h3><center>Sri. K.Jacob Thomas, B.E.C.E.(ബേബി)</center></h3>
+<p>ശ്രീ. കെ.സി. തോമസ്സിന്റെ മൂത്ത മകനും 7-ാം തലമുറക്കാരനുമായ ശ്രീ. ജെയിക്കബ് തോമസ്സ് മദ്രാസ്സ് എൻജിനീയറിംഗു് കോളജിൽ നിന്നു്, B.E., C. E. എന്നീ ഡിഗ്രികൾ കരസ്ഥമാക്കിയ ശേഷം സ്വപിതാവിൽ കാൽചുവടുകളെ പിൻതുടർന്നു്, തിരുവിതാംകൂർ P.W.D.- യിൽ ഒരു ജൂനിയർ എൻജിനീയറായി 1939- ൽ സർക്കാർ സർവ്വീസിൽ പ്രവേശിച്ചു. 1942-ൽ തൃശൂരിനടുത്തുള്ള, കാരാഞ്ചിറ ആലപ്പാട്ടു് തോപ്പിൽ പ്രൊഫസർ A. D, പോളിൻറെ മൂത്ത മകൾ സുശീലയെന്നു വിളിക്കുന്ന എലിസബത്തിനെ വിവാഹം ചെയ്തു. 1942 മുതൽ 1945 വരെ കോഴഞ്ചേരിയിലുള്ള വലിയപാലം മുതലായ മൂന്നു കോൺക്രീറ്റ് പാലങ്ങളുടെ പണികളുടെ മേൽനോട്ടം വഹിച്ചു. 1946-ൽ രണ്ടുകൊല്ലത്തെ ഉപരിപഠനത്തിനും പരിശീലനത്തിനും വേണ്ടി ഗവണ്മെന്റ് അദ്ദേഹത്തെ തിരഞ്ഞെടുത്ത് ഇംഗ്ലണ്ടിലേക്കയച്ചു.  അവിടെ Structural Engineering വിഭാഗത്തിൻറെ നാനാ വശങ്ങളും ഉൾകൊള്ളുന്ന പല Post-War പ്രോജക്റ്റുകളുടേയും പ്രവർത്തനങ്ങളിൽ സജീവ പങ്കു വഹിക്കുകയും, Institution of Structural Engineers (London), നടത്തിയ പരീക്ഷയിൽ വിജയിച്ച്, A.M.I. Struct. E. എന്ന മെമ്പർഷിപ്പു ബിരുദം സമ്പാദിക്കുകയും ചെയ്തു. 1948-ൽ തിരിച്ചെത്തി.  അതിനുശേഷം, 1949 മുതൽ 1953 വരെ, കൊല്ലത്തിനു വടക്കുവശം ചവറയിലുള്ള പുതിയ പാലത്തിൻറെയും മാവേലിക്കരയ്ക്കടുത്തുള്ള കൊല്ലക്കടവു പാലത്തിൻറെയും പണികൾക്കും, കാൺട്രാക്ടർമാർ വളരെ കൂടുതൽ അടങ്കൽതുകകൾ ആവശ്യപ്പെട്ടതിനെ തുടർന്നു്, അവയെല്ലാം നിരസിച്ചുകൊണ്ടു്, ആ രണ്ടു പാലങ്ങളുടേയും ഡിസൈനുകൾ നവീകരിക്കുന്നതിനും, അവയുടെ പണികൾ ഏറൊടുത്ത് നേരിട്ടു് (Departmental-ലായി) നടത്തുന്നതിനും, അന്നത്തെ ചീഫ് എൻജിനീയരുടെ പ്രത്യേക നിർദ്ദേശപ്രകാരം അപ്പോൾ ഒരു അസ്സിസ്റ്റന്റ് എൻഞ്ചിനീയറായിരുന്ന ശ്രീ. ജേക്കബ് തോമസ്സിനെ, ഒരു Executive Engineer-രുടെ എല്ലാ അധികാരംങ്ങളോടും, പ്രതേൃക ശമ്പളത്തിലും ഒരു &quot;Special Engineer” ആയി നിയമിച്ചു.  ഈ രണ്ടു പാലങ്ങൾക്കുകൂടി ഗവണ്മെന്റ്  അനുവദിച്ച എസ്റ്റിമേററു് തുകകളിൽ ഏകദേശം ഒന്നരലക്ഷം രൂപാ കുറഞ്ഞ സംഖ്യ മാത്രം ചെലവാക്കിയാണു് അദ്ദേഹം അവയുടെ പണികൾ പൂർത്തിയാക്കിയത്. അതിന്റെ ഒരു അംഗീകാരമെന്നോണം അദ്ദേഹത്തിന് ഒരു സ്പെഷ്യൽ പ്രൊമോഷനും ശമ്പള വർദ്ധനവും അനുവദിച്ചു. കൂടാതെ, അന്നു് Colombo Plan എന്നറിയപ്പെട്ടിരുന്ന അന്തർ ദ്ദേശീയ പരിശീലന പദ്ധതിപ്രകാരം, പാലംപണിയിലും പ്രത്യേകിച്ച്, Prestressed Concrete എന്ന ഒരു പുതിയ സംവിധാന രീതിയിലും കൂടുതൽ വിദഗ്ധ പഠനത്തിനും പരിശീലനത്തിനും വേണ്ടി ശ്രീ. ജയിക്കബ് തോമസിനെ, നമ്മുടെ ഗവർണ്മെൻറിൻറെ ശുപാർശ പ്രകാരം ഇൻഡൃ ഗവണ്മെന്റ്  തെരഞ്ഞെടുത്തു് ഒരുവർഷത്തേക്കു് കാനാഡായ്ക്  1953 - ൽ അയച്ചു.  അതുകഴിഞ്ഞു് 1954-ൽ തിരിച്ചെത്തിയശേഷം, എം.സി. റോഡിൽ, തിരുവല്ലായ്ക്കു്  തെക്കുവശം സ്ഥിതി ചെയ്യുന്ന തോണ്ടറപ്പാലം, Prestressed Concrete എന്ന നവീന രീതി ഉപയോഗിച്ച് നേരിട്ടു് (Departmental) പണിയുന്നതിന് കോട്ടയം ആസ്ഥാനമാക്കി ശ്രീ. ജയിക്കബ് തോമസ്സിനെത്തന്നെ “Special Engineer For Bridges” ആയി നിയമിച്ചു.  അതോടൊപ്പം തന്നെ, കുമ്പഴ, കൈപ്പട്ടൂർ, റാന്നി, മൂലേപ്ളാക്കൽ, മാവേലിക്കര (പ്രായിക്കര) ഇട്ടിനായർകടവു്, പന്നായി, പുളിക്കീഴ്, കോടിമത, ചുങ്കം, ഈരാറ്റുപേട്ടയിലുള്ള രണ്ടു പാലങ്ങൾ, മുത്തോലി, കിടങ്ങൂർ, എരുമേലി മുതലായ പല പുതിയ കോൺക്രീറ്റു പാലങ്ങളുടെ ഡിസൈനുകൾ തയ്യാറാക്കുന്നതിനും അവയെല്ലാം പണിയുന്നതിനും ജെയിക്കബ് തോമസ്സിനെത്തന്നെ ചുമതലപ്പെടുത്തി. 1954-മുതൽ 1960 വരെയുള്ള ചുരുങ്ങിയ കാലഘട്ടത്തിൽ ഏകദേശം 15 വലിയ Reinforced Concrete പാലങ്ങൾ മിക്കവാറും പൂർത്തിയാക്കുകയും, തോണ്ടറയുള്ള കേരളത്തിലെ പ്രഥമ Prestressed Concrete പാലത്തിൻറെ പണി നേരിട്ടുതന്നെ നടത്തുകയും ചെയ്തു. 1960-ൽ, ആലുവായ്ക്കടുത്തു് കളമശേരിയിൽ തുടങ്ങിയ പ്രീമിയർ ടയർ ഫാക്ടറിയുടെ പണിക്കു വേണ്ടി ആ കമ്പനി ആവശ്യപ്പെട്ട പ്രകാരം, അവരുടെ Project Engineer ആയി ജയിക്കബ് തോമസ്സിനെ ഗവണ്മെന്റ് വിട്ടുകൊടുത്തു. അതിൻറെ പൂർത്തികരണത്തെ തുടർന്നു് Cochin oil Refinery-യുടെ പണികൾക്കായി അവരുടെ പ്രത്യേക ആവശ്യപ്രകാരം, ജയിക്കബ് തോമസ്സിനെത്തന്നെ അവരുടെ Project Engineer- ആയും ഗവണ്മെന്റ് വിട്ടു കൊടുത്തു. അതിനുശേഷം, 1967 -മുതൽ, Deputy Chief Engineer-ആയി തിരിച്ചു P.W.D.-യിൽ വന്നു ചേരുകയും, അവസാനം കുറച്ചു നാളത്തേയ്ക്കു് National Highway ചീഫ് എൻജിനീയറായി ഇരുന്നശേഷം, 1971-ജൂൺമാസത്തിൽ 55- വയസ്സ് തികഞ്ഞപ്പോൾ, പെൻഷൻപററി, സവ്വീസിൽ നിന്നും റിട്ടയർ ചെയ്യുകയും ചെയ്തു. അതിനുശേഷം, പല വ്യക്തികളും സ്ഥാപനങ്ങളും ആവശ്യപ്പെട്ടതനുസരിച്ചും തന്റെ പ്രവർത്തി മണ്ഡലത്തോടുള്ള അതീർവ കൂറു നിമിത്തവും, ഇപ്പോൾ ഒരു Consulting Engineer ആയി പ്രവർത്തിച്ചുവരുന്നു.</p>
+<p>ശ്രീ. ജയിക്കബ് തോമസ്സിനും സുശീലയ്ക്കും നാലു് പുത്രന്മാരും മൂന്നു് പുത്രിമാരും ഉണ്ടു്.  മൂത്തമകൻ ശ്രീ. തോമസ്സ് ജയിക്കബ് (ബാലൻ ) B.Sc., B.E. (Met) Ph.D. (London) D.I.C. (London) എന്നീ ബിരുദങ്ങൾ സമ്പാദിച്ചശേഷം, Dr. Susan Moire, (M.B.B.S., D.C.H., M.R.C.P.) എന്ന വനിതാ ഡോക്ടറെ വിവാഹം ചെയ്തു. അതിനുശേഷം, അവർക്കു രണ്ടുപേർക്കും കാനഡയിൽ Toronto എന്ന നഗരത്തിൽ ഉദ്യോഗങ്ങൾ ലഭിക്കുകയും, അവിടെത്തന്നെ ജോലിയിൽ തുടരുകയും ചെയുന്നു.</p>
+<p>രണ്ടാമത്തെ പുത്രനായ പോൾ, നാലു വയസ്സുമുതൽ തളർച്ചരോഗം പിടിപട്ടു്, അനാരോഗ്യവാനായി കഴിയുന്നു.</p>
+<p>മൂന്നാമത്തെ സന്താനവും മൂത്ത പുത്രിയുമായ മേരി കാതറൈൻ “കിറ്റി”  യെ അവൾ B.Sc., M.Sc. (Home Science) പാസ്സായശേഷം, കൈനടിയിൽ, പുത്തൻപുരയിൽ വട്ടപ്പറമ്പിൽ പി.ജെ. വർഗീസ്സിൻറ പുത്രനായ Ignatius Alex, B.Sc., M.B.A., 1972 ജൂണിൽ വിവാഹം കഴിച്ചു.  അദ്ദേഹമിപ്പോൾ State Bank of India-യിലെ Bhilai-ശാഖയിലെ (Agent) Officer-ആയി ജോലി ചെയ്തുവരുന്നു. നാലാമത്തെ സന്താനവും, മൂന്നാമത്തെ പുത്രനുമായ ജോസഫ്  ജെയിക്കബ്, 1974 ഡിസംബറിൽ M.B.B.S. ബിരുദം നേടി, ഉപരിപഠനത്തിനു് ഉദ്യമിക്കുന്നു.  അഞ്ചാമത്തെ സന്താനവും, രണ്ടാമത്തെ പുത്രിയുമായ ആനി ജേയിക്കബ്, M. A. (Literature) ക്ലാസ്സിൽ പഠിക്കുന്നു.  ആറാമത്തെ സന്താനവും മൂന്നാമത്തെ പുത്രിയുമായ എലിസബത്ത് ജെയിക്കബ് (ലിസി) Pre-Degree വിദ്യാർത്ഥിയും, ഏഴാമത്തെ സന്താനവും നാലാമത്തെ പുത്രനുമായ ഫ്രാൻസിസ്സ് ജെയിക്കബ് ഇപ്പോൾ 7-ാം ക്ലാസ്സ് വിദ്യാർത്ഥിയുമാണ്.</p>
+<h3><center>Alexander Thomas (ലാലിച്ചൻ)</center></h3>
+<p>കെ.സി. തോമസ്സിന്റെ മൂന്നാമത്തെ സന്താനവും, രണ്ടാമത്തെ മകനുമായ ശ്രീ. കെ. അലക്സാണ്ടർ തോമസ്സ് (ലാലിച്ചൻ) ത്രിശിനാപ്പള്ളി St. Joseph&#x27;s College-ൽ പഠിച്ചു്, 1943-ൽ M. A. Economics ഡിഗ്രി എടുത്തശേഷം, സ്വപിതാവിനു് ഭാകഉടമ്പടിയിൽ കിട്ടിയതും മറെറല്ലാ ഭൂസ്വത്തുക്കളുടേയും മേൽനോട്ടത്തിനും, പ്ലാന്റിഗ് മുതലായ വികസന പ്രവർത്തികൾക്കു വേണ്ടി കാഞ്ഞിരപ്പള്ളിയിൽ തന്നെ താമസം തുടങ്ങി.  അവയുടെ എല്ലാവിധ ഭരണവുമേറ്റു. സ്വപിതാവു് 1944-ൽ റിട്ടയർ ചെയ്തു വന്നശേഷവും 1956-57-ൽ അദ്ദേഹം തൻറെ സ്വത്തുക്കളുടെ സിംഹഭാഗവും മക്കൾക്കായി ഭാഗം ചെയ്തു കൊടുത്തതിനു ശേഷവും, ലാലിച്ചൻ തന്നെയാണു് മിക്കവാറും എല്ലാത്തിൻറെയും ഭരണച്ചുമതല വഹിച്ചതു്.  ആയതുകൊണ്ടു് ശ്രീ. കെ.സി. തോമസ്സിനു് തനിക്കു പ്രിയംകരമായിരുന്ന മറ്റു മണ്ഡലങ്ങളിൽ പ്രവർത്തിക്കുവാനുള്ള സ്വാതന്ത്ര്യവും, സമയവും ലഭ്യമാക്കി.</p>
+<p>1946-ൽ ലാലിച്ചൻ, പുളിങ്കുന്ന് പുരയ്ക്കൽ കുഞ്ചറിയാച്ചൻറെ രണ്ടാമത്തെ മകളായ (റോസമ്മ) കുഞ്ഞമ്മയെ വിവാഹം ചെയ്തു.  അവർകു് സൂസി എന്നു വിളിക്കുന്ന കാതറൈൻ (23 വയസ്സ്), ആനി (21 വയസ്സ്), തൊമ്മച്ചൻ എന്നു വിളിക്കുന്ന തോമസ്സ് (19 വയസ്സ്) ഇങ്ങനെ മൂന്നു സന്താനങ്ങൾ ഉണ്ടു്.</p>
+<p>സൂസി Home Science വിഷയത്തിൽ B.Sc. ഡിഗ്രി എടുത്തശേഷം, അവളെ കൈനടിയിൽ വട്ടപ്പറമ്പിൽ കാട്ടുവള്ളിൽ (ഐസക്ക്  മാത്യു) മത്തായിക്കുട്ടിയുടെ നാലാമത്തെ മകനായ കെമിക്കൽ എൻജിനീയർ തോമസ് (Tomy) 1971-ൽ വിവാഹം ചെയ്തു.  അദ്ദേഹം ഇപ്പോൾ ബിഹാറിൽ Fertiliser Corporation of India-യുടെ Sindri Unit-ൽ ഒരു എൻജിനീയറാണു്.</p>
+<p>ആനിയമ്മ M.A. (Literature) പാസായി, കോതമംഗലത്തു് ഇലഞ്ഞിക്കൽ തോപ്പിൽ കുരൃപ്പിൻറെ രണ്ടാമത്തെ പുത്രനായ Electrical Engineer ശ്രീ. പോൾ (പോളി) 1973-ൽ വിവാഹം ചെയ്തു. അദ്ദേഹം ഇപ്പോൾ തലശേയിൽ C.S.I. Technical Training Institute-ൽ ഒരു lecturer ആണു്.   തൊമ്മച്ചൻ ഇപ്പോൾ പാലക്കാട്ട് എൻജിനീയറിംഗ് കോളേജിൽ B.Sc. ഡിഗ്രി കോഴ്സ് വിദ്യാർത്ഥിയാണു്.</p>
+<h3><center>കെ.ററി. ജോർജ് (കുറുവച്ചൻ)</center></h3>
+<p>ശ്രീ. കെ.സി. തോമസിന്റെ നാലാമത്തെ സന്താനവും മൂന്നാമത്തെ പുത്രനുമായ ശ്രീ.കെ.ററി. ജോർജ് (കുറുവച്ചൻ), ത്രിശിനാപ്പള്ളി St. Joseph&#x27;s College-ൽ പഠിച്ച് B.Sc. ഡിഗ്രി സമ്പാദിച്ചശേഷം തിരുവനന്തപുരം എൻജിനീയറിംഗ് കോളേജിൽ പഠിച്ച് B.Sc. (Eng.) ബിരുദം നേടി. 1945 -ൽ, സ്വപിതാവിൻറെയും, ജേഷ്ഠ സഹോദരനായ ശ്രീ. ജേയിക്കുബ് തോമസിൻറെയും പിന്നാലെ തിരുവിതാംകൂർ P.W.D. യിൽ ഒരു ജൂനിയർ എൻജിനീയറായി പ്രവേശിച്ചു.  ആദ്യം ഡിസൈൻ ബ്രാഞ്ചിലും, പിന്നീടു് കുറേക്കാലം Pallivasal Hydro-Electric Scheme-ലും ജോലി ചെയ്തു.  അതിനുശേഷം തിരിച്ചു് P.W.D. യിലേക്കു വന്നു് Buildings and Roads വിഭാഗത്തിലും, Irrigation വിഭാഗത്തിലും,  Work shops and Stores വിഭാഗത്തിലും പല സ്ഥലങ്ങളിലായി സേവനമനുഷ്ഠിച്ചു.  ഇപ്പോൾ തിരുവനന്തപുരത്തു് വിഴിഞ്ഞം ഹാർബർ സർക്കിൾ സൂപ്പറിന്റെൻഡിങ്  (Superentending) എൻജിനീയറാണു്. 1949-ൽ കുറുവച്ചൻ മണലൂർ താന്നിക്കൽ തോപ്പിൽ ജോസഫിന്റെ മകളായ ഏലിക്കുട്ടിയെ വിവാഹം ചെയ്തു. അവർക്കു്, വത്സമ്മ എന്നു വിളിക്കുന്ന കാതറൈൻ (23 വയസ്), ഏലിമ്മ എന്നു വിളിക്കുന്ന എലിസബത്തു് (21 വയസ്), മറിയാമ്മ (19 വയസ്), ത്രേസ്യാമ്മ (17 വയസ്), ആനി (15 വയസ്), റേറാമി എന്നു വിളിക്കുന്ന തോമസ് (13 വയസ്), ജോസ് എന്നു വിളിക്കുന്ന ജോസഫ് (11 വയസ്) എന്നിങ്ങിനെ ഏഴു സന്താനങ്ങൾ ഉണ്ട്.</p>
+<p>വത്സമ്മ B. Sc. പാസ്സായതിനുശേഷം, അവളെ വൈക്കത്തു് പഴയകടവിൽ വലൃവീട്ടിൽ ഔസേപ്പച്ചൻറെ മകൻ എൻജിനീയർ തോമസ്സ് 1971-ൽ വിവാഹം ചെയ്തു.  അദ്ദേഹം ഇപ്പോൾ, P.W.D. യിൽ ഒരു ജൂണിയർ എൻജിനീയറാണ്. ഏലമ്മയുടെ M.B.B.S. ഡിഗ്രിക്കുള്ള മെഡിക്കൽ വിദ്യാഭ്യാസം പൂർത്തിയാകാറായി.  മറിയമ്മ M.Sc. ക്ലാസിൽ പഠിക്കുന്നു.  ത്രേസ്യാമ്മയും 1974-ൽ മെഡിക്കൽ കോളേജിൽ  ചേർന്നു. ആനിമ്മ Pre-Degree ക്ലാസിലും, റേറാമി 9-ാം ക്ലാസിലും ജോസു് 6-ാം ക്ലാസിലും പഠിക്കുന്നു.</p>
+<h3><center>ശ്രീ. കെ. ററി. മാത്യു (മാത്തച്ചൻ)</center></h3>
+<p>ശ്രീ കെ. സി. തോമസിന്റെ അഞ്ചാമത്തെ സന്താനവും നാലാമത്തെ പുത്രനുമായ ശ്രീ.കെ.ററി. മാത്യു (മാത്തച്ചൻ) ത്രിശിനാപ്പള്ളി St. Joseph&#x27;s College-ൽ പഠിച്ചു് B. A. പാസ്സായശേഷം, മദ്രാസ്സ് ലയോളാ കോളേജിൽ പഠിച്ചു B-Com. ഡിഗ്രിയും സംമ്പാദിച്ചു.  അതിനുശേഷം, 1954-ൽ, ആലപ്പുഴ നെരോത്തു് ശ്രീ.എൻ.സി.ചാണ്ടിയുടെ മകൾ അന്നമ്മയെ വിവാഹം ചെയ്യുകയും, സ്വപിതാവിൽ നിന്നു് ഭാഗിച്ചു കിട്ടിയ ഭൂസ്വത്തുക്കളുടെ മേൽനോട്ടം ഏറെറടുത്തു് കുടുംബസമേതം താമസിക്കുകയും ചെയ്തു.</p>
+<p>അവർക്കു് റീന എന്നു് വിളിക്കുന്ന കാതറൈൻ (19 വയസ് ), റ്റോമി എന്നു വിളിക്കുന്ന തോമസ് (17 വയസ്), അലക്സ് എന്നു വിളിക്കുന്ന അലക്സാണ്ടർ (12 വയസ്) റെറസ്സി എന്നു വിളിക്കുന്ന ത്രേസ്യാ, ( 8 വയസ്) എന്നിങ്ങനെ നാലു് സന്താനങ്ങൾ ഉണ്ടു്.</p>
+<p>റീന B.Sc. ക്ലാസിലും, റ്റോമി പ്രിഡിഗ്രി ക്ലാസിലും, അലക്സ് 8-ാം ക്ലാസിലും, റെറസ്സി 4-ാം ക്ലാസ്സിലും പഠിക്കുന്നു.</p>
+<h3><center>എലിസബത്ത് (അച്ചാമ്മ), B. A.</center></h3>
+<p>ശ്രീ. കെ.സി. തോമസിന്റെ ആറാമത്തെ സന്താനവും, രണ്ടാമത്തെ പുത്രിയുമായ എലിസബത്ത് (അച്ചാമ്മ), B.A. പാസ്സായശേഷം, 19-ാം വയസിൽ തിരുവനന്തപുരത്തുള്ള വിശുദ്ധ അഗസ്തീനോസ്സിൻ സന്യാസിനീ സഭയിൽ ചേരുകയും, അതിനുശേഷം B.T. Degree സമ്പാദിക്കുകയും ചെയ്തു.  പിന്നീടു് ആ സഭയുടെ കേന്ദ്രമായ ബെൽജിയത്തു പോയി മൂന്നുവർഷത്തെ Novitiate പൂർത്തിയാക്കിയശേഷം, 1950-ൽ ഇഡ്യയിൽ തിരിച്ചെത്തി, തിരുവനന്തപുരത്തു അവർക്കുള്ള St. Roche&#x27;s Convent-ൽ വെച്ചു് നിത്യ പറഞ്ഞൊപ്പു് നടത്തുകയും Dame Marie Britto എന്ന പുതിയ സഭാ നാമധേയം സ്വീകരിച്ചു് ആസഭയിലെ ഒരു സ്ഥിരാംഗമായി തീരുകയും ചെയ്തു.  1956 -മുതൽ Sister Britto, St. Roche&#x27;s High School Headmistress ആയി സേവനമനുഷ്ടിച്ചു വരുന്നു.</p>
+<h3><center>മേരി (മോളി)</center></h3>
+<p>ശ്രീ. കെ.സി. തോമസ്സിന്റെ ഏഴാമത്തെ സന്താനവും മൂന്നാമത്തെ പുത്രിയുമായ മേരി (മോളി), മംഗലാപുരത്തുള്ള St. Agnes College-ൽ പഠിച്ച B.A., B.T., എന്നീ ബിരുദങ്ങൾ നേടിയശേഷം മദ്രാസിലുള്ള St. Christopher Training College-ൽ പഠിച്ചു് M.Ed. ഡിഗ്രിയും കരസ്ഥമാക്കി.  അതിനുശേഷം ഒരദ്ധ്യാപികയായി ജോലിയിൽ പ്രവേശിച്ചു.</p>
+<p>1965-മുതൽ, മുണ്ടക്കയത്തുള്ള Bishop Beneventure Memmorial Training School-ൽ ഒരു അവിവാഹിത അദ്ധ്യാപികയായി തുടരുകയും ചെയ്യുന്നു.</p>
+</div>
+
+            <!-- English Biography & History -->
+            <div class="bio-section" id="english-history">
+<hr class="section-separator" style="margin: 50px auto;">
+<h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Er. K. C. Thomas B.A., B.E. (Thommachan)</h2>
+<p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">Retired Executive Engineer, P.W.D. &bull; Anathanam, Flower Mount ("Pushpamala"), Kanjirappally &bull; (1889 &ndash; 1973)</p>
+<h3><center>Early Life, Education &amp; Marriage</center></h3>
+<p>Shri K. C. Thomas (Thommachan), the 8th child and a 6th-generation member of Branch E (the 5th branch) of the Kallarackal family, born to Kunjuvarkey Kuruvila, was born in the year 1889 A.D.</p>
+<p>He completed his education at St. Berchmans High School, Changanacherry; C.M.S. College, Kottayam; and St. Joseph’s College, Trichinopoly (Tiruchirappalli), earning a First-Class B.A. Degree in Mathematics. While subsequently pursuing his B.E. Degree at the College of Engineering, Madras (Guindy), in 1910 A.D., he married <strong>Kathreenamma</strong>, the second child and eldest daughter of Kalathil Chandyachan of Kanjuparambil, Chennankary. Upon graduating with a B.E. degree in Civil Engineering in 1913 A.D., he attained the proud distinction of becoming the <strong>very first Engineer from the Syrian Catholic community</strong> in this country/state.</p>
+<h3><center>Career in Travancore P.W.D. &amp; Pioneering Bridge Engineering</center></h3>
+<p>He subsequently served as an apprentice under the renowned Chief Engineer of the Travancore P.W.D., **Mr. A. H. Bastow**, earning his highest commendation. Before long, in 1915, he joined government service as the Head of the Design Branch in the Chief Engineer’s own office. Mr. Bastow, an acclaimed authority on Reinforced Concrete Design, was exceptionally pleased with the extraordinary talent displayed by Shri K. C. Thomas in that field.</p>
+<p>Shri K. C. Thomas prepared novel designs for several large, modern reinforced concrete bridges. When construction was launched, Mr. Bastow personally selected and appointed Shri K. C. Thomas as the Assistant Engineer in charge of the most critical undertaking—the <strong>Erappuzha Bridge</strong> situated north of Chengannur. Through these pioneering endeavors, it was widely acknowledged at the time that Travancore P.W.D. had secured the leadership position across India among all princely states and British provinces in the construction of reinforced concrete bridges.</p>
+<h3><center>Peermade Sub-Division (1922–1927)</center></h3>
+<p>From 1922 to 1927, while Shri K. C. Thomas held charge of the Peermade Sub-Division, he initiated and completed the survey, alignment, and construction of several vital new forest-fringe and ghat roads in that high-range terrain.</p>
+<h3><center>Trivandrum Wellington Water Works &amp; Principled Integrity</center></h3>
+<p>From 1928 to 1933, as the chief designer, engineer, and mastermind from inception to completion of the **Trivandrum Wellington Water Works**—the state&#x27;s first mega drinking water supply project—he won unanimous, unstinted acclaim from his colleagues, superior officers, and the Government itself. Thereafter, at the special insistence of the then Chief Engineer, **Mr. G. B. E. Truscott**, he served for a period as his Personal Assistant.</p>
+<p>Later, while serving as Executive Engineer in Trivandrum, tenders were invited for the large buildings of the State Transport Garage and Central Workshop—a prestigious project of the era. A covert directive was issued from above to award the contract at almost double the P.W.D. estimate to a group favored by a close relative of the Dewan, <strong>Sir C. P. Ramaswamy Aiyar</strong>. Shri K. C. Thomas steadfastly refused to comply with this irregular instruction and rejected it. As a punitive measure for his refusal to be subservient (<em>"Punishment for non-subservience"</em>), on the pretext that he was an expert in water works, he was abruptly saddled with full responsibility for the <strong>Nagercoil Water Works Project</strong> and transferred there.</p>
+<p>Accepting this without protest, Shri K. C. Thomas assumed charge immediately. Applying his vast expertise gained from the Trivandrum Water Works alongside his natural ingenuity, he substantially completed the primary works of the Nagercoil Water Works within approximately two years. Concurrently, he was also entrusted with the <strong>Shencottah Water Works</strong>, the major works of which he likewise brought to near-completion during that same timeframe.</p>
+<h3><center>The Pallivasal Hydro-Electric Project &amp; Meeting with the Chief Secretary</center></h3>
+<p>As these works entered their final stages, he received an urgent communication from the Chief Engineer: 
+&gt; *&quot;It is understood that the Dewanji has directed your immediate transfer to take up the stalled and troubled works of the Pallivasal Hydro-Electric Project. Official government orders follow.&quot;*</p>
+<p>Shri K. C. Thomas suspected whether this was yet another punitive transfer intended to burden him with insurmountable obstacles—or perhaps an orchestrated maneuver to let him meet his <em>"Waterloo"</em> at the Pallivasal Hydro-Electric Project, an undertaking from which almost everyone else had retreated in frustration.</p>
+<p>To clear this doubt, he called upon his long-time friend, the Chief Secretary, <strong>Shri Neelakanta Iyer</strong>, and asked candidly:  > <em>"Swami! Has the Dewan caught hold of me this time to destroy me or to build me up?"</em></p>
+<p>Bursting into laughter, the Chief Secretary replied: > <em>"The Dewan conducted very secret, thorough investigations regarding you and all your past works. In not a single report did he find anything other than unreserved praise! The Pallivasal project is the Dewan’s darling child. He has become completely convinced that there is no one else in this state capable of saving it except you. Therefore, gladly accept this new responsibility, work with the same brilliance you showed in the past, and render true service to the nation. You have all my warmest blessings."</em></p>
+<p>Assured of Shri Neelakanta Iyer’s sincerity, Shri K. C. Thomas departed for Munnar with absolute peace of mind and complete self-confidence.</p>
+<h3><center>Achievements at Munnar &amp; Dignified Retirement (1940–1944)</center></h3>
+<p>From February 1940, he immersed himself in his new assignment. He systematically resolved every chronic malfunction of the long-paralyzed **Pallivasal Power House**—an issue that had sparked intense public outcry and debates in the Legislative Assembly—and restored it to full operational efficiency. He expeditiously completed the new Head Regulator (subsequently named the **&quot;Ramaswamy Iyer Head Works&quot;**) and the new penstock pipelines.</p>
+<p>Thereafter, he carried out the construction of the <strong>Kundala Dam</strong> and the <strong>Mattupetty Dam</strong> with remarkable skill and efficiency. However, before their completion, his retirement upon reaching the superannuation age approached in 1944. His superior officer, the Chief Resident Engineer <strong>Mr. S. J. Bruford</strong>, considering Shri K. C. Thomas’s continued guidance indispensable for the progress of the Kundala and Mattupetty dams, requested that he remain in service and inquired under what terms he would agree to an extension.</p>
+<p>Guided solely by patriotism and public welfare, Shri Thomas submitted very modest and reasonable terms. During their discussion, Mr. Bruford agreed that they were thoroughly justified and assured him of government approval. However, Chief Secretary Neelakanta Iyer, who would have readily sanctioned them, had retired. His successor, with a narrow bureaucratic mindset, summarily dismissed Mr. Bruford’s recommendations.</p>
+<p>Learning of this, Shri Thomas addressed a fitting rejoinder to the Government. He pointed out that Mr. Bruford could attest that he had never solicited an extension, but had yielded only upon Bruford’s persistent pleading; he had assumed he was dispatched to Munnar because the Government wished to rectify early blunders and prevent their recurrence on similar projects; yet he was astonished by the Government’s <em>"penny-wise policy"</em>; and he therefore requested to be relieved of his duties on the exact date he attained 55 years of age.</p>
+<p>Forwarding this letter to the Government, Mr. Bruford wrote again, strongly emphasizing that Shri K. C. Thomas’s services were imperative and that it was in the Government’s own interest to concede his fair terms and grant an extension. However, the Dewan, who had been making strenuous efforts to conceal the early failures, delays, and financial losses of the Pallivasal scheme from the public, took serious offense at Shri Thomas's candid remarks. Miffed, the Dewan issued a government order stating that since Shri Thomas’s letter was deemed to have <em>"gone too far,"</em> permission for his retirement was granted with regret. Accordingly, in July 1944, he retired with exemplary honor and dignity.</p>
+<h3><center>Refusal of Re-employment &amp; Settlement at &quot;Pushpamala&quot;</center></h3>
+<p>Subsequently, the pace of construction at the Kundala and Mattupetty dams slowed drastically. Distressed by this, Mr. Bruford, with the Dewan’s confidential approval, visited Shri K. C. Thomas at his residence and offered to personally negotiate terms with the Dewan for his re-entry into service. But Shri Thomas declined, replying simply that he had no desire to deprive younger engineers of their rightful promotions on his account, while expressing his sincere regrets to Mr. Bruford for not being able to accept.</p>
+<p>Following his retirement, Shri K. C. Thomas resided in Kottayam from 1944 to 1946 while constructing his new residence, <strong>"Pushpamala" (Flower Mount)</strong>, at Anathanam in Kanjirappally, where he moved with his family in 1946.</p>
+<h3><center>Public Leadership &amp; The Construction of St. Dominic’s Forane Church</center></h3>
+<p>Blessed with sound health and deep public-spiritedness, he remained extraordinarily active. He was the very life and soul of:
+* **The All Kerala Agriculturists Association**
+* **The Kerala Catholic Trust**
+* **The First Official P.W.D. Re-organisation Committee**</p>
+<p>His selfless public service through these bodies over many years remains unforgettable. Furthermore, despite formidable challenges from 1947 onwards, it was through his tireless decade-long efforts that the magnificent <strong>St. Dominic’s Forane Church</strong> that stands in Kanjirappally today was brought to substantial completion.</p>
+<p>An eyewitness account of his monumental church building work records: > <em>"Among those who enhanced the renown and prestige of the ancient Kallarackal family, a pre-eminent position belongs to Retired Executive Engineer K. C. Thomas B.A., B.E., affectionately known as 'Engineer Thommachan'. In an era when English education was scarce and Catholic officials were rare, Thommachan was the first and only Catholic to attain the rank of Executive Engineer. That he discharged his duties with unimpeachable integrity, untainted by bribery or corruption, is a fact acknowledged alike by all communities and by the Government.</em> > > <em>On August 17, 1944, the parish assembly resolved to demolish the old church and erect a spacious, monumental cathedral-like structure, requesting Engineer Thommachan to undertake its honorary control and supervision. He agreed to do so without accepting any remuneration whatsoever. Thus, following a lifetime of national service, began his dedicated community service.</em> >  > <em>Every single day, before 7:00 AM—either before the laborers arrived or just as work commenced—he would be at the church. If it was mass time, he would attend holy mass, and then take a seat on a wooden block in the carpentry workshop or in the overseer's shed, instructing the craftsmen and explaining the day's tasks.</em> > > <em>Once, a gentleman visited his home early in the morning, and not finding him there, came to the church. Seeing him seated on a log in the carpenter's shed explaining work to a carpenter, he remarked: 'Ha! Ha! Coming so early! Seeing your simple attire and seat from afar, I thought you were one of the workmen; only on coming close did I recognize you!' Thommachan replied with a smile: 'I am indeed a worker among them; the only difference is that I have not picked up a chisel and mallet!'</em> > > <em>Having had only bed-tea in the morning, he would work absorbedly, often until 2:00 PM. If the Reverend Vicar invited him for coffee, he would gratefully decline. Not because he lacked hunger, but because accepting hospitality violated his strict personal principles. He stepped down on October 15, 1961, when the parish assembly resolved to pause further works. Though no commemorative plaque was carved in stone to thank this selfless soul who gave a decade of honorary service, every single granite block in the walls of this church bears silent, eternal witness to his sacrifice."</em></p>
+<p>He was a selfless public worker without political ambition or desire for reward—a dependable source of wise counsel and guidance to whom anyone could turn with complete confidence.</p>
+<h3><center>Demise</center></h3>
+<p>Living as an outstanding philanthropist and a devout Christian, he began to suffer from age-related ailments in February 1973. Gradually worsening, he received all the Last Rites of the Church and fell asleep in the Lord at **9:00 AM on August 15, 1973**, at Caritas Hospital, Kottayam.</p>
+<h2 style="text-align: center; color: var(--header-color); margin-top: 40px; margin-bottom: 15px;">Children of Shri K. C. Thomas (7 Children):</h2>
+<ul style="max-width: 900px; margin: 10px auto 20px auto; line-height: 1.8; font-size: 15.5px;"><li>K. T. Teresa, B.A. (Pennamma)<em></em> <em>(b. 1913)</em> — <em>(Mrs. Teresa Joseph, Kalluvelil, Aanavalaril House, Poovarani)</em></li><li>Er. K. Jacob Thomas, B.E., C.E. (Baby)<em></em> <em>(b. 1916)</em></li><li>K. Alexander Thomas, M.A. (Lalichan)<em></em> <em>(b. 1919)</em></li><li>Er. K. T. George, B.Sc., B.Sc. (Eng.) (Kuruvachan)<em></em> <em>(b. 1921)</em></li><li>K. T. Mathew, B.A., B.Com. (Mathachan)<em></em> <em>(b. 1924)</em></li><li>Dame Marie Britto / K. Elizabeth Thomas, B.Sc., B.T. (Achamma)<em></em> <em>(b. 1926)</em></li><li>K. Mary Thomas, B.A., B.T., M.Ed. (Molly)<em></em> <em>(b. 1930)</em></li></ul>
+<h3><center>Detailed Family Records of the Children:</center></h3>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Mrs. Teresa Joseph B.A. (Pennamma)</h3>
+<p>* **Spouse:** K. J. Joseph B.A. (Kochu) of the Aanavalaril family, Poovarani (Vilakkumadam). *(He had previously married Kochuthresiamma, the eldest daughter of Thommachan&#x27;s elder brother KochuMathai; after her passing in 1932, he remained unmarried until 1938, when he married Pennamma).*
+* **Children (8th Generation):**
+  1. **Mary (Ammini)** *(b. 1942)*: While studying for B.A., married in 1961 to **Er. C. P. Mathew**, 3rd son of Pothachan of Kappil, Pulincunnoo (Senior executive at Hindustan Photo Films, Ooty). Children: Annu, Joppan, Jose.
+  2. **Elizabeth (Leelamma)** *(b. 1954)*: While studying B.Sc. Home Science, married in 1974 to **V. C. Jacob B.A.**, 4th son of V. V. Chackochan of Vettimuttikavu, Thidanad (Agent/Officer at Federal Bank).</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Er. K. Jacob Thomas, B.E., C.E. (Baby)</h3>
+<p>* **Career:** Eldest son (7th generation). Graduated B.E., C.E. from Madras Engineering College. Following his father’s footsteps, joined Travancore P.W.D. in 1939 as Junior Engineer.
+* **Overseas Training &amp; Bridge Specialization:**
+  * 1942–1945: Supervised 3 major concrete bridges, including the Kozhencherry Bridge.
+  * 1946: Deputed to England for two years of higher training in post-war structural engineering; qualified as **A.M.I.Struct.E. (London)**; returned in 1948.
+  * 1949–1953: Special Engineer for Chavara Bridge (north of Kollam) and Kollakadavu Bridge (Mavelikkara), executed departmentally, saving ~₹1.5 lakhs under estimate, earning a special promotion.
+  * 1953: Deputed by the Government of India under the **Colombo Plan** to Canada for specialized training in **Prestressed Concrete**.
+  * 1954: Appointed **Special Engineer for Bridges** (headquartered at Kottayam); built the **Thondera Bridge** (Kerala’s very first prestressed concrete bridge) departmentally. Designed and executed ~15 major reinforced concrete bridges across Central Travancore (Kumbazha, Kaipattoor, Ranni, Moolaplakal, Mavelikara/Prayikkara, Ittinayarkadavu, Pannai, Pulikeezhu, Kodimatha, Chungam, two bridges at Erattupetta, Mutholy, Kidangoor, Erumely).
+  * 1960: Deputed as Project Engineer for the Premier Tyres factory at Kalamassery, and subsequently as Project Engineer for the **Cochin Oil Refinery**.
+  * 1967: Returned as Deputy Chief Engineer, P.W.D.; retired in June 1971 as **Chief Engineer (National Highways)** upon reaching age 55; later practiced as a Consulting Engineer.
+* **Spouse:** Elizabeth (Susheela), eldest daughter of Prof. A. D. Paul, Alappatt Thoppil, Karanchira near Thrissur (m. 1942).
+* **7 Children (8th Generation — 4 Sons, 3 Daughters):**
+  1. **Dr. Thomas Jacob (Balan)** B.Sc., B.E. (Met), Ph.D. (London), D.I.C. (London): Married **Dr. Susan Moire** (M.B.B.S., D.C.H., M.R.C.P.). Both employed in Toronto, Canada.
+  2. **Paul**: Ailing from paralysis since age 4.
+  3. **Mary Catherine (&quot;Kitty&quot;)** B.Sc., M.Sc. (Home Science): Married in June 1972 to **Ignatius Alex** B.Sc., M.B.A. (Agent/Officer, State Bank of India, Bhilai; son of P. J. Varghese, Vattaparambil, Puthenpura, Kainakary).
+  4. **Dr. Joseph Jacob**: Earned M.B.B.S. in December 1974; preparing for postgraduate studies.
+  5. **Annie Jacob**: Studying for M.A. (Literature).
+  6. **Elizabeth Jacob (Lissy)**: Pre-Degree student.
+  7. **Francis Jacob**: 7th standard student.</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. K. Alexander Thomas, M.A. (Lalichan)</h3>
+<p>* **Life &amp; Vocation:** Second son. Completed M.A. in Economics at St. Joseph’s College, Trichy (1943). Settled in Kanjirappally to shoulder full administrative management of all family plantations and landed properties, thereby affording his father the freedom and time to dedicate himself to public works.
+* **Spouse:** Kunjamma (Rosamma), second daughter of Kuncheriachan of Purayackal, Pulincunnoo (m. 1946).
+* **3 Children (8th Generation):**
+  1. **Catherine (Susie)** *(age 23)*: B.Sc. Home Science; married in 1971 to **Er. Thomas (Tomy)**, Chemical Engineer (Sindri Unit, Fertilizer Corporation of India, Bihar; son of Mathaikutty [Isaac Mathew], Kattuvally, Vattaparambil, Kainakary).
+  2. **Annie** *(age 21)*: M.A. Literature; married in 1973 to **Er. Paul (Pauly)**, Electrical Engineer (Lecturer, C.S.I. Technical Training Institute, Thalassery; son of Kuriap, Elanjikkal Thoppil, Kothamangalam).
+  3. **Thomas (Thommachan)** *(age 19)*: Student of B.Sc. Engineering at Government Engineering College, Palakkad.</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Er. K. T. George, B.Sc., B.Sc. (Eng.) (Kuruvachan)</h3>
+<p>* **Career:** Third son. Graduated B.Sc. from St. Joseph’s College, Trichy, and B.Sc. (Eng.) from College of Engineering, Trivandrum. Joined Travancore P.W.D. in 1945 as Junior Engineer; served across Design Branch, Pallivasal Hydro-Electric Scheme, Buildings &amp; Roads, Irrigation, and Workshops &amp; Stores. Superintending Engineer of Vizhinjam Harbour Circle, Trivandrum.
+* **Spouse:** Elikutty, daughter of Joseph of Thanikkal Thoppil, Manaloor (m. 1949).
+* **7 Children (8th Generation — 2 Sons, 5 Daughters):**
+  1. **Catherine (Valsamma)** *(age 23)*: B.Sc.; married in 1971 to **Er. Thomas**, Junior Engineer, P.W.D. (son of Ouseppachan, Valiyaveettil, Pazhayakadavu, Vaikom).
+  2. **Elizabeth (Elimma)** *(age 21)*: Completing M.B.B.S. medical degree.
+  3. **Mariyamma** *(age 19)*: Studying M.Sc.
+  4. **Thresiamma** *(age 17)*: Entered Medical College in 1974.
+  5. **Annamma** *(age 15)*: Pre-Degree student.
+  6. **Thomas (Tomy)** *(age 13)*: 9th standard student.
+  7. **Joseph (Jose)** *(age 11)*: 6th standard student.</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. K. T. Mathew, B.A., B.Com. (Mathachan)</h3>
+<p>* **Education &amp; Life:** Fourth son. Graduated B.A. from St. Joseph’s College, Trichy, and B.Com. from Loyola College, Madras. Manages his partitioned family estates.
+* **Spouse:** Annamma, daughter of N. C. Chandy of Neroth, Alappuzha (m. 1954).
+* **4 Children (8th Generation — 2 Sons, 2 Daughters):**
+  1. **Catherine (Reena)** *(age 19)*: B.Sc. student.
+  2. **Thomas (Tomy)** *(age 17)*: Pre-Degree student.
+  3. **Alexander (Alex)** *(age 12)*: 8th standard student.
+  4. **Thresia (Tessy)** *(age 8)*: 4th standard student.</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Dame Marie Britto / Elizabeth (Achamma), B.A., B.T.</h3>
+<p>* **Religious Life:** Second daughter. Graduated B.A. Entered the Congregation of the Canonesses of St. Augustine in Trivandrum at age 19. Earned her B.T. Degree. 
+* Completed a three-year novitiate at the congregation’s motherhouse in Belgium; returned to India in 1950, pronounced perpetual vows at St. Roch’s Convent, Trivandrum, receiving the religious name **Dame Marie Britto**.
+* Headmistress of **St. Roch’s High School, Trivandrum**, since 1956.</p>
+<h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Mary Thomas, B.A., B.T., M.Ed. (Molly)</h3>
+<p>* **Education &amp; Career:** Third daughter. Graduated B.A. and B.T. from St. Agnes College, Mangalore, and earned her M.Ed. from St. Christopher&#x27;s Training College, Madras.
+* Unmarried educator serving as teacher at **Bishop Bonaventure Memorial Training School, Mundakayam**, since 1965.</p>
+</div>
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 1406));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 1406) {
+                const centerScroll = (1406 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
