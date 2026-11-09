@@ -3,22 +3,843 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mammy Kathayanat - Under Construction</title>
+    <title>Mammy (Mariya) Kathayanat - മാമ്മി (മറിയ) കതയനാട്ട് - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.2em auto;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">മാമ്മി (മറിയ) കതയനാട്ട് &bull; Mammy (Mariya) Kathayanat (Thambalakkad)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                മാമ്മി (മറിയ) &ndash; മത്തായി തോമസ് കതയനാട്ട്<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">Mammy (Mariya) &ndash; Mathai Thomas Kathayanat</span>
+            </h1>
+            <p class="lifespan">കുന്നുംപുറത്തു് കതയനാട്ടു്, തമ്പലക്കാട് &bull; Kathayanat, Thambalakkad &bull; (1890 &ndash; 1936)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Mammy Kathayanat & Mathai Thomas Family Tree Diagram -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="2376" height="230" viewBox="0 0 2376 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents -->
+                <line x1="1188" y1="78" x2="1188" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 12 children -->
+                <line x1="121" y1="118" x2="2255" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1479" y1="118" x2="1479" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1673" y1="118" x2="1673" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1867" y1="118" x2="1867" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2061" y1="118" x2="2061" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2255" y1="118" x2="2255" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 6) -->
+                <g>
+                    <rect x="978" y="18" width="420" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="1188" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">Mammy (Mariya) &amp; Mathai Thomas</text>
+                    <text x="1188" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Mathai Thomas Kathayanat &bull; Former Travancore Praja Sabha Member)</text>
+                </g>
+
+                <!-- Child 1: Elikutty (Daughter) -->
+                <g>
+                    <a class="node-link" href="Elikutty_Kottavathukkal.html" xlink:href="Elikutty_Kottavathukkal.html" title="Open Elikutty Kottavathukkal">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Elikutty</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Thomas Kottavathukkal</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Mathaichan (Son) -->
+                <g>
+                    <a class="node-link" href="Mathaichan_Kathayanat_Infant.html" xlink:href="Mathaichan_Kathayanat_Infant.html" title="Open Mathaichan (Infant)">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathaichan</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="500" fill="#607d8b">(died in infancy)</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Kuruvila (Son) -->
+                <g>
+                    <a class="node-link" href="Kuruvila_Kathayanat_SJ.html" xlink:href="Kuruvila_Kathayanat_SJ.html" title="Open Kuruvila (Kuruvachan) Jesuit Seminarian">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila (Kuruvachan)</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Jesuit Seminarian B.A.)</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Thresiamma (Daughter) -->
+                <g>
+                    <a class="node-link" href="Thresiamma_Maniangadan.html" xlink:href="Thresiamma_Maniangadan.html" title="Open Thresiamma (Chachikunju) Maniangadan">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Thresiamma B.A.</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Adv. Mathew Maniangadan</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Chinnamma / Sr. Mary Francis (Daughter) -->
+                <g>
+                    <a class="node-link" href="Sr_Mary_Francis_Kathayanat.html" xlink:href="Sr_Mary_Francis_Kathayanat.html" title="Open Sr. Mary Francis (Chinnamma)">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Sr. Mary Francis</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">(Chinnamma &bull; S.A.B.S.)</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Prof. K. T. Mathai (Son) -->
+                <g>
+                    <a class="node-link" href="KT_Mathai_Kathayanat.html" xlink:href="KT_Mathai_Kathayanat.html" title="Open Prof. K. T. Mathai (Kuttiyachan)">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Prof. K.T. Mathai M.A.</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Mariyamma Poulose</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Adv. K. T. Thomas (Son) -->
+                <g>
+                    <a class="node-link" href="KT_Thomas_Kathayanat.html" xlink:href="KT_Thomas_Kathayanat.html" title="Open Adv. K. T. Thomas">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Adv. K.T. Thomas</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(B.A., B.L. &bull; Ponkunnam)</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Er. K. T. Joseph (Son) -->
+                <g>
+                    <a class="node-link" href="KT_Joseph_Kathayanat.html" xlink:href="KT_Joseph_Kathayanat.html" title="Open Er. K. T. Joseph (Appachan)">
+                        <rect x="1394" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1479" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Er. K.T. Joseph (Appachan)</text>
+                        <text x="1479" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Mani Koottiparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: K. T. Sebastian (Son) -->
+                <g>
+                    <a class="node-link" href="KT_Sebastian_Kathayanat.html" xlink:href="KT_Sebastian_Kathayanat.html" title="Open K. T. Sebastian">
+                        <rect x="1588" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1673" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">K.T. Sebastian B.A.</text>
+                        <text x="1673" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Ethamma Kaniyamparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Annamma (Daughter) -->
+                <g>
+                    <a class="node-link" href="Annamma_Illathuparambil.html" xlink:href="Annamma_Illathuparambil.html" title="Open Annamma Illathuparambil">
+                        <rect x="1782" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1867" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Annamma</text>
+                        <text x="1867" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Varkey Illathuparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 11: Claramma (Daughter) -->
+                <g>
+                    <a class="node-link" href="Claramma_Peediyekkal.html" xlink:href="Claramma_Peediyekkal.html" title="Open Claramma Peediyekkal">
+                        <rect x="1976" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2061" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Claramma B.A.</text>
+                        <text x="2061" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Ouseph Peediyekkal</text>
+                    </a>
+                </g>
+
+                <!-- Child 12: Rosakutty (Daughter) -->
+                <g>
+                    <a class="node-link" href="Rosakutty_Kunthara.html" xlink:href="Rosakutty_Kunthara.html" title="Open Rosakutty Kunthara">
+                        <rect x="2170" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2255" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Rosakutty B.A.</text>
+                        <text x="2255" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. K.V. Varghese M.Sc.</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <main>
+            <!-- Three Generation Genealogy Overview Cards -->
+            
+<div class="bio-section">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 6px;">Three Generation Family Tree &bull; മൂന്നു തലമുറകൾ</h2>
+    <p style="text-align: center; font-weight: 600; color: #7a5823; margin-bottom: 25px;">Mammy (Mariya) &amp; Mathai Thomas (6th Gen) &bull; 12 Children (7th Gen) &bull; 39+ Grandchildren (8th Gen)</p>
+    
+    <div class="overview-grid">
+        <!-- Child 1: Elikutty -->
+        <div class="overview-card female">
+            <h4>1. Elikutty (b. ~1900)</h4>
+            <div class="spouse">m. Thomas &bull; Kottavathukkal, Palai (m. 1919)</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 2 Children):</p>
+            <ul>
+                <li><strong>Air Commodore K. T. Abraham</strong> &bull; Indian Air Force (Western Area Air Defence Chief, Ambala)</li>
+                <li>Second child</li>
+            </ul>
+        </div>
+
+        <!-- Child 2: Mathaichan -->
+        <div class="overview-card male">
+            <h4>2. Mathaichan</h4>
+            <div class="spouse">Infant Demise</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; color: #5c4028;">Passed away in infancy (ശൈശവത്തിൽ തന്നെ മരണം പ്രാപിച്ചു).</p>
+        </div>
+
+        <!-- Child 3: Kuruvila (Kuruvachan) -->
+        <div class="overview-card male">
+            <h4>3. Kuruvila (Kuruvachan), B.A. (d. 1954)</h4>
+            <div class="spouse">Religious Life &bull; Jesuit Mission (S.J.)</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; color: #5c4028;">Graduated B.A., entered Jesuit Mission; passed away on Oct 11, 1954 prior to priestly ordination.</p>
+        </div>
+
+        <!-- Child 4: Thresiamma -->
+        <div class="overview-card female">
+            <h4>4. Thresiamma, B.A. (Chachikunju) (d. 1958)</h4>
+            <div class="spouse">m. Adv. Mathew Maniangadan</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 6 Children):</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Teacher at St. Anne's High School, Kottayam; blessed with 6 children; d. Nov 9, 1958.</p>
+        </div>
+
+        <!-- Child 5: Chinnamma / Sr. Mary Francis -->
+        <div class="overview-card female">
+            <h4>5. Sr. Mary Francis, B.A., B.T. (Chinnamma)</h4>
+            <div class="spouse">Religious Life &bull; Adoration Congregation (S.A.B.S.)</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; color: #5c4028;">High School educator; retired at Vazhappally Adoration Convent.</p>
+        </div>
+
+        <!-- Child 6: Prof. K. T. Mathai -->
+        <div class="overview-card male">
+            <h4>6. Prof. K. T. Mathai, M.A. (Kuttiyachan)</h4>
+            <div class="spouse">m. Mariyamma Poulose (m. 1942) &bull; Trivandrum</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; color: #5c4028;">Professor of English (St. Xavier's Palayamkottai, SB College, University College Trivandrum, Govt College Thalassery).</p>
+        </div>
+
+        <!-- Child 7: Adv. K. T. Thomas -->
+        <div class="overview-card male">
+            <h4>7. Adv. K. T. Thomas, B.A., B.L.</h4>
+            <div class="spouse">Advocate &bull; Ponkunnam</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 5 Children):</p>
+            <ul>
+                <li><strong>Mariyamma</strong></li>
+                <li><strong>Cicily (Chechamma)</strong></li>
+                <li><strong>Maria Goretti (Mariamma)</strong> &bull; Residing in USA</li>
+                <li><strong>Rani (Ranima)</strong></li>
+                <li><strong>Thomas</strong></li>
+            </ul>
+        </div>
+
+        <!-- Child 8: Er. K. T. Joseph -->
+        <div class="overview-card male">
+            <h4>8. Er. K. T. Joseph, B.Sc. Eng (Appachan)</h4>
+            <div class="spouse">m. Miss Mani &bull; Koottiparambil, Vaikom</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 4 Children):</p>
+            <ul>
+                <li><strong>Mammikutty</strong></li>
+                <li><strong>Thomas</strong></li>
+                <li><strong>Kunjachan</strong></li>
+                <li><strong>Joji</strong></li>
+            </ul>
+        </div>
+
+        <!-- Child 9: K. T. Sebastian -->
+        <div class="overview-card male">
+            <h4>9. K. T. Sebastian, B.A.</h4>
+            <div class="spouse">m. Ethamma B.A. &bull; Kaniyamparambil, Alappuzha</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 9 Children):</p>
+            <ul>
+                <li><strong>Sanio, Marykutty, Jose, Rosy, Kuruvila</strong></li>
+                <li><strong>Mathukutty, Siby, Vincent, Tessy</strong></li>
+            </ul>
+        </div>
+
+        <!-- Child 10: Annamma -->
+        <div class="overview-card female">
+            <h4>10. Annamma</h4>
+            <div class="spouse">m. Varkeyachan &bull; Illathuparambil, Punnathura (m. 1945)</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 7 Children):</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Residing in Punnathura; blessed with 7 children.</p>
+        </div>
+
+        <!-- Child 11: Claramma -->
+        <div class="overview-card female">
+            <h4>11. Claramma, B.A.</h4>
+            <div class="spouse">m. Ouseppachan &bull; Peediyekkal, Athirampuzha</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 5 Children):</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Graduated B.A., settled in Athirampuzha; blessed with 5 children.</p>
+        </div>
+
+        <!-- Child 12: Rosakutty -->
+        <div class="overview-card female">
+            <h4>12. Rosakutty, B.A. (d. 1959)</h4>
+            <div class="spouse">m. K. V. Varghese, M.Sc. &bull; Kunthara, Panavally (m. 1956)</div>
+            <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Children (8th Generation &bull; 1 Son):</p>
+            <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Blessed with one son; passed away on June 2, 1959.</p>
+        </div>
+    </div>
+</div>
+
+
+            <!-- Malayalam Biography & History First -->
+            
+<div class="bio-section" id="malayalam-history">
+    <hr class="section-separator" style="margin: 40px auto 30px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">മറിയ (മാമ്മി) &ndash; ജീവചരിത്രവും കുടുംബ ചരിത്രവും</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">കുന്നുംപുറത്തു് കതയനാട്ടു്, തമ്പലക്കാട് &bull; Kathayanat, Thambalakkad &bull; (1890 &ndash; 1936)</p>
+
+    <p class="section-lead">
+        5-ാം തലമുറക്കാരനായ കുഞ്ഞുവർക്കി കുരുവിളയുടെ ഒൻപതാമത്തെ സന്താനമായ മാമ്മി (മറിയ) 1890 ഏപ്രിൽ 4-ാം തീയതി ജനിച്ചു. മാമ്മിയെ തമ്പലക്കാട്ടു കുന്നുംപുറത്തു കുടുംബ ശാഖയായ കതയനാട്ടു് മത്തായി തോമസ് വിവാഹം ചെയ്തു. ഇദ്ദേഹം മുൻ തിരുവിതാംകൂർ പ്രജാസഭയിലെ ഒരു അംഗമായിരുന്നു. ഇവർക്കു് ഏലിക്കുട്ടി, മത്തായിച്ചൻ, കുരുവിള, ത്രേസ്യാമ്മ, മേരി, മാത്യ, തോമസ്, ജോസഫ്, സെബാസ്റ്റിയൻ, അന്നമ്മ, ക്ലാരമ്മ, റോസക്കുട്ടി എന്നിങ്ങനെ 12 സന്താനങ്ങൾ ഉണ്ടായി.
+    </p>
+
+    <hr class="section-separator">
+    <h3 style="text-align: center; color: var(--header-color); margin-top: 30px; margin-bottom: 20px;">മാമ്മിയുടെ 12 സന്താനങ്ങൾ</h3>
+
+    <h3><center>1. ഏലിക്കുട്ടി</center></h3>
+    <p>
+        ഇവരിൽ മൂത്തപുത്രിയായ ഏലിക്കുട്ടിയെ പാലായിൽ കോട്ടവാതുക്കൽ വീട്ടിൽ തോമസ് 1919-ാം വിവാഹം ചെയ്തു. രണ്ടു സന്താനങ്ങളാണിവർക്കുള്ളതു്. പുത്രൻ K. T. എബ്രാഹം Indian Air Force-ൽ Air Commander ആയി (Western area Air Defence Chief) Ambala-യിൽ താമസിക്കുന്നു.
+    </p>
+
+    <h3><center>2. മത്തായിച്ചൻ</center></h3>
+    <p>
+        മാമ്മിയുടെ രണ്ടാമത്തെ സന്താനമായ മത്തായിച്ചൻ ശൈശവത്തിൽ തന്നെ മരണം പ്രാപിച്ചു.
+    </p>
+
+    <h3><center>3. കുരുവിള (കുറവച്ചൻ), B.A.</center></h3>
+    <p>
+        മൂന്നാമത്തെ സന്താനമായ കുറവച്ചൻ B.A. പസ്സായശേഷം ജെസ്യൂട്ടു മിഷനിൽ ചേർന്നു. വൈദീക വിദ്യാഭ്യാസം പൂർത്തിയാക്കുന്നതിനുമുമ്പു് 1954 ഒക്ടോബർ 11-ാം തീയതി ഇദ്ദേഹം മരണം പ്രാപിച്ചു.
+    </p>
+
+    <h3><center>4. ത്രേസ്യാമ്മ B.A. (ചാച്ചിക്കുഞ്ഞു്)</center></h3>
+    <p>
+        നാലാമത്തെ സന്താനമായ ത്രേസ്യാമ്മ B.A., (ചാച്ചിക്കുഞ്ഞു്) കോട്ടയം St. Anne's High School-ൽ ഒരു അദ്ധ്യാപികയായി ജോലിനോക്കി. അഡ്വക്കേറ്റ് മാത്യു മണിയങ്ങാടനാണ് വിവാഹം ചെയ്തത്. ഇവർക്കു് ആറു സന്താനങ്ങളുണ്ടായി. ചാച്ചിക്കുഞ്ഞു് 1958 നവംബർ 9-ാം തീയതി പരലോകപ്രാപ്തയായി.
+    </p>
+
+    <h3><center>5. ചിന്നമ്മ / Sr. Mary Francis B.A., B.T.</center></h3>
+    <p>
+        അഞ്ചാമത്തെ സന്താനമായ ചിന്നമ്മ (Sr. Mary Francis B.A., B.T.) ആരാധനാ മഠത്തിൽചേർന്നു മഠംവക ഒരു ഹൈസ്ക്കുളിൽ ജോലിനോക്കി. ഇപ്പോൾ റിട്ടയർ ചെയ്ത് വാഴപ്പള്ളി മഠത്തിൽ വിശ്രമ ജീവിതം നയിക്കുന്നു.
+    </p>
+
+    <h3><center>6. കുട്ടിയച്ചൻ (Prof. K. T. Mathai M.A.)</center></h3>
+    <p>
+        ആറാമത്തെ സന്താനമായ കുട്ടിയച്ചൻ (K. T. Mathai M.A.) 1942-ൽ തിരുവനന്തപുരം അക്കൌണ്ട് ഓഫീസ് സൂപ്രണ്ടു് പി.വി. പൌലോസിൻറെ മകൾ മറിയാമ്മയെ വിവാഹം ചെയ്തു. ഇദ്ദേഹം പാളയംകോട്ട St. Xavier's College, S.B. College Changanacherry, എന്നിവിടങ്ങളിൽ ഇംഗ്ലീഷ് ലക്ചററായി ജോലി നോക്കിയതിനു ശേഷം തിരുവനന്തപുരം യൂണിവേഴ്സിററി കോളേജിൽ ജോലി തുടർന്നു. ഇപ്പോൾ തലശേരി ഗവ: കോളജിൽ പ്രൊഫസറായി ജോലി നോക്കുന്നു.
+    </p>
+
+    <h3><center>7. കെ.ററി. തോമസ് B.A., B.L.</center></h3>
+    <p>
+        ഏഴാമത്തെ സന്താനമായ കെ.ററി. തോമസ് B.A., B.L., അഡ്വേക്കേററായി പൊൻകുന്നത്തു താമസിക്കുന്നു. ഇദ്ദേഹത്തിനു് സന്താനങ്ങളായി മറിയമ്മ, സിസ്സിലി (ചേച്ചമ്മ), മരിയാ ഗൊരേത്തി (മേരിയമ്മ എന്നു് ഭർത്താവു് വീട്ടിലും അമേരിക്കയിലും അറിയപ്പെടുന്നു), റാണി (റാണിമ്മ) , തോമസ് എന്നീ അഞ്ച് പേരുണ്ടു്.
+    </p>
+
+    <h3><center>8. അപ്പച്ചൻ (Er. K. T. Joseph B.Sc. Eng)</center></h3>
+    <p>
+        മാമ്മിയുടെ 8-ാമത്തെ സന്താനമായ അപ്പച്ചൻ (K. T. Joseph B.Sc. Eng) കേരളാ ഗവണ്മെൻറ് സർവീസിൽ എൻജിനീയറായി ജോലിയിൽ പ്രവേശിച്ചു. ഇപ്പോൾ Executive Engineer ആണു്. വൈക്കത്ത് കൂട്ടിപ്പറമ്പിൽ കെ.ജെ. മാണിയുടെ മൂത്ത പത്രിയെ ഇദ്ദേഹം വിവാഹം ചെയ്തു. ഇവർക്കു് സന്താനങ്ങളായി മാമ്മിക്കുട്ടി, തോമസ്, കുഞ്ഞച്ചൻ, ജോജി എന്നീ നാലു പേരുണ്ടു്.
+    </p>
+
+    <h3><center>9. കെ.ററി. സെബാസ്റ്റിയൻ ബി.എ.</center></h3>
+    <p>
+        ഒൻപതാമത്തെ സന്താനമായ കെ.ററി. സെബാസ്റ്റിയൻ ബി.എ., ഗൃഹകാരൃങ്ങൾ അന്വഷിച്ചു് തറവാട്ടിൽ താമസിക്കുന്നു. ഇദ്ദേഹം ആലപ്പുഴ തത്തംപള്ളി കണിയാംപറമ്പിൽ Ethamma B.A., യെ വിവാഹം ചെയ്തു. ഇവർക്കു് സാനിയോ, മേരിക്കുട്ടി, ജോസു്, റോസി, കുരുവിള, മാത്തുക്കുട്ടി, സിബി, വിൻസെന്റ്, റെറസി എന്നീ 9 സന്താനങ്ങളുണ്ടു്.
+    </p>
+
+    <h3><center>10. അന്നമ്മ</center></h3>
+    <p>
+        10-ാമത്തെ സന്താനമായ അന്നമ്മയെ പുന്നത്തുറ ഇല്ലത്തുപറമ്പിൽ വർക്കിയച്ചൻ 1945-ൽ വിവാഹം കഴിച്ചു. ഇവർക്കു് ഏഴു സന്താനങ്ങളുണ്ടു്.
+    </p>
+
+    <h3><center>11. ക്ലാരമ്മ B.A.</center></h3>
+    <p>
+        11-ാമത്തെ സന്താനമായ ക്ലാരമ്മ B.A., യെ അതിരമ്പുഴ പീടിയേക്കൽ ഔസേപ്പച്ചൻ വിവാഹം കഴിച്ചു ഇവർക്ക് അഞ്ചു സന്താനങ്ങളുണ്ടു്.
+    </p>
+
+    <h3><center>12. റോസക്കുട്ടി B.A.</center></h3>
+    <p>
+        12-ാമത്തെ സന്താനമായ റോസക്കുട്ടി B. A. - യെ പാണാവള്ളി കുന്തറ വീട്ടിൽ K. V. വർഗീസു് M.Sc. 1956-ൽ വിവാഹം ചെയ്തു. ഇവർക്കു് ഒരാൺകുട്ടിയുണ്ടു്. റോസക്കുട്ടി 1959 ജൂൺ 2-ാം തീയതി മരണം പ്രാപിച്ചു.
+    </p>
+
+    <hr class="section-separator">
+    <p style="text-align: center; font-style: italic; color: #5c4028;">
+        ഇവരുടെയൊക്കെ പിതാവു° തോമ്മാച്ചൻ കതയനാട്ടു കുടുംബത്തിൽ പുത്രനോടുകൂടി താമസിച്ചു വരുന്നു. ഭാര്യ മാമ്മി 1936 മാർച്ചു് രണ്ടാം തീയതി പരലോക പ്രാപ്തയായി.
+    </p>
+</div>
+
+
+            <!-- English Biography & History Second -->
+            
+<div class="bio-section" id="english-history">
+    <hr class="section-separator" style="margin: 50px auto 35px auto;">
+    <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Mammy (Mariya) Kathayanat &ndash; Biography &amp; Family History</h2>
+    <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">Kunnumpuram Branch, Kathayanat Family, Thambalakkad &bull; (1890 &ndash; 1936)</p>
+
+    <p class="section-lead">
+        <strong>Mammy (Mariya)</strong>, the ninth child of the fifth-generation patriarch <strong>KunjuVarkey Kuruvila</strong> (and belonging to the sixth generation of the Kallarackal / Anathanam family), was born on <strong>April 4, 1890</strong>.
+    </p>
+
+    <p>
+        Mammy was given in marriage to <strong>Mathai Thomas (Thommachan) Kathayanat</strong>, belonging to the prominent Kathayanat branch of the distinguished Kunnumpuram family in Thambalakkad. Shri Mathai Thomas was a respected civic leader who served as an elected Member of the historic <strong>Travancore Sree Moolam Praja Sabha</strong> (the Popular Assembly of Travancore).
+    </p>
+
+    <p>
+        To this venerable couple were born <strong>12 children</strong> belonging to the seventh generation: Elikutty, Mathaichan, Kuruvila, Thresiamma, Mary (Chinnamma), Mathew (Kuttiyachan), Thomas, Joseph, Sebastian, Annamma, Claramma, and Rosakutty.
+    </p>
+
+    <p>
+        Their father, Thommachan, continues to reside at the Kathayanat ancestral home together with his son. His devoted wife, Mammy, passed away into eternal glory on <strong>March 2, 1936</strong>.
+    </p>
+
+    <hr class="section-separator">
+    <h2 style="text-align: center; color: var(--header-color); margin-top: 35px; margin-bottom: 20px;">The 12 Children of Mammy &amp; Mathai Thomas (7th Generation)</h2>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Elikutty</h3>
+    <p>
+        The eldest daughter, Elikutty, was married in 1919 to <strong>Thomas</strong> of the respected <strong>Kottavathukkal</strong> family in Palai. They were blessed with two children. Their son, <strong>Air Commodore K. T. Abraham</strong>, had a distinguished military career in the <strong>Indian Air Force</strong>, serving as the Western Area Air Defence Chief, and resides in Ambala.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Mathaichan</h3>
+    <p>
+        Mammy's second child, Mathaichan, passed away in infancy.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Kuruvila (Kuruvachan), B.A.</h3>
+    <p>
+        The third child, Kuruvila (Kuruvachan), graduated with a Bachelor of Arts degree and subsequently felt called to religious consecrated life, joining the renowned <strong>Jesuit Mission (Society of Jesus / S.J.)</strong>. However, before completing his priestly theological studies, he was called to eternal rest on <strong>October 11, 1954</strong>.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Thresiamma, B.A. (Chachikunju)</h3>
+    <p>
+        The fourth child, Thresiamma B.A. (Chachikunju), was an accomplished educator who rendered dedicated service as a high school teacher at <strong>St. Anne's High School, Kottayam</strong>. She was married to <strong>Advocate Mathew Maniangadan</strong>. They were blessed with six children. Thresiamma passed away on <strong>November 9, 1958</strong>.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Chinnamma / Sr. Mary Francis, B.A., B.T.</h3>
+    <p>
+        The fifth child, Chinnamma (Mary), joined the <strong>Adoration Congregation (Sisters of the Adoration of the Blessed Sacrament &ndash; S.A.B.S.)</strong>, taking the religious name <strong>Sr. Mary Francis, B.A., B.T.</strong> She served for many years as a dedicated teacher in a high school administered by the congregation. Following retirement, she leads a quiet and prayerful retired life at the Vazhappally Convent.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Prof. K. T. Mathai, M.A. (Kuttiyachan)</h3>
+    <p>
+        The sixth child, Kuttiyachan (K. T. Mathai M.A.), married in 1942 to <strong>Mariyamma</strong>, daughter of <strong>P. V. Poulose</strong>, Superintendent in the Accounts Office, Trivandrum. A distinguished scholar of English literature, he served as a Lecturer in English at <strong>St. Xavier's College, Palayamkottai</strong>, and <strong>St. Berchmans (S.B.) College, Changanacherry</strong>. Later, he joined the faculty of <strong>University College, Trivandrum</strong>, and currently serves as Professor of English at <strong>Government College, Thalassery</strong>.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Adv. K. T. Thomas, B.A., B.L.</h3>
+    <p>
+        The seventh child, K. T. Thomas B.A., B.L., entered the legal profession and practices actively as an Advocate residing in Ponkunnam. He is blessed with five children:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Mariyamma</strong></li>
+        <li><strong>Cicily (Chechamma)</strong></li>
+        <li><strong>Maria Goretti</strong> (fondly known to her husband at home and in America as Mariyamma)</li>
+        <li><strong>Rani (Ranima)</strong></li>
+        <li><strong>Thomas</strong></li>
+    </ul>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. Er. K. T. Joseph, B.Sc. (Eng.) (Appachan)</h3>
+    <p>
+        Mammy's eighth child, Appachan (K. T. Joseph B.Sc. Eng.), joined the Kerala State Government Service as an Engineer and now serves in the senior cadre of <strong>Executive Engineer</strong>. He married the eldest daughter of <strong>K. J. Mani</strong> of the <strong>Koottiparambil</strong> family in Vaikom. They have four children:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Mammikutty</strong></li>
+        <li><strong>Thomas</strong></li>
+        <li><strong>Kunjachan</strong></li>
+        <li><strong>Joji</strong></li>
+    </ul>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. K. T. Sebastian, B.A.</h3>
+    <p>
+        The ninth child, K. T. Sebastian B.A., looks after domestic affairs, estate management, and agriculture, residing at the ancestral Kathayanat homestead. He married <strong>Ethamma B.A.</strong> of the <strong>Kaniyamparambil</strong> family, Thathampally, Alappuzha. They are blessed with nine children:
+    </p>
+    <ul style="max-width: 900px; margin: 8px auto 18px auto; line-height: 1.8; font-size: 15.5px;">
+        <li><strong>Sanio</strong>, <strong>Marykutty</strong>, <strong>Jose</strong>, <strong>Rosy</strong>, <strong>Kuruvila</strong>, <strong>Mathukutty</strong>, <strong>Siby</strong>, <strong>Vincent</strong>, and <strong>Tessy</strong>.</li>
+    </ul>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. Annamma</h3>
+    <p>
+        The tenth child, Annamma, was married in 1945 to <strong>Varkeyachan</strong> of the <strong>Illathuparambil</strong> family in Punnathura. They are blessed with seven children.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">11. Claramma, B.A.</h3>
+    <p>
+        The eleventh child, Claramma B.A., was married to <strong>Ouseppachan</strong> of the <strong>Peediyekkal</strong> family in Athirampuzha. They have five children.
+    </p>
+
+    <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">12. Rosakutty, B.A.</h3>
+    <p>
+        The twelfth child, Rosakutty B.A., was married in 1956 to <strong>K. V. Varghese, M.Sc.</strong>, of the <strong>Kunthara</strong> family in Panavally. They were blessed with one son. Rosakutty departed this life at an early age on <strong>June 2, 1959</strong>.
+    </p>
+</div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.35, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.35, Math.min(1.0, availableWidth / 2376));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 2376) {
+                const centerScroll = (2376 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
