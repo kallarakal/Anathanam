@@ -3,22 +3,748 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuruvachan Anathanam - Under Construction</title>
+    <title>K. K. Kuruvila (Kuruvachan Anathanam) - കെ.കെ. കുരുവിള - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1450px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.2em auto;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Anathanam_KunjuVarkey_Kuruvila.html" class="nav-btn" title="View Father's Family Tree: Anathanam KunjuVarkey Kuruvila">
+                &uarr; Father's Tree (Kuruvila)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">K. K. കുരുവിള (കുറുവച്ചൻ) &bull; Kuruvachan &amp; Lucy (Anathanam Tharavadu)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ആറാം തലമുറ &bull; Sixth Generation</p>
+            <h1>
+                K. K. കുരുവിള (കുറുവച്ചൻ) &ndash; ലൂസി വെള്ളാനിക്കാരൻ<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">K. K. Kuruvila (Kuruvachan) &ndash; Lucy Vellanikkaran (Anathanam)</span>
+            </h1>
+            <p class="lifespan">ആനത്താനം തറവാടു്, കാഞ്ഞിരപ്പള്ളി &bull; Anathanam Tharavadu, Kanjirapally &bull; (b. June 3, 1912)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Kuruvachan & Lucy Anathanam Family Tree Diagram (10 Children) -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="1988" height="230" viewBox="0 0 1988 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents (centered at 994) -->
+                <line x1="994" y1="78" x2="994" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 10 children (121 to 1867) -->
+                <line x1="121" y1="118" x2="1867" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1479" y1="118" x2="1479" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1673" y1="118" x2="1673" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1867" y1="118" x2="1867" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 6) -->
+                <g>
+                    <rect x="754" y="18" width="480" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="994" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">K. K. Kuruvila (Kuruvachan) &amp; Lucy</text>
+                    <text x="994" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Anathanam Tharavadu &bull; Youngest Son of Kuruvila &bull; m. 1936)</text>
+                </g>
+
+                <!-- Child 1: Joji (George) -->
+                <g>
+                    <a class="node-link" href="Joji_Kuruvila_Anathanam.html" xlink:href="Joji_Kuruvila_Anathanam.html" title="Open Er. Joji (George) Anathanam">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Er. Joji (George)</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Thankamma Karimbanal</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Jose (Joseph) -->
+                <g>
+                    <a class="node-link" href="Jose_Kuruvila_Anathanam.html" xlink:href="Jose_Kuruvila_Anathanam.html" title="Open Er. Jose (Mechanical) Anathanam">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Er. Jose (Mechanical)</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Mary Polackal M.A.</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Mathachan (Mathew) -->
+                <g>
+                    <a class="node-link" href="Mathachan_Kuruvila_Anathanam.html" xlink:href="Mathachan_Kuruvila_Anathanam.html" title="Open Mathachan (Mathew) Anathanam">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathachan B.Com.</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Ressi Kuruvinakunnel</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Dr. Avirachan (Abraham) -->
+                <g>
+                    <a class="node-link" href="Dr_Avirachan_Anathanam.html" xlink:href="Dr_Avirachan_Anathanam.html" title="Open Dr. Avirachan M.B.B.S. (England)">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Dr. Avirachan M.B.B.S.</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Mary Thoppil (England)</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Premi -->
+                <g>
+                    <a class="node-link" href="Premi_Palakkunnel_Madras.html" xlink:href="Premi_Palakkunnel_Madras.html" title="Open Premi Palakkunnel (Madras)">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Premi B.Sc.</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Xavier Joseph B.Sc. (Eng.)</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Thommachan (Thomas) -->
+                <g>
+                    <a class="node-link" href="Thommachan_Anathanam.html" xlink:href="Thommachan_Anathanam.html" title="Open Thommachan (Thomas) Anathanam">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thommachan B.Sc.</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">Chartered Accountancy</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Jimmy -->
+                <g>
+                    <a class="node-link" href="Jimmy_Kuruvila_Anathanam.html" xlink:href="Jimmy_Kuruvila_Anathanam.html" title="Open Jimmy Anathanam (St. John's Medical)">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Jimmy</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">M.B.B.S. (St. John's, Blr)</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Alice -->
+                <g>
+                    <a class="node-link" href="Alice_Kuruvila_Anathanam.html" xlink:href="Alice_Kuruvila_Anathanam.html" title="Open Alice Anathanam (Stella Maris, Madras)">
+                        <rect x="1394" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1479" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Alice</text>
+                        <text x="1479" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">B.A. (Stella Maris, Madras)</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Siby -->
+                <g>
+                    <a class="node-link" href="Siby_Kuruvila_Anathanam.html" xlink:href="Siby_Kuruvila_Anathanam.html" title="Open Siby Anathanam (St. Joseph's European)">
+                        <rect x="1588" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1673" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Siby</text>
+                        <text x="1673" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">St. Joseph's European, Blr</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Tony -->
+                <g>
+                    <a class="node-link" href="Tony_Kuruvila_Anathanam.html" xlink:href="Tony_Kuruvila_Anathanam.html" title="Open Tony Anathanam (Loyola, Trivandrum)">
+                        <rect x="1782" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1867" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Tony</text>
+                        <text x="1867" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">Loyola School, Trivandrum</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <main>
+            <!-- Three Generation Genealogy Overview Cards -->
+            <div class="bio-section">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 6px;">Three Generation Family Tree &bull; മൂന്നു തലമുറകൾ</h2>
+                <p style="text-align: center; font-weight: 600; color: #7a5823; margin-bottom: 25px;">K. K. Kuruvila &amp; Lucy (6th Gen) &bull; 10 Children (7th Gen) &bull; Descendants (8th Gen)</p>
+                
+                <div class="overview-grid">
+                    <!-- Child 1: Joji -->
+                    <div class="overview-card male">
+                        <h4>1. Er. Joji (George) (b. Aug 13, 1937)</h4>
+                        <div class="spouse">m. Thankamma (m. Dec 27, 1962) &bull; Karimbanal, Kanjirapally</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Engineering &amp; Public Service:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Senior Cambridge (St. Joseph's, Bangalore), Loyola College Madras, Civil Eng. (Udupi). Junior Eng. on Sabarigiri Hydroelectric Project; currently Assistant Engineer in K.S.E.B., residing in Trivandrum.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>8th Generation (5 Children):</strong> Kurumon, Pappachan, Lucy, Annu, Jibu.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 2: Jose -->
+                    <div class="overview-card male">
+                        <h4>2. Er. Jose (Joseph) (b. Sept 28, 1939)</h4>
+                        <div class="spouse">m. Mary, M.A. (m. Feb 12, 1968) &bull; Polackal, Changanacherry</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Mechanical Engineering &amp; Estate:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Senior Cambridge (Bangalore), Loyola Madras, Mechanical Eng. (Udupi). Wife Mary is daughter of P. C. Mathew Polackal (GM, Southern Railway). Residing in ancestral family home (Anathanam), assisting father in agriculture.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>8th Generation (1 Daughter):</strong> Louvella.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 3: Mathachan -->
+                    <div class="overview-card male">
+                        <h4>3. Mathachan (Mathew) (b. Aug 21, 1941)</h4>
+                        <div class="spouse">m. Ressi (m. May 20, 1968) &bull; Kuruvinakunnel</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Commerce &amp; Estate Administration:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Cambridge (Bangalore), B.Com. from Loyola College, Madras. Married Ressi, daughter of Kurian &amp; Mariyakutty Kuruvinakunnel. Residing with father in the ancestral family home.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>8th Generation (3 Children):</strong> Leelu, Kukku, Dipu.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 4: Dr. Avirachan -->
+                    <div class="overview-card male">
+                        <h4>4. Dr. Avirachan (Abraham) (b. Aug 29, 1944)</h4>
+                        <div class="spouse">m. Mary (m. Jan 27, 1972) &bull; Thoppil, Manaloor</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Medicine &amp; British Specialization:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">St. Joseph's Bangalore, S.B. College Changanacherry, M.B.B.S. from Udupi Medical College. Married Mary, daughter of T. K. Louis Thoppil. Residing with family in England for advanced postgraduate medical education.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>8th Generation (1 Son):</strong> Georgie.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 5: Premi -->
+                    <div class="overview-card female">
+                        <h4>5. Premi (b. July 8, 1947)</h4>
+                        <div class="spouse">m. Xavier Joseph, B.Sc. (Eng.) (m. May 5, 1969) &bull; Palakkunnel, Mamood</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Academics &amp; Residence:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Senior Cambridge (St. Francis Xavier's, Bangalore), B.Sc. (Maths) St. Agnes College, Home Science degree from Nirmala Institute (Bombay). Husband Xavier Joseph serves as Assistant Engineer in Madras Port Trust; residing in Madras.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>8th Generation (3 Children):</strong> Jomon, Kiran, Mary.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 6: Thommachan -->
+                    <div class="overview-card male">
+                        <h4>6. Thommachan (Thomas) (b. Aug 9, 1949)</h4>
+                        <div class="spouse">Chartered Accountancy &bull; Madras</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Academics &amp; Finance:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Senior Cambridge from St. Joseph's European High School, Bangalore; B.Sc. (Mathematics) from Madras Christian College (M.C.C.). Currently pursuing Chartered Accountancy (C.A.) studies in Madras.</p>
+                    </div>
+
+                    <!-- Child 7: Jimmy -->
+                    <div class="overview-card male">
+                        <h4>7. Jimmy (b. Jan 26, 1952)</h4>
+                        <div class="spouse">Medical Studies &bull; St. John's, Bangalore</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Medicine:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">St. Joseph's European High School, Bangalore; Pre-University from Loyola College, Madras. Currently pursuing M.B.B.S. at St. John's Medical College, Bangalore.</p>
+                    </div>
+
+                    <!-- Child 8: Alice -->
+                    <div class="overview-card female">
+                        <h4>8. Alice (b. March 27, 1956)</h4>
+                        <div class="spouse">Collegiate Studies &bull; Stella Maris, Madras</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Academics:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">St. Joseph's Convent High School, Bangalore; Pre-University from Stella Maris College, Madras; currently pursuing Bachelor of Arts (B.A.) degree.</p>
+                    </div>
+
+                    <!-- Child 9: Siby -->
+                    <div class="overview-card male">
+                        <h4>9. Siby (b. Oct 19, 1957)</h4>
+                        <div class="spouse">St. Joseph's European &bull; Bangalore</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Secondary Education:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Currently pursuing schooling at St. Joseph's European High School, Bangalore.</p>
+                    </div>
+
+                    <!-- Child 10: Tony -->
+                    <div class="overview-card male">
+                        <h4>10. Tony (b. Sept 2, 1962)</h4>
+                        <div class="spouse">Loyola School &bull; Trivandrum</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">School Education:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Currently pursuing schooling at Loyola School, Trivandrum.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Malayalam Biography & History First -->
+            <div class="bio-section" id="malayalam-history">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">K. K. കുരുവിള (കുറുവച്ചൻ) &ndash; ജീവചരിത്രവും കുടുംബചരിത്രവും</h2>
+                <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">ആനത്താനത്തു കുഞ്ഞുവർക്കി കുരുവിളയുടെ ഇളയ പുത്രൻ &bull; ആറാം തലമുറ &bull; ആനത്താനം തറവാടു് &bull; (ജനനം: 1912 ജൂൺ 3)</p>
+
+                <p class="section-lead">
+                    ആനത്താനത്തു കുഞ്ഞുവർക്കി കുരുവിളയുടെയും കരിപ്പാപ്പറമ്പിൽ ചാച്ചിയമ്മയുടെയും ഇളയ സന്താനമായ K.K. കുരുവിള (കുറുവച്ചൻ) 1912 - മാണ്ടു് ജൂൺ 3-ാം തീയതി ജനിച്ചു. കാഞ്ഞിരപ്പള്ളിയിൽ പ്രാരംഭ വിദ്യാഭ്യാസത്തിനുശേഷം ചങ്ങനാശേരി സെൻറ് ബർക്കുമാൻസ് ഹൈസ്കൂളിൽ ചേർന്നു. ഇതിനുശേഷം തിരുവനന്തപുരം ഗവ. ഹൈസ്കൂളിൽ ചേർന്നു പഠിച്ചു. പിന്നീടു് തിരുവനന്തപുരം മഹാരാജാസ് കോളേജിൽ നിന്നു ഇൻറർമീഡിയറ്റ് പാസ്സായി.
+                </p>
+
+                <p>
+                    ഇതിനിടയിൽ പിതാവിൻറെ അസുഖത്തെത്തുടർന്ന് വിദ്യാഭ്യാസം നിർത്തി, കുടുംബകാരൃത്തിൽ സഹോദരനായ ചാക്കോച്ചനെ സഹായിച്ചു വന്നു. ഇങ്ങനെയിരിക്കെ 1932 ഓഗസ്റ്റ് 25-ാം തീയതി പിതാവായ കുരുവിള തൻറെ 85-ാമത്തെ വയസ്സിൽ നിരൃതനായി. പിതാവിന്റെ വിൽപത്ര പ്രകാരം ഇളയ പുത്രനായ കുറുവച്ചൻ തറവാട്ടിൽ താമസിച്ചു വരുന്നു.
+                </p>
+
+                <p>
+                    കുറുവച്ചൻറെ ജേഷ്ഠസഹോദരൻ K. K. Mathew B.A. B.L. കോട്ടയത്തു് വക്കീൽ ജോലിയിലിരിക്കെ 1934 ജൂലൈ 15-ാം തീയതി ഈശോ സഭയിൽ ചേരാൻ നിശ്ചയിച്ചപ്പോൾ, തന്റെ സ്വത്തുക്കൾ നോക്കി ഭരിക്കുന്നതിനായി കുറുവച്ചനെയാണു് നിയോഗിച്ചതു്. അതു് ഇപ്പോഴും തുടർന്നുവരുന്നു.
+                </p>
+
+                <p>
+                    1956-ാമാണ്ടു് ഒക്ടോബർ 25-ാം തീയതി കുറുവച്ചൻറെ മാതാവായ ചാച്ചിയമ്മ നിരൃതയായി. കാഞ്ഞിരപ്പള്ളി പുത്തൻ പളളിയുടെ മുൻവശത്തുള്ള സ്വഭർത്താവിന്റെ കല്ലറയിൽതന്നെ സ്വപുത്രൻ Fr. K. K. Mathew S.J. യുടേയും Rev. Fr. Kuruvilla Kallarackal-ൻറെയും പ്രധാന കാർമ്മികത്വത്തിലും, പല വൈദിക മേലദ്ധ്യക്ഷന്മാരുടെയും, വൈദികരുടെയും ബന്ധുമിത്രാദികളുടെയും സാന്നിദ്ധ്യത്തിലും ശവസംസ്കാരം നടത്തപ്പെട്ടു.
+                </p>
+
+                <p>
+                    കുറുവച്ചൻ 1936 ജനുവരി 27-ാം തീയതി ഇരിങ്ങാലക്കുട വെള്ളാനിക്കാരൻ കുടുബാംഗവും, കൊച്ചിൻ സ്റ്റേററ് ചീഫ് ജസ്റ്റീസ് V.D. അവുസേപ്പ് B.A. B.L. ൻറെയും വൈക്കത്തു മണിപ്പാടത്തു കുടുംബാംഗമായ ഏലിക്കുട്ടിയുടെയും മൂന്നാമത്തെ പുത്രിയുമായ ലൂസിയെ വിവാഹം ചെയ്തു. എറണാകുളം സെൻറ് മേരീസ് കത്തീഡ്രലിൽവച്ചു് പരേതനായ ആർച്ച് ബിഷപ് അഗസ്റ്റിൻ കണ്ടത്തിൽ അവർകളാണ് ഈ വിവാഹം ആശീർവദിച്ചതു്. ഇവർക്ക് ജോജി, ജോസു്, മാത്തച്ചൻ, അവിരാച്ചൻ, പ്രേമി, തോമാച്ചൻ, ജിമ്മി, ആലീസു്, സിബി, ടോണി എന്നീ 10 സന്താനങ്ങൾ ഉണ്ടായി.
+                </p>
+
+                <div style="background: rgba(179, 137, 56, 0.08); border-left: 4px solid #b38938; padding: 12px 18px; margin: 20px auto; max-width: 900px; font-size: 15px; line-height: 1.7; border-radius: 0 8px 8px 0;">
+                    <strong>കുറുവച്ചൻ &ndash; ലൂസി ദമ്പതികളുടെ 10 സന്താനങ്ങൾ (ഏഴാം തലമുറ):</strong>
+                </div>
+
+                <ol style="max-width: 920px; margin: 15px auto 25px auto; line-height: 1.85; font-size: 15.5px;">
+                    <li><strong>ജോജി</strong> 1937 ആഗസ്റ്റ് 13-ാം തീയതി ജനിച്ചു. ബാഗ്ളൂർ സെൻറ് ജോസഫ്സ് യൂറോപ്യൻ ഹൈസ്കൂളിൽനിന്നു് Senior Cambridge പാസ്സായ ശേഷം, മദ്രാസ് ലയോളാ കോളേജിൽ നിന്നു് ഇൻറർ മീഡിയേററ് പാസ്സായി. അതിനുശേഷം ഉടുപ്പി എൻജിനീയറിംഗ് കോളേജിൽ ചേർന്ന് സിവിൽ എൻജിനീയറിംഗ് പാസ്സായി. K.S.E.B.-യിൽ ജൂണിയർ എൻജിനീയറായി Sabarigiri project-ൽ ജോലി ആരംഭിച്ചു. അതിനുശേഷം കാഞ്ഞിരപ്പള്ളി പള്ളിവാതുക്കൽ കരിമ്പനാൽ പാപ്പച്ചൻറെയും അന്നമ്മയുടെയും സന്താനമായ തങ്കമ്മയെ, 1962 ഡിസംബർ 27-ാം തീയതി വിവാഹം കഴിച്ചു. ഇവർക്ക് കുറുമോൻ, പാപ്പച്ചൻ, ലൂസി, അന്നു, ജിബു എന്നീ അഞ്ചു സന്താനങ്ങൾ ഉണ്ടു്. Electricity Board-ൽ Asst. Engineer ആയി ജോലി ചെയ്തുകൊണ്ടു് തിരുവനന്തപുരത്തു കുടുംബസഹിതം താമസിക്കുന്നു.</li>
+                    <li><strong>ജോസു്</strong> 1939 സെപ്തംബർ 28-ാം തീയതി ജനിച്ചു. ബാംഗ്ളൂർ സെൻറ് ജോസഫ്സ് ഹൈസ്കൂളിലെ Senior Cambridge വിദ്യാഭ്യാസത്തിനു ശേഷം മദ്രാസ് ലയോളാ കോളേജിൽ നിന്നു് പ്രീയൂണിവേഴ്സിററി പാസ്സാവുകയും, പിന്നീടു് ഉടുപ്പി എൻജിനീയറിംഗ് കോളേജിൽനിന്നു് മെക്കാനിക്കൽ എൻജിനീയറിംഗ് പാസ്സാവുകയും ചെയ്തു. ചങ്ങനാശേരി P. C. Mathew Polackal (General Manager, Southern Railway) ൻറെ പുത്രിയായ മേരി M.A. യെ ജോസു് വിവാഹം ചെയ്തിരിക്കുന്നതു്. 1968 ഫെബ്രുവരി 12-ാം തീയതിയാണ് ഈ വിവാഹം നടന്നതു്. ഇവർക്കു് ലൂവല്ല, എന്നൊരു പുത്രിയുമുണ്ടു്. ജോസ് കൃഷികാരൃങ്ങളിൽ പിതാവിനെ സഹായിച്ചുകൊണ്ടു് കുടുംബത്തിൽ താമസിക്കുന്നു.</li>
+                    <li><strong>മാത്തച്ചൻ</strong> 1941 ഓഗസ്റ്റ് 21-ാം തീയതി ജനിച്ചു. ബാംഗ്ളൂർ സെൻറ് ജോസഫ്സ് സ്കൂളിലെ Cambridge വിദ്യാഭ്യാസത്തിനു ശേഷം മദ്രാസ് ലയോളാ കോളേജിൽനിന്നു് B.Com. പാസ്സായി. മാത്തച്ചൻ, കുരുവിനാക്കുന്നേൽ കുരൃൻറെയും മറിയക്കുട്ടിയുടെയും പുത്രിയായ റെറസിയെ 1968 മേയ് 20-ാം തീയതി വിവാഹം ചെയ്തു. ഇവർക്കു് സന്താനങ്ങളായി ലീലു, കുക്കു, ദിപു എന്നിവരുണ്ടു്. മാത്തച്ചൻ ഇപ്പോൾ പിതാവിനോടൊത്തു കുടുംബത്തിൽ താമസിക്കുന്നു.</li>
+                    <li><strong>അവിരാച്ചൻ</strong> 1944 ഓഗസ്റ് 29-ാം തീയതി ജനിച്ചു. ബാംക്ളൂർ സെൻറ് ജോസഫ്സ് യൂറോപൃൻ സ്കൂളിലെ വിദ്യാഭ്യാസത്തിനു ശേഷം ചങ്ങനാശേരി S. B. കോളേജിൽ നിന്നും പ്രീയൂണിവേഴ്സിററി പാസ്സായി. അതിനുശേഷം ഉടുപ്പി മെഡിക്കൽ കോളജിൽനിന്നു് M.B.B.S. പാസ്സായി. അവിരാച്ചൻ മണലൂർ തോപ്പിൽ T. K. ലൂയിസ്സിൻറെയും തങ്കമ്മയുടെയും പുത്രി മേരിയെ 1972 ജനുവരി 27-ാം തീയതി വിവാഹം കഴിച്ചു. അവിരാച്ചൻ കുടുംബസമേതം ഉന്നത വിദ്യാഭ്യാസത്തിനായി England-ൽ താമസിച്ചു വരുന്നു. സന്താനമായി Georgie എന്നൊരു പുത്രനും ഉണ്ടു്.</li>
+                    <li><strong>പ്രേമി</strong> 1947 ജൂലൈ 8-ാം തീയതി ജനിച്ചു. Bangalore St. Francis Xavier's Girls High School-ൽ നിന്ന് Senior Cambridge പാസ്സായി St. Agnes College-ൽ നിന്നും B.Sc. (Maths) പാസ്സായശേഷം ബോംബെ നിർമല ഹോംസയൻസ് ബിരുദം നേടി. പ്രേമിയെ മാമ്മൂട് പാലാക്കുന്നേൽ ഔസേപ്പച്ചൻറെയും റോസമ്മയുടെയും പുത്രൻ സേവ്യർ ജോസഫ് B.Sc. (Eng.) 1969 മെയ് 5-ാം തീയതി വിവാഹം ചെയ്തു. ഇദ്ദേഹം Madras Port Trust-ൽ ഒരു Asst. Engineer ആയി ജോലി നോക്കുന്നു. ഇവർക്കു ജോമോൻ, കിരൺ, മേരി എന്നീ സന്താനങ്ങൾ ഉണ്ടു്.</li>
+                    <li><strong>തോമ്മാച്ചൻ</strong> 1949 - ആഗസ്റ്റ് 9-ാം തീയതി ജനിച്ചു. Bangalore St. Joseph's European High School-ൽ നിന്നു് Senior Cambridge പാസ്സായശേഷം മദ്രാസ് ക്രിസ്ത്യൻ കോളേജിൽ നിന്നും B.Sc. (Maths) പാസ്സായി. ഇപ്പോൾ മദ്രാസിൽ Chartered Accountancy-യ്കു വേണ്ടി പഠിക്കുന്നു.</li>
+                    <li><strong>ജിമ്മി</strong> 1952 ജനുവരി 26-ാം തീയതി ജനിച്ചു. ബാഗ്ളൂർ സെൻറ് ജോസഫ്സ് യൂറോപ്യൻ സ്കൂളിലെ വിദ്യാഭ്യാസത്തിനു ശേഷം മദ്രാസ് ലയോള കോളേജിൽ പ്രീയൂണിവേഴ്സിററി പാസ്സായി. ജിമ്മി ഇപ്പോൾ ബാംഗ്ളൂർ സെൻറ് ജോൺസ് മെഡിക്കൽ കോളേജിൽ M.B.B.S.-നു പഠിക്കുന്നു.</li>
+                    <li><strong>ആലീസ്</strong> 1956 മാർച്ചു 27-ാം തീയതി ജനിച്ചു. ബാഗ്ളൂർ സെൻറ് ജോസഫ്സ് കോൺവൻറിലെ ഹൈസ്കൂൾ വിദ്യാഭ്യാസത്തിനുശേഷം മദ്രാസിലുള്ള Stella Maris College-ൽ പ്രി യൂണിവേഴ്സിററി പാസായി, B.A. യ്കു പഠിക്കുന്നു.</li>
+                    <li><strong>സിബി</strong> 1957 ഒക്ടോബർ 19-ാം തീയതി ജനിച്ചു. Bangalore St. Joseph's യൂറോപ്യൻ സ്കൂളിൽ പഠിക്കുന്നു.</li>
+                    <li><strong>റ്റോണി</strong> 1962 സെപ്തംബർ 2-ാം തീയതി ജനിച്ചു. തിരുവനന്തപുരം ലയോളാ സ്കൂളിൽ പഠിക്കുന്നു.</li>
+                </ol>
+            </div>
+
+            <!-- English Translation Second -->
+            <div class="bio-section" id="english-history">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Family History &amp; Biography &ndash; K. K. Kuruvila (Kuruvachan), Anathanam</h2>
+                <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">Youngest Son of Anathanam KunjuVarkey Kuruvila &bull; Sixth Generation Kallarackal &bull; Custodian of Ancestral Tharavadu</p>
+
+                <p class="section-lead">
+                    <strong>K. K. Kuruvila (Kuruvachan)</strong>, the youngest child of KunjuVarkey Kuruvila and Chachiyamma Karippaparambil of the Anathanam family, was born on <strong>June 3, 1912</strong>. Following his early education in Kanjirappally, he attended <strong>St. Berchmans (S.B.) High School, Changanacherry</strong>, and later completed his secondary schooling at the <strong>Government High School, Trivandrum</strong>. He then passed his Intermediate examinations from <strong>Maharaja's College, Trivandrum</strong>.
+                </p>
+
+                <p>
+                    During his collegiate years, owing to his father's failing health, Kuruvachan discontinued his higher academic studies and returned home to assist his elder brother Chackochan in overseeing household estates and agricultural management. On <strong>August 25, 1932</strong>, their venerable father KunjuVarkey Kuruvila passed away at the age of 85. Under the provisions of his father's last will and testament, as the youngest son, Kuruvachan inherited and took up lifelong residence in the ancestral <strong>Anathanam Tharavadu</strong>.
+                </p>
+
+                <p>
+                    When his elder brother, Advocate <strong>K. K. Mathew, B.A., B.L.</strong>, practicing at the Kottayam District Bar, resolved on <strong>July 15, 1934</strong>, to renounce worldly life and enter the Society of Jesus (Jesuit Novitiate at Shembaganur), he legally appointed Kuruvachan to administer his properties and patrimony&mdash;a responsibility Kuruvachan continued to faithfully execute.
+                </p>
+
+                <p>
+                    On <strong>October 25, 1956</strong>, Kuruvachan's mother, <strong>Chachiyamma</strong>, passed away. She was laid to rest alongside her husband in the ancestral family tomb in front of the Kanjirappally Puthenpally. The solemn funeral rites were celebrated with her son <strong>Rev. Fr. K. K. Mathew, S.J.</strong>, and <strong>Rev. Fr. Kuruvilla Kallarackal</strong> as principal celebrants, in the presence of numerous church dignitaries, priests, relatives, and well-wishers.
+                </p>
+
+                <p>
+                    On <strong>January 27, 1936</strong>, Kuruvachan married <strong>Lucy</strong>, the third daughter of <strong>Justice V. D. Ouseph, B.A., B.L.</strong> (Chief Justice of Cochin State) of the Vellanikkaran family in Irinjalakuda, and Elikutty of the Manippadom family in Vaikom. The holy matrimony was blessed at <strong>St. Mary's Cathedral, Ernakulam</strong>, by the late Most Rev. Augustine Kandathil, Archbishop of Ernakulam.
+                </p>
+
+                <p>
+                    Kuruvachan and Lucy were blessed with <strong>10 children</strong> belonging to the Seventh Generation:
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Er. Joji (George)</h3>
+                <p>
+                    Born on <strong>August 13, 1937</strong>. He passed the Senior Cambridge examination from St. Joseph's European High School, Bangalore, completed his Intermediate at Loyola College, Madras, and earned his <strong>Civil Engineering degree</strong> from Udupi Engineering College. He began his career as Junior Engineer in the Kerala State Electricity Board (K.S.E.B.) on the landmark <strong>Sabarigiri Hydroelectric Project</strong>. On <strong>December 27, 1962</strong>, he married <strong>Thankamma</strong>, daughter of Pappachan &amp; Annamma Pallivathukkal Karimbanal of Kanjirappally. They have five children: <strong>Kurumon</strong>, <strong>Pappachan</strong>, <strong>Lucy</strong>, <strong>Annu</strong>, and <strong>Jibu</strong>. He serves as an Assistant Engineer in the Electricity Board, residing with his family in Trivandrum.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Er. Jose (Joseph)</h3>
+                <p>
+                    Born on <strong>September 28, 1939</strong>. After Senior Cambridge schooling at St. Joseph's High School, Bangalore, he completed Pre-University at Loyola College, Madras, and graduated with a degree in <strong>Mechanical Engineering</strong> from Udupi Engineering College. On <strong>February 12, 1968</strong>, he married <strong>Mary, M.A.</strong>, daughter of <strong>P. C. Mathew Polackal</strong> (General Manager, Southern Railway) of Changanacherry. They have a daughter, <strong>Louvella</strong>. Jose assists his father in managing agricultural estates and resides in the ancestral home.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Mathachan (Mathew)</h3>
+                <p>
+                    Born on <strong>August 21, 1941</strong>. After Cambridge schooling at St. Joseph's, Bangalore, he graduated with a <strong>B.Com.</strong> degree from Loyola College, Madras. On <strong>May 20, 1968</strong>, he married <strong>Ressi</strong>, daughter of Kurian &amp; Mariyakutty Kuruvinakunnel. They have three children: <strong>Leelu</strong>, <strong>Kukku</strong>, and <strong>Dipu</strong>. Mathachan resides with his father in the family ancestral house.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Dr. Avirachan (Abraham)</h3>
+                <p>
+                    Born on <strong>August 29, 1944</strong>. Following schooling at St. Joseph's European School, Bangalore, he passed Pre-University at S.B. College, Changanacherry, and completed his <strong>M.B.B.S.</strong> at Udupi Medical College. On <strong>January 27, 1972</strong>, he married <strong>Mary</strong>, daughter of T. K. Louis &amp; Thankamma Thoppil of Manaloor. They have a son, <strong>Georgie</strong>. Dr. Avirachan resides with his family in England, pursuing advanced medical specialization.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Premi</h3>
+                <p>
+                    Born on <strong>July 8, 1947</strong>. After Senior Cambridge at St. Francis Xavier's Girls High School, Bangalore, she completed <strong>B.Sc. (Mathematics)</strong> at St. Agnes College and earned a degree in <strong>Home Science</strong> from Nirmala Institute, Bombay. On <strong>May 5, 1969</strong>, she married <strong>Xavier Joseph, B.Sc. (Eng.)</strong>, son of Ouseppachan &amp; Rosamma Palakkunnel of Mamood. Xavier Joseph is an Assistant Engineer in the Madras Port Trust; they reside in Madras with their three children: <strong>Jomon</strong>, <strong>Kiran</strong>, and <strong>Mary</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Thommachan (Thomas)</h3>
+                <p>
+                    Born on <strong>August 9, 1949</strong>. Following Senior Cambridge at St. Joseph's European High School, Bangalore, he graduated with <strong>B.Sc. (Mathematics)</strong> from Madras Christian College (M.C.C.). He is currently studying for <strong>Chartered Accountancy (C.A.)</strong> in Madras.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Jimmy</h3>
+                <p>
+                    Born on <strong>January 26, 1952</strong>. After St. Joseph's European School, Bangalore, and Pre-University at Loyola College, Madras, he is currently studying for his <strong>M.B.B.B.</strong> medical degree at <strong>St. John's Medical College, Bangalore</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. Alice</h3>
+                <p>
+                    Born on <strong>March 27, 1956</strong>. Following schooling at St. Joseph's Convent High School, Bangalore, and Pre-University at Stella Maris College, Madras, she is currently pursuing her <strong>Bachelor of Arts (B.A.)</strong> degree.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. Siby</h3>
+                <p>
+                    Born on <strong>October 19, 1957</strong>. He is currently pursuing his education at St. Joseph's European High School, Bangalore.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. Tony</h3>
+                <p>
+                    Born on <strong>September 2, 1962</strong>. He is currently pursuing his schooling at Loyola School, Trivandrum.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.3, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.3, Math.min(1.0, availableWidth / 1988));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 1988) {
+                const centerScroll = (1988 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
