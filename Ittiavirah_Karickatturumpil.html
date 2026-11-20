@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ittiavirah Karickatturumpil (Ittirachan) - ഇട്ടിരാച്ചൻ കരിക്കാട്ടുറുമ്പിൽ - Family Tree &amp; History</title>
+    <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1450px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        .scripture-box {
+            border: 2px solid #af8133;
+            background: #fdf8ed;
+            padding: 20px 24px;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 920px;
+            box-shadow: 0 4px 14px rgba(175, 129, 51, 0.12);
+        }
+
+        .scripture-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #5c3814;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .scripture-citation {
+            text-align: right;
+            font-weight: 700;
+            color: #8c5d1e;
+            font-size: 14.5px;
+            margin-top: 10px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="KunjuVarkey_Karickatturumpil.html" class="nav-btn" title="View Father's Family Tree: Kuruvila KunjuVarkey Karickatturumpil">
+                &uarr; Father's Tree (Karickatturumpil)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">ഇട്ടിരാച്ചൻ കരിക്കാട്ടുറുമ്പിൽ &bull; Ittiavirah &amp; Brigeetha Pottamkulam</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ഏഴാം തലമുറ &bull; Seventh Generation</p>
+            <h1>
+                ഇട്ടിരാച്ചൻ കരിക്കാട്ടുറുമ്പിൽ &ndash; ബ്രിജീത്താ പൊട്ടുംകുളത്തു്<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">KunjuVarkey Ittiavirah (Ittirachan) Karickatturumpil, B.A. &ndash; Brigeetha Pottamkulam</span>
+            </h1>
+            <p class="lifespan">അറപ്പുരയ്ക്കൽ പടിഞ്ഞാറെപ്പുരയിടം, കാഞ്ഞിരപ്പള്ളി &bull; Arappuraykkal Western Property, Kanjirapally &bull; (b. March 27, 1899 / 1074 Meenam 15)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Ittiavirah & Brigeetha Karickatturumpil Family Tree Diagram (10 Children) -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="1988" height="230" viewBox="0 0 1988 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents (centered at 994) -->
+                <line x1="994" y1="78" x2="994" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 10 children (121 to 1867) -->
+                <line x1="121" y1="118" x2="1867" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1479" y1="118" x2="1479" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1673" y1="118" x2="1673" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1867" y1="118" x2="1867" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Node (7th Generation) -->
+                <g>
+                    <rect x="734" y="18" width="520" height="60" rx="10" ry="10" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 4px 8px rgba(60, 40, 18, 0.15));" />
+                    <text x="994" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#3b2210">ഇട്ടിരാച്ചൻ കരിക്കാട്ടുറുമ്പിൽ (B.A.) &ndash; ബ്രിജീത്താ പൊട്ടുംകുളത്തു്</text>
+                    <text x="994" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Brigeetha Pottamkulam, Aruvithura &bull; 5th Child of Kuruvila KunjuVarkey)</text>
+                </g>
+
+                <!-- Child 1: George (Vackachan) -->
+                <g>
+                    <a class="node-link" href="George_Vackachan_Karickatturumpil.html" xlink:href="George_Vackachan_Karickatturumpil.html" title="Open George (Vackachan) Karickatturumpil">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">George (Vackachan)</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Thankamma Maliackal</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Scaria (Kariyachan) -->
+                <g>
+                    <a class="node-link" href="Scaria_Udumbanchola_Karickatturumpil.html" xlink:href="Scaria_Udumbanchola_Karickatturumpil.html" title="Open Scaria (Kariyachan) Karickatturumpil">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Scaria (Kariyachan)</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Alice Ullattikkulam</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Kuruvila (Kuruvachan) -->
+                <g>
+                    <a class="node-link" href="Kuruvila_Chemmalamattam_Karickatturumpil.html" xlink:href="Kuruvila_Chemmalamattam_Karickatturumpil.html" title="Open Kuruvila (Kuruvachan) Chemmalamattam">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila (Kuruvachan)</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Kunjamma Thekkumbhagom</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Mary (Mammy) -->
+                <g>
+                    <a class="node-link" href="Mary_Mammy_Valyaparackadu_Poonjar.html" xlink:href="Mary_Mammy_Valyaparackadu_Poonjar.html" title="Open Mary (Mammy) Valyaparackadu">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mary (Mammy)</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Thomas Valyaparackadu</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Aelimma / Sr. Carlotha -->
+                <g>
+                    <a class="node-link" href="Sr_Carlotha_Karickatturumpil.html" xlink:href="Sr_Carlotha_Karickatturumpil.html" title="Open Sr. Carlotha (Aelimma / Chachiyamma)">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Sr. Carlotha (Aelimma)</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">Sisters of Charity</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Mathew (Mathayichan) -->
+                <g>
+                    <a class="node-link" href="Mathew_Manjappally_Karickatturumpil.html" xlink:href="Mathew_Manjappally_Karickatturumpil.html" title="Open Mathew (Mathayichan) Manjappally">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathew (Mathayichan)</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Mariyamma Kakkarappadickal</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Annamma -->
+                <g>
+                    <a class="node-link" href="Annamma_Chirakkadavu_Thuruthi.html" xlink:href="Annamma_Chirakkadavu_Thuruthi.html" title="Open Annamma Chirakkadavu (Thuruthi)">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Annamma</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. C.P. Thomas Chirakkadavu</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Jacob (Pappachan) -->
+                <g>
+                    <a class="node-link" href="Jacob_FederalBank_Karickatturumpil.html" xlink:href="Jacob_FederalBank_Karickatturumpil.html" title="Open Jacob (Pappachan) Karickatturumpil">
+                        <rect x="1394" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1479" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Jacob (Pappachan), B.Com.</text>
+                        <text x="1479" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Elsie Nellippuzha</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Jose -->
+                <g>
+                    <a class="node-link" href="Jose_Arappuraykkal_Karickatturumpil.html" xlink:href="Jose_Arappuraykkal_Karickatturumpil.html" title="Open Jose Karickatturumpil">
+                        <rect x="1588" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1673" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Jose</text>
+                        <text x="1673" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Shantha Alumparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Abraham (Avirachan) -->
+                <g>
+                    <a class="node-link" href="Abraham_Avirachan_Karickatturumpil.html" xlink:href="Abraham_Avirachan_Karickatturumpil.html" title="Open Abraham (Avirachan) Karickatturumpil">
+                        <rect x="1782" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1867" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Abraham (Avirachan)</text>
+                        <text x="1867" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">College Student</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Three Generation Summary Cards (8th & 9th Generations) -->
+        <section style="max-width: 1200px; margin: 30px auto;">
+            <h2 style="text-align: center; color: #3b2210; font-size: 22px; margin-bottom: 8px;">സന്താനപരമ്പര &bull; Three-Generation Descendants Overview</h2>
+            <p style="text-align: center; color: #634018; font-size: 14.5px; margin-bottom: 24px;">ഇട്ടിരാച്ചൻ &ndash; ബ്രിജീത്താ ദമ്പതികളുടെ 10 സന്താനങ്ങളും അവരുടെ കുടുംബങ്ങളും (8 &amp; 9 തലമുറകൾ)</p>
+
+            <div class="overview-grid">
+                
+                <!-- Card 1: George (Vackachan) -->
+                <div class="overview-card male">
+                    <h4>1. George (Vackachan / വക്കച്ചൻ)</h4>
+                    <div class="spouse">m. Thankamma (Merciline / മർസിലിൻ) Maliackal, Manjoor</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Near Anakkallu Church &bull; b. Feb 11, 1930</p>
+                    <strong>Children (9th Gen): 6</strong>
+                    <ul>
+                        <li>Sheela (ഷീല)</li>
+                        <li>Susi (സുശി)</li>
+                        <li>Vino (വിനോ)</li>
+                        <li>Mejo (മേജൊ)</li>
+                        <li>Mini (മിനി)</li>
+                        <li>Shanthi (ശാന്തി)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Scaria (Kariyachan) -->
+                <div class="overview-card male">
+                    <h4>2. Scaria (Kariyachan / കറിയാച്ചൻ)</h4>
+                    <div class="spouse">m. Alice Ullattikkulam, Chalakudy</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Management &amp; Residence:</strong> Cardamom Estate, Udumbanchola &bull; b. Jan 14, 1931</p>
+                    <strong>Children (9th Gen): 4</strong>
+                    <ul>
+                        <li>Stanley (സ്റ്റാൻലി)</li>
+                        <li>Jeena (ജീന)</li>
+                        <li>Meena (മീന)</li>
+                        <li>Leena (ലീന)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Kuruvila (Kuruvachan) -->
+                <div class="overview-card male">
+                    <h4>3. Kuruvila (Kuruvachan / കുറുവച്ചൻ)</h4>
+                    <div class="spouse">m. Kunjamma (Brigeetha) Thekkumbhagom, Aruvithura</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Chemmalamattam &bull; b. Nov 2, 1933</p>
+                    <strong>Children (9th Gen): 10</strong>
+                    <ul>
+                        <li>Joy (ജോയി)</li>
+                        <li>Beena (ബീനാ)</li>
+                        <li>Siby (സിബി)</li>
+                        <li>Joshi (ജോഷി)</li>
+                        <li>Vakkan (വക്കൻ)</li>
+                        <li>Chackochan (ചാക്കോച്ചൻ)</li>
+                        <li>Jaya (ജയ)</li>
+                        <li>Suji (സുജി)</li>
+                        <li>Mary (മേരി)</li>
+                        <li>Thresia (ത്രേസ്യാ)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Mary (Mammy) -->
+                <div class="overview-card female">
+                    <h4>4. Mary (Mammy / മാമ്മി)</h4>
+                    <div class="spouse">m. Thomas Valyaparackadu, Poonjar</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Poonjar &bull; b. April 18, 1934</p>
+                    <strong>Children (9th Gen): 8</strong>
+                    <ul>
+                        <li>8 Children (8 സന്താനങ്ങൾ)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 5: Aelimma / Sr. Carlotha -->
+                <div class="overview-card female">
+                    <h4>5. Aelimma / Chachiyamma (Sr. Carlotha)</h4>
+                    <div class="spouse">Religious Vocation &bull; Sisters of Charity</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Service &amp; Residence:</strong> Religious Sister &amp; Nurse, Secunderabad &bull; b. Sept 17, 1936</p>
+                    <strong>Consecrated Life:</strong>
+                    <ul style="list-style-type: square;">
+                        <li>Joined the Sisters of Charity order</li>
+                        <li>Received the religious name Sr. Carlotha</li>
+                        <li>Serving the sick and suffering as a dedicated nurse</li>
+                    </ul>
+                </div>
+
+                <!-- Card 6: Mathew (Mathayichan) -->
+                <div class="overview-card male">
+                    <h4>6. Mathew (Mathayichan / മത്തായിച്ചൻ)</h4>
+                    <div class="spouse">m. Mariyamma Kakkarappadickal</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Manjappally &bull; b. Aug 17, 1937</p>
+                    <strong>Children (9th Gen): 4</strong>
+                    <ul>
+                        <li>Ramesh (രമേഷ്)</li>
+                        <li>Suresh (സുരേഷ്)</li>
+                        <li>Santhosh (സന്തോഷ്)</li>
+                        <li>Shanty (ഷാൻറി)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 7: Annamma -->
+                <div class="overview-card female">
+                    <h4>7. Annamma (അന്നമ്മ)</h4>
+                    <div class="spouse">m. C.P. Thomas Chirakkadavu, Thuruthi</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Thuruthi (near Changanacherry) &bull; b. April 24, 1939</p>
+                    <strong>Biblical Meditation:</strong>
+                    <p style="font-size: 12.5px; font-style: italic; margin-top: 6px; color: #5c3814;">
+                        Featured with the scripture passage on Christian Marriage (ഭാര്യാ ഭർതൃ ബന്ധം, Eph 5:22&ndash;33)
+                    </p>
+                </div>
+
+                <!-- Card 8: Jacob (Pappachan) -->
+                <div class="overview-card male">
+                    <h4>8. Jacob (Pappachan / പാപ്പച്ചൻ), B.Com.</h4>
+                    <div class="spouse">m. Elsie Nellippuzha, Cherpunkal</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Profession &amp; Residence:</strong> Federal Bank Agent/Manager; Nedumkandam &bull; b. June 26, 1940</p>
+                    <strong>Children (9th Gen): 2</strong>
+                    <ul>
+                        <li>Honey (ഹണി)</li>
+                        <li>Rony (റേറാണി)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 9: Jose -->
+                <div class="overview-card male">
+                    <h4>9. Jose (ജോസു്)</h4>
+                    <div class="spouse">m. Shantha Alumparambil, Kottayam</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Arappuraykkal Property &bull; b. Dec 28, 1943</p>
+                    <strong>Children (9th Gen): 1</strong>
+                    <ul>
+                        <li>Anish (അനിഷ്)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 10: Abraham (Avirachan) -->
+                <div class="overview-card male">
+                    <h4>10. Abraham (Avirachan / അവിരാച്ചൻ)</h4>
+                    <div class="spouse">10th Child of Ittiavirah &amp; Brigeetha</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education:</strong> Pursuing Higher College Education</p>
+                    <strong>Academic Pursuit:</strong>
+                    <ul style="list-style-type: square;">
+                        <li>Undergraduate college studies</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Main Biographical Narrative: Malayalam First, followed by English Translation -->
+        <main class="bio-section">
+            
+            <!-- MALAYALAM SECTION -->
+            <div lang="ml">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    കുടുംബ ചരിത്രം (Malayalam History)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>ഏഴാം തലമുറ &ndash; ഇട്ടിരാച്ചൻ കരിക്കാട്ടുറുമ്പിൽ:</strong>
+                </p>
+
+                <p>
+                    6-&nbsp;ാം തലമുറക്കാരനായ കുരുവിള കുഞ്ഞുവർക്കിയുടെ അഞ്ചാമത്തെ സന്താനമായ കാഞ്ഞുവർക്കി ഇട്ടിയവിരാ (ഇട്ടിരാച്ചൻ) 1899-&nbsp;ാംമാണ്ടു് (മീനമാസം 15-നു) ജനിച്ചു. ഇദ്ദേഹം കോളേജ് വിദ്യാഭ്യാസം നടത്തി ബി.എ. പാസ്സായി. പിന്നീടു് കല്ലറയ്ക്കൽ കുടുംബത്തിൻറെ പൂർവശാഖയായ അരുവിത്തുറ കല്ലറയ്ക്കൽ (പൊട്ടുംകുളത്തു) സഖറിയായുടെ പുത്രി ബ്രിജീത്തായെ 1929-&nbsp;ാംമാണ്ടു് മകരത്തിൽ വിവാഹം ചെയ്തു. ജോർജ് (വക്കച്ചൻ), സ്കറിയാ, കരുവിള (കുവറുവച്ചൻ), മേരി (മാമ്മി), ചാച്ചി, എന്നീ അഞ്ചു സന്താനങ്ങൾ ഈ ദമ്പതികൾക്കുണ്ടായി. ഇതിനുശേഷം 1936 കുംഭം 11-&nbsp;ാം തീയതി മാതാപിതാക്കന്മാരുടെ അനുമതിയോടും സഹകരണത്തോടും കൂടി അറപ്പുരയ്ക്കൽ പടിഞ്ഞാറെപ്പുരയിടത്തിൽ പണിയിച്ചിരുന്ന വീട്ടിലേക്ക് മാറിത്താമസിച്ചു. ഇതിനുശേഷം മാത്യ (മത്തായിച്ചൻ), അന്നമ്മ, ജേക്കബ് (പാപ്പച്ചൻ), ജോസു്, ഏബ്രഹാം (അവിരാച്ചൻ) എന്നിങ്ങനെ അഞ്ചു സന്താനങ്ങൾകൂടി ജനിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. ജോർജ് (വക്കച്ചൻ) &bull; ആനക്കല്ലു്</h3>
+                <p>
+                    ഇട്ടിയവിരായുടെ ആദ്യത്തെ സന്താനവും 8-&nbsp;ാം തലമുറക്കാരനുമായ വക്കച്ചൻ 1930 ഫെബ്രുവരി 11-&nbsp;ാം തീയതി ജനിച്ചു. മാഞ്ഞൂർ മാളിയേക്കൽ കുരിയന്റെ മകൾ തങ്കമ്മ (മർസിലിൻ) യെ ഇദ്ദേഹം വിവാഹം ചെയ്തു. ഷീല, സുശി, വിനോ, മേജൊ, മിനി, ശാന്തി എന്നീ സന്താനങ്ങളുമുണ്ടു്. വക്കച്ചൻ കുടുംബസമേതം ആനക്കല്ലു പള്ളിക്കു സമീപം താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. സ്കറിയാ (കറിയാച്ചൻ) &bull; ഉടുമ്പഞ്ചോല</h3>
+                <p>
+                    ഇട്ടിരാച്ചൻറ രണ്ടാമത്തെ സന്താനമായ കറിയാച്ചൻ 1931 ജനുവരി 14-&nbsp;ാംതീയതി പിറന്നു. ചാലക്കുടി ഉള്ളാട്ടിക്കുളം മത്തായിയുടെ മകൾ ആലീസിനെയാണ് വിവാഹം ചെയ്തിരിക്കുന്നതു്. സ്റ്റാൻലി, ജീന, മീന, ലീന എന്നീ നാലു സന്താനങ്ങൾ ഈ ദമ്പതികൾക്കുണ്ടായി. കറിയാച്ചൻ ഉടുമ്പഞ്ചോലയിലുള്ള കുടുംബവക ഏലത്തോട്ടത്തിന്റെ കാര്യാദികൾ നോക്കി നടത്തിവരുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. കുരുവിള (കുറുവച്ചൻ) &bull; ചെമ്മലമറ്റം</h3>
+                <p>
+                    മൂന്നാമത്തെ സന്താനമായ കുറുവച്ചൻ 1933 നവംബർ 2 -നു ജനിച്ചു. അരുവിത്തുറ തെക്കുംഭാഗത്തു തോമസിൻറെ മകൾ കുഞ്ഞമ്മ (ബ്രിജീത്താ) യെ ഇദ്ദേഹം വിവാഹം കഴിച്ചു. ജോയി, ബീനാ, സിബി, ജോഷി, വക്കൻ, ചാക്കോച്ചൻ, ജയ, സുജി, മേരി, ത്രേസ്യാ എന്നീ സന്താനങ്ങൾ ഈ ദമ്പതികൾക്കുണ്ടായി. കുറുവച്ചൻ ചെമ്മലമററത്തു കുടുംബസഹിതം താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. മേരി (മാമ്മി) &bull; പൂഞ്ഞാർ</h3>
+                <p>
+                    ഇട്ടിയവിരായുടെ 4-&nbsp;ാമത്തെ സന്താനമായ മാമ്മി 1934 ഏപ്രിൽ 18-നു ജനിച്ചു. പൂഞ്ഞാററിൽ വല്യപാറക്കാടു് ജോസഫിൻറെ മകൻ തോമസ് മാമ്മിയെ വിവാഹം കഴിച്ചു. ഇവർക്കു് 8 സന്താനങ്ങളുണ്ടു്.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. ഏലിമ്മ / ചാച്ചിയമ്മ (സി. കാർലോത്ത) &bull; സെക്കന്തരാബാദ്</h3>
+                <p>
+                    ഇട്ടിയവിരായുടെ 5-&nbsp;ാമത്തെ സന്താനമായ ഏലിമ്മ (ചാച്ചിയമ്മ), 1936 സെപ്തംബർ 17 -നു ജനിച്ചു. Sisters of charity എന്ന ഓർഡറിൽ ചേർന്നു Sr. Carlotha എന്ന പേരു സ്വീകരിച്ചു. ഇപ്പോൾ Secondrabad-ൽ ഒരു നേഴ്സായി സന്യാസ ജീവിതം നയിച്ചുവരുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. മാത്യു (മത്തായിച്ചൻ) &bull; മഞ്ഞപ്പള്ളി</h3>
+                <p>
+                    ആറാമത്തെ സന്താനമായ മത്തായിച്ചൻ 1937 ആഗസ്റ്റ് 17-നു ജനിച്ചു. വിദ്യാഭ്യാസാനന്തരം കാക്കരപ്പടിക്കൽ ജോസഫിൻറെ മകൾ മറിയമ്മയെ കല്യാണം കഴിച്ചു. രമേഷ്, സുരേഷ്, സന്തോഷ്, ഷാൻറി എന്നീ സന്താനങ്ങൾ ഇവർക്കുണ്ടായി. ഇവർ മഞ്ഞപ്പള്ളിയിൽ കുടുംബസഹിതം താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. അന്നമ്മ &bull; തുരുത്തി</h3>
+                <p>
+                    ഇട്ടിരാച്ചൻറ 7-&nbsp;ാമത്തെ സന്താനമായ അന്നമ്മ 1939 ഏപ്രിൽ 24 നു ജനിച്ചു. ചങ്ങനാശേരിക്കടുത്തു തുരുത്തിയിൽ ചിറക്കടവു വീട്ടിൽ പോളിൻറ മകൻ സി.പി. തോമസ് അന്നമ്മയെ വിവാഹം കഴിച്ചു.
+                </p>
+
+                <!-- Malayalam Scripture Box -->
+                <div class="scripture-box">
+                    <div class="scripture-title">ഭാര്യാ ഭർതൃ ബന്ധം</div>
+                    <p style="margin-bottom: 1em; font-size: 15.5px;">
+                        ഭാര്യമാരേ, ഭർത്താക്കന്മാർക്കു കർത്താവിനോടെന്നപോലെ കീഴ്പ്പെട്ടിരിക്കുക. എന്തെന്നാൽ, ഭാര്യയുടെ ശിരസ്സ് ഭർത്താവാണു്. തന്റെ ശരീരമാകുന്ന സഭയുടെ സംരക്ഷകനാകകൊണ്ട് മിശിഹാ സഭയുടെ ശിരസ്സായിരിക്കുന്നതുപോലെ, സഭ, സർവത്തിലും മിശിഹായ്കു കീഴ്പെട്ടിരിക്കുന്നതുപോലെ, ഭര്യ ഭർത്താവിനു സർവത്തിലും കീഴ്പ്പെട്ടിരിക്കണം.
+                    </p>
+                    <p style="margin-bottom: 1em; font-size: 15.5px;">
+                        ഭർത്താക്കന്മാരേ, ഭാര്യമാരെ സ്നേഹിക്കുക. മിശിഹാ സഭയെ സ്നേഹിച്ചു് അവർക്കുവേണ്ടി സ്വയം അർപ്പിച്ചതുപോലെ, വചനം കൊണ്ടുള്ള ജലത്താൽ സ്നാപനം ചെയ്തു ശുദ്ധമാക്കി, മറുകോ, ചുളിവോ മററു മാലിന്യങ്ങളോ ഇല്ലാതെ പ്രഭാപൂരിതമായ ഒരു തിരുസഭയെ തനിക്കു തന്നെ സമർപ്പിക്കുവാൻ വേണ്ടി, പ്രാണാർപ്പണം ചെയ്തതുപോലെ അപ്രകാരം ഭർത്താക്കന്മാർ ഭാര്യമാരെ സ്വന്തം ശരീരം എന്നവിധം സ്നേഹിക്കണം. ഭാര്യയെ സ്നേഹിക്കുന്ന ഭർത്താവ് സ്വയം സ്നേഹിക്കുന്നു. ഒരുവനും, സ്വന്തം ശരീരത്തെ വെറുക്കുന്നില്ല. പ്രത്യുത പോഷിപ്പിച്ചു പരിപാലിപ്പിക്കുന്നു. മിശിഹാ സഭയെ പ്രോഷിപ്പിച്ചു സംരക്ഷിക്കുന്നതുപോലെ. കാരണം, നാം എല്ലാവരും അവിടത്തെ ശരീരത്തിൻറെ അവയവങ്ങളാണ്.
+                    </p>
+                    <p style="margin-bottom: 0.5em; font-size: 15.5px;">
+                        ഇക്കാരണത്താൽ, പുരുഷൻ പിതാവിനെയും മാതാവിനെയും വിട്ടു് ഭാര്യയോട് ഒട്ടിച്ചേരും; രണ്ടുപേരും ഒരു ജഡമായിത്തീരും. ഇതൊരു മഹാ അജ്ഞയരഹസ്യമാണ്. ഞാൻ വിവക്ഷിക്കുന്നത്, സഭയേയും മിശിഹായേയും കുറിച്ചാണു് അതെങ്ങനെയും ഇരിക്കട്ടെ. നിങ്ങൾ ഓരോരുത്തരും സ്വയം സ്നേഹിക്കുന്നതുപോലെ ഭാര്യയേയും സ്നേഹിക്കണം. ഭാര്യ ഭർത്താവിനെ ആദരിക്കുകയും വേണം.
+                    </p>
+                    <div class="scripture-citation">Eph: V, 22&ndash;33</div>
+                </div>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. ജേക്കബ് (പാപ്പച്ചൻ), B.Com. &bull; നെടുംകണ്ടം</h3>
+                <p>
+                    8-&nbsp;ാമത്തെ സന്താനമായ പാപ്പച്ചൻ 1940 ജൂൺ 26-നു ജനിച്ചു. B.Com. പാസ്സായശേഷം ഇദ്ദേഹം ചേർപ്പുങ്കൽ നെല്ലിപ്പുഴ ജോസഫിൻറെ മകൾ എൽസിയെ വിവാഹം ചെയ്തു. ഹണി, റേറാണി എന്നീ സന്താനങ്ങളുണ്ടു്. Federal Bank-ൽ ഏജൻറായി ജോലി നോക്കി ഇപ്പോൾ നെടുംകണ്ടത്ത് താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. ജോസ് &bull; അറപ്പുരയ്ക്കൽ പറമ്പിൽ</h3>
+                <p>
+                    9-&nbsp;ാമത്തെ സന്താനരായ ജോസ് 1943 ഡിസംബർ 28-നു ജനിച്ചു. കോട്ടയത്തു് ആലുമ്പറമ്പിൽ ജേസഫിൻറെ പുത്രി ശാന്തയെ ഇദ്ദേഹം വിവാഹം ചെയ്തു. അനിഷ് എന്ന ഒരു കുട്ടി ഈ ദമ്പതികൾക്കുണ്ടായി. ഇവർ അറപ്പുരയ്ക്കൽ പറമ്പിൽ താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. ഏബ്രഹാം (അവിരാച്ചൻ)</h3>
+                <p>
+                    ഇട്ടിരാച്ചൻറെ 10-&nbsp;ാമത്തെ സന്താനമായ അവിരാച്ചൻ കോളേജ് വിദ്യഭ്യാസം നടത്തിക്കൊണ്ടിരിക്കുന്നു.
+                </p>
+            </div>
+
+            <hr class="section-separator">
+
+            <!-- ENGLISH TRANSLATION SECTION -->
+            <div lang="en">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    Family History (English Translation)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>Seventh Generation &ndash; Ittirachan Karickatturumpil:</strong>
+                </p>
+
+                <p>
+                    <strong>KunjuVarkey Ittiavirah (Ittirachan)</strong>, the fifth child of sixth-generation Kuruvila KunjuVarkey Karickatturumpil, was born in <strong>1899</strong> (on the 15th of Meenam, 1074 M.E. &ndash; March 27, 1899). He pursued higher collegiate education and successfully graduated with a <strong>Bachelor of Arts (B.A.)</strong> degree. Later, in <strong>Makaram 1929</strong> (January/February 1929), he married <strong>Brigeetha</strong>, daughter of Zacharias Pottamkulam (Pottankulam) of Aruvithura &mdash; an ancient primordial branch of the Kallarackal lineage.
+                </p>
+
+                <p>
+                    Five children were born to this couple at the ancestral home: <strong>George (Vackachan)</strong>, <strong>Scaria</strong>, <strong>Kuruvila (Kuruvachan)</strong>, <strong>Mary (Mammy)</strong>, and <strong>Chachi (Aelimma / Sr. Carlotha)</strong>. Subsequently, on <strong>Kumbham 11, 1936</strong> (February 1936), with the loving consent and harmonious cooperation of his parents, Ittirachan relocated his residence to a newly constructed house on the western estate of Arappuraykkal (അറപ്പുരയ്ക്കൽ പടിഞ്ഞാറെപ്പുരയിടം). Five more children were born following this relocation: <strong>Mathew (Mathayichan)</strong>, <strong>Annamma</strong>, <strong>Jacob (Pappachan)</strong>, <strong>Jose</strong>, and <strong>Abraham (Avirachan)</strong> &mdash; making ten children in total.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. George (Vackachan) &bull; Near Anakkallu Church (b. Feb 11, 1930)</h3>
+                <p>
+                    Ittiavirah's eldest child and eighth-generation representative, <strong>Vackachan (George)</strong>, was born on <strong>February 11, 1930</strong>. He married <strong>Thankamma (Merciline)</strong>, daughter of Kurien Maliackal of Manjoor. They are blessed with six children: <strong>Sheela</strong>, <strong>Susi</strong>, <strong>Vino</strong>, <strong>Mejo</strong>, <strong>Mini</strong>, and <strong>Shanthi</strong>. Vackachan resides with his family near the revered <strong>Anakkallu Church</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Scaria (Kariyachan) &bull; Udumbanchola Cardamom Estate (b. Jan 14, 1931)</h3>
+                <p>
+                    Ittirachan's second child, <strong>Kariyachan (Scaria)</strong>, was born on <strong>January 14, 1931</strong>. He married <strong>Alice</strong>, daughter of Mathai Ullattikkulam of Chalakudy. Four children were born to this union: <strong>Stanley</strong>, <strong>Jeena</strong>, <strong>Meena</strong>, and <strong>Leena</strong>. Kariyachan actively manages and oversees the operations of the family's expansive cardamom estate in <strong>Udumbanchola</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Kuruvila (Kuruvachan) &bull; Chemmalamattam (b. Nov 2, 1933)</h3>
+                <p>
+                    The third child, <strong>Kuruvachan (Kuruvila)</strong>, was born on <strong>November 2, 1933</strong>. He married <strong>Kunjamma (Brigeetha)</strong>, daughter of Thomas Thekkumbhagom of Aruvithura. This couple was blessed with ten children: <strong>Joy</strong>, <strong>Beena</strong>, <strong>Siby</strong>, <strong>Joshi</strong>, <strong>Vakkan</strong>, <strong>Chackochan</strong>, <strong>Jaya</strong>, <strong>Suji</strong>, <strong>Mary</strong>, and <strong>Thresia</strong>. Kuruvachan resides with his family in <strong>Chemmalamattam</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Mary (Mammy) &bull; Valyaparackadu, Poonjar (b. April 18, 1934)</h3>
+                <p>
+                    Ittiavirah's fourth child, <strong>Mammy (Mary)</strong>, was born on <strong>April 18, 1934</strong>. She married <strong>Thomas</strong>, son of Joseph Valyaparackadu of Poonjar. They have eight children.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Aelimma / Chachiyamma (Sr. Carlotha) &bull; Secunderabad (b. Sept 17, 1936)</h3>
+                <p>
+                    Ittiavirah's fifth child, <strong>Aelimma (Chachiyamma)</strong>, was born on <strong>September 17, 1936</strong>. Discerning a divine religious vocation, she entered the religious congregation of the <strong>Sisters of Charity</strong> and took the consecrated name <strong>Sr. Carlotha</strong>. She currently lives a dedicated religious life in <strong>Secunderabad</strong>, serving the sick and suffering as a compassionate nurse.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Mathew (Mathayichan) &bull; Manjappally (b. Aug 17, 1937)</h3>
+                <p>
+                    The sixth child, <strong>Mathayichan (Mathew)</strong>, was born on <strong>August 17, 1937</strong>. After completing his education, he married <strong>Mariyamma</strong>, daughter of Joseph Kakkarappadickal. Four children were born to them: <strong>Ramesh</strong>, <strong>Suresh</strong>, <strong>Santhosh</strong>, and <strong>Shanty</strong>. They reside together with their family in <strong>Manjappally</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Annamma &bull; Chirakkadavu, Thuruthi (b. April 24, 1939)</h3>
+                <p>
+                    Ittirachan's seventh child, <strong>Annamma</strong>, was born on <strong>April 24, 1939</strong>. She married <strong>C.P. Thomas</strong>, son of Paul of Chirakkadavu House, Thuruthi (near Changanacherry).
+                </p>
+
+                <!-- English Scripture Box -->
+                <div class="scripture-box">
+                    <div class="scripture-title">The Marital Relationship &bull; Christian Marriage</div>
+                    <p style="margin-bottom: 1em; font-size: 15.5px;">
+                        Wives, submit yourselves to your own husbands as you do to the Lord. For the husband is the head of the wife as Christ is the head of the church, his body, of which he is the Savior. Now as the church submits to Christ, so also wives should submit to their husbands in everything.
+                    </p>
+                    <p style="margin-bottom: 1em; font-size: 15.5px;">
+                        Husbands, love your wives, just as Christ loved the church and gave himself up for her to make her holy, cleansing her by the washing with water through the word, and to present her to himself as a radiant church, without stain or wrinkle or any other blemish, but holy and blameless. In this same way, husbands ought to love their wives as their own bodies. He who loves his wife loves himself. After all, no one ever hated their own body, but they feed and care for their body, just as Christ does the church &mdash; for we are members of his body.
+                    </p>
+                    <p style="margin-bottom: 0.5em; font-size: 15.5px;">
+                        "For this reason a man will leave his father and mother and be united to his wife, and the two will become one flesh." This is a profound mystery &mdash; but I am talking about Christ and the church. However, each one of you also must love his wife as he loves himself, and the wife must respect her husband.
+                    </p>
+                    <div class="scripture-citation">Ephesians 5:22&ndash;33</div>
+                </div>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. Jacob (Pappachan), B.Com. &bull; Federal Bank / Nedumkandam (b. June 26, 1940)</h3>
+                <p>
+                    The eighth child, <strong>Pappachan (Jacob)</strong>, was born on <strong>June 26, 1940</strong>. After graduating with a <strong>B.Com.</strong> degree, he married <strong>Elsie</strong>, daughter of Joseph Nellippuzha of Cherpunkal. They have two children: <strong>Honey</strong> and <strong>Rony</strong>. Having served as an Agent/Branch Manager at the <strong>Federal Bank</strong>, he currently resides in <strong>Nedumkandam</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. Jose &bull; Arappuraykkal Property (b. Dec 28, 1943)</h3>
+                <p>
+                    The ninth child, <strong>Jose</strong>, was born on <strong>December 28, 1943</strong>. He married <strong>Shantha</strong>, daughter of Joseph Alumparambil of Kottayam. A son named <strong>Anish</strong> was born to this couple. They reside at the Arappuraykkal family estate.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. Abraham (Avirachan) &bull; College Student</h3>
+                <p>
+                    Ittirachan's tenth child, <strong>Avirachan (Abraham)</strong>, is actively pursuing higher college education.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.25, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.25, Math.min(1.0, availableWidth / 1988));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 1988) {
+                const centerScroll = (1988 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

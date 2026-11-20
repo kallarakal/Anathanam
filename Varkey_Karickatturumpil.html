@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Varkey Karickatturumpil (Varkeychan) - വർക്കിയച്ചൻ കരിക്കാട്ടുറുമ്പിൽ - Family Tree &amp; History</title>
+    <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 17px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1450px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        blockquote {
+            border-left: 4px solid #b38938;
+            background: rgba(179, 137, 56, 0.08);
+            margin: 1.2em auto;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 8px 8px 0;
+            max-width: 960px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="KunjuVarkey_Karickatturumpil.html" class="nav-btn" title="View Father's Family Tree: Kuruvila KunjuVarkey Karickatturumpil">
+                &uarr; Father's Tree (Karickatturumpil)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">വർക്കിയച്ചൻ കരിക്കാട്ടുറുമ്പിൽ &bull; Varkey &amp; Mariya Vadackal (Karickatturumpil)</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ഏഴാം തലമുറ &bull; Seventh Generation</p>
+            <h1>
+                വർക്കിയച്ചൻ കരിക്കാട്ടുറുമ്പിൽ &ndash; മറിയ (മാമ്മി) വാടക്കൽ<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">KunjuVarkey (Varkeychan) Karickatturumpil &ndash; Mariya (Mammy) Vadackal</span>
+            </h1>
+            <p class="lifespan">കരിക്കാട്ടുറുമ്പിൽ &amp; പുളിക്കലാത്തു്, കാഞ്ഞിരപ്പള്ളി &bull; Karickatturumpil &amp; Pulikkalathu, Kanjirapally &bull; (b. 1897, Chingam 23)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Varkey & Mariya Karickatturumpil Family Tree Diagram (14 Children) -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="2764" height="230" viewBox="0 0 2764 230" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents (centered at 1382) -->
+                <line x1="1382" y1="78" x2="1382" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 14 children (121 to 2643) -->
+                <line x1="121" y1="118" x2="2643" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="121" y1="118" x2="121" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="315" y1="118" x2="315" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="509" y1="118" x2="509" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="703" y1="118" x2="703" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="897" y1="118" x2="897" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1091" y1="118" x2="1091" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1285" y1="118" x2="1285" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1479" y1="118" x2="1479" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1673" y1="118" x2="1673" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1867" y1="118" x2="1867" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2061" y1="118" x2="2061" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2255" y1="118" x2="2255" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2449" y1="118" x2="2449" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2643" y1="118" x2="2643" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Box (Generation 7) -->
+                <g>
+                    <rect x="1112" y="18" width="540" height="60" rx="8" ry="8" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.15));" />
+                    <text x="1382" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#2c1a0c">Varkey (Varkeychan) Karickatturumpil &amp; Mariya (Mammy)</text>
+                    <text x="1382" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Mariya from Thaiveettil Vadackal, Pulinkunnu &bull; 4th Child of Kuruvila KunjuVarkey)</text>
+                </g>
+
+                <!-- Child 1: Kuruvila (Kuruvachan) -->
+                <g>
+                    <a class="node-link" href="Kuruvila_Kilirookunnu_Karickatturumpil.html" xlink:href="Kuruvila_Kilirookunnu_Karickatturumpil.html" title="Open Kuruvila (Kuruvachan) Kilirookunnu">
+                        <rect x="36" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="121" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila (Kuruvachan)</text>
+                        <text x="121" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Thresiamma Vachaparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Thomas (Thommachan) -->
+                <g>
+                    <a class="node-link" href="Thomas_Mannarkayam_Karickatturumpil.html" xlink:href="Thomas_Mannarkayam_Karickatturumpil.html" title="Open Thomas (Thommachan) Mannarkayam">
+                        <rect x="230" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="315" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thomas (Thommachan)</text>
+                        <text x="315" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Achamma Karuparambil</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Mariya -->
+                <g>
+                    <a class="node-link" href="Mariya_Mambalathu_Kainakary.html" xlink:href="Mariya_Mambalathu_Kainakary.html" title="Open Mariya Mambalathu (Kainakary)">
+                        <rect x="424" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="509" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariya</text>
+                        <text x="509" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Chacko Mambalathu</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Joseph (Infant) -->
+                <g>
+                    <a class="node-link" href="Joseph_Infant_Karickatturumpil.html" xlink:href="Joseph_Infant_Karickatturumpil.html" title="Open Joseph (Infant)">
+                        <rect x="618" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="703" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
+                        <text x="703" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(died in infancy)</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Joseph (Appachan) -->
+                <g>
+                    <a class="node-link" href="Joseph_Udumbanchola_Karickatturumpil.html" xlink:href="Joseph_Udumbanchola_Karickatturumpil.html" title="Open Joseph (Appachan) Udumbanchola">
+                        <rect x="812" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="897" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph (Appachan)</text>
+                        <text x="897" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Thresia (Saramma) Purackal</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Varkey (Astronomer) -->
+                <g>
+                    <a class="node-link" href="Varkey_USNaval_Karickatturumpil.html" xlink:href="Varkey_USNaval_Karickatturumpil.html" title="Open Varkey (U.S. Naval Observatory)">
+                        <rect x="1006" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1091" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Varkey (Astronomer)</text>
+                        <text x="1091" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Thresia Valiyarambathu</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Mathai -->
+                <g>
+                    <a class="node-link" href="Mathai_Nedungadu_Karickatturumpil.html" xlink:href="Mathai_Nedungadu_Karickatturumpil.html" title="Open Mathai Veliyamparambu (Nedungadu)">
+                        <rect x="1200" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1285" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Mathai (Nedungadu)</text>
+                        <text x="1285" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Annie Puthussery</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Chacko (Infant) -->
+                <g>
+                    <a class="node-link" href="Chacko_Infant_Karickatturumpil.html" xlink:href="Chacko_Infant_Karickatturumpil.html" title="Open Chacko (Infant)">
+                        <rect x="1394" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1479" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Chacko</text>
+                        <text x="1479" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(died in infancy)</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Anna -->
+                <g>
+                    <a class="node-link" href="Anna_Vayalil_Palai.html" xlink:href="Anna_Vayalil_Palai.html" title="Open Anna Vayalil (Palai)">
+                        <rect x="1588" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1673" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Anna</text>
+                        <text x="1673" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Mathew Vayalil</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Aely (Eli) -->
+                <g>
+                    <a class="node-link" href="Aely_Cherupurackal_Champakulam.html" xlink:href="Aely_Cherupurackal_Champakulam.html" title="Open Aely Cherupurackal (Champakulam)">
+                        <rect x="1782" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1867" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Aely (Eli)</text>
+                        <text x="1867" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Mathew Cherupurackal</text>
+                    </a>
+                </g>
+
+                <!-- Child 11: Ninan (Ninachan) -->
+                <g>
+                    <a class="node-link" href="Ninan_Udumbanchola_Karickatturumpil.html" xlink:href="Ninan_Udumbanchola_Karickatturumpil.html" title="Open Ninan (Ninachan) Udumbanchola">
+                        <rect x="1976" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2061" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Ninan (Ninachan)</text>
+                        <text x="2061" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">m. Annamma (Udumbanchola)</text>
+                    </a>
+                </g>
+
+                <!-- Child 12: Rosa -->
+                <g>
+                    <a class="node-link" href="Rosa_Pattathil_Pulinkunnu.html" xlink:href="Rosa_Pattathil_Pulinkunnu.html" title="Open Rosa Pattathil (Pulinkunnu)">
+                        <rect x="2170" y="148" width="170" height="66" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2255" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Rosa</text>
+                        <text x="2255" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#8c4e5e">m. Mathew Pattathil (A.E.O.)</text>
+                    </a>
+                </g>
+
+                <!-- Child 13: Chacko (USA) -->
+                <g>
+                    <a class="node-link" href="Chacko_USA_Karickatturumpil.html" xlink:href="Chacko_USA_Karickatturumpil.html" title="Open Chacko (M.L.S., USA)">
+                        <rect x="2364" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2449" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Chacko (USA)</text>
+                        <text x="2449" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">B.Com., M.L.S. (USA)</text>
+                    </a>
+                </g>
+
+                <!-- Child 14: Ittiavirah (Ittirachan) -->
+                <g>
+                    <a class="node-link" href="Ittiavirah_Udumbanchola_Karickatturumpil.html" xlink:href="Ittiavirah_Udumbanchola_Karickatturumpil.html" title="Open Ittiavirah (Ittirachan) Udumbanchola">
+                        <rect x="2558" y="148" width="170" height="66" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2643" y="173" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Ittiavirah (Ittirachan)</text>
+                        <text x="2643" y="194" text-anchor="middle" font-size="11px" font-weight="600" fill="#4a6572">(Udumbanchola Estate)</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <main>
+            <!-- Three Generation Genealogy Overview Cards -->
+            <div class="bio-section">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <p style="text-align: center; font-weight: 600; color: #7a5823; margin-bottom: 25px;">Varkey &amp; Mariya Vadackal (7th Gen) &bull; 14 Children (8th Gen) &bull; Descendants (9th Gen)</p>
+                
+                <div class="overview-grid">
+                    <!-- Child 1: Kuruvila -->
+                    <div class="overview-card male">
+                        <h4>1. Kuruvila (Kuruvachan)</h4>
+                        <div class="spouse">m. Thresiamma (Theramma) (m. 1945) &bull; Vachaparambil, Pulinkunnu</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Residence: Kilirookunnu, Chirakkadavu</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (6 Children):</strong>
+                                <br>&bull; <strong>Vackachan</strong> (Carmelite Order, Dharmaram College, Bangalore)
+                                <br>&bull; <strong>Mariya / Mariyamma</strong> (B.Sc., Assumption College)
+                                <br>&bull; <strong>Job (Eyo)</strong> (Violin B.A., Annamalai University)
+                                <br>&bull; <strong>Joseph</strong>, <strong>Anna</strong>, <strong>Philomina (Thankamma)</strong> (Continuing education)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 2: Thomas (Thommachan) -->
+                    <div class="overview-card male">
+                        <h4>2. Thomas (Thommachan)</h4>
+                        <div class="spouse">m. Achamma &bull; Karuparambil, Plassanal &bull; (Res: Mannarkayam)</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">7 Sons (9th Generation):</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>Vackachan</strong>: B.S.E.E. (Univ. of Maryland, 1969); Computer Programmer at <strong>NASA</strong> (Spacecraft Tracking &amp; Data Network); m. <strong>Marymma (Maria Goretti)</strong> Kathayanat, Thampalackad.</li>
+                            <li><strong>Ouseppachan, Thommachan, Chackochan, Kuttichan, Ittirachan, Mathachan</strong> (Pursuing education).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 3: Mariya -->
+                    <div class="overview-card female">
+                        <h4>3. Mariya</h4>
+                        <div class="spouse">m. Chacko &bull; Mambalathu, Kainakary</div>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (2 Children):</strong> Joseph, Mariya.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 4: Joseph (Infant) -->
+                    <div class="overview-card male">
+                        <h4>4. Joseph</h4>
+                        <div class="spouse">Karickatturumpil, Kanjirapally</div>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f;">Passed away in infancy.</p>
+                    </div>
+
+                    <!-- Child 5: Joseph (Appachan) -->
+                    <div class="overview-card male">
+                        <h4>5. Joseph (Appachan) (d. Dec 15, 1972)</h4>
+                        <div class="spouse">m. Thresia (Saramma) &bull; Purackal, Pulinkunnu</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Udumbanchola Cardamom Estate:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Supervised the family cardamom estate in Udumbanchola until passing from cardiac arrest on Dec 15, 1972 (buried in Kanjirappally family tomb).</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (4 Children):</strong> Varkey, Mariya, Anna, Kuncheria.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 6: Varkey -->
+                    <div class="overview-card male">
+                        <h4>6. Varkey (U.S. Naval Observatory)</h4>
+                        <div class="spouse">m. Thresia &bull; Valiyarambathu, Vaikom</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Astronomer in Washington, D.C.:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Pursued higher studies in the United States, earned advanced degrees, and serves as an <strong>Astronomer</strong> at the U.S. Naval Observatory, Washington, D.C.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (2 Children):</strong> Marisha, Vivito (Viveetto).</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 7: Mathai -->
+                    <div class="overview-card male">
+                        <h4>7. Mathai</h4>
+                        <div class="spouse">m. Annie &bull; Puthussery, Pulinkunnu</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Residence: Veliyamparambu, Nedungadu</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (3 Children):</strong> Jessy, Jiji, Joji.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 8: Chacko (Infant) -->
+                    <div class="overview-card male">
+                        <h4>8. Chacko</h4>
+                        <div class="spouse">Pulikkalathu, Kanjirapally</div>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f;">Passed away in infancy.</p>
+                    </div>
+
+                    <!-- Child 9: Anna -->
+                    <div class="overview-card female">
+                        <h4>9. Anna</h4>
+                        <div class="spouse">m. Mathew &bull; Vayalil, Palai</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Connection:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Husband Mathew is the nephew of Mar Sebastian Vayalil, Bishop of Palai.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (7 Children):</strong> Joseph, Varkey, Rosa, Devasia, Mathew, Tomy, Marisha.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 10: Aely (Eli) -->
+                    <div class="overview-card female">
+                        <h4>10. Aely (Eli)</h4>
+                        <div class="spouse">m. Mathew &bull; Mapilassery Cherupurackal, Champakulam</div>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (4 Children):</strong> Mariam, Chacko, Varkey, Annie.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 11: Ninan (Ninachan) -->
+                    <div class="overview-card male">
+                        <h4>11. Ninan (Ninachan) (b. Sept 6, 1940)</h4>
+                        <div class="spouse">m. Annamma (m. 1967) &bull; Andhra Pradesh</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Residence: Udumbanchola</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (3 Children):</strong> Joji, Tina, Jessy.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 12: Rosa -->
+                    <div class="overview-card female">
+                        <h4>12. Rosa</h4>
+                        <div class="spouse">m. Mathew &bull; Pattathil Pathil, Pulinkunnu</div>
+                        <p style="font-size: 13.5px; margin: 4px 0 2px; font-weight: 600; color: #5c4028;">Profession:</p>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Husband Mathew serves as an Agricultural Extension Officer (A.E.O.) in the Government of Kerala.</p>
+                        <ul style="margin-top: 6px;">
+                            <li><strong>9th Generation (2 Children):</strong> Ciny (Sini), Sheena.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Child 13: Chacko (USA) -->
+                    <div class="overview-card male">
+                        <h4>13. Chacko (Library Science, USA)</h4>
+                        <div class="spouse">United States of America</div>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">After passing B.Com., with the assistance of his brother Varkey in the USA, earned a Master's degree in Library Science in America and works there.</p>
+                    </div>
+
+                    <!-- Child 14: Ittiavirah (Ittirachan) -->
+                    <div class="overview-card male">
+                        <h4>14. Ittiavirah (Ittirachan)</h4>
+                        <div class="spouse">Udumbanchola Cardamom Estate</div>
+                        <p style="font-size: 13.5px; margin: 0; color: #3d2b1f; line-height: 1.5;">Following the demise of elder brother Joseph (Appachan) in 1972, assumed management of the family cardamom estate in Udumbanchola and resides there.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Malayalam Biography & History First -->
+            <div class="bio-section" id="malayalam-history">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">ഏഴാം തലമുറ &ndash; വർക്കിയച്ചൻ കരിക്കാട്ടുറുമ്പിൽ</h2>
+                <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">കുരുവിള കുഞ്ഞുവർക്കിയുടെ 5-മത്തെ സന്താനം &bull; കരിക്കാട്ടുറുമ്പിൽ &amp; പുളിക്കലാത്തു് &bull; (ജനനം: 1897 ചിങ്ങം 23)</p>
+
+                <p class="section-lead">
+                    മുൻവിവരിച്ച ബ. കുരുവിളയച്ചന്റെ സഹോദരനും, ആറാംതലമുറക്കാരനായ കുരുവിള കുഞ്ഞുവർക്കിയുടെ 4-&nbsp;ാമത്തെ സന്താനവുമായ കുഞ്ഞുവർക്കി കുഞ്ഞുവർക്കി (വർക്കിയച്ചൻ) 1897-&nbsp;ാംമാണ്ടാണു് (ചിങ്ങം 23-നു) ജനിച്ചതു്. വിദ്യാഭ്യാസാനന്തരം പുളിങ്കുന്നിൽ തൈവീട്ടിലായ വാടക്കൽ തൊമ്മൻ അവർകളുടെ പുത്രി മറിയ (മാമ്മി)യെ ഇദ്ദേഹം വിവാഹം ചെയ്തു. പിതാവിൻറ ആജ്ഞാനുസരണം പുരകൾ പണിയിക്കുന്നതിലും ദേഹണ്ഡങ്ങൾ നടത്തുന്നതിലും ഇദ്ദേഹം പിതാവിനെ വേണ്ട വിധം സഹായിച്ചിരുന്നു. കുരുവിള, തോമസ്, മറിയ, ജോസഫ്, ജോസഫ് ഇങ്ങനെ അഞ്ചു സന്താനങ്ങൾ വർക്കിയച്ചനുണ്ടായി. ഇതിൽ 4-&nbsp;ാമത്തെ ജോസഫ് ശിശു പ്രായത്തിൽ മരണംപ്രാപിച്ചു. ഇതിനുശേഷം 1930-&nbsp;ാംമാണ്ടു് (ചിങ്ങത്തിൽ) പുളിക്കലാത്തു പുരയിടത്തിൽ പണിയിച്ചിരുന്ന വീട്ടിലേക്കു മാറിത്താമസിച്ചു. ഇതിനു ശേഷം വർക്കി, മത്തായി, ചാക്കോ, അന്ന, ഏലി, നൈനാൻ, റോസ, ചാക്കോ, ഇട്ടിയവിരാ എന്നിങ്ങനെ സന്താനങ്ങൾ കൂടി ജനിച്ചു. ഇതിൽ 8-&nbsp;മത്തെ സന്താനമായ ചാക്കോ ശൈശവത്തിൽ മരണം പ്രാപിക്കയുണ്ടായി.
+                </p>
+
+                <p>
+                    <strong>1)</strong> ആദ്യസന്താനമായ <strong>കുരുവിള (കുറുവച്ചൻ)</strong> പുളിങ്കുന്നിൽ വാച്ചാപറമ്പിൽ ഈയോയുടെ പുത്രി ത്രേസിയാമ്മയെ (തെറമ്മ) 1945-&nbsp;മാണ്ട് വിവാഹം ചെയ്തു. ഇദ്ദേഹത്തിന് വക്കച്ചൻ, മറിയ, ജോബ് (ഈയോ), ജോസഫ്, അന്ന, ഫിലോമിനാ (തങ്കമ്മ) ഇങ്ങനെ ആറു സന്താനങ്ങളുണ്ടായി. ഇതിനുശേഷം കുരുവിള ചിറക്കടവിലുള്ള കിളിരൂക്കുന്നു പുരയിടത്തിൽ ഒരു പുരവച്ചു മാറിത്താമസിച്ചു. ഇദ്ദേഹത്തിന്റെ ആദ്യപുത്രനായ വക്കച്ചൻ കർമ്മലീത്താ സഭയിൽ ചേർന്നു ബാംഗളൂർ ധർമ്മാരാം കോളേജിൽ പഠനം നടത്തുന്നു. രണ്ടാമത്തെ പുത്രനായ ജോബ് സംഗീതത്തിൽ ഉന്നതവിദ്യാഭ്യാസത്തിനായി അണ്ണാമല യൂണിവേഴ്സിററിയിൽ വയലിൻ B.A. ക്ലാസ്സിൽ പഠിക്കുന്നു. ഒന്നാമത്തെ പുത്രി മറിയമ്മ അസംഷൻ കോളേജിൽ പഠിച്ച് B.Sc. പാസ്സായി. ബാക്കിയുള്ള സന്താനങ്ങളായ ജോസഫ്, അന്ന, തങ്കമ്മ എന്നിവർ വിദ്യാഭ്യാസം തുടരുന്നു.
+                </p>
+
+                <p>
+                    <strong>2)</strong> വർക്കിയച്ചൻറ രണ്ടാമത്തെ സന്താനമായ <strong>തോമസ് (തൊമ്മച്ചൻ)</strong> പ്ലാശനാൽ കാരുപറമ്പിൽ ജോസഫിൻറെ മകൾ അച്ചാമ്മയെ വിവാഹം ചെയ്തു. ഇദ്ദേഹം മണ്ണാറക്കയത്തുള്ള കെട്ടിടത്തിലേക്കു് മാറിത്താമസിച്ചു. ഇദ്ദേഹത്തിന് വക്കച്ചൻ, ഔസേപ്പച്ചൻ, തോമാച്ചൻ, ചാക്കോച്ചൻ, കുട്ടിച്ചൻ, ഇട്ടിരാച്ചൻ, മാത്തച്ചൻ ഇങ്ങനെ ഏഴു പുത്രന്മാർ ഉണ്ടായി. വക്കച്ചൻ അല്ലാത്ത എല്ലാ പുത്രന്മാരും ഇപ്പോൾ പഠിച്ചുകൊണ്ടിരിക്കുന്നു.
+                </p>
+
+                <blockquote>
+                    തൊമ്മച്ചന്റെ മൂത്ത പുത്രൻ <strong>വക്കച്ചൻ</strong> (1964 ഏപ്രിലിൽ) പ്രീയൂണിവേഴ്സിറ്റിക്ക് ഫസ്റ്റ്ക്ലാസും മാത്തമാറ്റിക്സിൽ ഡിസ്റ്റിംക്ഷൻ പ്ലസ്സും കിട്ടി 16-&nbsp;ാം വയസ്സിൽ മദ്രാസ് യൂണിവേഴ്സിറ്റിയിൽ നിന്നും പാസ്സായി. ഇതുകഴിഞ്ഞു് 1965-ൽ എഞ്ചിനീയറിംഗിനു പഠിക്കാൻ അമേരിക്കയിൽ എത്തി. തൊമ്മച്ചന്റെ അനിയൻ വർക്കിച്ചൻറെ കുടുംബവും ഒന്നിച്ചു താമസിച്ചും പല ജോലികളും ചെയ്തു് 1969 ജൂണിൽ യൂണിവേഴ്സിറ്റി ഓഫ് മേരിലൻഡിൽ നിന്നു് B.S.E.E. സമ്പാദിച്ചു. ഇപ്പോൾ വക്കച്ചൻ അമേരിക്കയിൽ Computer Programmer ആയി NASA-യുടെ Spacecraft Tracking And Data Network-നു ജോലി നോക്കുന്നു. ഈ വക്കച്ചൻ തമ്പലക്കാട്ടു കതയനാട്ടു തോമസിൻറെ പുത്രി മേരിമ്മയെ (Maria Goretti) യാണു വിവാഹം ചെയ്തിരിക്കുന്നതു്.
+                </blockquote>
+
+                <p>
+                    <strong>3)</strong> വർക്കിയച്ചൻറെ മൂന്നാമത്തെ സന്താനമായ <strong>മറിയയെ</strong> കൈനകരി മമ്പലത്തു ജോസഫിൻറെ മകൻ ചാക്കോയെക്കൊണ്ടു വിവാഹം കഴിപ്പിച്ചു. ജോസഫ്, മറിയ എന്നീ രണ്ടു സന്താനങ്ങൾ ഇവർക്കുണ്ടായി.
+                </p>
+
+                <p>
+                    <strong>5)</strong> വർക്കിയച്ചൻറെ അഞ്ചാമത്തെ സന്താനമായ <strong>ജോസഫ് (അപ്പച്ചൻ)</strong> പുളിങ്കുന്നിൽ പുരയ്ക്കൽ കുഞ്ചെറിയായുടെ പുത്രി ത്രേസ്യാ (സാറാമ്മ) യെ വിവാഹം ചെയ്തു. വർക്കി, മറിയ, അന്ന, കുഞ്ചെറിയാ എന്നീ നാലു സന്താനങ്ങൾ ഇദ്ദേഹത്തിനുണ്ടായി. ജോസഫ് ഉടുമ്പഞ്ചോലയുള്ള കുടുംബ വക ഏലത്തോട്ടത്തിൽ ജോലി ചെയ്യിച്ചു താമസിച്ചുവരവേ, 1972 ഡിസംബർ 15-&nbsp;ാം തീയതി ഹൃദയസ്തംഭനംമൂലം മരണമടഞ്ഞു. ഇതിനുശേഷം മൃതദേഹം കാഞ്ഞിരപ്പള്ളി പള്ളി സിമിത്തേരിയിലെ കുടുംബ കല്ലറയിൽ സംസ്കരിച്ചു.
+                </p>
+
+                <p>
+                    <strong>6)</strong> വർക്കിയച്ചൻറെ 6-&nbsp;ാമത്തെ സന്താനമായ <strong>വർക്കി</strong> വൈക്കത്തു് വലിയാറമ്പത്തു് ത്രേസ്യായെ വിവാഹം ചെയ്തു. മരീഷ, വിവീറേറാ എന്നിങ്ങനെ രണ്ടു സന്താനങ്ങൾ ഈ ദമ്പതികൾക്കുണ്ടായി. ഇദ്ദേഹം അമേരിക്കയിൽ പോയി ഉപരിപഠനം നടത്തി ഉന്നതബിരുദം സമ്പാദിച്ചു. ഇപ്പോൾ വാഷിംഗ്ടണിലുള്ള U. S. Naval Observatory-യിൽ ഒരു Astronomer ആയി ജോലി നോക്കിവരുന്നു.
+                </p>
+
+                <p>
+                    <strong>7)</strong> 7-&nbsp;ാമത്തെ സന്താനമായ <strong>മത്തായി</strong> പുളിങ്കുന്നിൽ പുതുശേരി തോമസിന്റെ മകൾ ആനിയെ വിവാഹംചെയ്തു. ഇദ്ദേഹത്തിനു് ജെസ്സി, ജിജി, ജോജി എന്നീ മൂന്നു സന്താനങ്ങളുണ്ടായി. മത്തായി നെടുങ്ങാട്ടിലുള്ള വെളിയമ്പറമ്പു പുരയിടവും അതിലുള്ള പുരയും കൂടി വാങ്ങി അവിടെ താമസിക്കുന്നു.
+                </p>
+
+                <p>
+                    <strong>9)</strong> വർക്കിയച്ചൻറെ 9-&nbsp;ാമത്തെ സന്താനമായ <strong>അന്നയെ</strong> പാലാ മെത്രാനായ വയലിൽ തിരുമേനിയുടെ സഹോദരപുത്രനായ മാത്യു വിവാഹം ചെയ്തു. ജോസഫ്, വർക്കി, റോസ, ദേവസ്യാ, മാത്യു, ടോമി, മരീഷ ഇങ്ങനെ 7 സന്താനങ്ങൾ ഇവർക്കുണ്ടു്.
+                </p>
+
+                <p>
+                    <strong>10)</strong> വർക്കിയച്ചൻറ 10-&nbsp;ാമത്തെ സന്താനമായ <strong>ഏലിയെ</strong> ചമ്പക്കുളം മാപ്പിളശേരിൽ ചെറുപുരയ്ക്കൽ ചാക്കോയുടെ പുത്രനായ മാത്യു വിവാഹം ചെയ്തു. മറിയം, ചാക്കോ, വർക്കി, ആനി ഇങ്ങനെ നാലു സന്താനങ്ങൾ ഇവർക്കുണ്ടായി.
+                </p>
+
+                <p>
+                    <strong>11)</strong> 11-&nbsp;ാമത്തെ സന്താനമായ <strong>നൈനച്ചൻ</strong> 1940 സെപ്തംബർ ആറാം തീയതി ജനിച്ചു. പ്രീയൂണിവേഴ്സിറ്റി പഠിച്ചശേഷം 1967-ൽ ആന്ധ്രാപ്രദേശിൽ നിന്ന് അന്നമ്മയെ വിവാഹം കഴിച്ചു് ജോജി, റ്റീനാ, ജെസ്സി എന്നു് മൂന്നു് കുട്ടികളുമായി ഉടുമ്പഞ്ചോലയിൽ താമസിക്കുന്നു.
+                </p>
+
+                <p>
+                    <strong>12)</strong> 12-&nbsp;ാമത്തെ സന്താനമായ <strong>റോസയെ</strong> പുളിങ്കുന്നിൽ പാട്ടത്തിൽ പത്തിൽ കറിയായുടെ പുത്രൻ മാത്യു വിവാഹം ചെയ്തു. സിനി, ഷീനാ എന്നീ രണ്ടു സന്താനങ്ങളുണ്ടായി. മാത്യു Agricultural Extension Officer (A.E.O.) ആയി കേരളാ ഗവണ്മെൻറിൽ ജോലി നോക്കുന്നു.
+                </p>
+
+                <p>
+                    <strong>13)</strong> 13-&nbsp;ാമത്തെ സന്താനമായ <strong>ചാക്കോ</strong> B.Com. പാസ്സായശേഷം, അമേരിക്കയിൽ ജോലിചെയ്യുന്ന സഹോദരൻ വർക്കിയുടെ സഹായത്താൽ Library Science-ൽ Masters ബിരുദം സമ്പാദിച്ചു് അവിടെത്തന്നെ ജോലി ചെയ്യുന്നു.
+                </p>
+
+                <p>
+                    <strong>14)</strong> 14-&nbsp;ാമത്തെ സന്താനമായ <strong>ഇട്ടിരാച്ചൻ</strong>, സഹോദരൻ ജോസഫി (അപ്പച്ചൻ) ൻറെ മരണാനന്തരം ഉടുമ്പഞ്ചോലയുള്ള കുടുംബ വക ഏലത്തോട്ടത്തിൻറ മേൽനോട്ടം ഏറെറടുത്ത് അവിടെ താമസിക്കുന്നു.
+                </p>
+            </div>
+
+            <!-- English Translation Second -->
+            <div class="bio-section" id="english-history">
+                <hr class="section-separator" style="margin: 40px auto 30px auto;">
+                <h2 style="text-align: center; color: var(--header-color); font-size: 24px; margin-bottom: 8px;">Seventh Generation &ndash; KunjuVarkey (Varkeychan) Karickatturumpil &amp; Mariya Vadackal</h2>
+                <p style="text-align: center; font-weight: 700; color: #8c5d1e; margin-bottom: 25px;">4th Child of Kuruvila KunjuVarkey &bull; Brother of Rev. Fr. Kuruvila Kallarackal &bull; (Born: Chingam 23, 1897)</p>
+
+                <p class="section-lead">
+                    <strong>KunjuVarkey KunjuVarkey (Varkeychan)</strong>, brother of the aforementioned Rev. Fr. Kuruvila and fourth child of the 6th-generation Kuruvila KunjuVarkey, was born in <strong>1897</strong> (on the 23rd of Chingam). Upon completing his education, he married <strong>Mariya (Mammy)</strong>, daughter of Thomman Vadackal of the Thaiveettil branch in Pulinkunnu. Dutifully obeying his father's wishes, Varkeychan ably assisted his father in constructing residences and managing agricultural estates.
+                </p>
+
+                <p>
+                    In the earlier years, five children were born to Varkeychan and Mariya: <strong>Kuruvila</strong>, <strong>Thomas</strong>, <strong>Mariya</strong>, <strong>Joseph</strong> (fourth child, died in infancy), and <strong>Joseph</strong> (fifth child). Thereafter, in <strong>Chingam 1930</strong> (August/September 1930), the family relocated to the newly built house at the <strong>Pulikkalathu</strong> estate property. Following this move, nine more children joined the family&mdash;<strong>Varkey</strong>, <strong>Mathai</strong>, <strong>Chacko</strong> (eighth child, died in infancy), <strong>Anna</strong>, <strong>Aely (Eli)</strong>, <strong>Ninan</strong>, <strong>Rosa</strong>, <strong>Chacko</strong>, and <strong>Ittiavirah</strong>&mdash;bringing their family to fourteen children (12 surviving into adulthood).
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Kuruvila (Kuruvachan) &bull; Kilirookunnu, Chirakkadavu</h3>
+                <p>
+                    The eldest child, <strong>Kuruvila (Kuruvachan)</strong>, married <strong>Thresiamma (Theramma)</strong>, daughter of Eyo Vachaparambil of Pulinkunnu, in <strong>1945</strong>. They have six children belonging to the Ninth Generation: <strong>Vackachan</strong>, <strong>Mariya</strong>, <strong>Job (Eyo)</strong>, <strong>Joseph</strong>, <strong>Anna</strong>, and <strong>Philomina (Thankamma)</strong>. Kuruvila later built a residence on the Kilirookunnu estate in Chirakkadavu and settled there. Their eldest son, <strong>Vackachan</strong>, entered the Carmelite religious order (C.M.I.) and is studying at Dharmaram College, Bangalore. Their second son, <strong>Job (Eyo)</strong>, is pursuing higher studies in music in the Violin B.A. degree program at Annamalai University. Their eldest daughter, <strong>Mariyamma</strong>, graduated with a B.Sc. from Assumption College. The remaining children&mdash;Joseph, Anna, and Thankamma&mdash;continue their education.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Thomas (Thommachan) &bull; Mannarkayam</h3>
+                <p>
+                    Varkeychan's second child, <strong>Thomas (Thommachan)</strong>, married <strong>Achamma</strong>, daughter of Joseph Karuparambil of Plassanal, and relocated to the family residence at Mannarkayam. They were blessed with seven sons: <strong>Vackachan</strong>, <strong>Ouseppachan</strong>, <strong>Thommachan</strong>, <strong>Chackochan</strong>, <strong>Kuttichan</strong>, <strong>Ittirachan</strong>, and <strong>Mathachan</strong>. All sons except Vackachan are currently pursuing their education.
+                </p>
+                <blockquote>
+                    <strong>Eldest Son Vackachan (NASA &amp; University of Maryland):</strong> In April 1964, Thommachan's eldest son, <strong>Vackachan</strong>, passed the Pre-University Examination from Madras University at the age of 16 with First Class honors and Distinction Plus in Mathematics. In 1965, he traveled to the United States to pursue engineering. Residing together with his uncle Varkichan's (#6) family while working multiple part-time jobs, he graduated with a <strong>Bachelor of Science in Electrical Engineering (B.S.E.E.)</strong> from the <strong>University of Maryland</strong> in June 1969. He works in the United States as a Computer Programmer supporting <strong>NASA's Spacecraft Tracking and Data Network</strong>. Vackachan is married to <strong>Marymma (Maria Goretti)</strong>, daughter of Thomas Kathayanat of Thampalackad.
+                </blockquote>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Mariya &bull; Kainakary</h3>
+                <p>
+                    Varkeychan's third child, <strong>Mariya</strong>, was married to <strong>Chacko</strong>, son of Joseph Mambalathu of Kainakary. They have two children: <strong>Joseph</strong> and <strong>Mariya</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Joseph &amp; 8. Chacko</h3>
+                <p>
+                    Varkeychan's fourth child (<strong>Joseph</strong>) and eighth child (<strong>Chacko</strong>) both passed away in infancy.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Joseph (Appachan) &bull; Udumbanchola (d. Dec 15, 1972)</h3>
+                <p>
+                    The fifth child, <strong>Joseph (Appachan)</strong>, married <strong>Thresia (Saramma)</strong>, daughter of Kuncheria Purackal of Pulinkunnu. They have four children: <strong>Varkey</strong>, <strong>Mariya</strong>, <strong>Anna</strong>, and <strong>Kuncheria</strong>. While residing at and supervising operations on the family's cardamom estate in Udumbanchola, Joseph passed away suddenly due to cardiac arrest on <strong>December 15, 1972</strong>. His remains were laid to rest in the ancestral family vault at Kanjirappally Church Cemetery.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Varkey &bull; Astronomer, U.S. Naval Observatory (Washington, D.C.)</h3>
+                <p>
+                    The sixth child, <strong>Varkey</strong>, married <strong>Thresia</strong> of the Valiyarambathu family in Vaikom. They have two children: <strong>Marisha</strong> and <strong>Vivito (Viveetto)</strong>. Varkey pursued postgraduate studies in the United States, earning advanced university degrees, and serves as an <strong>Astronomer</strong> at the <strong>U.S. Naval Observatory in Washington, D.C.</strong>
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Mathai &bull; Veliyamparambu, Nedungadu</h3>
+                <p>
+                    The seventh child, <strong>Mathai</strong>, married <strong>Annie</strong>, daughter of Thomas Puthussery of Pulinkunnu. They have three children: <strong>Jessy</strong>, <strong>Jiji</strong>, and <strong>Joji</strong>. Mathai acquired the Veliyamparambu estate and residence in Nedungadu and resides there with his family.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. Anna &bull; Vayalil, Palai</h3>
+                <p>
+                    Varkeychan's ninth child, <strong>Anna</strong>, married <strong>Mathew</strong>, nephew of Bishop Mar Sebastian Vayalil, Bishop of Palai. They have seven children: <strong>Joseph</strong>, <strong>Varkey</strong>, <strong>Rosa</strong>, <strong>Devasia</strong>, <strong>Mathew</strong>, <strong>Tomy</strong>, and <strong>Marisha</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. Aely (Eli) &bull; Champakulam</h3>
+                <p>
+                    Varkeychan's tenth child, <strong>Aely (Eli)</strong>, married <strong>Mathew</strong>, son of Chacko Mapilassery Cherupurackal of Champakulam. They have four children: <strong>Mariam</strong>, <strong>Chacko</strong>, <strong>Varkey</strong>, and <strong>Annie</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">11. Ninan (Ninachan) &bull; Udumbanchola (b. Sept 6, 1940)</h3>
+                <p>
+                    The eleventh child, <strong>Ninan (Ninachan)</strong>, was born on <strong>September 6, 1940</strong>. Following Pre-University studies, he married <strong>Annamma</strong> from Andhra Pradesh in <strong>1967</strong>. They reside in Udumbanchola with their three children: <strong>Joji</strong>, <strong>Tina</strong>, and <strong>Jessy</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">12. Rosa &bull; Pulinkunnu</h3>
+                <p>
+                    The twelfth child, <strong>Rosa</strong>, married <strong>Mathew</strong>, son of Kurian Pattathil Pathil of Pulinkunnu. They have two children: <strong>Ciny (Sini)</strong> and <strong>Sheena</strong>. Mathew serves with the Government of Kerala as an <strong>Agricultural Extension Officer (A.E.O.)</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">13. Chacko &bull; Library Science (United States)</h3>
+                <p>
+                    The thirteenth child, <strong>Chacko</strong>, after graduating with a <strong>B.Com.</strong> degree, traveled to the United States with the support of his brother Varkey (#6), earned a <strong>Master's degree in Library Science</strong> there, and works professionally in America.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">14. Ittiavirah (Ittirachan) &bull; Udumbanchola</h3>
+                <p>
+                    The fourteenth child, <strong>Ittiavirah (Ittirachan)</strong>, following the passing of his elder brother Joseph (Appachan, #5) in December 1972, assumed active management and residence at the family's cardamom estate in <strong>Udumbanchola</strong>.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.25, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.25, Math.min(1.0, availableWidth / 2764));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 2764) {
+                const centerScroll = (2764 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
