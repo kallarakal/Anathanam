@@ -3,22 +3,744 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Varkey Maliackal - Under Construction</title>
+    <title>Varkey Maliackal (മാളിയേക്കൽ വർക്കിച്ചൻ) - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 16px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card h4 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .overview-card h4 a:hover {
+            text-decoration: underline;
+            color: #8c5d1e;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Thommy_Maliackal.html" class="nav-btn" title="View Father's Family Tree: Maliackal Kuruvila Thommy">
+                &uarr; Father's Tree (Maliackal)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">മാളിയേക്കൽ വർക്കിച്ചൻ &bull; Varkey Maliackal &amp; Rossamma Neerackal</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ഏഴാം തലമുറ &bull; Seventh Generation</p>
+            <h1>
+                തൊമ്മി വർക്കി (വർക്കിച്ചൻ) മാളിയേക്കൽ &ndash; റോസമ്മ നീരാക്കൽ<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">Varkey Maliackal (Thommy Varkey / Varkeychan) &ndash; Rossamma Neerackal</span>
+            </h1>
+            <p class="lifespan">മാളിയേക്കൽ തറവാട്, കാഞ്ഞിരപ്പള്ളി &bull; Maliackal Ancestral Home, Kanjirappally &bull; (b. January 26, 1923)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Varkey Maliackal & Rossamma Neerackal Family Tree Diagram (12 Children) -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="2572" height="242" viewBox="0 0 2572 242" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents (centered at 1286) -->
+                <line x1="1286" y1="78" x2="1286" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 12 children (131 to 2441) -->
+                <line x1="131" y1="118" x2="2441" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="131" y1="118" x2="131" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="341" y1="118" x2="341" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="551" y1="118" x2="551" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="761" y1="118" x2="761" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="971" y1="118" x2="971" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1181" y1="118" x2="1181" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1391" y1="118" x2="1391" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1601" y1="118" x2="1601" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1811" y1="118" x2="1811" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2021" y1="118" x2="2021" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2231" y1="118" x2="2231" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2441" y1="118" x2="2441" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Node (7th Generation) -->
+                <g>
+                    <rect x="966" y="18" width="640" height="60" rx="10" ry="10" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 4px 8px rgba(60, 40, 18, 0.15));" />
+                    <text x="1286" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#3b2210">തൊമ്മി വർക്കി (വർക്കിച്ചൻ) മാളിയേക്കൽ &ndash; റോസമ്മ നീരാക്കൽ</text>
+                    <text x="1286" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Varkey Maliackal &amp; Rossamma Neerackal &bull; 13th Child of Kuruvila Thommy Maliackal)</text>
+                </g>
+
+                <!-- Child 1: Aeli -->
+                <g>
+                    <a class="node-link" href="Aeli_Vayampothanal_Aruvithura.html" xlink:href="Aeli_Vayampothanal_Aruvithura.html" title="Open Aeli Vayampothanal (Aruvithura)">
+                        <rect x="36" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="131" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Aeli</text>
+                        <text x="131" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Joseph Vayampothanal</text>
+                        <text x="131" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Valyaveettil, Aruvithura</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Rosamma (Sophiamma) -->
+                <g>
+                    <a class="node-link" href="Rosamma_Sophiamma_Vettichira_Chennamkary.html" xlink:href="Rosamma_Sophiamma_Vettichira_Chennamkary.html" title="Open Rosamma (Sophiamma) Vettichira">
+                        <rect x="246" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="341" y="170" text-anchor="middle" font-size="12.5px" font-weight="700" fill="#6d2b3c">Rosamma (Sophiamma)</text>
+                        <text x="341" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Philip Vettichira</text>
+                        <text x="341" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Kanjuparambil, Chennamkary</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Chachiamma -->
+                <g>
+                    <a class="node-link" href="Chachiamma_Padinjattumala_Elikulam.html" xlink:href="Chachiamma_Padinjattumala_Elikulam.html" title="Open Chachiamma Padinjattumala (Elikulam)">
+                        <rect x="456" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="551" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Chachiamma</text>
+                        <text x="551" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Kuruvila Padinjattumala</text>
+                        <text x="551" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Kuruvinakunnel, Elikulam</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Mariyamma -->
+                <g>
+                    <a class="node-link" href="Mariyamma_Kanathiparambil_Kanjirappally.html" xlink:href="Mariyamma_Kanathiparambil_Kanjirappally.html" title="Open Mariyamma Kanathiparambil (Kanjirappally)">
+                        <rect x="666" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="761" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mariyamma</text>
+                        <text x="761" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Ittirachan Kanathiparambil</text>
+                        <text x="761" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Pallivathukkal, Kanjirappally</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Rani -->
+                <g>
+                    <a class="node-link" href="Rani_Varkey_Maliackal.html" xlink:href="Rani_Varkey_Maliackal.html" title="Open Rani Maliackal">
+                        <rect x="876" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="971" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Rani</text>
+                        <text x="971" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">College Educated</text>
+                        <text x="971" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Resides at Home</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Thomas (Toman) -->
+                <g>
+                    <a class="node-link" href="Thomas_Toman_Varkey_Maliackal.html" xlink:href="Thomas_Toman_Varkey_Maliackal.html" title="Open Thomas (Toman) Maliackal">
+                        <rect x="1086" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1181" y="178" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thomas (Toman)</text>
+                        <text x="1181" y="200" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">College Student</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Celine -->
+                <g>
+                    <a class="node-link" href="Celine_Varkey_Maliackal.html" xlink:href="Celine_Varkey_Maliackal.html" title="Open Celine Maliackal">
+                        <rect x="1296" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1391" y="178" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Celine</text>
+                        <text x="1391" y="200" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">College Student</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Cicily -->
+                <g>
+                    <a class="node-link" href="Cicily_Varkey_Maliackal.html" xlink:href="Cicily_Varkey_Maliackal.html" title="Open Cicily Maliackal">
+                        <rect x="1506" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1601" y="178" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Cicily</text>
+                        <text x="1601" y="200" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">College Student</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Alex -->
+                <g>
+                    <a class="node-link" href="Alex_Varkey_Maliackal.html" xlink:href="Alex_Varkey_Maliackal.html" title="Open Alex Maliackal">
+                        <rect x="1716" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1811" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Alex</text>
+                        <text x="1811" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">A.K.J.M. High School</text>
+                        <text x="1811" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kanjirappally</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Joseph -->
+                <g>
+                    <a class="node-link" href="Joseph_Varkey_Maliackal.html" xlink:href="Joseph_Varkey_Maliackal.html" title="Open Joseph Maliackal">
+                        <rect x="1926" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2021" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
+                        <text x="2021" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">A.K.J.M. High School</text>
+                        <text x="2021" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kanjirappally</text>
+                    </a>
+                </g>
+
+                <!-- Child 11: George -->
+                <g>
+                    <a class="node-link" href="George_Varkey_Maliackal.html" xlink:href="George_Varkey_Maliackal.html" title="Open George Maliackal">
+                        <rect x="2136" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2231" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">George</text>
+                        <text x="2231" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">A.K.J.M. High School</text>
+                        <text x="2231" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kanjirappally</text>
+                    </a>
+                </g>
+
+                <!-- Child 12: Martin -->
+                <g>
+                    <a class="node-link" href="Martin_Varkey_Maliackal.html" xlink:href="Martin_Varkey_Maliackal.html" title="Open Martin Maliackal">
+                        <rect x="2346" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2441" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Martin</text>
+                        <text x="2441" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">A.K.J.M. High School</text>
+                        <text x="2441" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kanjirappally</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Three Generation Summary Cards (8th Generation & Family Details) -->
+        <section style="max-width: 1200px; margin: 30px auto;">
+            <h2 style="text-align: center; color: #3b2210; font-size: 22px; margin-bottom: 8px;">സന്താനപരമ്പര &bull; Three-Generation Descendants Overview</h2>
+            <p style="text-align: center; color: #634018; font-size: 14.5px; margin-bottom: 24px;">തൊമ്മി വർക്കി (വർക്കിച്ചൻ) &ndash; റോസമ്മ നീരാക്കൽ ദമ്പതികളുടെ 12 സന്താനങ്ങളും അവരുടെ കുടുംബങ്ങളും (7 പെൺമക്കൾ &amp; 5 ആൺമക്കൾ)</p>
+
+            <div class="overview-grid">
+                
+                <!-- Card 1: Eli -->
+                <div class="overview-card female">
+                    <h4><a href="Eli_Vayampothanal_Aruvithura.html">1. Eli (ഏലി)</a></h4>
+                    <div class="spouse">m. Joseph, s/o Varkey Vayampothanal</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Valyaveettil Vayampothanal, Aruvithura (അരുവിത്തുറ വല്യവീട്ടിലായ വയമ്പോത്തനാൽ)</p>
+                </div>
+
+                <!-- Card 2: Rosamma (Sophiamma) -->
+                <div class="overview-card female">
+                    <h4><a href="Rosamma_Sophiamma_Vettichira_Chennamkary.html">2. Rosamma / Sophiamma (റോസമ്മ / സോഫിയാമ്മ)</a></h4>
+                    <div class="spouse">m. Philip, s/o Vakkachan Vettichira</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Kanjuparambil Vettichira, Chennamkary (ചേന്നങ്കരി കാഞ്ഞൂപറമ്പിൽ വെട്ടിച്ചിറ)</p>
+                </div>
+
+                <!-- Card 3: Chachiamma -->
+                <div class="overview-card female">
+                    <h4><a href="Chachiamma_Padinjattumala_Elikulam.html">3. Chachiamma (ചാച്ചിമ്മ)</a></h4>
+                    <div class="spouse">m. Kuruvila, s/o George Padinjattumala</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Kuruvinakunnel Padinjattumala, Elikulam (എലിക്കുളം കുരുവിനാക്കുന്നേൽ പടിഞ്ഞാറ്റുമല)</p>
+                </div>
+
+                <!-- Card 4: Mariyamma -->
+                <div class="overview-card female">
+                    <h4><a href="Mariyamma_Kanathiparambil_Kanjirappally.html">4. Mariyamma (മറിയമ്മ)</a></h4>
+                    <div class="spouse">m. Ittirachan, s/o Peelichan Kanathiparambil</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Pallivathukkal Kanathiparambil, Kanjirappally (കാഞ്ഞിരപ്പള്ളി പള്ളിവാതുക്കൽ കാനത്തിപ്പറമ്പിൽ)</p>
+                </div>
+
+                <!-- Card 5: Rani -->
+                <div class="overview-card female">
+                    <h4><a href="Rani_Varkey_Maliackal.html">5. Rani (റാണി)</a></h4>
+                    <div class="spouse">Fifth child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education &amp; Residence:</strong> Completed college education; resides at the family home (സ്വഗൃഹത്തിൽ കഴിയുന്നു)</p>
+                </div>
+
+                <!-- Card 6: Thomas (Toman) -->
+                <div class="overview-card male">
+                    <h4><a href="Thomas_Toman_Varkey_Maliackal.html">6. Thomas / Toman (തോമസ് / ടോമൻ)</a></h4>
+                    <div class="spouse">Sixth child &amp; eldest son of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Status:</strong> Pursuing college education (കോളേജ് വിദ്യാഭ്യാസം തുടരുന്നു)</p>
+                </div>
+
+                <!-- Card 7: Celine -->
+                <div class="overview-card female">
+                    <h4><a href="Celine_Varkey_Maliackal.html">7. Celine (സെലിൻ)</a></h4>
+                    <div class="spouse">Seventh child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Status:</strong> Pursuing college education (കോളേജ് വിദ്യാഭ്യാസം തുടരുന്നു)</p>
+                </div>
+
+                <!-- Card 8: Cicily -->
+                <div class="overview-card female">
+                    <h4><a href="Cicily_Varkey_Maliackal.html">8. Cicily (സിസിലി)</a></h4>
+                    <div class="spouse">Eighth child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Status:</strong> Pursuing college education (കോളേജ് വിദ്യാഭ്യാസം തുടരുന്നു)</p>
+                </div>
+
+                <!-- Card 9: Alex -->
+                <div class="overview-card male">
+                    <h4><a href="Alex_Varkey_Maliackal.html">9. Alex (അലക്സ്)</a></h4>
+                    <div class="spouse">Ninth child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education:</strong> Studying at A.K.J.M. English Medium High School, Kanjirappally</p>
+                </div>
+
+                <!-- Card 10: Joseph -->
+                <div class="overview-card male">
+                    <h4><a href="Joseph_Varkey_Maliackal.html">10. Joseph (ജോസഫ്)</a></h4>
+                    <div class="spouse">Tenth child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education:</strong> Studying at A.K.J.M. English Medium High School, Kanjirappally</p>
+                </div>
+
+                <!-- Card 11: George -->
+                <div class="overview-card male">
+                    <h4><a href="George_Varkey_Maliackal.html">11. George (ജോർജ്ജ്)</a></h4>
+                    <div class="spouse">Eleventh child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education:</strong> Studying at A.K.J.M. English Medium High School, Kanjirappally</p>
+                </div>
+
+                <!-- Card 12: Martin -->
+                <div class="overview-card male">
+                    <h4><a href="Martin_Varkey_Maliackal.html">12. Martin (മാർട്ടിൻ)</a></h4>
+                    <div class="spouse">Twelfth &amp; youngest child of Varkeychan &amp; Rossamma</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Education:</strong> Studying at A.K.J.M. English Medium High School, Kanjirappally</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Main Biographical Narrative: Malayalam First, followed by English Translation -->
+        <main class="bio-section">
+            
+            <!-- MALAYALAM SECTION -->
+            <div lang="ml">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    കുടുംബ ചരിത്രം (Malayalam History)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>ഏഴാം തലമുറ &ndash; മാളിയേക്കൽ വർക്കിച്ചൻ (തൊമ്മി വർക്കി):</strong>
+                </p>
+
+                <p>
+                    കുരുവിള തൊമ്മിയുടെ 13-&nbsp;ാമത്തെ സന്താനമായ തൊമ്മി വർക്കി (വർക്കിയച്ചൻ) 1923 ജനുവരി 26-&nbsp;ാം തീയതി ജനിച്ചു. വിദ്യാഭ്യാസാനന്തരം മുട്ടുചിറ നീരാക്കൽ ചാണ്ടിക്കുഞ്ഞിന്റെ പുത്രി റോസമ്മയെ ഇദ്ദേഹം വിവാഹം ചെയ്തു. മാതാപിതാക്കന്മാരോടുകൂടി ജീവിക്കുന്ന കാലത്തു് ഇദ്ദേഹത്തിന്റെ മാതാവു് ചരമമടഞ്ഞു. 1948 ആഗസ്റ്റ് 24-&nbsp;ാം തീയതി ഇവരുടെയെല്ലാം പിതാവായ തൊമ്മി ഇഹലോകവാസം വെടിഞ്ഞു. വമ്പിച്ച ഒരു ജനാവലിയുടെ സാന്നിദ്ധ്യത്തിൽ കുടുംബകല്ലറയിൽ ശവസംസ്കാരം നടത്തി.
+                </p>
+
+                <p>
+                    വർക്കിയച്ചനു് ഏഴു പെൺമക്കളും അഞ്ചു് പുത്രന്മാരുമുണ്ടു്.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. ഏലി &bull; വയമ്പോത്തനാൽ, അരുവിത്തുറ</h3>
+                <p>
+                    ആദ്യപുത്രി ഏലിയെ അരുവിത്തുറ വല്യവീട്ടിലായ വയമ്പോത്തനാൽ വർക്കിയുടെ മകൻ ജോസഫ് വിവാഹം കഴിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. റോസമ്മ (സോഫിയാമ്മ) &bull; വെട്ടിച്ചിറ, ചേന്നങ്കരി</h3>
+                <p>
+                    രണ്ടാമത്തെ പുത്രി റോസമ്മ (സോഫിയാമ്മ) യെ ചേന്നങ്കരി കാഞ്ഞൂപറമ്പിൽ വെട്ടിച്ചിറ വക്കച്ചൻ മകൻ ഫിലിപ്പ് വിവാഹം കഴിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. ചാച്ചിമ്മ &bull; പടിഞ്ഞാറ്റുമല, എലിക്കുളം</h3>
+                <p>
+                    3-&nbsp;ാമത്തെ സന്താനമായ ചാച്ചിമ്മയെ എലിക്കുളത്തു് കുരുവിനാക്കുന്നേൽ പടിഞ്ഞാറ്റുമല ജോർജിന്റെ പുത്രൻ കുരുവിള വിവാഹം കഴിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. മറിയമ്മ &bull; കാനത്തിപ്പറമ്പിൽ, കാഞ്ഞിരപ്പള്ളി</h3>
+                <p>
+                    4-&nbsp;ാമത്തെ സന്താനമായ മറിയമ്മയെ കാഞ്ഞിരപ്പള്ളി പള്ളിവാതുക്കൽ കാനത്തിപ്പറമ്പിൽ പീലിച്ചൻ മകൻ ഇട്ടിരാച്ചൻ വിവാഹം കഴിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. റാണി</h3>
+                <p>
+                    5-&nbsp;ാമത്തെ സന്താനമായ റാണി കോളേജ് വിദ്യാഭ്യാസത്തിനു ശേഷം സ്വഗൃഹത്തിൽ കഴിയുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6&ndash;12. തോമസ് (ടോമൻ), സെലിൻ, സിസിലി, അലക്സ്, ജോസഫ്, ജോർജ്ജ്, മാർട്ടിൻ</h3>
+                <p>
+                    6-&nbsp;ാമത്തെ സന്താനമായ തോമസ് (ടോമൻ) കോളേജ് വിദ്യാഭ്യാസം തുടരുന്നു. 7-&nbsp;ാമത്തെയും 8-&nbsp;ാമത്തെയും സന്താനങ്ങളായ സെലിനും സിസിലിയും കോളേജ് വിദ്യാഭ്യാസം തുടരുന്നു. 9-&nbsp;ാമത്തെ സന്താനമായ അലക്സും 10-&nbsp;ാമത്തെ സന്താനമായ ജോസഫും, 11-&nbsp;ാമത്തെ സന്താനമായ ജോർജ്ജും 12-&nbsp;ാമത്തെ സന്താനമായ മാർട്ടിനും കാഞ്ഞിരപ്പള്ളി A.K.J.M. ഇംഗ്ലീഷ് മീഡിയം ഹൈസ്കൂളിൽ പഠിക്കുന്നു.
+                </p>
+            </div>
+
+            <hr class="section-separator">
+
+            <!-- ENGLISH TRANSLATION SECTION -->
+            <div lang="en">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    Family History (English Translation)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>Seventh Generation &ndash; Maliackal Varkeychan (Thommy Varkey):</strong>
+                </p>
+
+                <p>
+                    <strong>Thommy Varkey (Varkeychan) Maliackal</strong>, the thirteenth child of Kuruvila Thommy and a seventh-generation member of the family, was born on <strong>January 26, 1923</strong>. Following his education, he married <strong>Rossamma</strong>, daughter of <strong>Chandikunju Neerackal</strong> of <strong>Muttuchira</strong>. While he was living together with his parents, his mother passed away. On <strong>August 24, 1948</strong>, their father, <strong>Thommy</strong>, departed this earthly life; his funeral was solemnly held at the family vault in the presence of a vast gathering.
+                </p>
+
+                <p>
+                    Varkeychan and Rossamma were blessed with <strong>seven daughters and five sons</strong> (twelve children in total).
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Eli &bull; Vayampothanal, Aruvithura</h3>
+                <p>
+                    Their eldest daughter, <strong>Eli</strong>, was married to <strong>Joseph</strong>, son of <strong>Varkey</strong> of <strong>Vayampothanal</strong> (belonging to the Valyaveettil family), <strong>Aruvithura</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Rosamma (Sophiamma) &bull; Vettichira, Chennamkary</h3>
+                <p>
+                    Their second daughter, <strong>Rosamma (Sophiamma)</strong>, was married to <strong>Philip</strong>, son of <strong>Vakkachan</strong> of <strong>Vettichira</strong> (Kanjuparambil branch), <strong>Chennamkary</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Chachiamma &bull; Padinjattumala, Elikulam</h3>
+                <p>
+                    The third child, <strong>Chachiamma</strong>, was married to <strong>Kuruvila</strong>, son of <strong>George</strong> of <strong>Padinjattumala</strong> (Kuruvinakunnel branch), <strong>Elikulam</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Mariyamma &bull; Kanathiparambil, Kanjirappally</h3>
+                <p>
+                    The fourth child, <strong>Mariyamma</strong>, was married to <strong>Ittirachan</strong>, son of <strong>Peelichan</strong> of <strong>Kanathiparambil</strong> (Pallivathukkal branch), <strong>Kanjirappally</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Rani</h3>
+                <p>
+                    The fifth child, <strong>Rani</strong>, resides at home after completing her college education.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6&ndash;12. Thomas (Toman), Celine, Cicily, Alex, Joseph, George &amp; Martin</h3>
+                <p>
+                    The sixth child, <strong>Thomas (Toman)</strong>, and the seventh and eighth children, <strong>Celine</strong> and <strong>Cicily</strong>, are pursuing their college education. The ninth child <strong>Alex</strong>, tenth child <strong>Joseph</strong>, eleventh child <strong>George</strong>, and twelfth child <strong>Martin</strong> are studying at <strong>A.K.J.M. English Medium High School, Kanjirappally</strong>.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.25, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.25, Math.min(1.0, availableWidth / 2572));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 2572) {
+                const centerScroll = (2572 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
