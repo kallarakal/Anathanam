@@ -3,22 +3,801 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joseph Maliackal - Under Construction</title>
+    <title>Joseph Maliackal (തൊമ്മി ജോസഫ് അപ്പച്ചൻ മാളിയേക്കൽ) - Family Tree &amp; History</title>
     <style>
+        :root {
+            --bg-color: #fcfaf5;
+            --text-color: #2c1a0c;
+            --header-color: #3b2210;
+            --gold-accent: #af8133;
+            --gold-border: #b38938;
+            --gold-light: #edd18c;
+            --male-fill: #eef5fa;
+            --male-stroke: #5d88a4;
+            --male-text: #1e3a5f;
+            --female-fill: #faf0f2;
+            --female-stroke: #bc7585;
+            --female-text: #6d2b3c;
+            --parent-fill: #fdfaf3;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
             margin: 0;
-            background-color: #fbf7ee;
-            color: #2c1a0c;
-            font-size: 28px;
+            padding: 0 0 60px 0;
+        }
+
+        /* Sticky Top Navigation Bar */
+        .top-nav {
+            background: rgba(31, 22, 16, 0.94);
+            border-bottom: 1px solid rgba(175, 129, 51, 0.4);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+            padding: 8px 18px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn {
+            background: #2a1b12;
+            border: 1px solid #af8133;
+            color: #f0dbaf;
+            padding: 6px 13px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: #422d1f;
+            color: #ffffff;
+            border-color: #d8a84e;
+            box-shadow: 0 2px 8px rgba(175, 129, 51, 0.3);
+        }
+
+        .home-btn-nav {
+            background: #4a2e18;
+            border-color: #d8a84e;
+            color: #fff2d1;
+            font-weight: 700;
+        }
+
+        .home-btn-nav:hover {
+            background: #633f21;
+            border-color: #edd18c;
+        }
+
+        .nav-center {
+            text-align: center;
+            flex: 1 1 auto;
+        }
+
+        .nav-title {
+            color: #edd18c;
+            font-size: 14.5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .zoom-text {
+            color: #edd18c;
+            font-size: 12.5px;
+            font-weight: 700;
+            min-width: 44px;
+            text-align: center;
+        }
+
+        /* Main Content Container */
+        .content-wrap {
+            padding: 20px 20px 40px 20px;
+        }
+
+        /* Header Area */
+        .header-box {
+            text-align: center;
+            max-width: 900px;
+            margin: 10px auto 20px auto;
+        }
+
+        .generation-tag {
+            font-size: 18px;
+            font-weight: 700;
+            color: #8c5d1e;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .header-box h1 {
+            margin: 6px 0 12px 0;
+            color: var(--header-color);
+            font-size: 26px;
+            line-height: 1.35;
+        }
+
+        .lifespan {
+            font-size: 16px;
+            font-weight: 600;
+            color: #5c4028;
+            margin: 4px 0 14px 0;
+        }
+
+        .header-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2a1b12;
+            border: 1.5px solid #af8133;
+            color: #f0dbaf;
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 14.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.15);
+            margin: 6px 0 12px 0;
+        }
+
+        .header-home-btn:hover {
+            background: #422d1f;
+            border-color: #d8a84e;
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(60, 40, 18, 0.25);
+        }
+
+        /* Tree Scroll Container */
+        .tree-scroll-container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 25px auto 35px auto;
+            overflow-x: auto;
+            padding-bottom: 14px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .family-sub-tree {
+            background: #ffffff;
+            border: 2px solid #b38938;
+            border-radius: 12px;
+            box-shadow: 0 10px 28px rgba(60, 40, 18, 0.12);
+            display: block;
+            margin: 0 auto;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            transform-origin: top center;
+            transition: transform 0.2s ease;
+        }
+
+        a.node-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.node-link rect {
+            transition: filter 0.18s ease, stroke-width 0.18s ease;
+        }
+
+        a.node-link:hover rect {
+            stroke-width: 2.8 !important;
+            filter: brightness(0.96) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.18));
+        }
+
+        a.node-link:hover text {
+            text-decoration: underline;
+        }
+
+        /* History & Biography Text */
+        .bio-section {
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        p {
+            max-width: 960px;
+            margin: 0 auto 1.4em auto;
+            font-size: 16.5px;
+            text-align: justify;
+            line-height: 1.85;
+        }
+
+        .section-lead {
+            font-size: 17px;
+            font-weight: 600;
+            color: #634018;
+            border-left: 4px solid #b38938;
+            padding-left: 12px;
+            margin-bottom: 1.2em;
+        }
+
+        .section-separator {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(179, 137, 56, 0.1), rgba(179, 137, 56, 0.6), rgba(179, 137, 56, 0.1));
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        /* Three Generation Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 20px auto 35px auto;
+        }
+
+        .overview-card {
+            background: #ffffff;
+            border: 1.5px solid #d8be86;
+            border-radius: 10px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 12px rgba(60, 40, 18, 0.08);
+        }
+
+        .overview-card.male {
+            border-left: 5px solid #5d88a4;
+        }
+
+        .overview-card.female {
+            border-left: 5px solid #bc7585;
+        }
+
+        .overview-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 15.5px;
+            color: #3b2210;
+        }
+
+        .overview-card h4 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .overview-card h4 a:hover {
+            text-decoration: underline;
+            color: #8c5d1e;
+        }
+
+        .overview-card .spouse {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #634018;
+            margin-bottom: 8px;
+        }
+
+        .overview-card ul {
+            margin: 6px 0 0 18px;
+            padding: 0;
+            font-size: 13.5px;
+            color: #3d2b1f;
+            line-height: 1.5;
+        }
+
+        .overview-card ul li {
+            margin-bottom: 4px;
+        }
+
+        @media print {
+            .top-nav, .nav-btn, .header-home-btn { display: none !important; }
+            body { background: white !important; color: black !important; padding: 0 !important; }
+            .tree-scroll-container { overflow: visible !important; }
+            .family-sub-tree { box-shadow: none !important; border: 1px solid #444 !important; }
         }
     </style>
 </head>
-<body>"Under Construction"</body>
+<body>
+
+    <!-- Sticky Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-left">
+            <a href="index.html" class="nav-btn home-btn-nav" title="Back to Home (Main Family Tree)">
+                &#127968; Home
+            </a>
+            <a href="Thommy_Maliackal.html" class="nav-btn" title="View Father's Family Tree: Maliackal Kuruvila Thommy">
+                &uarr; Father's Tree (Maliackal)
+            </a>
+        </div>
+        <div class="nav-center">
+            <span class="nav-title">തൊമ്മി ജോസഫ് (അപ്പച്ചൻ) മാളിയേക്കൽ &bull; Joseph Maliackal &amp; Anna Kadmapuzha</span>
+        </div>
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="changeZoom(-0.1)" title="Zoom Out">&minus;</button>
+            <span class="zoom-text" id="zoomLevel">100%</span>
+            <button class="nav-btn" onclick="changeZoom(0.1)" title="Zoom In">&plus;</button>
+            <button class="nav-btn" onclick="resetZoom()" title="Reset Zoom">Reset</button>
+            <button class="nav-btn" onclick="fitWidth()" title="Fit Tree to Screen Width">Fit Width</button>
+        </div>
+    </header>
+
+    <div class="content-wrap">
+        
+        <!-- Header Box -->
+        <div class="header-box">
+            <p class="generation-tag">ഏഴാം തലമുറ &bull; Seventh Generation</p>
+            <h1>
+                തൊമ്മി ജോസഫ് (അപ്പച്ചൻ) മാളിയേക്കൽ &ndash; അന്ന കടമപ്പുഴ<br>
+                <span style="font-size: 20px; font-weight: 600; color: #5c4028;">Joseph Maliackal (Thommy Joseph / Appachan) &ndash; Anna Kadmapuzha</span>
+            </h1>
+            <p class="lifespan">മാളിയേക്കൽ കുടുംബം, കാഞ്ഞിരപ്പള്ളി / മണ്ണാർക്കാട് &bull; Maliackal Family, Kanjirappally &amp; Mannarkkad &bull; (b. 1st Medam 1899)</p>
+            <div>
+                <a href="index.html" class="header-home-btn" title="Back to Home / Main Family Tree">
+                    &#127968; Home (Main Family Tree) &rarr;
+                </a>
+            </div>
+        </div>
+
+        <!-- Joseph Maliackal & Anna Kadmapuzha Family Tree Diagram (11 Children) -->
+        <div class="tree-scroll-container" id="scrollWrapper">
+            <svg class="family-sub-tree" id="familySvg" width="2362" height="242" viewBox="0 0 2362 242" preserveAspectRatio="xMidYMin meet">
+                
+                <!-- Connectors -->
+                <!-- Vertical stem from parents (centered at 1181) -->
+                <line x1="1181" y1="78" x2="1181" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Horizontal branch spanning all 11 children (131 to 2231) -->
+                <line x1="131" y1="118" x2="2231" y2="118" stroke="#af8133" stroke-width="2.5" />
+                <!-- Vertical drops to each child -->
+                <line x1="131" y1="118" x2="131" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="341" y1="118" x2="341" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="551" y1="118" x2="551" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="761" y1="118" x2="761" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="971" y1="118" x2="971" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1181" y1="118" x2="1181" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1391" y1="118" x2="1391" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1601" y1="118" x2="1601" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="1811" y1="118" x2="1811" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2021" y1="118" x2="2021" y2="148" stroke="#af8133" stroke-width="2.5" />
+                <line x1="2231" y1="118" x2="2231" y2="148" stroke="#af8133" stroke-width="2.5" />
+
+                <!-- Parents Node (7th Generation) -->
+                <g>
+                    <rect x="891" y="18" width="580" height="60" rx="10" ry="10" fill="#fdfaf3" stroke="#b38938" stroke-width="2.5" style="filter: drop-shadow(0 4px 8px rgba(60, 40, 18, 0.15));" />
+                    <text x="1181" y="42" text-anchor="middle" font-size="15px" font-weight="700" fill="#3b2210">തൊമ്മി ജോസഫ് (അപ്പച്ചൻ) മാളിയേക്കൽ &ndash; അന്ന കടമപ്പുഴ</text>
+                    <text x="1181" y="62" text-anchor="middle" font-size="11.5px" font-weight="600" fill="#7a5823">(Joseph Maliackal &amp; Anna Kadmapuzha &bull; 3rd Child of Kuruvila Thommy Maliackal)</text>
+                </g>
+
+                <!-- Child 1: Thommy (Thommachan) -->
+                <g>
+                    <a class="node-link" href="Thommy_Vachaparambil_Joseph_Maliackal.html" xlink:href="Thommy_Vachaparambil_Joseph_Maliackal.html" title="Open Thommy (Thommachan) Maliackal">
+                        <rect x="36" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="131" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Thommy (Thommachan)</text>
+                        <text x="131" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">m. d/o Kurian Vachaparambil</text>
+                        <text x="131" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Pulinkunnu &bull; 8 Children</text>
+                    </a>
+                </g>
+
+                <!-- Child 2: Aeli -->
+                <g>
+                    <a class="node-link" href="Aeli_Kallankattu_Thidanad.html" xlink:href="Aeli_Kallankattu_Thidanad.html" title="Open Aeli Kallankattu (Thidanad)">
+                        <rect x="246" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="341" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Aeli</text>
+                        <text x="341" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. s/o Kuruvachan Kallankattu</text>
+                        <text x="341" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Thidanad (Vellukkunnel)</text>
+                    </a>
+                </g>
+
+                <!-- Child 3: Chacko -->
+                <g>
+                    <a class="node-link" href="Chacko_Karimpoozhikattu_Joseph_Maliackal.html" xlink:href="Chacko_Karimpoozhikattu_Joseph_Maliackal.html" title="Open Chacko Maliackal">
+                        <rect x="456" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="551" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Chacko</text>
+                        <text x="551" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">m. Karimpoozhikattu Family</text>
+                        <text x="551" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Vaikom &bull; Settled in Malabar</text>
+                    </a>
+                </g>
+
+                <!-- Child 4: Achamma -->
+                <g>
+                    <a class="node-link" href="Achamma_Pallivathukkal_Joseph_Maliackal.html" xlink:href="Achamma_Pallivathukkal_Joseph_Maliackal.html" title="Open Achamma Pallivathukkal">
+                        <rect x="666" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="761" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Achamma</text>
+                        <text x="761" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Devasya Pallivathukkal</text>
+                        <text x="761" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">s/o Chandy Pallivathukkal</text>
+                    </a>
+                </g>
+
+                <!-- Child 5: Chachi -->
+                <g>
+                    <a class="node-link" href="Chachi_Adv_Kora_Kanjirappally.html" xlink:href="Chachi_Adv_Kora_Kanjirappally.html" title="Open Chachi (m. Son of Adv. Kora)">
+                        <rect x="876" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="971" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Chachi</text>
+                        <text x="971" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. s/o Adv. Kora</text>
+                        <text x="971" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Kanjirappally Munsiff Court</text>
+                    </a>
+                </g>
+
+                <!-- Child 6: Mary -->
+                <g>
+                    <a class="node-link" href="Mary_Kokkappally_Kanjirappally.html" xlink:href="Mary_Kokkappally_Kanjirappally.html" title="Open Mary Kokkappally (Kanjirappally)">
+                        <rect x="1086" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1181" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Mary</text>
+                        <text x="1181" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Ouseppachan Kokkappally</text>
+                        <text x="1181" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Thuruthippadavu, Kanjirappally</text>
+                    </a>
+                </g>
+
+                <!-- Child 7: Kuruvila (Kuttappan) -->
+                <g>
+                    <a class="node-link" href="Kuruvila_Kuttappan_Joseph_Maliackal.html" xlink:href="Kuruvila_Kuttappan_Joseph_Maliackal.html" title="Open Kuruvila (Kuttappan) Maliackal">
+                        <rect x="1296" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1391" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Kuruvila (Kuttappan)</text>
+                        <text x="1391" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">m. Kizhakkethalakkal</text>
+                        <text x="1391" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kanjirappally &bull; 2 Sons</text>
+                    </a>
+                </g>
+
+                <!-- Child 8: Leelamma -->
+                <g>
+                    <a class="node-link" href="Leelamma_Kallankattu_Aruvithura.html" xlink:href="Leelamma_Kallankattu_Aruvithura.html" title="Open Leelamma Kallankattu (Aruvithura)">
+                        <rect x="1506" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1601" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Leelamma</text>
+                        <text x="1601" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. Thommachan Kallankattu</text>
+                        <text x="1601" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Aruvithura (Vellukkunnel)</text>
+                    </a>
+                </g>
+
+                <!-- Child 9: Varkey (George) -->
+                <g>
+                    <a class="node-link" href="Varkey_George_Joseph_Maliackal.html" xlink:href="Varkey_George_Joseph_Maliackal.html" title="Open Varkey (George) Maliackal">
+                        <rect x="1716" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="1811" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Varkey (George)</text>
+                        <text x="1811" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">m. Niece of Mathayichan</text>
+                        <text x="1811" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Kizhakkekara &bull; 4 Children</text>
+                    </a>
+                </g>
+
+                <!-- Child 10: Celine (Ammini) -->
+                <g>
+                    <a class="node-link" href="Celine_Ammini_Cheenimoottil_Malabar.html" xlink:href="Celine_Ammini_Cheenimoottil_Malabar.html" title="Open Celine (Ammini) Cheenimoottil">
+                        <rect x="1926" y="148" width="190" height="76" rx="8" ry="8" fill="#faf0f2" stroke="#bc7585" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2021" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#6d2b3c">Celine (Ammini)</text>
+                        <text x="2021" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#8c4e5e">m. George Cheenimoottil</text>
+                        <text x="2021" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#9a6070">Karippaparambil &bull; Malabar</text>
+                    </a>
+                </g>
+
+                <!-- Child 11: Joseph -->
+                <g>
+                    <a class="node-link" href="Joseph_Jr_Joseph_Maliackal.html" xlink:href="Joseph_Jr_Joseph_Maliackal.html" title="Open Joseph Maliackal (11th Child)">
+                        <rect x="2136" y="148" width="190" height="76" rx="8" ry="8" fill="#eef5fa" stroke="#5d88a4" stroke-width="2" style="filter: drop-shadow(0 3px 6px rgba(60, 40, 18, 0.12));" />
+                        <text x="2231" y="170" text-anchor="middle" font-size="13px" font-weight="700" fill="#1e3a5f">Joseph</text>
+                        <text x="2231" y="190" text-anchor="middle" font-size="10.5px" font-weight="600" fill="#4a6572">Resides with Father</text>
+                        <text x="2231" y="208" text-anchor="middle" font-size="10px" font-weight="500" fill="#5c7684">Mannarkkad</text>
+                    </a>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- Three Generation Summary Cards (8th & 9th Generations) -->
+        <section style="max-width: 1200px; margin: 30px auto;">
+            <h2 style="text-align: center; color: #3b2210; font-size: 22px; margin-bottom: 8px;">സന്താനപരമ്പര &bull; Three-Generation Descendants Overview</h2>
+            <p style="text-align: center; color: #634018; font-size: 14.5px; margin-bottom: 24px;">തൊമ്മി ജോസഫ് (അപ്പച്ചൻ) &ndash; അന്ന കടമപ്പുഴ ദമ്പതികളുടെ സന്താനങ്ങളും അവരുടെ കുടുംബങ്ങളും (8 &amp; 9 തലമുറകൾ)</p>
+
+            <div class="overview-grid">
+                
+                <!-- Card 1: Thommy (Thommachan) -->
+                <div class="overview-card male">
+                    <h4><a href="Thommy_Vachaparambil_Joseph_Maliackal.html">1. Thommy / Thommachan (തൊമ്മി / തൊമ്മച്ചൻ)</a></h4>
+                    <div class="spouse">m. Daughter of Kurian Vachaparambil, Pulinkunnu</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>b. July 31, 1919</strong> &bull; Residence: Ancestral Home, Nedungad</p>
+                    <strong>Children (9th Gen): 8</strong>
+                    <ul>
+                        <li><strong>Dr. Joseph / Jose (ജോസഫ് / ജോസ്), M.B.B.S.</strong> &ndash; m. from Parackal family, Kanjoor</li>
+                        <li><strong>Dr. Kurian / Kuriappan (കുര്യൻ / കുര്യപ്പൻ), M.B.B.S.</strong> &ndash; Serving in the Military</li>
+                        <li><strong>Annamma (അന്നമ്മ)</strong> &ndash; m. Chandikunju, s/o Pallivathukkal Kunjammachan</li>
+                        <li>Tommy (റ്റോമി) &ndash; Student</li>
+                        <li>Mariyamma (മറിയമ്മ) &ndash; Student</li>
+                        <li>Appachan (അപ്പച്ചൻ) &ndash; Student</li>
+                        <li>Lissa (ലിസ്സാ) &ndash; Student</li>
+                        <li>Antappan (ആന്റപ്പൻ) &ndash; Student</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Eli -->
+                <div class="overview-card female">
+                    <h4><a href="Eli_Kallankattu_Thidanad.html">2. Eli (ഏലി)</a></h4>
+                    <div class="spouse">m. Son of Kuruvachan, Kallankattu (Thidanad)</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Vellukkunnel family of Aruvithura (Thidanad Kallankattu)</p>
+                </div>
+
+                <!-- Card 3: Chacko -->
+                <div class="overview-card male">
+                    <h4><a href="Chacko_Karimpoozhikattu_Joseph_Maliackal.html">3. Chacko (ചാക്കോ)</a></h4>
+                    <div class="spouse">m. From Karimpoozhikattu Family, Vaikom</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence &amp; Work:</strong> Malabar</p>
+                    <ul style="list-style-type: square;">
+                        <li>Sold the Inchikkunnu estate in Mannarkkad for &#8377;1.25 lakhs per his father's instruction</li>
+                        <li>Purchased and cultivated new lands in Malabar; assisted father in building houses &amp; cultivation</li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Achamma -->
+                <div class="overview-card female">
+                    <h4><a href="Achamma_Pallivathukkal_Joseph_Maliackal.html">4. Achamma (അച്ചാമ്മ)</a></h4>
+                    <div class="spouse">m. Devasya, s/o Chandy Pallivathukkal</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Pallivathukkal</p>
+                </div>
+
+                <!-- Card 5: Chachi -->
+                <div class="overview-card female">
+                    <h4><a href="Chachi_Adv_Kora_Kanjirappally.html">5. Chachi (ചാച്ചി)</a></h4>
+                    <div class="spouse">m. Son of Advocate Kora</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family:</strong> Advocate Kora, Kanjirappally Munsiff Court</p>
+                </div>
+
+                <!-- Card 6: Mary -->
+                <div class="overview-card female">
+                    <h4><a href="Mary_Kokkappally_Kanjirappally.html">6. Mary (മേരി)</a></h4>
+                    <div class="spouse">m. Ouseppachan, eldest s/o late Appachan Kokkappally</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Branch:</strong> Kokkappally (Pallivathukkal), Kanjirappally &bull; Residence: Thuruthippadavu, Kanjirappally</p>
+                </div>
+
+                <!-- Card 7: Kuruvila (Kuttappan) -->
+                <div class="overview-card male">
+                    <h4><a href="Kuruvila_Kuttappan_Joseph_Maliackal.html">7. Kuruvila / Kuttappan (കുരുവിള / കുട്ടപ്പൻ)</a></h4>
+                    <div class="spouse">m. Daughter of Kunjappan Kizhakkethalakkal, Kanjirappally</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Status:</strong> Passed away prematurely (അകാല ചരമം പ്രാപിച്ചു)</p>
+                    <strong>Children (9th Gen): 2 Sons</strong>
+                    <ul>
+                        <li>Two sons &ndash; residing with their mother and grandfather Appachan at Pottassery, Mannarkkad</li>
+                    </ul>
+                </div>
+
+                <!-- Card 8: Leelamma -->
+                <div class="overview-card female">
+                    <h4><a href="Leelamma_Kallankattu_Aruvithura.html">8. Leelamma (ലീലാമ്മ)</a></h4>
+                    <div class="spouse">m. Thommachan, s/o Kunju Kallankattu</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Family Branch:</strong> Vellukkunnel Kallankattu, Aruvithura</p>
+                </div>
+
+                <!-- Card 9: Varkey (George) -->
+                <div class="overview-card male">
+                    <h4><a href="Varkey_George_Joseph_Maliackal.html">9. Varkey / George (വർക്കി / ജോർജ്ജ്)</a></h4>
+                    <div class="spouse">m. Niece (sister's daughter) of Mathayichan Kizhakkekara, Mannarkkad</div>
+                    <strong>Children (9th Gen): 4</strong>
+                    <ul>
+                        <li>Four children (നാലു സന്താനങ്ങൾ)</li>
+                    </ul>
+                </div>
+
+                <!-- Card 10: Celine (Ammini) -->
+                <div class="overview-card female">
+                    <h4><a href="Celine_Ammini_Cheenimoottil_Malabar.html">10. Celine / Ammini (സെലിൻ / അമ്മിണി)</a></h4>
+                    <div class="spouse">m. George, s/o Kochuthommachan Cheenimoottil</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Branch:</strong> Cheenimoottil (Karippaparambil), Kanjirappally &bull; Residence: Malabar</p>
+                </div>
+
+                <!-- Card 11: Joseph -->
+                <div class="overview-card male">
+                    <h4><a href="Joseph_Jr_Joseph_Maliackal.html">11. Joseph (ജോസഫ്)</a></h4>
+                    <div class="spouse">Youngest child of Joseph Maliackal &amp; Anna Kadmapuzha</div>
+                    <p style="font-size: 13.5px; margin: 4px 0 6px 0;"><strong>Residence:</strong> Lives with his father in Mannarkkad (പിതാവിനോടൊത്തു് മണ്ണാർക്കാട്ടു് താമസിക്കുന്നു)</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Main Biographical Narrative: Malayalam First, followed by English Translation -->
+        <main class="bio-section">
+            
+            <!-- MALAYALAM SECTION -->
+            <div lang="ml">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    കുടുംബ ചരിത്രം (Malayalam History)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>ഏഴാം തലമുറ &ndash; തൊമ്മി ജോസഫ് (അപ്പച്ചൻ):</strong>
+                </p>
+
+                <p>
+                    മേൽ വിവരിച്ച ആറാം തലമുറക്കാരനായ തൊമ്മിയുടെ മൂന്നാമത്തെ സന്താനവും, ഏഴാംതലമുറക്കാരനുമായ തൊമ്മി ജോസഫ് 1899-&nbsp;ാമാണ്ടു് മേടമാസം 1-&nbsp;ാം തീയതി പിറന്നു. വിദ്യാഭ്യാസാനന്തരം കാഞ്ഞിരപ്പള്ളി പുത്തൻപുരയിൽ കുടുംബത്തിന്റെ ഉപശാഖയായ കടമപ്പുഴ ചാക്കോയുടെ പുത്രി അന്നയെ വിവാഹംചെയ്തതായി മുൻപു് പ്രസ്താവിച്ചല്ലോ. ഇദ്ദേഹം പിതാവിനോടൊന്നിച്ചു താമസിച്ചു ദേഹണ്ഡങ്ങൾ നടത്തിവന്നു.
+                </p>
+
+                <p>
+                    എട്ടാംതലമുറക്കാരായി തൊമ്മി, ഏലി, ചാക്കോ, അച്ചാമ്മ, ചാച്ചി, മേരി, കുരുവിള, ലീലാമ്മ, വർക്കി, സെലിൻ, ജോസഫ് ഇങ്ങനെ 11 സന്താനങ്ങൾ അദ്ദേഹത്തിനുണ്ടായി.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. തൊമ്മി (തൊമ്മച്ചൻ) &bull; നെടുങ്ങാട് തറവാട്</h3>
+                <p>
+                    മേൽവിവരിച്ച 7-&nbsp;ാംതലമുറക്കാരനായ ജോസഫിന്റെ ആദ്യപുത്രനായ തൊമ്മി (തൊമ്മച്ചൻ) 1919 ജൂലൈ 31-&nbsp;ാം തീയതിയാണ് ജനിച്ചത്. വിദ്യാഭ്യാസ ശേഷം പുളിങ്കുന്നിൽ വാച്ചാപറമ്പിൽ കുര്യന്റെ പുത്രിയെ വിവാഹം ചെയ്തു. ജോസഫ്, കുര്യൻ, അന്നമ്മ, റ്റോമി, മറിയമ്മ, അപ്പച്ചൻ, ലിസ്സാ, ആന്റപ്പൻ എന്നീ സന്താനങ്ങളാണിവർക്കുള്ളതു്. ആദ്യസന്താനമായ ജോസ് M.B.B.S., കാഞ്ഞൂർ പാറക്കൽ കുടുംബത്തിൽനിന്നും വിവാഹം കഴിച്ചു. രണ്ടാമത്തെ സന്താനമായ കുര്യപ്പൻ M.B.B.S. പാസ്സായശേഷം മിലിട്ടറിയിൽ സേവനമനുഷ്ഠിക്കുന്നു. മൂന്നാമത്തെ സന്താനമായ അന്നമ്മയെ പള്ളിവാതുക്കൽ കുഞ്ഞമ്മച്ചന്റെ മകൻ ചാണ്ടിക്കുഞ്ഞു വിവാഹം ചെയ്തു. റ്റോമി, മറിയമ്മ, അപ്പച്ചൻ, ലിസ്സാ, ആന്റപ്പൻ എന്നിവർ പഠിച്ചു കൊണ്ടിരിക്കുന്നു. തൊമ്മച്ചൻ നെടുങ്ങാട്ടിലുള്ള തറവാട്ടിൽതന്നെ താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. ഏലി &bull; കല്ലൻകാട്ട്, തിടനാട്</h3>
+                <p>
+                    തന്റെ രണ്ടാമത്തെ സന്താനമായ ഏലിയെ അരുവിത്തുറ വെള്ളൂക്കുന്നേലായ തിടനാട്ട് കല്ലൻകാട്ടു് കുറുവച്ചൻ എന്നയാളിന്റെ പുത്രനെക്കൊണ്ടു വിവാഹം കഴിപ്പിച്ചു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. ചാക്കോ &bull; കരിംപൂഴിക്കാട്ട്, വൈക്കം / മലബാർ</h3>
+                <p>
+                    3-&nbsp;ാമത്തെ സന്താനമായ ചാക്കോയാകട്ടെ, വൈക്കത്തു കരിംപൂഴിക്കാട്ടു നിന്നും വിവാഹം ചെയ്തു. ഇദ്ദേഹം പിതാവിന്റെ ആജ്ഞാനുസരണം മണ്ണാർക്കാട്ടു ഇഞ്ചിക്കുന്നു തോട്ടം ഒന്നേകാൽ ലക്ഷം രൂപയ്ക്കും വിറ്റ്, പകരം മലബാറിൽ വേറെ സ്ഥലം വാങ്ങി ദേഹണ്ഡിച്ചു. പുരകൾ പണിയുന്നതിലും ദേഹണ്ഡങ്ങൾ നടത്തുന്നതിലും ഇദ്ദേഹം പിതാവിനെ വേണ്ടവിധം സഹായിച്ചിരുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. അച്ചാമ്മ &bull; പള്ളിവാതുക്കൽ</h3>
+                <p>
+                    നാലാമത്തെ സന്താനമായ അച്ചാമ്മയെ പള്ളിവാതുക്കൽ ചാണ്ടിയുടെ പുത്രൻ ദേവസ്യാ വിവാഹം ചെയ്തു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. ചാച്ചി &bull; അഡ്വ. കോര, കാഞ്ഞിരപ്പള്ളി</h3>
+                <p>
+                    5-&nbsp;ാമത്തെ സന്താനമായ ചാച്ചിയെ കാഞ്ഞിരപ്പള്ളി മുൻസിഫ് കോടതി വക്കീൽ, കോര അവർകളുടെ പുത്രനാണ് വിവാഹം ചെയ്തത്.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. മേരി &bull; കോക്കാപ്പള്ളി, തുരുത്തിപ്പടവ്</h3>
+                <p>
+                    6-&nbsp;ാമത്തെ സന്താനമായ മേരിയെ, കാഞ്ഞിരപ്പള്ളി പള്ളിവാതുക്കലായ കോക്കാപ്പള്ളി പരേതനായ അപ്പച്ചൻ മൂത്തപുത്രൻ ഔസേപ്പച്ചൻ വിവാഹംചെയ്തു. കാഞ്ഞിരപ്പള്ളി തുരുത്തിപ്പടവിലാണ് ഇവർ താമസിക്കുന്നതു്.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. കുരുവിള (കുട്ടപ്പൻ) &bull; കിഴക്കേത്തലയ്ക്കൽ / മണ്ണാർക്കാട് പൊറ്റശേരി</h3>
+                <p>
+                    7-&nbsp;ാമത്തെ സന്താനമായ കുരുവിള (കുട്ടപ്പൻ) കാഞ്ഞിരപ്പള്ളി കിഴക്കേത്തലയ്ക്കൽ കുഞ്ഞപ്പന്റെ മകളെ വിവാഹം ചെയ്തു. ഇവർക്കു രണ്ടു ആൺമക്കളുണ്ടു്. കുട്ടപ്പൻ അകാല ചരമം പ്രാപിച്ചു. ഭാര്യയും പുത്രന്മാരും ഇപ്പോൾ പിതാവായ അപ്പച്ചന്റെകൂടെ മണ്ണാർക്കാട്ടു പൊറ്റശേരിൽ താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. ലീലാമ്മ &bull; കല്ലങ്കാട്ട്, അരുവിത്തുറ</h3>
+                <p>
+                    8-&nbsp;ാമത്തെ സന്താനമായ ലീലാമ്മയെ അരുവിത്തുറ വെള്ളൂക്കുന്നേൽ കല്ലങ്കാട്ടു കുഞ്ഞിന്റെ മകൻ തൊമ്മച്ചൻ വിവാഹം ചെയ്തു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. വർക്കി (ജോർജ്ജ്) &bull; കിഴക്കേക്കര, മണ്ണാർക്കാട്</h3>
+                <p>
+                    9-&nbsp;ാമത്തെ സന്താനമായ ജോർജ്ജ്, മണ്ണാർക്കാടു് കിഴക്കേക്കര മത്തായിച്ചന്റെ സഹോദരിയുടെ മകളെയാണ് വിവാഹം ചെയ്തിരിക്കുന്നതു്. ഇവർക്ക് നാലു സന്താനങ്ങളുണ്ടു്.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. സെലിൻ (അമ്മിണി) &bull; ചീനിമൂട്ടിൽ, കാഞ്ഞിരപ്പള്ളി / മലബാർ</h3>
+                <p>
+                    10-&nbsp;ാമത്തെ സന്താനമായ അമ്മിണിയെ കാഞ്ഞിരപ്പള്ളി കരിപ്പാപ്പറമ്പിൽ ചീനിമൂട്ടിൽ കൊച്ചുതൊമ്മച്ചൻ മകൻ ജോർജ് വിവാഹം ചെയ്തു. ഇവർ മലബാറിൽ താമസിക്കുന്നു.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">11. ജോസഫ് &bull; മണ്ണാർക്കാട്</h3>
+                <p>
+                    11-&nbsp;ാമത്തെ സന്താനമായ ജോസഫ് പിതാവിനോടൊത്തു് മണ്ണാർക്കാട്ടു് താമസിക്കുന്നു.
+                </p>
+            </div>
+
+            <hr class="section-separator">
+
+            <!-- ENGLISH TRANSLATION SECTION -->
+            <div lang="en">
+                <h2 style="color: #4a2e18; border-bottom: 2px solid #b38938; padding-bottom: 6px; text-align: center; margin-bottom: 24px;">
+                    Family History (English Translation)
+                </h2>
+
+                <p class="section-lead">
+                    <strong>Seventh Generation &ndash; Thommy Joseph (Appachan) Maliackal:</strong>
+                </p>
+
+                <p>
+                    <strong>Thommy Joseph (Appachan) Maliackal</strong>, the third child of the sixth-generation descendant Thommy (Maliackal Kuruvila Thommy) and a seventh-generation member of the family, was born on the <strong>1st of Medam, 1899</strong>. As previously noted, following his education he married <strong>Anna</strong>, daughter of <strong>Kadamappuzha Chacko</strong>, belonging to a sub-branch of the <strong>Puthenpurayil</strong> family of Kanjirappally. He lived together with his father and carried out agricultural cultivation and land improvements.
+                </p>
+
+                <p>
+                    They were blessed with eleven children of the eighth generation: <strong>Thommy</strong>, <strong>Eli</strong>, <strong>Chacko</strong>, <strong>Achamma</strong>, <strong>Chachi</strong>, <strong>Mary</strong>, <strong>Kuruvila</strong>, <strong>Leelamma</strong>, <strong>Varkey (George)</strong>, <strong>Celine (Ammini)</strong>, and <strong>Joseph</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">1. Thommy (Thommachan) &bull; Ancestral Home, Nedungad (b. July 31, 1919)</h3>
+                <p>
+                    <strong>Thommy (Thommachan)</strong>, the eldest son of seventh-generation Joseph, was born on <strong>July 31, 1919</strong>. Following his education, he married the daughter of <strong>Kurian Vachaparambil</strong> of <strong>Pulinkunnu</strong>. They have eight children: <strong>Joseph (Jose)</strong>, <strong>Kurian (Kuriappan)</strong>, <strong>Annamma</strong>, <strong>Tommy</strong>, <strong>Mariyamma</strong>, <strong>Appachan</strong>, <strong>Lissa</strong>, and <strong>Antappan</strong>. Their eldest child, <strong>Dr. Jose, M.B.B.S.</strong>, married from the <strong>Parackal</strong> family of Kanjoor. Their second child, <strong>Dr. Kuriappan</strong>, after completing his <strong>M.B.B.S.</strong>, serves in the military. Their third child, <strong>Annamma</strong>, married <strong>Chandikunju</strong>, son of <strong>Pallivathukkal Kunjammachan</strong>. <strong>Tommy</strong>, <strong>Mariyamma</strong>, <strong>Appachan</strong>, <strong>Lissa</strong>, and <strong>Antappan</strong> are pursuing their studies. Thommachan resides at the ancestral home in <strong>Nedungad</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">2. Eli &bull; Kallankattu, Thidanad</h3>
+                <p>
+                    Joseph gave his second child, <strong>Eli</strong>, in marriage to the son of <strong>Kuruvachan</strong> of <strong>Kallankattu, Thidanad</strong>, belonging to the <strong>Vellukkunnel</strong> family of Aruvithura.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">3. Chacko &bull; Karimpoozhikattu, Vaikom / Malabar</h3>
+                <p>
+                    The third child, <strong>Chacko</strong>, married from the <strong>Karimpoozhikattu</strong> family of <strong>Vaikom</strong>. In accordance with his father's instructions, he sold the <strong>Inchikkunnu estate</strong> in Mannarkkad for <strong>1.25 lakh rupees</strong>, and in its place purchased other land in <strong>Malabar</strong> and cultivated it. He ably assisted his father in constructing houses and carrying out agricultural work.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">4. Achamma &bull; Pallivathukkal</h3>
+                <p>
+                    The fourth child, <strong>Achamma</strong>, was married to <strong>Devasya</strong>, son of <strong>Chandy Pallivathukkal</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">5. Chachi &bull; Adv. Kora, Kanjirappally</h3>
+                <p>
+                    The fifth child, <strong>Chachi</strong>, was married to the son of <strong>Advocate Kora</strong> of the Kanjirappally Munsiff Court.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">6. Mary &bull; Kokkappally, Thuruthippadavu</h3>
+                <p>
+                    The sixth child, <strong>Mary</strong>, was married to <strong>Ouseppachan</strong>, the eldest son of the late <strong>Appachan</strong> of <strong>Kokkappally</strong> (a branch of Pallivathukkal), Kanjirappally. They reside at <strong>Thuruthippadavu, Kanjirappally</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">7. Kuruvila (Kuttappan) &bull; Kizhakkethalakkal / Pottassery, Mannarkkad</h3>
+                <p>
+                    The seventh child, <strong>Kuruvila (Kuttappan)</strong>, married the daughter of <strong>Kunjappan Kizhakkethalakkal</strong> of Kanjirappally. They were blessed with <strong>two sons</strong>. Kuttappan passed away prematurely. His wife and two sons reside with his father Appachan at <strong>Pottassery, Mannarkkad</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">8. Leelamma &bull; Kallankattu, Aruvithura</h3>
+                <p>
+                    The eighth child, <strong>Leelamma</strong>, was married to <strong>Thommachan</strong>, son of <strong>Kunju</strong> of <strong>Kallankattu</strong> (Vellukkunnel family), Aruvithura.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">9. Varkey (George) &bull; Kizhakkekara, Mannarkkad</h3>
+                <p>
+                    The ninth child, <strong>Varkey (George)</strong>, married the sister's daughter (niece) of <strong>Kizhakkekara Mathayichan</strong> of Mannarkkad. They have <strong>four children</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">10. Celine (Ammini) &bull; Cheenimoottil, Kanjirappally / Malabar</h3>
+                <p>
+                    The tenth child, <strong>Celine (Ammini)</strong>, was married to <strong>George</strong>, son of <strong>Kochuthommachan</strong> of <strong>Cheenimoottil</strong> (Karippaparambil branch), Kanjirappally. They reside in <strong>Malabar</strong>.
+                </p>
+
+                <h3 style="color: #4a2e18; border-bottom: 1px solid #d8be86; padding-bottom: 4px; margin-top: 30px;">11. Joseph &bull; Mannarkkad</h3>
+                <p>
+                    The eleventh child, <strong>Joseph</strong>, resides together with his father in <strong>Mannarkkad</strong>.
+                </p>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Zoom & Fit Script -->
+    <script>
+        let currentZoom = 1.0;
+        const svgElement = document.getElementById('familySvg');
+        const zoomDisplay = document.getElementById('zoomLevel');
+        const scrollWrapper = document.getElementById('scrollWrapper');
+
+        function applyZoom() {
+            svgElement.style.transform = `scale(${currentZoom})`;
+            if (zoomDisplay) zoomDisplay.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
+        function changeZoom(delta) {
+            currentZoom = Math.min(2.0, Math.max(0.25, currentZoom + delta));
+            applyZoom();
+        }
+
+        function resetZoom() {
+            currentZoom = 1.0;
+            applyZoom();
+        }
+
+        function fitWidth() {
+            const availableWidth = scrollWrapper.clientWidth - 30;
+            currentZoom = Math.max(0.25, Math.min(1.0, availableWidth / 2362));
+            applyZoom();
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (scrollWrapper && scrollWrapper.clientWidth < 2362) {
+                const centerScroll = (2362 - scrollWrapper.clientWidth) / 2;
+                if (centerScroll > 0) {
+                    scrollWrapper.scrollLeft = centerScroll;
+                }
+            }
+        });
+    </script>
+</body>
 </html>
